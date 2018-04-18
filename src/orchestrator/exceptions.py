@@ -13,6 +13,7 @@ __ALL__ = [
     'NotReadyToAdapt',
     'FileNotFound',
     'LineNotFound',
+    'NoSearchLimits',
     'OperatorNotFound'
 ]
 
@@ -80,6 +81,15 @@ class NotReadyToAdapt(OrchestratorError):
     """
     def to_response(self) -> flask.Response:
         return self._to_response("system is not ready to be adapted.", code=409)
+
+
+class NoSearchLimits(OrchestratorError):
+    """
+    Indicates that the user attempted to perform adaptation without specifying
+    any limits on the available resources.
+    """
+    def to_response(self) -> flask.Response:
+        return self._to_response("no resource limits specified.", code=400)
 
 
 class FileNotFound(OrchestratorError):
