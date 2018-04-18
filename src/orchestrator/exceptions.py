@@ -7,7 +7,8 @@ __ALL__ = [
     'OrchestratorError',
     'PerturbationFailure',
     'NeutralPerturbation',
-    'FailedToComputeCoverage'
+    'FailedToComputeCoverage',
+    'NotReadyToPerturb'
 ]
 
 
@@ -20,6 +21,8 @@ class OrchestratorError(Exception):
                      kind: Optional[str] = None,
                      code: int = 400
                      ) -> flask.Response:
+        if kind is None:
+            kind = self.__class__.__name__
         jsn = {
             'error': {
                 'kind': kind,
@@ -53,3 +56,12 @@ class FailedToComputeCoverage(PerturbationFailure):
     """
     def to_response(self) -> flask.Response:
         return self._to_response("invalid perturbation: failed to obtain coverage information.")
+
+
+class NotReadyToPerturb(OrchestratorError):
+    """
+    Indicates that the system is not in a state where a perturbation may be
+    legally injected.
+    """
+    def to_response(self) -> flask.Response:
+        return self._to_response("system is not ready to be perturbed.", code=409)
