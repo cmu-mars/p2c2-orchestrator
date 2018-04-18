@@ -9,7 +9,7 @@ from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 
 
-__ALL__ = ['Orchestrator']
+__ALL__ = ['Orchestrator', 'OrchestratorState']
 
 
 class OrchestratorState(Enum):
@@ -153,7 +153,13 @@ class Orchestrator(object):
         Returns:
             (num_attempts, minutes).
         """
-        raise NotImplementedError
+        if self.__searcher:
+            num_attempts = self.__searcher.num_candidate_evals
+            minutes = self.__searcher.time_running.seconds / 60
+        else:
+            num_attempts = 0
+            minutes = 0.0
+        return (num_attempts, minutes)
 
     def perturb(self, perturbation) -> None:
         """
