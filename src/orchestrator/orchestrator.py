@@ -122,6 +122,19 @@ class Orchestrator(object):
         """
         return self.__patches.copy()
 
+    @property
+    def resource_usage(self) -> Tuple[int, float]:
+        """
+        A summary of the resources used by the adaptation process, given as a
+        tuple `(num_attempts, minutes)`, where `num_attempts` is a count of the
+        number of candidate patches that have been evaluated, and `minutes`
+        specifies the number of minutes that the search has been running.
+
+        Returns:
+            (num_attempts, minutes).
+        """
+        raise NotImplementedError
+
     def perturb(self, perturbation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
