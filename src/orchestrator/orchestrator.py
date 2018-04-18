@@ -1,3 +1,4 @@
+from typing import List
 import threading
 import time
 
@@ -75,3 +76,26 @@ class Orchestrator(object):
         finished.
         """
         return self.__event_finished
+
+    @property
+    def files(self) -> List[str]:
+        """
+        A list of the names of the source code files for the original,
+        unperturbed system that may be subject to perturbation.
+        """
+        return self.lines.files
+
+    @property
+    def lines(self) -> bugzoo.core.fileline.FileLineSet:
+        """
+        The set of source code lines in the original, unperturbed system that
+        may be subject to perturbation.
+        """
+        coverage = self.bugzoo.bugs.coverage(self.baseline)
+        lines = coverage.lines
+
+        # restrict to files that may be mutated
+        files = [fn for fn in lines.files if __is_file_mutable(fn)]
+        lines = lines.restricted_to_files(files)
+
+        return lines
