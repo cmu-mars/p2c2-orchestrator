@@ -8,7 +8,8 @@ __ALL__ = [
     'PerturbationFailure',
     'NeutralPerturbation',
     'FailedToComputeCoverage',
-    'NotReadyToPerturb'
+    'NotReadyToPerturb',
+    'NotReadyToAdapt'
 ]
 
 
@@ -58,6 +59,7 @@ class FailedToComputeCoverage(PerturbationFailure):
         return self._to_response("invalid perturbation: failed to obtain coverage information.")
 
 
+# FIXME replace with AlreadyPerturbed and AlreadyStartedAdaptation
 class NotReadyToPerturb(OrchestratorError):
     """
     Indicates that the system is not in a state where a perturbation may be
@@ -65,3 +67,12 @@ class NotReadyToPerturb(OrchestratorError):
     """
     def to_response(self) -> flask.Response:
         return self._to_response("system is not ready to be perturbed.", code=409)
+
+
+class NotReadyToAdapt(OrchestratorError):
+    """
+    Indicates that the system is not in a state where a perturbation may be
+    legally injected.
+    """
+    def to_response(self) -> flask.Response:
+        return self._to_response("system is not ready to be adapted.", code=409)
