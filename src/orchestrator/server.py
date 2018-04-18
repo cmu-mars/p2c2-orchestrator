@@ -21,7 +21,7 @@ import bugzoo
 import rooibos
 import darjeeling
 
-from .error import *
+from .exceptions import *
 
 
 app = flask.Flask(__name__) # type: flask.Flask
