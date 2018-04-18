@@ -5,6 +5,11 @@ import time
 import hulk
 import bugzoo
 import darjeeling
+from darjeeling.problem import Problem
+from darjeeling.searcher import Searcher
+
+
+__ALL__ = ['Orchestrator']
 
 
 class OrchestratorState(Enum):
@@ -40,7 +45,8 @@ class Orchestrator(object):
         self.__client_bugzoo = bugzoo.Client(url_bugzoo)
         # TODO it would be nicer if Darjeeling was a service
 
-        self.__problem = None # type: Optional[darjeeling.problem.Problem]
+        self.__problem = None # type: Optional[Problem]
+        self.__searcher = None # type: Optional[Searcher]
 
         # FIXME wait for servers to be ready
         time.sleep(30)
@@ -172,9 +178,9 @@ class Orchestrator(object):
                 snapshot = self.hulk.mutate(self.baseline, perturbation)
                 # TODO pass logger
                 try:
-                    self.__problem = darjeeling.Problem(bz=self.bugzoo,
-                                                        bug=snapshot,
-                                                        cache_coverage=False)
+                    self.__problem = Problem(bz=self.bugzoo,
+                                             bug=snapshot,
+                                             cache_coverage=False)
                     self.__state = OrchestratorState.READY_TO_ADAPT
                 except darjeeling.exceptions.NoFailingTests:
                     raise NeutralPerturbation()
@@ -185,3 +191,60 @@ class Orchestrator(object):
                 self.__problem = None
                 self.__state = OrchestratorState.READY_TO_PERTURB
                 raise
+
+    def adapt(self,
+              *,
+              minutes: Optional[float] = None,
+              attempts: Optional[int] = None
+              ) -> None:
+        """
+        Attempts to trigger the code adaptation process.
+
+        Parameters:
+            minutes: an optional time limit on the search process, given in
+                minutes.
+            attempts: an optional limit on the number of candidate patches
+                that the search may evaluate before terminating.
+
+        Raises:
+            NotReadyToAdapt: if the system is not ready to be adapted or if
+                adaptation has already begun.
+            AssertionError: if a non-positive time limit or number of attempts
+                is provided.
+            NoSearchLimits: if neither a time or candidate limit is provided.
+        """
+        assert minutes is None or minutes > 0
+        assert attempts is None or attempts > 0
+
+        if minutes is None and attempts is None:
+            raise NoSearchLimits()
+
+        time_limit = datetime.timedelta(minutes=minutes) if minutes else None
+
+        with self.__lock:
+            if self.state != OrchestratorState.READY_TO_ADAPT:
+                raise NotReadyToAdapt()
+
+            self.__state = OrchestratorState.SEARCHING
+
+            # start the search on a separate thread
+            def search():
+                problem = self.__problem
+                candidates = \
+                    darjeeling.generator.SampleByLocalization(problem=problem,
+                                                              localization=problem.localization,
+                                                              snippets=problem.snippets)
+                self.__searcher = Searcher(bugzoo=self.bugzoo,
+                                           problem=problem,
+                                           candidate=candidates,
+                                           num_candidates=attempts,
+                                           time_limit=time_limit)
+                for patch in self.__searcher:
+                    self.__patches.append(patch)
+
+                # mark the search as finished
+                self.__event_finished.set()
+
+            # TODO ensure that thread is killed cleanly
+            thread = threading.Thread(target=search)
+            thread.start()
