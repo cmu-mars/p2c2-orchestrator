@@ -10,7 +10,8 @@ __ALL__ = [
     'FailedToComputeCoverage',
     'NotReadyToPerturb',
     'NotReadyToAdapt',
-    'FileNotFound'
+    'FileNotFound',
+    'OperatorNotFound'
 ]
 
 
@@ -97,4 +98,24 @@ class FileNotFound(OrchestratorError):
 
     def to_response(self) -> flask.Response:
         msg = "file could not be found: {}".format(self.filename)
+        return self._to_response(msg)
+
+
+class OperatorNotFound(OrchestratorError):
+    """
+    Indicates that no mutation operator could be found with a given name.
+    """
+    def __init__(self, operator: str) -> None:
+        self.__operator = operator
+        super().__init__()
+
+    @property
+    def operator(self) -> str:
+        """
+        The name of the operator.
+        """
+        return self.__operator
+
+    def to_response(self) -> flask.Response:
+        msg = "mutation operator could not be found: {}".format(self.operator)
         return self._to_response(msg)
