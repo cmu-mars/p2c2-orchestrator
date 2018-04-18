@@ -1,15 +1,29 @@
 from typing import List
+from enum import Enum
 import threading
 import time
 
 import hulk
 import bugzoo
 import darjeeling
+from bugzoo.core.fileline import FileLine
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 
 
 __ALL__ = ['Orchestrator', 'OrchestratorState']
+
+
+# a list of the names of supported mutation operators
+OPERATOR_NAMES = [
+    'delete-void-function-call',
+    'flip-arithmetic-operator',
+    'flip-boolean-operator',
+    'flip-relational-operator',
+    'undo-transformation',
+    'delete-conditional-control-flow',
+    'flip-signedness'
+]
 
 
 class OrchestratorState(Enum):
@@ -161,6 +175,60 @@ class Orchestrator(object):
             minutes = 0.0
         return (num_attempts, minutes)
 
+    # TODO add return type
+    def perturbations(self,
+                      filename: str,
+                      line_num: Optional[int] = None,
+                      op_name: Optional[str] = None
+                      ):
+        """
+        Returns a list of all perturbations that can be made to a given file.
+
+        Parameters:
+            filename: the path to the file, relative to the root source
+                directory.
+            line_num: if specified, restricts the list of perturbations to
+                those that cover the line with this one-indexed number.
+            op_name: if specified, restricts the list of perturbations to
+                those that are generated using the mutation operator with
+                this name.
+
+        Returns:
+            a list of perturbations.
+
+        Raises:
+            FileNotFound: if the specified file does not exist or cannot be
+                pertubed.
+            LineNotFound: if the specified line does not exist or cannot be
+                perturbed.
+            OperatorNotFound: if no operator with the given name exists.
+            AssertionError: if a line number is provided and that line number
+                is less than or equal to zero.
+        """
+        assert line_num is None or line_num > 0
+
+        line = FileLine(filename, line_num) if line_num else None
+
+        if filename is not in self.files:
+            raise FileNotFound(filename)
+        if line is not None and line not in self.lines:
+            raise LineNotFound(line)
+        if op_name is not None and op_name is not in OPERATOR_NAMES:
+            raise OperatorNotFound(op_name)
+
+        # fetch the mutation operators
+        if op_name is not None:
+            operators = [self.hulk.operators[op_name]]
+        else:
+            operators = [self.hulk.operators[name] for name in OPERATOR_NAMES]
+
+        mutations = hulk_client.mutations(self.baseline,
+                                          filename=filename,
+                                          operators=operators,
+                                          line=line)
+        return mutations
+
+    # TODO add arg type
     def perturb(self, perturbation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
