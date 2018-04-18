@@ -1,6 +1,7 @@
 from typing import Optional
 
 import flask
+from bugzoo.core.fileline import FileLine
 
 
 __ALL__ = [
@@ -11,6 +12,7 @@ __ALL__ = [
     'NotReadyToPerturb',
     'NotReadyToAdapt',
     'FileNotFound',
+    'LineNotFound',
     'OperatorNotFound'
 ]
 
@@ -98,6 +100,41 @@ class FileNotFound(OrchestratorError):
 
     def to_response(self) -> flask.Response:
         msg = "file could not be found: {}".format(self.filename)
+        return self._to_response(msg)
+
+
+class LineNotFound(OrchestratorError):
+    """
+    Indicates that the given line either does not exist or if it does, it
+    cannot be subject to perturbation.
+    """
+    def __init__(self, line: FileLine) -> None:
+        self.__line = line
+        super().__init__()
+
+    @property
+    def line(self) -> FileLine:
+        """
+        The line.
+        """
+        return self.__line
+
+    @property
+    def filename(self) -> str:
+        """
+        The name of the file to which the line belongs.
+        """
+        return self.__line.filename
+
+    @property
+    def line_num(self) -> int:
+        """
+        The one-indexed number of the line within its file.
+        """
+        return self.__line.num
+
+    def to_response(self) -> flask.Response:
+        msg = "line could not be found: {}".format(self.line)
         return self._to_response(msg)
 
 
