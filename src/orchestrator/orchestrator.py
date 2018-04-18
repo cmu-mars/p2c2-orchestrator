@@ -86,6 +86,20 @@ class Orchestrator(object):
         """
         return self.__event_finished
 
+    def __is_file_mutable(self, fn: str) -> bool:
+        """
+        Determines whether a given source code file may be the subject of
+        perturbation on the basis of its name.
+        """
+        if not fn.endswith('.cpp'):
+            return False
+
+        #
+        # TODO: ignore blacklisted files (e.g., Gazebo, ROS core code)
+        #
+
+        return True
+
     @property
     def files(self) -> List[str]:
         """
@@ -108,7 +122,7 @@ class Orchestrator(object):
         lines = coverage.lines
 
         # restrict to files that may be mutated
-        files = [fn for fn in lines.files if __is_file_mutable(fn)]
+        files = [fn for fn in lines.files if self.__is_file_mutable(fn)]
         lines = lines.restricted_to_files(files)
 
         return lines
