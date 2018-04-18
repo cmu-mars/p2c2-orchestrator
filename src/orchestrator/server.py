@@ -229,9 +229,10 @@ def perturb():
     """
     global PROBLEM, STATE
 
-    # TODO fetch the perturbation from the payload
+    # fetch the desired perturbation from the payload
+    # TODO we could do some input validation here
     perturbation = flask.request.json
-    mutant = None # FIXME TRANSFORM
+    mutant = hulk.base.Mutation.from_dict(perturbation)
 
     # TODO use lock
     if STATE != OrchestratorState.READY_TO_PERTURB:
