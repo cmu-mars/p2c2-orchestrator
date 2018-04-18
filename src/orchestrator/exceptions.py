@@ -9,7 +9,8 @@ __ALL__ = [
     'NeutralPerturbation',
     'FailedToComputeCoverage',
     'NotReadyToPerturb',
-    'NotReadyToAdapt'
+    'NotReadyToAdapt',
+    'FileNotFound'
 ]
 
 
@@ -76,3 +77,24 @@ class NotReadyToAdapt(OrchestratorError):
     """
     def to_response(self) -> flask.Response:
         return self._to_response("system is not ready to be adapted.", code=409)
+
+
+class FileNotFound(OrchestratorError):
+    """
+    Indicates that the given file either does not exist or if it does, it
+    cannot be subject to perturbation.
+    """
+    def __init__(self, filename: str) -> None:
+        self.__filename = filename
+        super().__init__()
+
+    @property
+    def filename(self) -> str:
+        """
+        The name of the file.
+        """
+        return self.__filename
+
+    def to_response(self) -> flask.Response:
+        msg = "file could not be found: {}".format(self.filename)
+        return self._to_response(msg)
