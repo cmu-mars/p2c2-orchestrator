@@ -4,6 +4,7 @@ import time
 
 import hulk
 import bugzoo
+import darjeeling
 
 
 class OrchestratorState(Enum):
@@ -26,12 +27,20 @@ class Orchestrator(object):
             url_hulk: the base URL of the Hulk server.
             url_bugzoo: the base URL of the BugZoo server.
         """
+        # a lock is used to ensure mutually exclusive access to destructive
+        # events (i.e., injecting a perturbation or triggering the
+        # adaptation).
+        self.__lock = threading.Lock()
+
         self.__event_finished = threading.Event()
+        self.__patches = [] # type: List[darjeeling.candidate.Candidate]
 
         self.__state = OrchestratorState.READY_TO_PERTURB
         self.__client_hulk = hulk.Client(url_hulk)
         self.__client_bugzoo = bugzoo.Client(url_bugzoo)
         # TODO it would be nicer if Darjeeling was a service
+
+        self.__problem = None # type: Optional[darjeeling.problem.Problem]
 
         # FIXME wait for servers to be ready
         time.sleep(30)
@@ -90,6 +99,10 @@ class Orchestrator(object):
         """
         The set of source code lines in the original, unperturbed system that
         may be subject to perturbation.
+
+        Only lines that are covered by the test suite may be perturbed.
+        Furthermore, lines in certain blacklisted files are removed from
+        consideration, even if covered by the test suite.
         """
         coverage = self.bugzoo.bugs.coverage(self.baseline)
         lines = coverage.lines
@@ -99,3 +112,49 @@ class Orchestrator(object):
         lines = lines.restricted_to_files(files)
 
         return lines
+
+    @property
+    def patches(self) -> List[darjeeling.candidate.Candidate]:
+        """
+        A list of all of the patches that have been discovered thus far by
+        during the search process. If the search process has not begun, an
+        empty list is returned.
+        """
+        return self.__patches.copy()
+
+    def perturb(self, perturbation) -> None:
+        """
+        Attempts to generate baseline B by perturbing the original system.
+
+        Parameters:
+            perturbation: the perturbation that should be applied.
+
+        Raises:
+            NotReadyToPerturb: if the system is not ready to be perturbed.
+            NeutralPerturbation: if the given mutant does not fail any tests.
+            FailedToComputeCoverage: if coverage information could not be
+                obtained for the given mutant.
+        """
+        with self.__lock:
+            if self.state != OrchestratorState.READY_TO_PERTURB:
+                raise NotReadyToPerturb()
+
+            self.__state = OrchestratorState.PERTURBING
+            try:
+                # TODO capture unexpected errors during snapshot creation
+                snapshot = self.hulk.mutate(self.baseline, perturbation)
+                # TODO pass logger
+                try:
+                    self.__problem = darjeeling.Problem(bz=self.bugzoo,
+                                                        bug=snapshot,
+                                                        cache_coverage=False)
+                    self.__state = OrchestratorState.READY_TO_ADAPT
+                except darjeeling.exceptions.NoFailingTests:
+                    raise NeutralPerturbation()
+                except darjeeling.exceptions.NoImplicatedLines:
+                    raise FailedToComputeCoverage()
+
+            except:
+                self.__problem = None
+                self.__state = OrchestratorState.READY_TO_PERTURB
+                raise
