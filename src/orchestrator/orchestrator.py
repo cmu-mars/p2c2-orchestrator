@@ -1,12 +1,13 @@
-from typing import List
+from typing import List, Tuple, Optional
 from enum import Enum
 import threading
 import time
 
 import hulk
 import bugzoo
+import bugzoo.client
 import darjeeling
-from bugzoo.core.fileline import FileLine
+from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 
@@ -27,11 +28,11 @@ OPERATOR_NAMES = [
 
 
 class OrchestratorState(Enum):
-    READY_TO_PERTURB = auto()
-    PERTURBING = auto()
-    READY_TO_ADAPT = auto()
-    SEARCHING = auto()
-    FINISHED = auto()
+    READY_TO_PERTURB = 0
+    PERTURBING = 1
+    READY_TO_ADAPT = 2
+    SEARCHING = 3
+    FINISHED = 4
 
 
 class Orchestrator(object):
@@ -90,7 +91,7 @@ class Orchestrator(object):
         return self.__client_hulk
 
     @property
-    def bugzoo(self) -> bugzoo.Client:
+    def bugzoo(self) -> bugzoo.client.Client:
         """
         A connection to the BugZoo server, used to validate patches and provide
         a sandboxed environment for interacting with (versions of) the system
@@ -129,7 +130,7 @@ class Orchestrator(object):
         return self.lines.files
 
     @property
-    def lines(self) -> bugzoo.core.fileline.FileLineSet:
+    def lines(self) -> FileLineSet:
         """
         The set of source code lines in the original, unperturbed system that
         may be subject to perturbation.
@@ -209,11 +210,11 @@ class Orchestrator(object):
 
         line = FileLine(filename, line_num) if line_num else None
 
-        if filename is not in self.files:
+        if filename not in self.files:
             raise FileNotFound(filename)
         if line is not None and line not in self.lines:
             raise LineNotFound(line)
-        if op_name is not None and op_name is not in OPERATOR_NAMES:
+        if op_name is not None and op_name not in OPERATOR_NAMES:
             raise OperatorNotFound(op_name)
 
         # fetch the mutation operators
