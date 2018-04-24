@@ -13,7 +13,7 @@ setup(
     python_requires='>=3.5',
     install_requires=[
         'darjeeling>=0.0.17',
-        'bugzoo>=2.0.13',
+        'bugzoo>=2.0.15',
         'hulk',
         'requests',
         'flask'
