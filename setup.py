@@ -12,7 +12,7 @@ setup(
     license='mit',
     python_requires='>=3.5',
     install_requires=[
-        'darjeeling>=0.0.17',
+        'darjeeling>=0.0.18',
         'bugzoo>=2.0.15',
         'hulk',
         'requests',
