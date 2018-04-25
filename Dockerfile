@@ -19,6 +19,7 @@ RUN git clone https://github.com/squaresLab/Hulk /opt/hulk \
  && rm -rf /opt/hulk
 
 COPY setup.py /opt/orchestrator/
-COPY src /opt/orchestrator/
+COPY src/ /opt/orchestrator/src
 RUN cd /opt/orchestrator \
- && pip install --no-cache --upgrade .
+ && pip install --no-cache --upgrade . \
+ && rm -rf /opt/orchestrator
