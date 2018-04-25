@@ -11,7 +11,7 @@ RUN apk add --no-cache python3 git gcc gfortran python3-dev build-base openblas-
  && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
 
 # install Hulk from source
-ENV HULK_REVISION 0b412c9a042f964582246fc5da91967e6a086d21
+ENV HULK_REVISION 9255e26eaf7d1c2b29b2765637e508c41c6e59cf
 RUN git clone https://github.com/squaresLab/Hulk /opt/hulk \
  && cd /opt/hulk \
  && git checkout "${HULK_REVISION}" \
