@@ -13,7 +13,7 @@ from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 
 
-__ALL__ = ['Orchestrator', 'OrchestratorState']
+__ALL__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
 
 
 # a list of the names of supported mutation operators
@@ -37,12 +37,21 @@ class OrchestratorState(Enum):
     ERROR = 5
 
 
+class OrchestratorOutcome(Enum):
+    """
+    Concisely describes the outcome of the challenge problem.
+    """
+    COMPLETE_REPAIR = 0
+    PARTIAL_REPAIR = 1
+    NO_REPAIR = 2
+
+
 class Orchestrator(object):
     def __init__(self,
                  url_hulk: str,
                  url_bugzoo: str,
-                 callback_progress: Callable[[Candidate], None],
-                 callback_done: Callable[[], None],
+                 callback_progress: Callable[[Candidate, List[Candidate]], None],
+                 callback_done: Callable[[List[Candidate], int, OrchestratorOutcome, float], None],
                  callback_error: Callable[[Exception], None]
                  ) -> None:
         """
@@ -321,10 +330,16 @@ class Orchestrator(object):
                                                time_limit=time_limit)
                     for patch in self.__searcher:
                         self.__patches.append(patch)
-                        self.__callback_progress(patch)
+                        self.__callback_progress(patch, self.patches)
 
+                    # FIXME extract log of attempted patches from darjeeling
+                    log = []
                     self.__state = OrchestratorState.FINISHED
-                    self.__callback_done()
+                    if self.patches:
+                        outcome = OrchestratorOutcome.COMPLETE_REPAIR
+                    else:
+                        outcome = OrchestratorOutcome.NO_REPAIR
+                    self.__callback_done(log, num_attempts, outcome, self.patches, runtime)
 
                 except Exception as err:
                     self.__state = OrchestratorState.ERROR
