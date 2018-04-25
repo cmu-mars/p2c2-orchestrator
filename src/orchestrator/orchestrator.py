@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Callable
 from enum import Enum
 import threading
 import time
@@ -10,6 +10,7 @@ import darjeeling
 from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
+from darjeeling.candidate import Candidate
 
 
 __ALL__ = ['Orchestrator', 'OrchestratorState']
@@ -33,12 +34,16 @@ class OrchestratorState(Enum):
     READY_TO_ADAPT = 2
     SEARCHING = 3
     FINISHED = 4
+    ERROR = 5
 
 
 class Orchestrator(object):
     def __init__(self,
                  url_hulk: str,
-                 url_bugzoo: str
+                 url_bugzoo: str,
+                 callback_progress: Callable[[Candidate], None],
+                 callback_done: Callable[[], None],
+                 callback_error: Callable[[Exception], None]
                  ) -> None:
         """
         Constructs a new orchestrator.
@@ -46,15 +51,22 @@ class Orchestrator(object):
         Parameters:
             url_hulk: the base URL of the Hulk server.
             url_bugzoo: the base URL of the BugZoo server.
+            callback_status: called when a new patch is added to the pareto
+                front.
+            callback_done: called when the search process has finished.
+            callback_error: called when an unexpected error is encountered
+                during a non-blocking call.
         """
+        self.__callback_progress = callback_progress
+        self.__callback_done = callback_done
+        self.__callback_error = callback_error
+
         # a lock is used to ensure mutually exclusive access to destructive
         # events (i.e., injecting a perturbation or triggering the
         # adaptation).
         self.__lock = threading.Lock()
 
-        self.__event_finished = threading.Event()
-        self.__patches = [] # type: List[darjeeling.candidate.Candidate]
-
+        self.__patches = [] # type: List[Candidate]
         self.__state = OrchestratorState.READY_TO_PERTURB
         self.__client_hulk = hulk.Client(url_hulk)
         self.__client_bugzoo = bugzoo.Client(url_bugzoo)
@@ -98,14 +110,6 @@ class Orchestrator(object):
         under test.
         """
         return self.__client_bugzoo
-
-    @property
-    def finished(self) -> threading.Event:
-        """
-        An event that is used to indicate when the adaptation process has
-        finished.
-        """
-        return self.__event_finished
 
     def __is_file_mutable(self, fn: str) -> bool:
         """
@@ -304,21 +308,27 @@ class Orchestrator(object):
 
             # start the search on a separate thread
             def search():
-                problem = self.__problem
-                candidates = \
-                    darjeeling.generator.SampleByLocalization(problem=problem,
-                                                              localization=problem.localization,
-                                                              snippets=problem.snippets)
-                self.__searcher = Searcher(bugzoo=self.bugzoo,
-                                           problem=problem,
-                                           candidate=candidates,
-                                           num_candidates=attempts,
-                                           time_limit=time_limit)
-                for patch in self.__searcher:
-                    self.__patches.append(patch)
+                try:
+                    problem = self.__problem
+                    candidates = \
+                        darjeeling.generator.SampleByLocalization(problem=problem,
+                                                                  localization=problem.localization,
+                                                                  snippets=problem.snippets)
+                    self.__searcher = Searcher(bugzoo=self.bugzoo,
+                                               problem=problem,
+                                               candidate=candidates,
+                                               num_candidates=attempts,
+                                               time_limit=time_limit)
+                    for patch in self.__searcher:
+                        self.__patches.append(patch)
+                        self.__callback_progress(patch)
 
-                # mark the search as finished
-                self.__event_finished.set()
+                    self.__state = OrchestratorState.FINISHED
+                    self.__callback_done()
+
+                except Exception as err:
+                    self.__state = OrchestratorState.ERROR
+                    self.__callback_error(err)
 
             # TODO ensure that thread is killed cleanly
             thread = threading.Thread(target=search)
