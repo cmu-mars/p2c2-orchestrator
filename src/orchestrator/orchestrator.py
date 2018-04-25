@@ -52,7 +52,7 @@ class Orchestrator(object):
                  url_bugzoo: str,
                  callback_progress: Callable[[Candidate, List[Candidate]], None],
                  callback_done: Callable[[List[Candidate], int, OrchestratorOutcome, float], None],
-                 callback_error: Callable[[Exception], None]
+                 callback_error: Callable[[str, str], None]
                  ) -> None:
         """
         Constructs a new orchestrator.
@@ -341,9 +341,11 @@ class Orchestrator(object):
                         outcome = OrchestratorOutcome.NO_REPAIR
                     self.__callback_done(log, num_attempts, outcome, self.patches, runtime)
 
+                # FIXME handle unexpected errors
                 except Exception as err:
                     self.__state = OrchestratorState.ERROR
-                    self.__callback_error(err)
+                    kind = err.__class__.name
+                    self.__callback_error(kind, str(err))
 
             # TODO ensure that thread is killed cleanly
             thread = threading.Thread(target=search)
