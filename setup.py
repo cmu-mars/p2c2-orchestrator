@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'darjeeling>=0.0.18',
         'bugzoo>=2.0.15',
-        'hulk',
+        # 'hulk',
         'requests',
         'flask'
     ],
