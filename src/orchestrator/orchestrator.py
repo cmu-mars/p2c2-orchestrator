@@ -8,11 +8,11 @@ import hulk
 import bugzoo
 import bugzoo.client
 import darjeeling
+import darjeeling.outcome
 from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
-
 
 __ALL__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
 
@@ -48,12 +48,36 @@ class OrchestratorOutcome(Enum):
     NO_REPAIR = 2
 
 
+class CandidateEvaluation(object):
+    """
+    Describes a candidate patch evaluation.
+    """
+    def __init__(self,
+                 patch: darjeeling.candidate.Candidate,
+                 outcome: darjeeling.outcome.CandidateOutcome
+                 ) -> None:
+        self.__patch = patch
+        self.__outcome = outcome
+
+    @property
+    def diff(self) -> str:
+        return "NOT YET IMPLEMENTED"
+
+    @property
+    def tests(self) -> darjeeling.outcome.TestOutcomeSet:
+        return self.__outcome.tests
+
+    @property
+    def build(self) -> darjeeling.outcome.BuildOutcome:
+        return self.__outcome.build
+
+
 class Orchestrator(object):
     def __init__(self,
                  url_hulk: str,
                  url_bugzoo: str,
-                 callback_progress: Callable[[Candidate, List[Candidate]], None],
-                 callback_done: Callable[[List[Candidate], int, OrchestratorOutcome, float], None],
+                 callback_progress: Callable[[CandidateEvaluation, List[CandidateEvaluation]], None],
+                 callback_done: Callable[[List[CandidateEvaluation], int, OrchestratorOutcome, float], None],
                  callback_error: Callable[[str, str], None]
                  ) -> None:
         """
@@ -81,7 +105,7 @@ class Orchestrator(object):
         # adaptation).
         self.__lock = threading.Lock()
 
-        self.__patches = [] # type: List[Candidate]
+        self.__patches = [] # type: List[CandidateEvaluation]
         self.__state = OrchestratorState.READY_TO_PERTURB
         self.__client_hulk = hulk.Client(url_hulk, timeout_connection=120)
         self.__client_bugzoo = bugzoo.Client(url_bugzoo, timeout_connection=120)
@@ -172,7 +196,7 @@ class Orchestrator(object):
         return lines
 
     @property
-    def patches(self) -> List[darjeeling.candidate.Candidate]:
+    def patches(self) -> List[CandidateEvaluation]:
         """
         A list of all of the patches that have been discovered thus far by
         during the search process. If the search process has not begun, an
@@ -339,8 +363,10 @@ class Orchestrator(object):
                                                num_candidates=attempts,
                                                time_limit=time_limit)
                     for patch in self.__searcher:
-                        self.__patches.append(patch)
-                        self.__callback_progress(patch, self.patches)
+                        outcome = self.__searcher.outcomes[patch]
+                        evaluation = CandidateEvaluation(patch, outcome)
+                        self.__patches.append(evaluation)
+                        self.__callback_progress(evaluation, self.patches)
 
                     # FIXME extract log of attempted patches from darjeeling
                     log = []
