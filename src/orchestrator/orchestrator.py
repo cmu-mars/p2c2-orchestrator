@@ -15,6 +15,7 @@ from darjeeling.candidate import Candidate
 
 __ALL__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
 
+BASE_IMAGE_NAME = 'mars:base'
 
 # a list of the names of supported mutation operators
 OPERATOR_NAMES = [
@@ -77,18 +78,15 @@ class Orchestrator(object):
 
         self.__patches = [] # type: List[Candidate]
         self.__state = OrchestratorState.READY_TO_PERTURB
-        self.__client_hulk = hulk.Client(url_hulk)
-        self.__client_bugzoo = bugzoo.Client(url_bugzoo)
+        self.__client_hulk = hulk.Client(url_hulk, timeout_connection=120)
+        self.__client_bugzoo = bugzoo.Client(url_bugzoo, timeout_connection=120)
         # TODO it would be nicer if Darjeeling was a service
 
         self.__problem = None # type: Optional[Problem]
         self.__searcher = None # type: Optional[Searcher]
 
-        # FIXME wait for servers to be ready
-        time.sleep(30)
-
         # compute and cache coverage information for the original system
-        self.__baseline = self.__client_bugzoo.bugs["mars:baseline"]
+        self.__baseline = self.__client_bugzoo.bugs["mars:base"]
 
     @property
     def state(self) -> OrchestratorState:
