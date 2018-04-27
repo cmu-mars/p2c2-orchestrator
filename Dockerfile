@@ -10,8 +10,10 @@ RUN apk add --no-cache python3 git gcc gfortran python3-dev build-base openblas-
  && if [[ ! -e /usr/bin/pip ]]; then ln -s pip3 /usr/bin/pip ; fi \
  && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
 
+RUN pip install --no-cache numpy
+
 # install Hulk from source
-ENV HULK_REVISION 9255e26eaf7d1c2b29b2765637e508c41c6e59cf
+ENV HULK_REVISION 0f64575f99ca8d5bbe7eb37e9e739a601b8038e0
 RUN git clone https://github.com/squaresLab/Hulk /opt/hulk \
  && cd /opt/hulk \
  && git checkout "${HULK_REVISION}" \
