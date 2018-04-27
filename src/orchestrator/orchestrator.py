@@ -2,6 +2,7 @@ from typing import List, Tuple, Optional, Callable
 from enum import Enum
 import threading
 import time
+import logging
 
 import hulk
 import bugzoo
@@ -67,6 +68,10 @@ class Orchestrator(object):
             callback_error: called when an unexpected error is encountered
                 during a non-blocking call.
         """
+        self.__logger = logging.getLogger('orchestrator')
+        self.__logger.info("- using BugZoo: {}".format(bugzoo.__version__))
+        self.__logger.info("- using Darjeeling: {}".format(darjeeling.__version__))
+
         self.__callback_progress = callback_progress
         self.__callback_done = callback_done
         self.__callback_error = callback_error
@@ -87,6 +92,13 @@ class Orchestrator(object):
 
         # compute and cache coverage information for the original system
         self.__baseline = self.__client_bugzoo.bugs["mars:base"]
+
+    @property
+    def logger(self) -> logging.Logger:
+        """
+        The associated with this orchestrator.
+        """
+        return self.__logger
 
     @property
     def state(self) -> OrchestratorState:
