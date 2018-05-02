@@ -18,13 +18,13 @@ setup(
         'requests',
         'flask'
     ],
-    include_package_data=True,
+    setup_requires=[
+        'pytest-runner'
+    ],
+    tests_require=[
+        'pytest'
+    ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
-    entry_points = {
-        'console_scripts': [
-            'orchestrator = orchestrator.server:main'
-        ]
-    }
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')]
 )
