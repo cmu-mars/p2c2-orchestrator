@@ -14,7 +14,10 @@ from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 
-__ALL__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
+logger = logging.getLogger("orchestrator")  # type: logging.Logger
+logger.addHandler(logging.NullHandler())
+
+__all__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
 
 BASE_IMAGE_NAME = 'mars:base'
 
@@ -92,10 +95,9 @@ class Orchestrator(object):
             callback_error: called when an unexpected error is encountered
                 during a non-blocking call.
         """
-        self.__logger = logging.getLogger('orchestrator')
-        self.__logger.info("- using BugZoo: {}".format(bugzoo.__version__))
-        self.__logger.info("- using Darjeeling: {}".format(darjeeling.__version__))
-        self.__logger.info("- using boggart: {}".format(boggart.__version__))
+        logger.info("- using BugZoo: {}".format(bugzoo.__version__))
+        logger.info("- using Darjeeling: {}".format(darjeeling.__version__))
+        logger.info("- using boggart: {}".format(boggart.__version__))
 
         self.__callback_progress = callback_progress
         self.__callback_done = callback_done
@@ -116,14 +118,11 @@ class Orchestrator(object):
         self.__searcher = None # type: Optional[Searcher]
 
         # compute and cache coverage information for the original system
-        self.__baseline = self.__client_bugzoo.bugs["mars:base"]
-
-    @property
-    def logger(self) -> logging.Logger:
-        """
-        The associated with this orchestrator.
-        """
-        return self.__logger
+        logger.info("Fetching snapshot for baseline system: %s",
+                    BASE_IMAGE_NAME)
+        self.__baseline = self.__client_bugzoo.bugs[BASE_IMAGE_NAME]  # type: bugzoo.core.bug.Bug
+        logger.info("Fetched snapshot for baseline system: %s",
+                    self.__baseline)
 
     @property
     def state(self) -> OrchestratorState:
@@ -187,7 +186,10 @@ class Orchestrator(object):
         Furthermore, lines in certain blacklisted files are removed from
         consideration, even if covered by the test suite.
         """
+        # TODO cache this information?
+        logger.info("Fetching coverage information for Baseline A.")
         coverage = self.bugzoo.bugs.coverage(self.baseline)
+        logger.info("Fetched coverage information for Baseline A.")
         lines = coverage.lines
 
         # restrict to files that may be mutated
@@ -301,7 +303,6 @@ class Orchestrator(object):
             try:
                 # TODO capture unexpected errors during snapshot creation
                 snapshot = boggartd.mutate(self.baseline, perturbation)
-                # TODO pass logger
                 try:
                     self.__problem = Problem(bz=self.bugzoo,
                                              bug=snapshot,
