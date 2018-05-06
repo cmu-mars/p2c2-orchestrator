@@ -4,7 +4,7 @@ import threading
 import time
 import logging
 
-import hulk
+import boggart
 import bugzoo
 import bugzoo.client
 import darjeeling
@@ -74,7 +74,7 @@ class CandidateEvaluation(object):
 
 class Orchestrator(object):
     def __init__(self,
-                 url_hulk: str,
+                 url_boggart: str,
                  url_bugzoo: str,
                  callback_progress: Callable[[CandidateEvaluation, List[CandidateEvaluation]], None],
                  callback_done: Callable[[List[CandidateEvaluation], int, OrchestratorOutcome, float], None],
@@ -84,7 +84,7 @@ class Orchestrator(object):
         Constructs a new orchestrator.
 
         Parameters:
-            url_hulk: the base URL of the Hulk server.
+            url_boggart: the base URL of the Hulk server.
             url_bugzoo: the base URL of the BugZoo server.
             callback_status: called when a new patch is added to the pareto
                 front.
@@ -95,6 +95,7 @@ class Orchestrator(object):
         self.__logger = logging.getLogger('orchestrator')
         self.__logger.info("- using BugZoo: {}".format(bugzoo.__version__))
         self.__logger.info("- using Darjeeling: {}".format(darjeeling.__version__))
+        self.__logger.info("- using boggart: {}".format(boggart.__version__))
 
         self.__callback_progress = callback_progress
         self.__callback_done = callback_done
@@ -107,7 +108,7 @@ class Orchestrator(object):
 
         self.__patches = [] # type: List[CandidateEvaluation]
         self.__state = OrchestratorState.READY_TO_PERTURB
-        self.__client_hulk = hulk.Client(url_hulk, timeout_connection=120)
+        self.__client_boggart = boggart.Client(url_boggart, timeout_connection=120)
         self.__client_bugzoo = bugzoo.Client(url_bugzoo, timeout_connection=120)
         # TODO it would be nicer if Darjeeling was a service
 
@@ -139,11 +140,11 @@ class Orchestrator(object):
         return self.__baseline
 
     @property
-    def hulk(self) -> hulk.Client:
+    def boggart(self) -> boggart.Client:
         """
-        A connection to the Hulk server, used to perturb the system under test.
+        A connection to the boggart server, used to perturb the system under test.
         """
-        return self.__client_hulk
+        return self.__client_boggart
 
     @property
     def bugzoo(self) -> bugzoo.client.Client:
@@ -253,6 +254,7 @@ class Orchestrator(object):
             AssertionError: if a line number is provided and that line number
                 is less than or equal to zero.
         """
+        boggartd = self.boggart
         assert line_num is None or line_num > 0
 
         line = FileLine(filename, line_num) if line_num else None
@@ -266,14 +268,14 @@ class Orchestrator(object):
 
         # fetch the mutation operators
         if op_name is not None:
-            operators = [self.hulk.operators[op_name]]
+            operators = [boggartd.operators[op_name]]
         else:
-            operators = [self.hulk.operators[name] for name in OPERATOR_NAMES]
+            operators = [boggartd.operators[name] for name in OPERATOR_NAMES]
 
-        mutations = hulk_client.mutations(self.baseline,
-                                          filename=filename,
-                                          operators=operators,
-                                          line=line)
+        mutations = boggartd.mutations(self.baseline,
+                                       filename=filename,
+                                       operators=operators,
+                                       line=line)
         return mutations
 
     # TODO add arg type
@@ -290,6 +292,7 @@ class Orchestrator(object):
             FailedToComputeCoverage: if coverage information could not be
                 obtained for the given mutant.
         """
+        boggartd = self.__boggart
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_PERTURB:
                 raise NotReadyToPerturb()
@@ -297,7 +300,7 @@ class Orchestrator(object):
             self.__state = OrchestratorState.PERTURBING
             try:
                 # TODO capture unexpected errors during snapshot creation
-                snapshot = self.hulk.mutate(self.baseline, perturbation)
+                snapshot = boggartd.mutate(self.baseline, perturbation)
                 # TODO pass logger
                 try:
                     self.__problem = Problem(bz=self.bugzoo,
