@@ -190,11 +190,17 @@ class Orchestrator(object):
         logger.info("Fetching coverage information for Baseline A.")
         coverage = self.bugzoo.bugs.coverage(self.baseline)
         logger.info("Fetched coverage information for Baseline A.")
+        logger.info("Computing covered lines.")
         lines = coverage.lines
+        logger.info("Computed covered lines: %d lines", len(lines))
 
         # restrict to files that may be mutated
+        logger.info("Determining list of mutable files.")
         files = [fn for fn in lines.files if self.__is_file_mutable(fn)]
+        logger.info("Determined list of mutable files: %s", files)
+        logger.info("Restricting coverage to lines in mutable files.")
         lines = lines.restricted_to_files(files)
+        logger.info("Restricted coverage to lines in mutable files.")
 
         return lines
 
