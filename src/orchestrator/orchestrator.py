@@ -283,10 +283,11 @@ class Orchestrator(object):
         else:
             operators = [boggartd.operators[name] for name in OPERATOR_NAMES]
 
+        restrict_to_lines = None if line_num is None else [line_num]
         mutations = boggartd.mutations(self.baseline,
                                        filepath=filename,
                                        operators=operators,
-                                       line=line)
+                                       restrict_to_lines=restrict_to_lines)
         return mutations
 
     # TODO add arg type
