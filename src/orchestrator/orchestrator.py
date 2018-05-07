@@ -174,7 +174,10 @@ class Orchestrator(object):
         A list of the names of the source code files for the original,
         unperturbed system that may be subject to perturbation.
         """
-        return self.lines.files
+        logger.info("Determining list of covered files.")
+        files = self.lines.files
+        logger.info("Determined list of covered files: %s.", files)
+        return files
 
     @property
     def lines(self) -> FileLineSet:
