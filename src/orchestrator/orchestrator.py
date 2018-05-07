@@ -177,6 +177,11 @@ class Orchestrator(object):
         logger.info("Determining list of covered files.")
         files = self.lines.files
         logger.info("Determined list of covered files: %s.", files)
+
+        # FIXME debugging
+        restrict_to = "yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp"
+        logger.warning("DEBUGGING: restricting mutations to %s", restrict_to)
+        files = [restrict_to]
         return files
 
     @property
@@ -284,10 +289,19 @@ class Orchestrator(object):
             operators = [boggartd.operators[name] for name in OPERATOR_NAMES]
 
         restrict_to_lines = None if line_num is None else [line_num]
-        mutations = boggartd.mutations(self.baseline,
-                                       filepath=filename,
-                                       operators=operators,
-                                       restrict_to_lines=restrict_to_lines)
+
+        # FIXME debugging
+        mutations = [
+            boggart.Mutation("flip-boolean-operator", 1,
+                             boggart.FileLocationRange.from_string("yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@45:39::45:41"),
+                             {})
+        ]
+
+        # mutations = boggartd.mutations(self.baseline,
+        #                                filepath=filename,
+        #                                operators=operators,
+        #                                restrict_to_lines=restrict_to_lines)
+
         return mutations
 
     # TODO add arg type
