@@ -284,7 +284,7 @@ class Orchestrator(object):
             operators = [boggartd.operators[name] for name in OPERATOR_NAMES]
 
         mutations = boggartd.mutations(self.baseline,
-                                       filename=filename,
+                                       filepath=filename,
                                        operators=operators,
                                        line=line)
         return mutations
