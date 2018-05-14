@@ -14,6 +14,8 @@ from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 
+from .exceptions import *
+
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
 
