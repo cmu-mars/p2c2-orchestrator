@@ -354,7 +354,8 @@ class Orchestrator(object):
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__problem = Problem(bz=self.bugzoo,
                                              bug=snapshot,
-                                             cache_coverage=False)
+                                             cache_coverage=False,
+                                             in_files=self.files)
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__state = OrchestratorState.READY_TO_ADAPT
                 except darjeeling.exceptions.NoFailingTests:
