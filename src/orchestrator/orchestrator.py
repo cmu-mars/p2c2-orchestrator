@@ -336,7 +336,7 @@ class Orchestrator(object):
         """
         logger.info("Attempting to perturb system using mutation: %s",
                     perturbation)
-        boggartd = self.__boggart
+        boggartd = self.boggart
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_PERTURB:
                 logger.warning("System is not ready to be perturbed [state: %s]",  # noqa: pycodestyle
