@@ -309,8 +309,9 @@ class Orchestrator(object):
         # FIXME debugging
         mutations = [
             Mutation("flip-boolean-operator", 1,
-                     boggart.FileLocationRange.from_string("yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@45:39::45:41"),
-                     {})
+                     boggart.FileLocationRange.from_string("yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@44:9::45:34"),
+                     {'1': 'cmd_vel_sub.allowed',
+                      '2': 'idx'})
         ]
         # mutations = boggartd.mutations(self.baseline,
         #                                filepath=filename,
