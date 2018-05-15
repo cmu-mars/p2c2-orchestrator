@@ -347,7 +347,7 @@ class Orchestrator(object):
             try:
                 # TODO capture unexpected errors during snapshot creation
                 logger.info("Applying perturbation to baseline snapshot.")
-                snapshot = boggartd.mutate(self.baseline, perturbation)
+                snapshot = boggartd.mutate(self.baseline, [perturbation])
                 logger.info("Generated mutant snapshot: %s", snapshot)
                 try:
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
