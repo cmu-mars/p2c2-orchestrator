@@ -13,6 +13,7 @@ from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
+from boggart import Mutation
 
 from .exceptions import *
 
@@ -307,9 +308,9 @@ class Orchestrator(object):
 
         # FIXME debugging
         mutations = [
-            boggart.Mutation("flip-boolean-operator", 1,
-                             boggart.FileLocationRange.from_string("yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@45:39::45:41"),
-                             {})
+            Mutation("flip-boolean-operator", 1,
+                     boggart.FileLocationRange.from_string("yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@45:39::45:41"),
+                     {})
         ]
         # mutations = boggartd.mutations(self.baseline,
         #                                filepath=filename,
@@ -320,7 +321,7 @@ class Orchestrator(object):
 
         return mutations
 
-    def perturb(self, perturbation: boggart.Mutation) -> None:
+    def perturb(self, perturbation: Mutation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
 
