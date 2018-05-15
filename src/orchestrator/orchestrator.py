@@ -272,6 +272,17 @@ class Orchestrator(object):
             AssertionError: if a line number is provided and that line number
                 is less than or equal to zero.
         """
+        if line_num is None:
+            loc_s = filename
+        else:
+            loc_s = "{}:{}".format(filename, line_num)
+
+        if op_name is None:
+            op_s = "all operators"
+        else:
+            op_s = "operator: {}".format(op_name)
+
+        logger.info("Finding all perturbations in %s using %s.", loc_s, op_s)
         boggartd = self.boggart
         assert line_num is None or line_num > 0
 
@@ -289,6 +300,8 @@ class Orchestrator(object):
             operators = [boggartd.operators[op_name]]
         else:
             operators = [boggartd.operators[name] for name in OPERATOR_NAMES]
+        logger.debug("Using perturbation operators: %s",
+                     [op.name for op in operators])
 
         restrict_to_lines = None if line_num is None else [line_num]
 
@@ -298,16 +311,16 @@ class Orchestrator(object):
                              boggart.FileLocationRange.from_string("yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@45:39::45:41"),
                              {})
         ]
-
         # mutations = boggartd.mutations(self.baseline,
         #                                filepath=filename,
         #                                operators=operators,
         #                                restrict_to_lines=restrict_to_lines)
+        logger.info("Found %d perturbations in %s using %s.",
+                    len(mutations), loc_s, op_s)
 
         return mutations
 
-    # TODO add arg type
-    def perturb(self, perturbation) -> None:
+    def perturb(self, perturbation: boggart.Mutation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
 
@@ -320,29 +333,43 @@ class Orchestrator(object):
             FailedToComputeCoverage: if coverage information could not be
                 obtained for the given mutant.
         """
+        logger.info("Attempting to perturb system using mutation: %s",
+                    perturbation)
         boggartd = self.__boggart
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_PERTURB:
+                logger.warning("System is not ready to be perturbed [state: %s]",  # noqa: pycodestyle
+                               str(self.state))
                 raise NotReadyToPerturb()
 
             self.__state = OrchestratorState.PERTURBING
             try:
                 # TODO capture unexpected errors during snapshot creation
+                logger.info("Applying perturbation to baseline snapshot.")
                 snapshot = boggartd.mutate(self.baseline, perturbation)
+                logger.info("Generated mutant snapshot: %s", snapshot)
                 try:
+                    logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__problem = Problem(bz=self.bugzoo,
                                              bug=snapshot,
                                              cache_coverage=False)
+                    logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__state = OrchestratorState.READY_TO_ADAPT
                 except darjeeling.exceptions.NoFailingTests:
+                    logger.error("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
                     raise NeutralPerturbation()
                 except darjeeling.exceptions.NoImplicatedLines:
+                    logger.error("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
                     raise FailedToComputeCoverage()
 
             except:
+                logger.debug("Resetting system state to be ready to perturb.")
                 self.__problem = None
                 self.__state = OrchestratorState.READY_TO_PERTURB
+                logger.debug("System is now ready to perturb.")
                 raise
+        logger.info("Successfully perturbed system using mutation: %s",
+                    perturbation)
 
     def adapt(self,
               *,
