@@ -358,13 +358,13 @@ class Orchestrator(object):
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__state = OrchestratorState.READY_TO_ADAPT
                 except darjeeling.exceptions.NoFailingTests:
-                    logger.error("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
+                    logger.exception("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
                     raise NeutralPerturbation()
                 except darjeeling.exceptions.NoImplicatedLines:
-                    logger.error("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
+                    logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
                     raise FailedToComputeCoverage()
 
-            except:
+            except OrchestratorError:
                 logger.debug("Resetting system state to be ready to perturb.")
                 self.__problem = None
                 self.__state = OrchestratorState.READY_TO_PERTURB
