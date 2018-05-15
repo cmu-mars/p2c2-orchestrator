@@ -337,7 +337,8 @@ class Orchestrator(object):
         """
         logger.info("Attempting to perturb system using mutation: %s",
                     perturbation)
-        boggartd = self.boggart
+        bz = self.__client_bugzoo
+        boggartd = self.__client_boggart
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_PERTURB:
                 logger.warning("System is not ready to be perturbed [state: %s]",  # noqa: pycodestyle
@@ -348,7 +349,8 @@ class Orchestrator(object):
             try:
                 # TODO capture unexpected errors during snapshot creation
                 logger.info("Applying perturbation to baseline snapshot.")
-                snapshot = boggartd.mutate(self.baseline, [perturbation])
+                mutant = boggartd.mutate(self.baseline, [perturbation])
+                snapshot = bz.bugs[mutant.snapshot]
                 logger.info("Generated mutant snapshot: %s", snapshot)
                 try:
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
