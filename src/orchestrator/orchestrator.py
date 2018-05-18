@@ -182,7 +182,7 @@ class Orchestrator(object):
         logger.info("Determined list of covered files: %s.", files)
 
         # FIXME debugging
-        restrict_to = "yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp"
+        restrict_to = "src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp"
         logger.warning("DEBUGGING: restricting mutations to %s", restrict_to)
         files = [restrict_to]
         return files
