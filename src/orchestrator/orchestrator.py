@@ -36,6 +36,10 @@ OPERATOR_NAMES = [
 ]
 
 
+def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
+    return 1.0 if nf == 0 else 0.0
+
+
 class OrchestratorState(Enum):
     READY_TO_PERTURB = 0
     PERTURBING = 1
@@ -357,6 +361,7 @@ class Orchestrator(object):
                     self.__problem = Problem(bz=self.bugzoo,
                                              bug=snapshot,
                                              cache_coverage=False,
+                                             suspiciousness_metric=suspiciousness,
                                              in_files=self.files)
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__state = OrchestratorState.READY_TO_ADAPT
