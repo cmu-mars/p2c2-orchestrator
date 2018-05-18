@@ -309,7 +309,7 @@ class Orchestrator(object):
         # FIXME debugging
         mutations = [
             Mutation("flip-boolean-operator", 1,
-                     boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@44:6::46:83"),
+                     boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@44:6::46:82"),
                      {'1': '(cmd_vel_sub.allowed == VACANT)',
                       '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
         ]
