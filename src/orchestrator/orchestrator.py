@@ -402,38 +402,49 @@ class Orchestrator(object):
                 is provided.
             NoSearchLimits: if neither a time or candidate limit is provided.
         """
+        logger.info("triggering adaptation")
         assert minutes is None or minutes > 0
         assert attempts is None or attempts > 0
 
         if minutes is None and attempts is None:
+            logger.error("no resource limits specified")
             raise NoSearchLimits()
 
         time_limit = datetime.timedelta(minutes=minutes) if minutes else None
 
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_ADAPT:
+                logger.error("unable to trigger adaptation: system is not ready to adapt [state: %s]",  # noqa: pycodestyle
+                             self.state)
                 raise NotReadyToAdapt()
 
             self.__state = OrchestratorState.SEARCHING
+            logger.debug("set orchestrator state to %s", self.__state)
 
             # start the search on a separate thread
             def search():
                 try:
                     problem = self.__problem
+                    logger.debug("constructing lazy patch sampler")
                     candidates = \
                         darjeeling.generator.SampleByLocalization(problem=problem,
                                                                   localization=problem.localization,
                                                                   snippets=problem.snippets)
+                    logger.debug("constructed lazy patch sampler")
+                    logger.debug("constructing search mechanism")
                     self.__searcher = Searcher(bugzoo=self.bugzoo,
                                                problem=problem,
                                                candidate=candidates,
                                                num_candidates=attempts,
                                                time_limit=time_limit)
+                    logger.debug("constructed search mechanism")
+                    logger.info("beginning search")
                     for patch in self.__searcher:
                         outcome = self.__searcher.outcomes[patch]
                         evaluation = CandidateEvaluation(patch, outcome)
                         self.__patches.append(evaluation)
                         self.__callback_progress(evaluation, self.patches)
+                    logger.info("finished search")
 
                     # FIXME extract log of attempted patches from darjeeling
                     log = []
@@ -446,10 +457,15 @@ class Orchestrator(object):
 
                 # FIXME handle unexpected errors
                 except Exception as err:
+                    logger.exception("an unexpected error occurred during adaptation: %s",  # noqa: pycodestyle
+                                     err)
                     self.__state = OrchestratorState.ERROR
                     kind = err.__class__.name
                     self.__callback_error(kind, str(err))
 
             # TODO ensure that thread is killed cleanly
+            logger.debug("creating search thread")
             thread = threading.Thread(target=search)
+            logger.debug("starting search thread")
             thread.start()
+            logger.info("finished triggered adaptation")
