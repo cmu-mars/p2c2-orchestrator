@@ -3,6 +3,7 @@ from enum import Enum
 import threading
 import time
 import logging
+import datetime
 
 import boggart
 import bugzoo
@@ -408,7 +409,7 @@ class Orchestrator(object):
 
         if minutes is None and attempts is None:
             logger.error("no resource limits specified")
-            raise NoSearchLimits()
+            raise NoSearchLimits
 
         time_limit = datetime.timedelta(minutes=minutes) if minutes else None
 
