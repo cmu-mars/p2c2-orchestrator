@@ -461,7 +461,7 @@ class Orchestrator(object):
                     logger.exception("an unexpected error occurred during adaptation: %s",  # noqa: pycodestyle
                                      err)
                     self.__state = OrchestratorState.ERROR
-                    kind = err.__class__.name
+                    kind = err.__class__.__name__
                     self.__callback_error(kind, str(err))
 
             # TODO ensure that thread is killed cleanly
