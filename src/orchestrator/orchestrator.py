@@ -10,6 +10,7 @@ import bugzoo
 import bugzoo.client
 import darjeeling
 import darjeeling.outcome
+import darjeeling.generator
 from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
