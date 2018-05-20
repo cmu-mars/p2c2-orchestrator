@@ -457,7 +457,7 @@ class Orchestrator(object):
                         outcome = OrchestratorOutcome.COMPLETE_REPAIR
                     else:
                         outcome = OrchestratorOutcome.NO_REPAIR
-                    num_attempts, runtime = self.resource_usage()
+                    num_attempts, runtime = self.resource_usage
                     self.__callback_done(log, num_attempts, outcome, self.patches, runtime)
 
                 # FIXME handle unexpected errors
