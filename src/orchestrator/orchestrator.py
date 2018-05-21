@@ -3,16 +3,21 @@ from enum import Enum
 import threading
 import time
 import logging
+import datetime
 
 import boggart
 import bugzoo
 import bugzoo.client
 import darjeeling
 import darjeeling.outcome
+import darjeeling.generator
 from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
+from boggart import Mutation
+
+from .exceptions import *
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
@@ -23,14 +28,18 @@ BASE_IMAGE_NAME = 'mars:base'
 
 # a list of the names of supported mutation operators
 OPERATOR_NAMES = [
-    'delete-void-function-call',
+#    'delete-void-function-call',
     'flip-arithmetic-operator',
     'flip-boolean-operator',
-    'flip-relational-operator',
-    'undo-transformation',
+#    'flip-relational-operator',
+#    'undo-transformation',
     'delete-conditional-control-flow',
-    'flip-signedness'
+#    'flip-signedness'
 ]
+
+
+def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
+    return 1.0 if nf == 0 else 0.0
 
 
 class OrchestratorState(Enum):
@@ -177,6 +186,13 @@ class Orchestrator(object):
         logger.info("Determining list of covered files.")
         files = self.lines.files
         logger.info("Determined list of covered files: %s.", files)
+
+        # FIXME for the sake of debugging and RR2, we're restricting the space
+        #   of possible mutations to those that occur in one particular
+        #   file.
+        restrict_to = "src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp"
+        logger.warning("DEBUGGING: restricting mutations to %s", restrict_to)
+        files = [restrict_to]
         return files
 
     @property
@@ -265,6 +281,17 @@ class Orchestrator(object):
             AssertionError: if a line number is provided and that line number
                 is less than or equal to zero.
         """
+        if line_num is None:
+            loc_s = filename
+        else:
+            loc_s = "{}:{}".format(filename, line_num)
+
+        if op_name is None:
+            op_s = "all operators"
+        else:
+            op_s = "operator: {}".format(op_name)
+
+        logger.info("Finding all perturbations in %s using %s.", loc_s, op_s)
         boggartd = self.boggart
         assert line_num is None or line_num > 0
 
@@ -282,16 +309,30 @@ class Orchestrator(object):
             operators = [boggartd.operators[op_name]]
         else:
             operators = [boggartd.operators[name] for name in OPERATOR_NAMES]
+        logger.debug("Using perturbation operators: %s",
+                     [op.name for op in operators])
 
         restrict_to_lines = None if line_num is None else [line_num]
-        mutations = boggartd.mutations(self.baseline,
-                                       filepath=filename,
-                                       operators=operators,
-                                       restrict_to_lines=restrict_to_lines)
+
+        # NOTE below is a prebaked mutation that is known to work
+        mutations = [
+            Mutation("flip-boolean-operator", 1,
+                     boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
+                     {'1': '(cmd_vel_sub.allowed == VACANT)',
+                      '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
+        ]
+        #generator_mutations = \
+        #    boggartd.mutations(self.baseline,
+        #                       filepath=filename,
+        #                       operators=operators,
+        #                       restrict_to_lines=restrict_to_lines)
+        #mutations = list(generator_mutations)
+        logger.info("Found %d perturbations in %s using %s.",
+                    len(mutations), loc_s, op_s)
+
         return mutations
 
-    # TODO add arg type
-    def perturb(self, perturbation) -> None:
+    def perturb(self, perturbation: Mutation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
 
@@ -304,29 +345,47 @@ class Orchestrator(object):
             FailedToComputeCoverage: if coverage information could not be
                 obtained for the given mutant.
         """
-        boggartd = self.__boggart
+        logger.info("Attempting to perturb system using mutation: %s",
+                    perturbation)
+        bz = self.__client_bugzoo
+        boggartd = self.__client_boggart
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_PERTURB:
+                logger.warning("System is not ready to be perturbed [state: %s]",  # noqa: pycodestyle
+                               str(self.state))
                 raise NotReadyToPerturb()
 
             self.__state = OrchestratorState.PERTURBING
             try:
                 # TODO capture unexpected errors during snapshot creation
-                snapshot = boggartd.mutate(self.baseline, perturbation)
+                logger.info("Applying perturbation to baseline snapshot.")
+                mutant = boggartd.mutate(self.baseline, [perturbation])
+                snapshot = bz.bugs[mutant.snapshot]
+                logger.info("Generated mutant snapshot: %s", snapshot)
                 try:
+                    logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__problem = Problem(bz=self.bugzoo,
                                              bug=snapshot,
-                                             cache_coverage=False)
+                                             cache_coverage=False,
+                                             suspiciousness_metric=suspiciousness,
+                                             in_files=self.files)
+                    logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__state = OrchestratorState.READY_TO_ADAPT
                 except darjeeling.exceptions.NoFailingTests:
+                    logger.exception("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
                     raise NeutralPerturbation()
                 except darjeeling.exceptions.NoImplicatedLines:
+                    logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
                     raise FailedToComputeCoverage()
 
-            except:
+            except OrchestratorError:
+                logger.debug("Resetting system state to be ready to perturb.")
                 self.__problem = None
                 self.__state = OrchestratorState.READY_TO_PERTURB
+                logger.debug("System is now ready to perturb.")
                 raise
+        logger.info("Successfully perturbed system using mutation: %s",
+                    perturbation)
 
     def adapt(self,
               *,
@@ -349,38 +408,51 @@ class Orchestrator(object):
                 is provided.
             NoSearchLimits: if neither a time or candidate limit is provided.
         """
+        logger.info("triggering adaptation")
         assert minutes is None or minutes > 0
         assert attempts is None or attempts > 0
 
         if minutes is None and attempts is None:
-            raise NoSearchLimits()
+            logger.error("no resource limits specified")
+            raise NoSearchLimits
 
         time_limit = datetime.timedelta(minutes=minutes) if minutes else None
 
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_ADAPT:
+                logger.error("unable to trigger adaptation: system is not ready to adapt [state: %s]",  # noqa: pycodestyle
+                             self.state)
                 raise NotReadyToAdapt()
 
             self.__state = OrchestratorState.SEARCHING
+            logger.debug("set orchestrator state to %s", self.__state)
 
             # start the search on a separate thread
             def search():
                 try:
                     problem = self.__problem
-                    candidates = \
+                    logger.debug("constructing lazy patch sampler")
+                    transformations = \
                         darjeeling.generator.SampleByLocalization(problem=problem,
                                                                   localization=problem.localization,
                                                                   snippets=problem.snippets)
+                    candidates = \
+                        darjeeling.generator.SingleEditPatches(transformations)
+                    logger.debug("constructed lazy patch sampler")
+                    logger.debug("constructing search mechanism")
                     self.__searcher = Searcher(bugzoo=self.bugzoo,
                                                problem=problem,
-                                               candidate=candidates,
-                                               num_candidates=attempts,
+                                               candidates=candidates,
+                                               # num_candidates=attempts,
                                                time_limit=time_limit)
+                    logger.debug("constructed search mechanism")
+                    logger.info("beginning search")
                     for patch in self.__searcher:
                         outcome = self.__searcher.outcomes[patch]
                         evaluation = CandidateEvaluation(patch, outcome)
                         self.__patches.append(evaluation)
                         self.__callback_progress(evaluation, self.patches)
+                    logger.info("finished search")
 
                     # FIXME extract log of attempted patches from darjeeling
                     log = []
@@ -389,14 +461,20 @@ class Orchestrator(object):
                         outcome = OrchestratorOutcome.COMPLETE_REPAIR
                     else:
                         outcome = OrchestratorOutcome.NO_REPAIR
+                    num_attempts, runtime = self.resource_usage
                     self.__callback_done(log, num_attempts, outcome, self.patches, runtime)
 
                 # FIXME handle unexpected errors
                 except Exception as err:
+                    logger.exception("an unexpected error occurred during adaptation: %s",  # noqa: pycodestyle
+                                     err)
                     self.__state = OrchestratorState.ERROR
-                    kind = err.__class__.name
+                    kind = err.__class__.__name__
                     self.__callback_error(kind, str(err))
 
             # TODO ensure that thread is killed cleanly
+            logger.debug("creating search thread")
             thread = threading.Thread(target=search)
+            logger.debug("starting search thread")
             thread.start()
+            logger.info("finished triggered adaptation")
