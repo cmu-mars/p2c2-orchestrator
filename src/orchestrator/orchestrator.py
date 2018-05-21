@@ -187,7 +187,9 @@ class Orchestrator(object):
         files = self.lines.files
         logger.info("Determined list of covered files: %s.", files)
 
-        # FIXME debugging
+        # FIXME for the sake of debugging and RR2, we're restricting the space
+        #   of possible mutations to those that occur in one particular
+        #   file.
         restrict_to = "src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp"
         logger.warning("DEBUGGING: restricting mutations to %s", restrict_to)
         files = [restrict_to]
@@ -312,17 +314,17 @@ class Orchestrator(object):
 
         restrict_to_lines = None if line_num is None else [line_num]
 
-        # FIXME debugging
-        mutations = [
-            Mutation("flip-boolean-operator", 1,
-                     boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
-                     {'1': '(cmd_vel_sub.allowed == VACANT)',
-                      '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
-        ]
-        # mutations = boggartd.mutations(self.baseline,
-        #                                filepath=filename,
-        #                                operators=operators,
-        #                                restrict_to_lines=restrict_to_lines)
+        # NOTE below is a prebaked mutation that is known to work
+        # mutations = [
+        #     Mutation("flip-boolean-operator", 1,
+        #              boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
+        #              {'1': '(cmd_vel_sub.allowed == VACANT)',
+        #               '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
+        # ]
+        mutations = boggartd.mutations(self.baseline,
+                                       filepath=filename,
+                                       operators=operators,
+                                       restrict_to_lines=restrict_to_lines)
         logger.info("Found %d perturbations in %s using %s.",
                     len(mutations), loc_s, op_s)
 
