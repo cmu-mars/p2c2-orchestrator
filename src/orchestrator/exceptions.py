@@ -4,7 +4,7 @@ import flask
 from bugzoo.core.fileline import FileLine
 
 
-__ALL__ = [
+__all__ = [
     'OrchestratorError',
     'PerturbationFailure',
     'NeutralPerturbation',
