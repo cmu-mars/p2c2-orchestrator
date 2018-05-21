@@ -315,18 +315,18 @@ class Orchestrator(object):
         restrict_to_lines = None if line_num is None else [line_num]
 
         # NOTE below is a prebaked mutation that is known to work
-        # mutations = [
-        #     Mutation("flip-boolean-operator", 1,
-        #              boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
-        #              {'1': '(cmd_vel_sub.allowed == VACANT)',
-        #               '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
-        # ]
-        generator_mutations = \
-            boggartd.mutations(self.baseline,
-                               filepath=filename,
-                               operators=operators,
-                               restrict_to_lines=restrict_to_lines)
-        mutations = list(generator_mutations)
+        mutations = [
+            Mutation("flip-boolean-operator", 1,
+                     boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
+                     {'1': '(cmd_vel_sub.allowed == VACANT)',
+                      '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
+        ]
+        #generator_mutations = \
+        #    boggartd.mutations(self.baseline,
+        #                       filepath=filename,
+        #                       operators=operators,
+        #                       restrict_to_lines=restrict_to_lines)
+        #mutations = list(generator_mutations)
         logger.info("Found %d perturbations in %s using %s.",
                     len(mutations), loc_s, op_s)
 
