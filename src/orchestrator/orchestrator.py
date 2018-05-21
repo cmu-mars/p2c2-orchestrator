@@ -321,10 +321,12 @@ class Orchestrator(object):
         #              {'1': '(cmd_vel_sub.allowed == VACANT)',
         #               '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
         # ]
-        mutations = boggartd.mutations(self.baseline,
-                                       filepath=filename,
-                                       operators=operators,
-                                       restrict_to_lines=restrict_to_lines)
+        generator_mutations = \
+            boggartd.mutations(self.baseline,
+                               filepath=filename,
+                               operators=operators,
+                               restrict_to_lines=restrict_to_lines)
+        mutations = list(generator_mutations)
         logger.info("Found %d perturbations in %s using %s.",
                     len(mutations), loc_s, op_s)
 
