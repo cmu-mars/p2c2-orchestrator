@@ -174,8 +174,10 @@ class Orchestrator(object):
         #
         # TODO: ignore blacklisted files (e.g., Gazebo, ROS core code)
         #
-
-        return True
+        blacklist = [
+            'src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_subscribers.cpp'
+        ]
+        return fn not in blacklist
 
     @property
     def files(self) -> List[str]:
