@@ -8,6 +8,7 @@ import datetime
 import boggart
 import bugzoo
 import bugzoo.client
+import bugzoo.exceptions
 import darjeeling
 import darjeeling.outcome
 import darjeeling.generator
@@ -376,7 +377,8 @@ class Orchestrator(object):
                 except darjeeling.exceptions.NoFailingTests:
                     logger.exception("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
                     raise NeutralPerturbation()
-                except darjeeling.exceptions.NoImplicatedLines:
+                # FIXME darjeeling should be responsible for catching BugZoo errors
+                except (darjeeling.exceptions.NoImplicatedLines, bugzoo.exceptions.FailedToComputeCoverage):  # noqa: pycodestyle
                     logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
                     raise FailedToComputeCoverage()
 
