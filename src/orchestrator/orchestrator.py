@@ -361,6 +361,24 @@ class Orchestrator(object):
                 mutant = boggartd.mutate(self.baseline, [perturbation])
                 snapshot = bz.bugs[mutant.snapshot]
                 logger.info("Generated mutant snapshot: %s", snapshot)
+
+                # ensure that the mutant fails at least one test
+                logger.info("Ensuring that mutant fails at least one test")
+                try:
+                    killed = False
+                    container = bz.containers.provision(snapshot)
+                    for test in snapshot.tests:
+                        outcome = bz.containers.test(container, test)
+                        if not outcome.passed:
+                            killed = True
+                            break
+                    if not killed:
+                        logger.info("Mutant was not killed by any of the test cases")
+                        raise NeutralPerturbation()
+                finally:
+                    del bz.containers[container.uid]
+                logger.info("Verified that mutant fails at least one test")
+
                 try:
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
                     self.__problem = Problem(bz=self.bugzoo,
