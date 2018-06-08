@@ -8,6 +8,7 @@ import datetime
 import boggart
 import bugzoo
 import bugzoo.client
+import bugzoo.exceptions
 import darjeeling
 import darjeeling.outcome
 import darjeeling.generator
@@ -174,8 +175,10 @@ class Orchestrator(object):
         #
         # TODO: ignore blacklisted files (e.g., Gazebo, ROS core code)
         #
-
-        return True
+        blacklist = [
+            'src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_subscribers.cpp'
+        ]
+        return fn not in blacklist
 
     @property
     def files(self) -> List[str]:
@@ -315,18 +318,18 @@ class Orchestrator(object):
         restrict_to_lines = None if line_num is None else [line_num]
 
         # NOTE below is a prebaked mutation that is known to work
-        mutations = [
-            Mutation("flip-boolean-operator", 1,
-                     boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
-                     {'1': '(cmd_vel_sub.allowed == VACANT)',
-                      '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
-        ]
-        #generator_mutations = \
-        #    boggartd.mutations(self.baseline,
-        #                       filepath=filename,
-        #                       operators=operators,
-        #                       restrict_to_lines=restrict_to_lines)
-        #mutations = list(generator_mutations)
+        #mutations = [
+        #    Mutation("flip-boolean-operator", 1,
+        #             boggart.FileLocationRange.from_string("src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@40:6::42:77"),
+        #             {'1': '(cmd_vel_sub.allowed == VACANT)',
+        #              '2': '(cmd_vel_sub.allowed == idx) || (cmd_vel_sub[idx].priority > cmd_vel_sub[cmd_vel_sub.allowed].priority)'})  # noqa: pycodestyle
+        #]
+        generator_mutations = \
+            boggartd.mutations(self.baseline,
+                               filepath=filename,
+                               operators=operators,
+                               restrict_to_lines=restrict_to_lines)
+        mutations = list(generator_mutations)
         logger.info("Found %d perturbations in %s using %s.",
                     len(mutations), loc_s, op_s)
 
@@ -374,7 +377,8 @@ class Orchestrator(object):
                 except darjeeling.exceptions.NoFailingTests:
                     logger.exception("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
                     raise NeutralPerturbation()
-                except darjeeling.exceptions.NoImplicatedLines:
+                # FIXME darjeeling should be responsible for catching BugZoo errors
+                except (darjeeling.exceptions.NoImplicatedLines, bugzoo.exceptions.FailedToComputeCoverage):  # noqa: pycodestyle
                     logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
                     raise FailedToComputeCoverage()
 
