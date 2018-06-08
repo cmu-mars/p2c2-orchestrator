@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional, Callable
+from typing import List, Tuple, Optional, Callable, Iterator
 from enum import Enum
 import threading
 import time
