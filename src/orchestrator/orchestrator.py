@@ -28,13 +28,13 @@ BASE_IMAGE_NAME = 'mars:base'
 
 # a list of the names of supported mutation operators
 OPERATOR_NAMES = [
-#    'delete-void-function-call',
+    'delete-void-function-call',
     'flip-arithmetic-operator',
     'flip-boolean-operator',
-#    'flip-relational-operator',
-#    'undo-transformation',
+    'flip-relational-operator',
+    'undo-transformation',
     'delete-conditional-control-flow',
-#    'flip-signedness'
+    'flip-signedness'
 ]
 
 
