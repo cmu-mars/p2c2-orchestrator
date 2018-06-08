@@ -191,13 +191,6 @@ class Orchestrator(object):
         logger.info("Determining list of covered files.")
         files = self.lines.files
         logger.info("Determined list of covered files: %s.", files)
-
-        # FIXME for the sake of debugging and RR2, we're restricting the space
-        #   of possible mutations to those that occur in one particular
-        #   file.
-        restrict_to = "src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp"
-        logger.warning("DEBUGGING: restricting mutations to %s", restrict_to)
-        files = [restrict_to]
         return files
 
     @property
