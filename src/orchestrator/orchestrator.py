@@ -387,6 +387,21 @@ class Orchestrator(object):
         logger.info("Successfully perturbed system using mutation: %s",
                     perturbation)
 
+    def _construct_search_space(self) -> Iterator[Candidate]:
+        """
+        Used to compose the sequence of patches that should be attempted.
+        """
+        logger.debug("constructing lazy patch sampler")
+        problem = self.__problem
+        transformations = \
+            darjeeling.generator.SampleByLocalization(problem=problem,
+                                                      localization=problem.localization,
+                                                      snippets=problem.snippets)
+        candidates = \
+            darjeeling.generator.SingleEditPatches(transformations)
+        logger.debug("constructed lazy patch sampler")
+        return candidates
+
     def adapt(self,
               *,
               minutes: Optional[float] = None,
@@ -431,14 +446,7 @@ class Orchestrator(object):
             def search():
                 try:
                     problem = self.__problem
-                    logger.debug("constructing lazy patch sampler")
-                    transformations = \
-                        darjeeling.generator.SampleByLocalization(problem=problem,
-                                                                  localization=problem.localization,
-                                                                  snippets=problem.snippets)
-                    candidates = \
-                        darjeeling.generator.SingleEditPatches(transformations)
-                    logger.debug("constructed lazy patch sampler")
+                    candidates = self._construct_search_space()
                     logger.debug("constructing search mechanism")
                     self.__searcher = Searcher(bugzoo=self.bugzoo,
                                                problem=problem,
