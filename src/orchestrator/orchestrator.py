@@ -67,14 +67,16 @@ class CandidateEvaluation(object):
     """
     def __init__(self,
                  patch: darjeeling.candidate.Candidate,
-                 outcome: darjeeling.outcome.CandidateOutcome
+                 outcome: darjeeling.outcome.CandidateOutcome,
+                 diff: str
                  ) -> None:
         self.__patch = patch
         self.__outcome = outcome
+        self.__diff = diff
 
     @property
     def diff(self) -> str:
-        return "NOT YET IMPLEMENTED"
+        return self.__diff
 
     @property
     def tests(self) -> darjeeling.outcome.TestOutcomeSet:
@@ -453,7 +455,9 @@ class Orchestrator(object):
                     logger.info("beginning search")
                     for patch in self.__searcher:
                         outcome = self.__searcher.outcomes[patch]
-                        evaluation = CandidateEvaluation(patch, outcome)
+                        evaluation = CandidateEvaluation(patch,
+                                                         outcome,
+                                                         patch.diff(problem))
                         self.__patches.append(evaluation)
                         self.__callback_progress(evaluation, self.patches)
                     logger.info("finished search")
