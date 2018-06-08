@@ -329,6 +329,15 @@ class Orchestrator(object):
 
         return mutations
 
+    def _patch_to_evaluation(self, patch: Candidate) -> CandidateEvaluation:
+        """
+        Transforms a Darjeeling patch data structure into its Orchestrator
+        equivalent.
+        """
+        return CandidateEvaluation(patch,
+                                   self.__searcher.outcomes[patch],
+                                   patch.diff(self.__problem))
+
     def perturb(self, perturbation: Mutation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
@@ -446,16 +455,12 @@ class Orchestrator(object):
                     logger.debug("constructed search mechanism")
                     logger.info("beginning search")
                     for patch in self.__searcher:
-                        outcome = self.__searcher.outcomes[patch]
-                        evaluation = CandidateEvaluation(patch,
-                                                         outcome,
-                                                         patch.diff(problem))
+                        evaluation = self._patch_to_evaluation(patch)
                         self.__patches.append(evaluation)
                         self.__callback_progress(evaluation, self.patches)
                     logger.info("finished search")
-
-                    # FIXME extract log of attempted patches from darjeeling
-                    log = []
+                    log = [self._patch_to_evaluation(p)
+                           for p in self.__searcher.history]
                     self.__state = OrchestratorState.FINISHED
                     if self.patches:
                         outcome = OrchestratorOutcome.COMPLETE_REPAIR
