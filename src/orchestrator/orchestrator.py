@@ -367,6 +367,7 @@ class Orchestrator(object):
                 try:
                     killed = False
                     container = bz.containers.provision(snapshot)
+                    bz.containers.build(container)
                     for test in snapshot.tests:
                         outcome = bz.containers.test(container, test)
                         if not outcome.passed:
