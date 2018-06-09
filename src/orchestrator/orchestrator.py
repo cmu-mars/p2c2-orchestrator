@@ -329,7 +329,7 @@ class Orchestrator(object):
         """
         return CandidateEvaluation(patch,
                                    self.__searcher.outcomes[patch],
-                                   patch.to_diff(self.__problem))
+                                   str(patch.to_diff(self.__problem)))
 
     def perturb(self, perturbation: Mutation) -> None:
         """
