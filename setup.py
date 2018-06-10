@@ -26,6 +26,9 @@ setup(
     ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
+    package_data={
+        '': ['*.yml']
+    },
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     test_suite='tests'
 )
