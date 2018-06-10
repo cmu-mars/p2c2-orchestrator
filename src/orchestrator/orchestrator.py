@@ -359,7 +359,7 @@ class Orchestrator(object):
             container = bugzoo.containers.provision(self.__baseline_with_instrumentation)
             bgz.containers.patch(container, diff)
             bgz.containers.exec(container, "catkin build")
-            coverage = bgz.containers.coverage(container, recompile=False)
+            coverage = bgz.containers.coverage(container, rebuild=False)
         except BugZooException:
             raise FailedToComputeCoverage
         finally:
