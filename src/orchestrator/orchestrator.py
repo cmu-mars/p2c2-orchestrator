@@ -14,8 +14,10 @@ import bugzoo.exceptions
 import darjeeling
 import darjeeling.outcome
 import darjeeling.generator
+from bugzoo.exceptions import BugZooException
 from bugzoo.core.bug import Bug as Snapshot
 from bugzoo.core.fileline import FileLine, FileLineSet
+from bugzoo.core.coverage import TestSuiteCoverage
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
@@ -105,7 +107,7 @@ class Orchestrator(object):
             url_boggart: the base URL of the Hulk server.
             url_bugzoo: the base URL of the BugZoo server.
             callback_status: called when a new patch is added to the pareto
-                front.
+                    front.
             callback_done: called when the search process has finished.
             callback_error: called when an unexpected error is encountered
                 during a non-blocking call.
@@ -129,8 +131,10 @@ class Orchestrator(object):
         self.__client_bugzoo = bugzoo.Client(url_bugzoo, timeout_connection=120)
         # TODO it would be nicer if Darjeeling was a service
 
-        self.__problem = None # type: Optional[Problem]
-        self.__searcher = None # type: Optional[Searcher]
+        self.__problem = None  # type: Optional[Problem]
+        self.__searcher = None  # type: Optional[Searcher]
+        self.__coverage_for_mutant = None  # type: Optional[TestSuiteCoverage]
+        self.__coverage_for_baseline = None  # type: Optional[TestSuiteCoverage]
         self.__register_baseline()
 
     def __register_baseline(self) -> None:
@@ -212,8 +216,9 @@ class Orchestrator(object):
         consideration, even if covered by the test suite.
         """
         # TODO cache this information?
+        bz = self.__client_bugzoo
         logger.info("Fetching coverage information for Baseline A.")
-        coverage = self.bugzoo.bugs.coverage(self.__baseline)
+        coverage = bz.bugs.coverage(self.__baseline)
         logger.info("Fetched coverage information for Baseline A.")
         logger.info("Computing covered lines.")
         lines = coverage.lines
@@ -344,28 +349,22 @@ class Orchestrator(object):
         """
         Attempts to compute coverage information for a given mutant.
         """
-        boggart = self.__client_boggart
-        bugzoo = self.__client_bugzoo
+        bgrt = self.__client_boggart
+        bgz = self.__client_bugzoo
 
         logger.debug("computing coverage for mutant: %s", mutant)
         diff = boggart.mutations_to_diff(self.__baseline, mutant.mutations)
-
         container = None
         try:
-            # FIXME no, we want to use the instrumented image
-            container = bugzoo.containers.provision(mutant.snapshot)
-            bugzoo.containers.patch(container, diff)
-            bugzoo.containers.exec(container, "catkin build")
-
-            # FIXME extract coverage
-            bugzoo.containers.coverag
-
+            container = bugzoo.containers.provision(self.__baseline_with_instrumentation)
+            bgz.containers.patch(container, diff)
+            bgz.containers.exec(container, "catkin build")
+            coverage = bgz.containers.coverage(container, recompile=False)
         except BugZooException:
-            # FIXME
+            raise FailedToComputeCoverage
         finally:
             if container is not None:
-                del bugzoo.containers[container.uid]
-
+                del bgz.containers[container.uid]
         logger.debug("computed coverage for mutant: %s", mutant)
         return coverage
 
@@ -424,7 +423,7 @@ class Orchestrator(object):
 
                 try:
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
-                    self.__problem = Problem(bz=self.bugzoo,
+                    self.__problem = Problem(bz=self.__client_bugzoo,
                                              bug=snapshot,
                                              cache_coverage=False,
                                              suspiciousness_metric=suspiciousness,
@@ -437,7 +436,7 @@ class Orchestrator(object):
                 # FIXME darjeeling should be responsible for catching BugZoo errors
                 except (darjeeling.exceptions.NoImplicatedLines, bugzoo.exceptions.FailedToComputeCoverage):  # noqa: pycodestyle
                     logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
-                    raise FailedToComputeCoverage()
+                    raise FailedToComputeCoverage
 
             except OrchestratorError:
                 logger.debug("Resetting system state to be ready to perturb.")
@@ -505,11 +504,12 @@ class Orchestrator(object):
 
             # start the search on a separate thread
             def search():
+                bz = self.__client_bugzoo
                 try:
                     problem = self.__problem
                     candidates = self._construct_search_space()
                     logger.debug("constructing search mechanism")
-                    self.__searcher = Searcher(bugzoo=self.bugzoo,
+                    self.__searcher = Searcher(bugzoo=self.__client_bugzoo,
                                                problem=problem,
                                                candidates=candidates,
                                                # num_candidates=attempts,
