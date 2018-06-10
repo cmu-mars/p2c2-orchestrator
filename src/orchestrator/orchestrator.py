@@ -22,6 +22,7 @@ from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
+from boggart.core.mutant import Mutant
 
 from .exceptions import *
 
@@ -143,13 +144,14 @@ class Orchestrator(object):
         manifest_fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
         with open(manifest_fn, 'r') as f:
             dict_snapshot = yaml.load(f)
+        dict_snapshot['source'] = None
 
         self.__baseline = Snapshot.from_dict(dict_snapshot)
-        bz.bugs.register(self.__baseline_with_instrumentation)
+        bz.bugs.register(self.__baseline)
 
         dict_snapshot['name'] = 'mars:instrumentation'
         dict_snapshot['image'] = 'cmumars/cp2:instrumentation'
-        self.__baseline_with_instrumenation = \
+        self.__baseline_with_instrumentation = \
             Snapshot.from_dict(dict_snapshot)
         bz.bugs.register(self.__baseline_with_instrumentation)
         logger.info("Registered snapshot for baseline system.")
@@ -353,13 +355,19 @@ class Orchestrator(object):
         bgz = self.__client_bugzoo
 
         logger.debug("computing coverage for mutant: %s", mutant)
-        diff = boggart.mutations_to_diff(self.__baseline, mutant.mutations)
+        logger.debug("generating diff for mutant: %s", mutant)
+        diff = bgrt.mutations_to_diff(self.__baseline, mutant.mutations)
+        logger.debug("generated diff for mutant: %s", mutant)
         container = None
         try:
-            container = bugzoo.containers.provision(self.__baseline_with_instrumentation)
+            container = bgz.containers.provision(self.__baseline_with_instrumentation)
+            logger.debug("applying diff to instrumented container")
             bgz.containers.patch(container, diff)
+            logger.debug("rebuilding program")
             bgz.containers.exec(container, "catkin build")
+            logger.debug("computing coverage")
             coverage = bgz.containers.coverage(container, instrument=False)
+            logger.debug("computed coverage")
         except BugZooException:
             raise FailedToComputeCoverage
         finally:
