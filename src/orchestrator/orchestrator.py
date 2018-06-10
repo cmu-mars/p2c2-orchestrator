@@ -364,7 +364,9 @@ class Orchestrator(object):
             logger.debug("applying diff to instrumented container")
             bgz.containers.patch(container, diff)
             logger.debug("rebuilding program")
-            bgz.containers.exec(container, "catkin build")
+            bgz.containers.exec(container,
+                                'catkin build',
+                                context='/ros_ws')
             logger.debug("computing coverage")
             coverage = bgz.containers.coverage(container, instrument=False)
             logger.debug("computed coverage")
