@@ -1,7 +1,9 @@
 name: mars:base
 image: cmumars/cp2:base
 dataset: mars
+program: turtlebot
 source-location: /ros_ws
+source: ephemeral
 coverage:
   files-to-instrument:
     - src/actionlib/test/add_two_ints_server.cpp
