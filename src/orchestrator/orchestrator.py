@@ -4,6 +4,8 @@ import threading
 import time
 import logging
 import datetime
+import os
+import yaml
 
 import boggart
 import bugzoo
@@ -12,6 +14,7 @@ import bugzoo.exceptions
 import darjeeling
 import darjeeling.outcome
 import darjeeling.generator
+from bugzoo.core.bug import Bug as Snapshot
 from bugzoo.core.fileline import FileLine, FileLineSet
 from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
@@ -128,13 +131,24 @@ class Orchestrator(object):
 
         self.__problem = None # type: Optional[Problem]
         self.__searcher = None # type: Optional[Searcher]
+        self.__register_baseline()
 
-        # compute and cache coverage information for the original system
-        logger.info("Fetching snapshot for baseline system: %s",
-                    BASE_IMAGE_NAME)
-        self.__baseline = self.__client_bugzoo.bugs[BASE_IMAGE_NAME]  # type: bugzoo.core.bug.Bug
-        logger.info("Fetched snapshot for baseline system: %s",
-                    self.__baseline)
+    def __register_baseline(self) -> None:
+        logger.info("Registering snapshot for baseline system.")
+        bz = self.__client_bugzoo
+        manifest_fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
+        with open(manifest_fn, 'r') as f:
+            dict_snapshot = yaml.load(f)
+
+        self.__baseline = Snapshot.from_dict(dict_snapshot)
+        bz.bugs.register(self.__baseline_with_instrumentation)
+
+        dict_snapshot['name'] = 'mars:instrumentation'
+        dict_snapshot['image'] = 'cmumars/cp2:instrumentation'
+        self.__baseline_with_instrumenation = \
+            Snapshot.from_dict(dict_snapshot)
+        bz.bugs.register(self.__baseline_with_instrumentation)
+        logger.info("Registered snapshot for baseline system.")
 
     @property
     def state(self) -> OrchestratorState:
@@ -142,13 +156,6 @@ class Orchestrator(object):
         The current state of the orchestrator.
         """
         return self.__state
-
-    @property
-    def baseline(self) -> bugzoo.core.bug.Bug:
-        """
-        The BugZoo snapshot for the original version of the system under test.
-        """
-        return self.__baseline
 
     @property
     def boggart(self) -> boggart.Client:
@@ -188,6 +195,7 @@ class Orchestrator(object):
         A list of the names of the source code files for the original,
         unperturbed system that may be subject to perturbation.
         """
+        # FIXME cache?
         logger.info("Determining list of covered files.")
         files = self.lines.files
         logger.info("Determined list of covered files: %s.", files)
@@ -205,7 +213,7 @@ class Orchestrator(object):
         """
         # TODO cache this information?
         logger.info("Fetching coverage information for Baseline A.")
-        coverage = self.bugzoo.bugs.coverage(self.baseline)
+        coverage = self.bugzoo.bugs.coverage(self.__baseline)
         logger.info("Fetched coverage information for Baseline A.")
         logger.info("Computing covered lines.")
         lines = coverage.lines
@@ -279,6 +287,8 @@ class Orchestrator(object):
             AssertionError: if a line number is provided and that line number
                 is less than or equal to zero.
         """
+        baseline = self.__baseline
+        boggartd = self.__client_boggart
         if line_num is None:
             loc_s = filename
         else:
@@ -290,7 +300,6 @@ class Orchestrator(object):
             op_s = "operator: {}".format(op_name)
 
         logger.info("Finding all perturbations in %s using %s.", loc_s, op_s)
-        boggartd = self.boggart
         assert line_num is None or line_num > 0
 
         line = FileLine(filename, line_num) if line_num else None
@@ -312,7 +321,7 @@ class Orchestrator(object):
 
         restrict_to_lines = None if line_num is None else [line_num]
         generator_mutations = \
-            boggartd.mutations(self.baseline,
+            boggartd.mutations(baseline,
                                filepath=filename,
                                operators=operators,
                                restrict_to_lines=restrict_to_lines)
@@ -335,10 +344,30 @@ class Orchestrator(object):
         """
         Attempts to compute coverage information for a given mutant.
         """
-        # 1. use a special coverage image
-        # 2. apply diff
-        # 3. rebuild
-        raise NotImplementedError
+        boggart = self.__client_boggart
+        bugzoo = self.__client_bugzoo
+
+        logger.debug("computing coverage for mutant: %s", mutant)
+        diff = boggart.mutations_to_diff(self.__baseline, mutant.mutations)
+
+        container = None
+        try:
+            # FIXME no, we want to use the instrumented image
+            container = bugzoo.containers.provision(mutant.snapshot)
+            bugzoo.containers.patch(container, diff)
+            bugzoo.containers.exec(container, "catkin build")
+
+            # FIXME extract coverage
+            bugzoo.containers.coverag
+
+        except BugZooException:
+            # FIXME
+        finally:
+            if container is not None:
+                del bugzoo.containers[container.uid]
+
+        logger.debug("computed coverage for mutant: %s", mutant)
+        return coverage
 
     def perturb(self, perturbation: Mutation) -> None:
         """
@@ -357,6 +386,7 @@ class Orchestrator(object):
                     perturbation)
         bz = self.__client_bugzoo
         boggartd = self.__client_boggart
+        baseline = self.__baseline
         with self.__lock:
             if self.state != OrchestratorState.READY_TO_PERTURB:
                 logger.warning("System is not ready to be perturbed [state: %s]",  # noqa: pycodestyle
@@ -367,7 +397,7 @@ class Orchestrator(object):
             try:
                 # TODO capture unexpected errors during snapshot creation
                 logger.info("Applying perturbation to baseline snapshot.")
-                mutant = boggartd.mutate(self.baseline, [perturbation])
+                mutant = boggartd.mutate(baseline, [perturbation])
                 snapshot = bz.bugs[mutant.snapshot]
                 logger.info("Generated mutant snapshot: %s", snapshot)
 
