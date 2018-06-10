@@ -331,6 +331,15 @@ class Orchestrator(object):
                                    self.__searcher.outcomes[patch],
                                    str(patch.to_diff(self.__problem)))
 
+    def _compute_coverage(self, mutant: Mutant) -> TestSuiteCoverage:
+        """
+        Attempts to compute coverage information for a given mutant.
+        """
+        # 1. use a special coverage image
+        # 2. apply diff
+        # 3. rebuild
+        raise NotImplementedError
+
     def perturb(self, perturbation: Mutation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
@@ -379,6 +388,9 @@ class Orchestrator(object):
                 finally:
                     del bz.containers[container.uid]
                 logger.info("Verified that mutant fails at least one test")
+
+                # FIXME generate coverage information for the mutant
+                coverage = self._compute_coverage(mutant)
 
                 try:
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
