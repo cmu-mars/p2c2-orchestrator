@@ -21,7 +21,6 @@ coverage:
     - src/image_common/image_transport/src/republish.cpp
     - src/image_common/image_transport/tutorial/src/my_subscriber.cpp
     - src/image_common/image_transport/tutorial/src/my_publisher.cpp
-    - src/astra_camera/ros/astra_camera_node.cpp
     - src/kdl_parser/kdl_parser/test/test_inertia_rpy.cpp
     - src/kdl_parser/kdl_parser/test/test_kdl_parser.cpp
     - src/perception_pcl/pcl_ros/tools/convert_pcd_to_image.cpp
