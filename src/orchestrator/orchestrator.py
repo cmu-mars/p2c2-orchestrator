@@ -21,7 +21,6 @@ from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
 from bugzoo.core.fileline import FileLine, FileLineSet
 from bugzoo.core.coverage import TestSuiteCoverage
-from darjeeling.problem import Problem
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
@@ -30,8 +29,7 @@ from darjeeling.generator import all_transformations_in_file
 from darjeeling.transformation import AndToOr, \
                                       GreaterThanToLessOrEqualTo
 
-
-
+from .problem import Problem
 from .exceptions import *
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
@@ -430,16 +428,14 @@ class Orchestrator(object):
             FailedToComputeCoverage: if an error occurred during the coverage
                 computing process.
         """
-        snapshot = self.__client_bugzoo.bugs[perturbation.snapshot]
         coverage = self._compute_coverage(perturbation)
         logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
-        logger.info("Using snapshot: %s", snapshot)
         try:
             self.__problem = \
-                Problem(bz=self.__client_bugzoo,
-                        bug=snapshot,
-                        coverage=coverage,
-                        client_rooibos=self.__client_rooibos)
+                Problem(self.__client_bugzoo,
+                        self.__client_rooibos,
+                        coverage,
+                        perturbation)
             self.__state = OrchestratorState.READY_TO_ADAPT
         except darjeeling.exceptions.NoImplicatedLines:  # noqa: pycodestyle
             logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
