@@ -66,8 +66,8 @@ def fetch_instrumentation_snapshot(bz: bugzoo.client.Client) -> Snapshot:
     with open(fn, 'r') as f:
         desc = yaml.load(f)
     desc['source'] = None
-    desc['name'] = 'mars:instrumentation'
-    desc['image'] = 'cmumars/cp2:instrumentation'
+    desc['name'] = 'mars:instrument'
+    desc['image'] = 'cmumars/cp2:instrument'
     snapshot = Snapshot.from_dict(desc)
     bz.bugs.register(snapshot)
     return snapshot
