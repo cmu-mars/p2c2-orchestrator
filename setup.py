@@ -30,5 +30,10 @@ setup(
         '': ['*.yml']
     },
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
-    test_suite='tests'
+    test_suite='tests',
+    entry_points = {
+        'console_scripts': [
+            'orchestrator-instrument = orchestrator.instrument:instrument',
+        ]
+    }
 )
