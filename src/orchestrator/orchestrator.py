@@ -8,6 +8,7 @@ import datetime
 import os
 import yaml
 
+import rooibos
 import boggart
 import bugzoo
 import bugzoo.client
@@ -16,6 +17,7 @@ import darjeeling
 import darjeeling.outcome
 import darjeeling.generator
 from bugzoo.exceptions import BugZooException
+from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
 from bugzoo.core.fileline import FileLine, FileLineSet
 from bugzoo.core.coverage import TestSuiteCoverage
@@ -24,6 +26,11 @@ from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
 from boggart.core.mutant import Mutant
+from darjeeling.generator import all_transformations_in_file
+from darjeeling.transformation import AndToOr, \
+                                      GreaterThanToLessOrEqualTo
+
+
 
 from .exceptions import *
 
@@ -122,6 +129,7 @@ class Orchestrator(object):
     def __init__(self,
                  url_boggart: str,
                  url_bugzoo: str,
+                 url_rooibos: str,
                  callback_progress: Callable[[CandidateEvaluation, List[CandidateEvaluation]], None],
                  callback_done: Callable[[List[CandidateEvaluation], int, OrchestratorOutcome, float], None],
                  callback_error: Callable[[str, str], None]
@@ -153,6 +161,7 @@ class Orchestrator(object):
 
         self.__patches = [] # type: List[CandidateEvaluation]
         self.__state = OrchestratorState.READY_TO_PERTURB
+        self.__client_rooibos = rooibos.Client(url_rooibos, timeout_connection=120)
         self.__client_boggart = boggart.Client(url_boggart, timeout_connection=120)
         self.__client_bugzoo = bugzoo.Client(url_bugzoo, timeout_connection=120)
         # TODO it would be nicer if Darjeeling was a service
@@ -413,6 +422,29 @@ class Orchestrator(object):
         logger.debug("computed coverage for mutant: %s", mutant)
         return coverage
 
+    def _build_problem(self, perturbation: Mutation) -> Problem:
+        """
+        Transforms the scenario into a repair problem.
+
+        Raises:
+            FailedToComputeCoverage: if an error occurred during the coverage
+                computing process.
+        """
+        snapshot = self.__client_bugzoo.bugs[perturbation.snapshot]
+        coverage = self._compute_coverage(perturbation)
+        logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
+        logger.info("Using snapshot: %s", snapshot)
+        try:
+            self.__problem = \
+                Problem(bz=self.__client_bugzoo,
+                        bug=snapshot,
+                        coverage=coverage,
+                        client_rooibos=self.__client_rooibos)
+            self.__state = OrchestratorState.READY_TO_ADAPT
+        except darjeeling.exceptions.NoImplicatedLines:  # noqa: pycodestyle
+            logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
+            raise FailedToComputeCoverage
+
     def perturb(self, perturbation: Mutation) -> None:
         """
         Attempts to generate baseline B by perturbing the original system.
@@ -445,27 +477,7 @@ class Orchestrator(object):
                 snapshot = bz.bugs[mutant.snapshot]
                 logger.info("Generated mutant snapshot: %s", snapshot)
                 self._check_liveness(mutant)
-                coverage = self._compute_coverage(mutant)
-
-                # FIXME bundle this into a new method
-                try:
-                    logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
-                    # FIXME use new Problem class
-                    self.__problem = Problem(bz=self.__client_bugzoo,
-                                             bug=snapshot,
-                                             cache_coverage=False,
-                                             suspiciousness_metric=suspiciousness,
-                                             in_files=self.files)
-                    logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
-                    self.__state = OrchestratorState.READY_TO_ADAPT
-                except darjeeling.exceptions.NoFailingTests:
-                    logger.exception("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
-                    raise NeutralPerturbation
-                # FIXME darjeeling should be responsible for catching BugZoo errors
-                except (darjeeling.exceptions.NoImplicatedLines, bugzoo.exceptions.FailedToComputeCoverage):  # noqa: pycodestyle
-                    logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
-                    raise FailedToComputeCoverage
-
+                self._build_problem(mutant)
             except OrchestratorError:
                 logger.debug("Resetting system state to be ready to perturb.")
                 self.__problem = None
@@ -480,11 +492,11 @@ class Orchestrator(object):
         Used to compose the sequence of patches that should be attempted.
         """
         logger.debug("constructing lazy patch sampler")
-        problem = self.__problem
+        # FIXME implement!
         transformations = \
-            darjeeling.generator.SampleByLocalization(problem=problem,
-                                                      localization=problem.localization,
-                                                      snippets=problem.snippets)
+            all_transformations_in_file(self.__problem,
+                                        GreaterThanToLessOrEqualTo,
+                                        "src/ros_comm/roscpp/src/libros/transport_subscriber_link.cpp")
         candidates = \
             darjeeling.generator.SingleEditPatches(transformations)
         logger.debug("constructed lazy patch sampler")

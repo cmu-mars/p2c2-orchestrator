@@ -15,6 +15,7 @@ setup(
         'darjeeling>=0.1.5',
         'bugzoo>=2.1.8',
         'boggart>=0.1.5',
+        'rooibos>=0.3.0',
         'requests',
         'flask'
     ],
