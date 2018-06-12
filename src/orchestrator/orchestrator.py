@@ -32,6 +32,8 @@ logger.addHandler(logging.NullHandler())
 __all__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
 
 BASE_IMAGE_NAME = 'mars:base'
+__BASELINE_SNAPSHOT = None  # type: Optional[Snapshot]
+__INSTRUMENTATION_SNAPSHOT = None  # type: Optional[Snapshot]
 
 # a list of the names of supported mutation operators
 OPERATOR_NAMES = [
@@ -47,6 +49,28 @@ OPERATOR_NAMES = [
 
 def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
     return 1.0 if nf == 0 else 0.0
+
+
+def fetch_baseline_snapshot(bz: bugzoo.client.Client) -> Snapshot:
+    fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
+    with open(fn, 'r') as f:
+        desc = yaml.load(f)
+    desc['source'] = None
+    snapshot = Snapshot.from_dict(desc)
+    bz.bugs.register(snapshot)
+    return snapshot
+
+
+def fetch_instrumentation_snapshot(bz: bugzoo.client.Client) -> Snapshot:
+    fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
+    with open(fn, 'r') as f:
+        desc = yaml.load(f)
+    desc['source'] = None
+    desc['name'] = 'mars:instrumentation'
+    desc['image'] = 'cmumars/cp2:instrumentation'
+    snapshot = Snapshot.from_dict(desc)
+    bz.bugs.register(snapshot)
+    return snapshot
 
 
 class OrchestratorState(Enum):
@@ -136,25 +160,10 @@ class Orchestrator(object):
         self.__searcher = None  # type: Optional[Searcher]
         self.__coverage_for_mutant = None  # type: Optional[TestSuiteCoverage]
         self.__coverage_for_baseline = None  # type: Optional[TestSuiteCoverage]
-        self.__register_baseline()
-
-    def __register_baseline(self) -> None:
-        logger.info("Registering snapshot for baseline system.")
-        bz = self.__client_bugzoo
-        manifest_fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
-        with open(manifest_fn, 'r') as f:
-            dict_snapshot = yaml.load(f)
-        dict_snapshot['source'] = None
-
-        self.__baseline = Snapshot.from_dict(dict_snapshot)
-        bz.bugs.register(self.__baseline)
-
-        dict_snapshot['name'] = 'mars:instrumentation'
-        dict_snapshot['image'] = 'cmumars/cp2:instrumentation'
+        self.__baseline = \
+            fetch_baseline_snapshot(self.__client_bugzoo)
         self.__baseline_with_instrumentation = \
-            Snapshot.from_dict(dict_snapshot)
-        bz.bugs.register(self.__baseline_with_instrumentation)
-        logger.info("Registered snapshot for baseline system.")
+            fetch_instrumentation_snapshot(self.__client_bugzoo)
 
     @property
     def state(self) -> OrchestratorState:
@@ -347,6 +356,28 @@ class Orchestrator(object):
                                    self.__searcher.outcomes[patch],
                                    str(patch.to_diff(self.__problem)))
 
+    def _check_liveness(self, mutant: Mutant) -> None:
+        """
+        Determines whether a given mutant is killed by the test suite.
+        """
+        mgr_ctr = self.__client_bugzoo.containers
+        snapshot = self.__client_bugzoo.bugs[mutant.snapshot]
+        logger.info("Ensuring that mutant fails at least one test")
+        try:
+            killed = False
+            container = mgr_ctr.provision(snapshot)
+            for test in snapshot.tests:
+                outcome = mgr_ctr.test(container, test)
+                if not outcome.passed:
+                    killed = True
+                    break
+            if not killed:
+                logger.info("Mutant was not killed by any of the test cases")
+                raise NeutralPerturbation
+        finally:
+            del mgr_ctr[container.uid]
+        logger.info("Verified that mutant fails at least one test")
+
     def _compute_coverage(self, mutant: Mutant) -> TestSuiteCoverage:
         """
         Attempts to compute coverage information for a given mutant.
@@ -409,30 +440,13 @@ class Orchestrator(object):
                 mutant = boggartd.mutate(baseline, [perturbation])
                 snapshot = bz.bugs[mutant.snapshot]
                 logger.info("Generated mutant snapshot: %s", snapshot)
-
-                # ensure that the mutant fails at least one test
-                logger.info("Ensuring that mutant fails at least one test")
-                try:
-                    killed = False
-                    container = bz.containers.provision(snapshot)
-                    bz.containers.build(container)
-                    for test in snapshot.tests:
-                        outcome = bz.containers.test(container, test)
-                        if not outcome.passed:
-                            killed = True
-                            break
-                    if not killed:
-                        logger.info("Mutant was not killed by any of the test cases")
-                        raise NeutralPerturbation()
-                finally:
-                    del bz.containers[container.uid]
-                logger.info("Verified that mutant fails at least one test")
-
-                # FIXME generate coverage information for the mutant
+                self._check_liveness(mutant)
                 coverage = self._compute_coverage(mutant)
 
+                # FIXME bundle this into a new method
                 try:
                     logger.info("Transforming perturbed code into a repair problem.")  # noqa: pycodestyle
+                    # FIXME use new Problem class
                     self.__problem = Problem(bz=self.__client_bugzoo,
                                              bug=snapshot,
                                              cache_coverage=False,
@@ -442,7 +456,7 @@ class Orchestrator(object):
                     self.__state = OrchestratorState.READY_TO_ADAPT
                 except darjeeling.exceptions.NoFailingTests:
                     logger.exception("Failed to transform perturbed code into a repair problem: no test failures were introduced.")  # noqa: pycodestyle
-                    raise NeutralPerturbation()
+                    raise NeutralPerturbation
                 # FIXME darjeeling should be responsible for catching BugZoo errors
                 except (darjeeling.exceptions.NoImplicatedLines, bugzoo.exceptions.FailedToComputeCoverage):  # noqa: pycodestyle
                     logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
