@@ -15,7 +15,7 @@ import bugzoo.client
 import bugzoo.exceptions
 import darjeeling
 import darjeeling.outcome
-import darjeeling.generator
+import darjeeling.transformation
 from bugzoo.exceptions import BugZooException
 from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
@@ -25,9 +25,8 @@ from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
 from boggart.core.mutant import Mutant
-from darjeeling.generator import all_transformations_in_file
-from darjeeling.transformation import AndToOr, \
-                                      GreaterThanToLessOrEqualTo
+from darjeeling.localization import Localization
+from darjeeling.generator import RooibosGenerator
 
 from .problem import Problem
 from .exceptions import *
@@ -51,10 +50,6 @@ OPERATOR_NAMES = [
     'delete-conditional-control-flow',
     'flip-signedness'
 ]
-
-
-def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
-    return 1.0 if nf == 0 else 0.0
 
 
 def fetch_baseline_snapshot(bz: bugzoo.client.Client) -> Snapshot:
@@ -173,6 +168,18 @@ class Orchestrator(object):
         self.__baseline_with_instrumentation = \
             fetch_instrumentation_snapshot(self.__client_bugzoo)
 
+        logger.info("fetching coverage information for Baseline A.")
+        self.__coverage_for_baseline = \
+            self.__client_bugzoo.bugs.coverage(self.__baseline)
+        logger.debug("restricting to mutable files")
+        lines = self.__coverage_for_baseline.lines
+        files = [fn for fn in lines.files if self.__is_file_mutable(fn)]
+        logger.debug("mutable files: %s", files)
+        self.__coverage_for_baseline = \
+            self.__coverage_for_baseline.restricted_to_files(files)
+        logger.info("fetched coverage information for Baseline A.")
+        logger.info("line coverage for Baseline A: %d lines", len(self.lines))
+
     @property
     def state(self) -> OrchestratorState:
         """
@@ -208,7 +215,9 @@ class Orchestrator(object):
         # TODO: ignore blacklisted files (e.g., Gazebo, ROS core code)
         #
         blacklist = [
-            'src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_subscribers.cpp'
+            'src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_subscribers.cpp',
+            'src/rospack/src/rospack.cpp',
+            'src/ros_comm/xmlrpcpp/src/XmlRpcUtil.cpp'
         ]
         return fn not in blacklist
 
@@ -218,11 +227,7 @@ class Orchestrator(object):
         A list of the names of the source code files for the original,
         unperturbed system that may be subject to perturbation.
         """
-        # FIXME cache?
-        logger.info("Determining list of covered files.")
-        files = self.lines.files
-        logger.info("Determined list of covered files: %s.", files)
-        return files
+        return self.lines.files
 
     @property
     def lines(self) -> FileLineSet:
@@ -234,24 +239,7 @@ class Orchestrator(object):
         Furthermore, lines in certain blacklisted files are removed from
         consideration, even if covered by the test suite.
         """
-        # TODO cache this information?
-        bz = self.__client_bugzoo
-        logger.info("Fetching coverage information for Baseline A.")
-        coverage = bz.bugs.coverage(self.__baseline)
-        logger.info("Fetched coverage information for Baseline A.")
-        logger.info("Computing covered lines.")
-        lines = coverage.lines
-        logger.info("Computed covered lines: %d lines", len(lines))
-
-        # restrict to files that may be mutated
-        logger.info("Determining list of mutable files.")
-        files = [fn for fn in lines.files if self.__is_file_mutable(fn)]
-        logger.info("Determined list of mutable files: %s", files)
-        logger.info("Restricting coverage to lines in mutable files.")
-        lines = lines.restricted_to_files(files)
-        logger.info("Restricted coverage to lines in mutable files.")
-
-        return lines
+        return self.__coverage_for_baseline.lines
 
     @property
     def patches(self) -> List[CandidateEvaluation]:
@@ -417,6 +405,9 @@ class Orchestrator(object):
         finally:
             if container is not None:
                 del bgz.containers[container.uid]
+        logger.debug("restricting coverage to mutable files")
+        coverage = coverage.restricted_to_files(self.files)
+        logger.debug("restricted coverage to mutable files")
         logger.debug("computed coverage for mutant: %s", mutant)
         return coverage
 
@@ -483,19 +474,33 @@ class Orchestrator(object):
         logger.info("Successfully perturbed system using mutation: %s",
                     perturbation)
 
+    def _compute_localization(self) -> Localization:
+        def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
+            return 1.0 if nf == 0 else 0.0
+        logger.info("computing fault localization")
+        localization = Localization.build(self.__problem, suspiciousness)
+        logger.info("computed fault localization (%d files, %d lines)",
+                    len(localization.files), len(localization))
+        return localization
+
     def _construct_search_space(self) -> Iterator[Candidate]:
         """
         Used to compose the sequence of patches that should be attempted.
         """
-        logger.debug("constructing lazy patch sampler")
-        # FIXME implement!
-        transformations = \
-            all_transformations_in_file(self.__problem,
-                                        GreaterThanToLessOrEqualTo,
-                                        "src/ros_comm/roscpp/src/libros/transport_subscriber_link.cpp")
+        logger.debug("constructing search space")
+        localization = self._compute_localization()
+        schemas = [
+            darjeeling.transformation.AndToOr,
+            darjeeling.transformation.OrToAnd,
+            darjeeling.transformation.LEToGT,
+            darjeeling.transformation.GTToLE
+        ]
+        transformations = RooibosGenerator(self.__problem,
+                                           localization,
+                                           schemas)
         candidates = \
             darjeeling.generator.SingleEditPatches(transformations)
-        logger.debug("constructed lazy patch sampler")
+        logger.debug("constructed search space")
         return candidates
 
     def adapt(self,
