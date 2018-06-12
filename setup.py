@@ -13,8 +13,9 @@ setup(
     python_requires='>=3.5',
     install_requires=[
         'darjeeling>=0.1.5',
-        'bugzoo>=2.1.7',
-        'boggart>=0.1.4',
+        'bugzoo>=2.1.8',
+        'boggart>=0.1.5',
+        'rooibos>=0.3.0',
         'requests',
         'flask'
     ],
@@ -26,6 +27,14 @@ setup(
     ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
+    package_data={
+        '': ['*.yml']
+    },
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
-    test_suite='tests'
+    test_suite='tests',
+    entry_points = {
+        'console_scripts': [
+            'orchestrator-instrument = orchestrator.instrument:instrument',
+        ]
+    }
 )
