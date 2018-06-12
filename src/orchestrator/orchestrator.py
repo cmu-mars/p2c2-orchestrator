@@ -1,4 +1,5 @@
 from typing import List, Tuple, Optional, Callable, Iterator
+from timeit import default_timer as timer
 from enum import Enum
 import threading
 import time
@@ -395,9 +396,12 @@ class Orchestrator(object):
             logger.debug("applying diff to instrumented container")
             bgz.containers.patch(container, diff)
             logger.debug("rebuilding program")
+            t_start = timer()
             bgz.containers.exec(container,
                                 'catkin build',
                                 context='/ros_ws')
+            t_running = timer() - t_start
+            logger.debug("rebuilt program (took %.2f seconds)", t_running)
             logger.debug("computing coverage")
             coverage = bgz.containers.coverage(container, instrument=False)
             logger.debug("computed coverage")
