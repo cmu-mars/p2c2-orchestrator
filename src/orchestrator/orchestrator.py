@@ -490,14 +490,25 @@ class Orchestrator(object):
         """
         Used to compose the sequence of patches that should be attempted.
         """
-        logger.info("constructing search space")
         localization = self._compute_localization()
         schemas = [
+            # boolean operators
             darjeeling.transformation.AndToOr,
             darjeeling.transformation.OrToAnd,
+            # relation operators
             darjeeling.transformation.LEToGT,
-            darjeeling.transformation.GTToLE
+            darjeeling.transformation.GTToLE,
+            darjeeling.transformation.GEToLT,
+            darjeeling.transformation.LTToGE,
+            darjeeling.transformation.EQToNEQ,
+            darjeeling.transformation.NEQToEQ,
+            # arithmetic operators
+            darjeeling.transformation.PlusToMinus,
+            darjeeling.transformation.MinusToPlus,
+            darjeeling.transformation.MulToDiv,
+            darjeeling.transformation.DivToMul
         ]
+        logger.info("constructing search space")
         transformations = RooibosGenerator(self.__problem,
                                            localization,
                                            schemas)
