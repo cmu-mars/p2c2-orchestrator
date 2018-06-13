@@ -490,7 +490,7 @@ class Orchestrator(object):
         """
         Used to compose the sequence of patches that should be attempted.
         """
-        logger.debug("constructing search space")
+        logger.info("constructing search space")
         localization = self._compute_localization()
         schemas = [
             darjeeling.transformation.AndToOr,
@@ -503,7 +503,7 @@ class Orchestrator(object):
                                            schemas)
         candidates = \
             darjeeling.generator.SingleEditPatches(transformations)
-        logger.debug("constructed search space")
+        logger.info("constructed search space")
         return candidates
 
     def adapt(self,
