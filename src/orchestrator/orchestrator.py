@@ -384,7 +384,7 @@ class Orchestrator(object):
         bgrt = self.__client_boggart
         bgz = self.__client_bugzoo
 
-        logger.debug("computing coverage for mutant: %s", mutant)
+        logger.info("computing coverage for mutant: %s", mutant)
         logger.debug("generating diff for mutant: %s", mutant)
         diff = bgrt.mutations_to_diff(self.__baseline, mutant.mutations)
         logger.debug("generated diff for mutant: %s", mutant)
@@ -411,7 +411,7 @@ class Orchestrator(object):
         logger.debug("restricting coverage to mutable files")
         coverage = coverage.restricted_to_files(self.files)
         logger.debug("restricted coverage to mutable files")
-        logger.debug("computed coverage for mutant: %s", mutant)
+        logger.info("computed coverage for mutant: %s", mutant)
         return coverage
 
     def _build_problem(self, perturbation: Mutation) -> Problem:
