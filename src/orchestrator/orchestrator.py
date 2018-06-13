@@ -140,9 +140,10 @@ class Orchestrator(object):
             callback_error: called when an unexpected error is encountered
                 during a non-blocking call.
         """
-        logger.info("- using BugZoo: {}".format(bugzoo.__version__))
-        logger.info("- using Darjeeling: {}".format(darjeeling.__version__))
-        logger.info("- using boggart: {}".format(boggart.__version__))
+        logger.info("- using BugZoo: %s", bugzoo.__version__)
+        logger.info("- using Darjeeling: %s", darjeeling.__version__)
+        logger.info("- using boggart: %s", boggart.__version__)
+        logger.info("- using %d threads for evaluation", threads)
 
         self.__callback_progress = callback_progress
         self.__callback_done = callback_done
