@@ -125,7 +125,8 @@ class Orchestrator(object):
                  url_rooibos: str,
                  callback_progress: Callable[[CandidateEvaluation, List[CandidateEvaluation]], None],
                  callback_done: Callable[[List[CandidateEvaluation], int, OrchestratorOutcome, float], None],
-                 callback_error: Callable[[str, str], None]
+                 callback_error: Callable[[str, str], None],
+                 threads: int = 8
                  ) -> None:
         """
         Constructs a new orchestrator.
@@ -159,6 +160,7 @@ class Orchestrator(object):
         self.__client_bugzoo = bugzoo.Client(url_bugzoo, timeout_connection=120)
         # TODO it would be nicer if Darjeeling was a service
 
+        self.__num_threads = threads
         self.__problem = None  # type: Optional[Problem]
         self.__searcher = None  # type: Optional[Searcher]
         self.__coverage_for_mutant = None  # type: Optional[TestSuiteCoverage]
@@ -554,6 +556,7 @@ class Orchestrator(object):
                                                problem=problem,
                                                candidates=candidates,
                                                # num_candidates=attempts,
+                                               threads=self.__num_threads,
                                                time_limit=time_limit)
                     logger.debug("constructed search mechanism")
                     logger.info("beginning search")
