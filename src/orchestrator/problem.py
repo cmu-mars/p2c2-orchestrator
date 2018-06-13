@@ -85,6 +85,6 @@ class Problem(darjeeling.problem.Problem):
             pkg = path[0]
 
         if builder is None:
-            cmd = 'catkin build {}'.format(pkg)
+            cmd = 'catkin build {} --no-deps --no-status -j1 --override-build-tool-check'.format(pkg)
             builder = lambda c: BuildOutcome(mgr_ctr.exec(c, cmd, '/ros_ws'))
         return super().build_patch(patch, builder)
