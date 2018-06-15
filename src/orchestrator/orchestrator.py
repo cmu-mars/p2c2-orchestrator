@@ -492,21 +492,28 @@ class Orchestrator(object):
         """
         localization = self._compute_localization()
         schemas = [
-            # boolean operators
-            darjeeling.transformation.AndToOr,
-            darjeeling.transformation.OrToAnd,
-            # relation operators
-            darjeeling.transformation.LEToGT,
-            darjeeling.transformation.GTToLE,
-            darjeeling.transformation.GEToLT,
-            darjeeling.transformation.LTToGE,
-            darjeeling.transformation.EQToNEQ,
-            darjeeling.transformation.NEQToEQ,
-            # arithmetic operators
-            darjeeling.transformation.PlusToMinus,
-            darjeeling.transformation.MinusToPlus,
-            darjeeling.transformation.MulToDiv,
-            darjeeling.transformation.DivToMul
+            ## boolean operators
+            #darjeeling.transformation.AndToOr,
+            #darjeeling.transformation.OrToAnd,
+            ## relation operators
+            #darjeeling.transformation.LEToGT,
+            #darjeeling.transformation.GTToLE,
+            #darjeeling.transformation.GEToLT,
+            #darjeeling.transformation.LTToGE,
+            #darjeeling.transformation.EQToNEQ,
+            #darjeeling.transformation.NEQToEQ,
+            ## arithmetic operators
+            #darjeeling.transformation.PlusToMinus,
+            #darjeeling.transformation.MinusToPlus,
+            #darjeeling.transformation.MulToDiv,
+            #darjeeling.transformation.DivToMul,
+            #darjeeling.transformation.SignedToUnsigned,
+            # insert void function call
+            # darjeeling.transformation.InsertVoidFunctionCall,
+            # insert conditional control flow
+            # darjeeling.transformation.InsertConditionalReturn,
+            # darjeeling.transformation.InsertConditionalBreak,
+            darjeeling.transformation.ApplyTransformation
         ]
         logger.info("constructing search space")
         transformations = RooibosGenerator(self.__problem,
