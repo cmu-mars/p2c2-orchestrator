@@ -14,7 +14,8 @@ __all__ = [
     'FileNotFound',
     'LineNotFound',
     'NoSearchLimits',
-    'OperatorNotFound'
+    'OperatorNotFound',
+    'UnexpectedError'
 ]
 
 
@@ -36,6 +37,19 @@ class OrchestratorError(Exception):
             }
         }
         return flask.make_response(flask.jsonify(jsn), code)
+
+
+class UnexpectedError(OrchestratorError):
+    """
+    Indicates that a given perturbation failed to be injected into the baseline
+    system.
+    """
+    def __init__(self, error: Exception) -> None:
+        self.__error_message = str(error)  # type: str
+
+    def to_response(self) -> flask.Response:
+        msg = "an unexpected error occurred: {}".format(self.__error_message)
+        return self._to_response(msg)
 
 
 class PerturbationFailure(OrchestratorError):
