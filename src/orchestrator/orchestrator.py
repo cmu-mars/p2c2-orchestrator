@@ -481,6 +481,8 @@ class Orchestrator(object):
                     self.__problem = self._build_problem(mutant)
                     self.__state = OrchestratorState.READY_TO_ADAPT
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
+                except OrchestratorError:
+                    raise
                 except Exception as e:
                     raise UnexpectedError(e)
             except OrchestratorError:
