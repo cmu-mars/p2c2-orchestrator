@@ -7,6 +7,7 @@ import logging
 import datetime
 import os
 import yaml
+import random
 
 import rooibos
 import boggart
@@ -126,7 +127,8 @@ class Orchestrator(object):
                  callback_progress: Callable[[CandidateEvaluation, List[CandidateEvaluation]], None],
                  callback_done: Callable[[List[CandidateEvaluation], int, OrchestratorOutcome, float], None],
                  callback_error: Callable[[str, str], None],
-                 threads: int = 8
+                 threads: int = 8,
+                 seed: int = 0
                  ) -> None:
         """
         Constructs a new orchestrator.
@@ -143,6 +145,7 @@ class Orchestrator(object):
         logger.info("- using BugZoo: %s", bugzoo.__version__)
         logger.info("- using Darjeeling: %s", darjeeling.__version__)
         logger.info("- using boggart: %s", boggart.__version__)
+        logger.info("- using RNG seed: %d", seed)
         logger.info("- using %d threads for evaluation", threads)
 
         self.__callback_progress = callback_progress
@@ -154,6 +157,10 @@ class Orchestrator(object):
         # adaptation).
         self.__lock = threading.Lock()
 
+        # seed the RNG
+        self.__seed = seed
+        random.seed(seed)
+
         self.__patches = [] # type: List[CandidateEvaluation]
         self.__state = OrchestratorState.READY_TO_PERTURB
         self.__client_rooibos = rooibos.Client(url_rooibos, timeout_connection=120)
@@ -164,6 +171,7 @@ class Orchestrator(object):
         self.__num_threads = threads
         self.__problem = None  # type: Optional[Problem]
         self.__searcher = None  # type: Optional[Searcher]
+        self.__localization = None  # type: Optional[Localization]
         self.__coverage_for_mutant = None  # type: Optional[TestSuiteCoverage]
         self.__coverage_for_baseline = None  # type: Optional[TestSuiteCoverage]
         self.__baseline = \
@@ -422,18 +430,20 @@ class Orchestrator(object):
             FailedToComputeCoverage: if an error occurred during the coverage
                 computing process.
         """
-        coverage = self._compute_coverage(perturbation)
-        logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
         try:
-            self.__problem = \
+            self.__coverage_for_mutant = self._compute_coverage(perturbation)
+            problem = \
                 Problem(self.__client_bugzoo,
                         self.__client_rooibos,
-                        coverage,
+                        self.__coverage_for_mutant,
                         perturbation)
-            self.__state = OrchestratorState.READY_TO_ADAPT
-        except darjeeling.exceptions.NoImplicatedLines:  # noqa: pycodestyle
+            self.__localization = self._compute_localization(problem)
+        except Exception:
+            self.__localization = None
+            self.__coverage_for_mutant = None
             logger.exception("Failed to transform perturbed code into a repair problem: encountered unexpected error whilst generating coverage.")  # noqa: pycodestyle
             raise FailedToComputeCoverage
+        return problem
 
     def perturb(self, perturbation: Mutation) -> None:
         """
@@ -461,13 +471,18 @@ class Orchestrator(object):
 
             self.__state = OrchestratorState.PERTURBING
             try:
-                # TODO capture unexpected errors during snapshot creation
-                logger.info("Applying perturbation to baseline snapshot.")
-                mutant = boggartd.mutate(baseline, [perturbation])
-                snapshot = bz.bugs[mutant.snapshot]
-                logger.info("Generated mutant snapshot: %s", snapshot)
-                self._check_liveness(mutant)
-                self._build_problem(mutant)
+                try:
+                    # TODO capture unexpected errors during snapshot creation
+                    logger.info("Applying perturbation to baseline snapshot.")
+                    mutant = boggartd.mutate(baseline, [perturbation])
+                    snapshot = bz.bugs[mutant.snapshot]
+                    logger.info("Generated mutant snapshot: %s", snapshot)
+                    self._check_liveness(mutant)
+                    self.__problem = self._build_problem(mutant)
+                    self.__state = OrchestratorState.READY_TO_ADAPT
+                    logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
+                except Exception as e:
+                    raise UnexpectedError(e)
             except OrchestratorError:
                 logger.debug("Resetting system state to be ready to perturb.")
                 self.__problem = None
@@ -477,20 +492,32 @@ class Orchestrator(object):
         logger.info("Successfully perturbed system using mutation: %s",
                     perturbation)
 
-    def _compute_localization(self) -> Localization:
+    def _compute_localization(self, problem: Problem) -> Localization:
+        """
+        Computes the fault localization for baseline C.
+
+        Raises:
+            FailedToComputeCoverage: if no lines are implicated by the fault
+                localization.
+        """
         def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
             return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
-        localization = Localization.build(self.__problem, suspiciousness)
+        try:
+            localization = Localization.build(problem, suspiciousness)
+        except darjeeling.exceptions.NoImplicatedLines:
+            raise FailedToComputeCoverage
         logger.info("computed fault localization (%d files, %d lines)",
                     len(localization.files), len(localization))
         return localization
 
-    def _construct_search_space(self) -> Iterator[Candidate]:
+    def _construct_search_space(self,
+                                problem: Problem,
+                                localization: Localization
+                                ) -> Iterator[Candidate]:
         """
         Used to compose the sequence of patches that should be attempted.
         """
-        localization = self._compute_localization()
         schemas = [
             ## boolean operators
             #darjeeling.transformation.AndToOr,
@@ -516,7 +543,7 @@ class Orchestrator(object):
             darjeeling.transformation.ApplyTransformation
         ]
         logger.info("constructing search space")
-        transformations = RooibosGenerator(self.__problem,
+        transformations = RooibosGenerator(problem,
                                            localization,
                                            schemas)
         candidates = \
@@ -559,7 +586,7 @@ class Orchestrator(object):
             if self.state != OrchestratorState.READY_TO_ADAPT:
                 logger.error("unable to trigger adaptation: system is not ready to adapt [state: %s]",  # noqa: pycodestyle
                              self.state)
-                raise NotReadyToAdapt()
+                raise NotReadyToAdapt
 
             self.__state = OrchestratorState.SEARCHING
             logger.debug("set orchestrator state to %s", self.__state)
@@ -569,7 +596,10 @@ class Orchestrator(object):
                 bz = self.__client_bugzoo
                 try:
                     problem = self.__problem
-                    candidates = self._construct_search_space()
+                    assert self.__localization is not None
+                    candidates = \
+                        self._construct_search_space(problem,
+                                                     self.__localization)
                     logger.debug("constructing search mechanism")
                     self.__searcher = Searcher(bugzoo=self.__client_bugzoo,
                                                problem=problem,
