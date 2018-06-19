@@ -121,7 +121,7 @@ compiler:
   workspace: /ros_ws
   time-limit: 600
 test-harness:
-  time-limit: 60
+  time-limit: 3
   context: /ros_ws
   tests:
     - name: t1
@@ -1087,6 +1087,240 @@ test-harness:
       expected-outcome: True
       time-limit: 3
 
+    - name: SimpleFilter.callbackTypes
+      command: rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.callbackTypes
+      expected-outcome: True
+      time-limit: 3
+    - name: SimpleFilter.oldRegisterWithNewFilter
+      command: rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.oldRegisterWithNewFilter
+      expected-outcome: True
+      time-limit: 3
+
+    - name: TimeSynchronizer.compile2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile2
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile3
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile4
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile5
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile6
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile7
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile8
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compile9
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile9
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction2
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction3
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction4
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction5
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction6
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction7
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction8
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileFunction9
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction9
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod2
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod3
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod4
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod5
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod6
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod7
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.compileMethod8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod8
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate2
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate3
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate4
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate5
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate6
+    - name: TimeSynchronizer.immediate7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate7
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate8
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.immediate9
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate9
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.multipleTimes
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.multipleTimes
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.queueSize
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.queueSize
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.dropCallback
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.dropCallback
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.eventInEventOut
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.eventInEventOut
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeSynchronizer.connectConstructor
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.connectConstructor
+      expected-outcome: True
+      time-limit: 3
+
+    - name: rospack.reentrant
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.reentrant
+      expected-outcome: True
+    - name: rospack.multiple_rospack_objects
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.multiple_rospack_objects
+      expected-outcome: True
+    - name: rospack.deduplicate_tokens
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.deduplicate_tokens
+      expected-outcome: True
+    - name: rospack.env_change
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.env_change
+      expected-outcome: True
+
+    - name: Time.size
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.size
+      expected-outcome: True
+    - name: Time.Comparitors
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.Comparitors
+      expected-outcome: True
+    - name: Time.ToFromDouble
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.ToFromDouble
+      expected-outcome: True
+    - name: Time.RoundingError
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.RoundingError
+      expected-outcome: True
+    - name: Time.OperatorPlus
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlus
+      expected-outcome: True
+    - name: Time.OperatorMinus
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinus
+      expected-outcome: True
+    - name: Time.OperatorPlusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlusEquals
+      expected-outcome: True
+    - name: Time.OperatorMinusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinusEquals
+      expected-outcome: True
+    - name: Time.SecNSecConstructor
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.SecNSecConstructor
+      expected-outcome: True
+    - name: Time.DontMungeStreamState
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.DontMungeStreamState
+      expected-outcome: True
+    - name: Time.ToFromBoost
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.ToFromBoost
+      expected-outcome: True
+    - name: Duration.Comparitors
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.Comparitors
+      expected-outcome: True
+    - name: Duration.ToFromSec
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.ToFromSec
+      expected-outcome: True
+    - name: Duration.OperatorPlus
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlus
+      expected-outcome: True
+    - name: Duration.OperatorMinus
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinus
+      expected-outcome: True
+    - name: Duration.OperatorTimes
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorTimes
+      expected-outcome: True
+    - name: Duration.OperatorPlusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlusEquals
+      expected-outcome: True
+    - name: Duration.OperatorMinusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinusEquals
+      expected-outcome: True
+    - name: Duration.sleepWithSignal
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.sleepWithSignal
+      expected-outcome: True
+    - name: Rate.constructFromDuration
+      command: rosrun rostime rostime-test_time --gtest_filter=Rate.constructFromDuration
+      expected-outcome: True
+    - name: Rate.sleep_return_value_true
+      command: rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_true
+      expected-outcome: True
+    - name: Rate.sleep_return_value_false
+      command: rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_false
+      expected-outcome: True
+    - name: WallRate.constructFromDuration
+      command: rosrun rostime rostime-test_time --gtest_filter=WallRate.constructFromDuration
+      expected-outcome: True
 
 
       # FIXME
