@@ -485,3 +485,36 @@ test-harness:
       command: rosrun actionlib actionlib-destruction_guard_test --gtest_filter=DestructionGuard.easy_test
       expected-outcome: True
       time-limit: 3
+
+    - name: Angles.shortestDistanceWithLimits
+      command: rosrun angles utest --gtest_filter=Angles.shortestDistanceWithLimits
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.from_degrees
+      command: rosrun angles utest --gtest_filter=Angles.from_degrees
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.to_degrees
+      command: rosrun angles utest --gtest_filter=Angles.to_degrees
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.normalize_angle_positive
+      command: rosrun angles utest --gtest_filter=Angles.normalize_angle_positive
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.normalize_angle
+      command: rosrun angles utest --gtest_filter=Angles.normalize_angle
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.shortest_angular_distance
+      command: rosrun angles utest --gtest_filter=Angles.shortest_angular_distance
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.two_pi_complement
+      command: rosrun angles utest --gtest_filter=Angles.two_pi_complement
+      expected-outcome: True
+      time-limit: 3
+    - name: Angles.find_min_max_delta
+      command:rosrun angles utest --gtest_filter=Angles.find_min_max_delta
+      expected-outcome: True
+      time-limit: 3
