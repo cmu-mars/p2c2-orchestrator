@@ -8,7 +8,6 @@ tests:
   - rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.Repeatability
   - rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
   - rosrun tf2 test_cache_unittest --gtest_filter=Bullet.Slerp
-
   - rosrun tf2 test_simple --gtest_filter=tf2.setTransformFail
   - rosrun tf2 test_simple --gtest_filter=tf2.setTransformValid
   - rosrun tf2 test_simple --gtest_filter=tf2.setTransformInvalidQuarternion
@@ -19,10 +18,8 @@ tests:
   - rosrun tf2 test_simple --gtest_filter=tf2_chainAsVector.chain_v_configuration
   - rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_i_configuration
   - rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_v_configuration
-
   - rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.Repeatability
   - rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.DuplicateEntries
-
   - rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_compount
   - rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_helix_configuration
   - rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_ring45
@@ -63,17 +60,6 @@ tests:
   - rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqualEqual
   - rosrun tf tf_unittest --gtest_filter=data.StampedTransformOperatorEqualEqual
   - rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqual
-
-
-  - rostest -t tf2_ros transform_listener_time_reset.launch
-  - rostest -t tf2_ros transform_listener_unittest.launch
-  - rostest -t tf2_kdl test_python.launch
-  - rostest -t tf2_kdl test.launch
-  - rostest -t tf test_message_filter.xml
-  - rostest -t tf transform_listener_unittest.launch
-  - rostest -t tf test_broadcaster.launch
-
-
   - rosrun tf tf_quaternion_unittest --gtest_filter=tf.Quarternion
   - rosrun tf test_transform_datatypes --gtest_filter=tf.set
   - rosrun tf test_velocity --gtest_filter=LinearVelocitySquareTest.LinearVelocityToThreeFrames
@@ -97,21 +83,6 @@ tests:
   - rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_transform
   - rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_pose
   - rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.msg_kdl_twist
-  - rostest -t actionlib ref_server_test.launch
-  - rostest -t actionlib simple_execute_ref_server_test.launch
-  - rostest -t actionlib test_python_simple_client.launch
-  - rostest -t actionlib test_cpp_simple_client_allocator.launch
-  - rostest -t actionlib test_cpp_action_client_destruction.launch
-  - rostest -t actionlib test_server_goal_handle_destruction.launch
-  - rostest -t actionlib test_cpp_simple_client_cancel_crash.launch
-  - rostest -t actionlib test_imports.launch
-  - rostest -t actionlib test_python_server_components.launch
-  - rostest -t actionlib test_python_server.launch
-  - rostest -t actionlib test_python_server2.launch
-  - rostest -t actionlib test_python_server3.launch
-  - rostest -t actionlib test_python_simple_server.launch
-  - rostest -t actionlib test_exercise_simple_clients.launch
-  - rostest -t actionlib test_simple_action_server_deadlock_python.launch
   - rosrun actionlib actionlib-destruction_guard_test --gtest_filter=TestRunner.threaded_test
   - rosrun actionlib actionlib-destruction_guard_test --gtest_filter=DestructionGuard.easy_test
   - rosrun angles utest --gtest_filter=Angles.shortestDistanceWithLimits
@@ -122,17 +93,15 @@ tests:
   - rosrun angles utest --gtest_filter=Angles.shortest_angular_distance
   - rosrun angles utest --gtest_filter=Angles.two_pi_complement
   - rosrun angles utest --gtest_filter=Angles.find_min_max_delta
-  - rostest -t capabilities test_client_module.test
-  - rostest -t capabilities test_launch_manager.test
-  - rostest -t capabilities test_client.test
-  - rostest -t capabilities test_default_provider.test
-  - rostest -t capabilities test_dependent_capabilities.test
-  - rostest -t capabilities test_invalid_specs.test
-  - rostest -t capabilities test_package_white_black_lists.test
-  - rostest -t capabilities test_remapping.test
-  - rostest -t capabilities test_ros_services.test
-  - rostest -t capabilities test_white_black_lists.test
-  - rostest -t capabilities test_spec_index_from_service.test
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.basicLoad
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.correctLazyLoadUnload
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.nonExistentPlugin
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.threadSafety
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.loadRefCountingLazy
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoad
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.nonLazyLoad
+  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
   - rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.basicLoad
   - rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctNonLazyLoadUnload
   - rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctLazyLoadUnload
@@ -146,15 +115,6 @@ tests:
   - rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoadSecondTime
   - rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.nonLazyLoad
   - rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.noWarningOnLazyLoad
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.basicLoad
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.correctLazyLoadUnload
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.nonExistentPlugin
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.threadSafety
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.loadRefCountingLazy
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoad
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.nonLazyLoad
-  - rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
   - rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.setupLibrary
   - rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
   - rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testScanHeight
@@ -162,31 +122,12 @@ tests:
   - rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testNaN
   - rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testPositiveInf
   - rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testNegativeInf
-  - rostest -t diagnostic_aggregator test_agg.launch
-  - rostest -t diagnostic_aggregator test_add_agg.launch
-  - rostest -t diagnostic_aggregator test_loader.launch
-  - rostest -t diagnostic_aggregator test_expected_stale.launch
-  - rostest -t diagnostic_aggregator test_multiple_match.launch
-  - rostest -t diagnostic_updater diagnostic_updater_fast_test.xml
-  - rostest -t dynamic_reconfigure test_cpp_simple_client.launch
-  - rostest -t dynamic_reconfigure test_python_simple_client.launch
-  - rostest -t camera_info_manager unit_test.test
-  - rostest -t kdl_parser test_kdl_parser.launch
-  - rostest -t kdl_parser test_inertia_rpy.launch
   - rosrun laser_geometry projection_test --gtest_filter=laser_geometry.projectLaser2
   - rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud
   - rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud2
-  - rostest -t amcl set_initial_pose.xml
-  - rostest -t amcl set_initial_pose_delayed.xml
-  - rostest -t amcl basic_localization_stage.xml
-  - rostest -t amcl small_loop_prf.xml
-  - rostest -t amcl small_loop_crazy_driving_prg.xml
-  - rostest -t amcl texas_greenroom_loop.xml
-  - rostest -t amcl rosie_multilaser.xml
-  - rostest -t amcl texas_willow_hallway_loop.xml
-  - rosrun base_local_planner base_local_planner_utest --gtest_filter=TrajectoryPlannerTest.footprintObstacles
-  - rosrun base_local_planner base_local_planner_utest --gtest_filter=TrajectoryPlannerTest.checkGoalDistance
-  - rosrun base_local_planner base_local_planner_utest --gtest_filter=TrajectoryPlannerTest.checkPathDistance
+  - rosrun base_local_planner line_iterator --gtest_filter=LineIterator.south
+  - rosrun base_local_planner line_iterator --gtest_filter=LineIterator.north_north_west
+  - rosrun base_local_planner base_local_planner_utest --gtest_filter=TrajectoryPlannerTest.*
   - rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle
   - rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle_pos
   - rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle_neg
@@ -209,27 +150,22 @@ tests:
   - rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.adjustPlanEmpty
   - rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.adjustPlan
   - rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.distancePropagation
-  - rosrun base_local_planner line_iterator --gtest_filter=lineIterator.south
-  - rosrun base_local_planner line_iterator --gtest_filter=lineIterator.north_north_west
-  - rostest -t clear_costmap_recovery clear_tests.launch
-  - rostest -t costmap_2d footprint_tests.launch
-  - rostest -t costmap_2d inflation_tests.launch
-  - rostest -t costmap_2d obstacle_tests.launch
-  - rostest -t costmap_2d simple_driving_test.xml
-  - rostest -t costmap_2d static_tests.launch
   - rosrun costmap_2d array_parser_test --gtest_filter=array_parser.basic_operation
   - rosrun costmap_2d array_parser_test --gtest_filter=array_parser.missing_open
   - rosrun costmap_2d array_parser_test --gtest_filter=array_parser.missing_close
   - rosrun costmap_2d array_parser_test --gtest_filter=array_parser.wrong_depth
-  - rostest -t map_server rtest.xml
   - rosrun navfn path_calc_test --gtest_filter=PathCalc.oscillate_in_pinch_point
   - rosrun navfn path_calc_test --gtest_filter=PathCalc.easy_nav_should_always_work
-  - rostest -t robot_pose_ekf test_robot_pose_ekf.launch
-  - rostest -t robot_pose_ekf test_robot_pose_ekf_zero_covariance.launch
   - rosrun voxel_grid voxel_grid_tests --gtest_filter=voxel_grid.basicMarkingAndClearing
   - rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionTests.imageConversion
   - rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionTests.pointcloud2Conversion
   - rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionStamp.Stamps
+  - rosrun roslib roslib-utest --gtest_filter=roslib.commandListNames
+  - rosrun roslib roslib-utest --gtest_filter=roslib.commandList
+  - rosrun roslib roslib-utest --gtest_filter=roslib.getAll
+  - rosrun roslib roslib-utest --gtest_filter=roslib.concurrent_access
+  - rosrun roslib roslib-test_package --gtest_filter=Package.getPath
+  - rosrun roslib roslib-test_package --gtest_filter=Package.getAll
   - rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.unknownPlugin
   - rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.misspelledPlugin
   - rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.invalidPackage
@@ -243,24 +179,144 @@ tests:
   - rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.workingPlugin
   - rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.createUniqueInstanceAndUnloadLibrary
   - rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibTest.brokenPlugin
-  - rostest -t rgbd_launch camera.test
-  - rostest -t robot_state_publisher test_one_link.launch
-  - rostest -t robot_state_publisher test_two_links_fixed_joint.launch
-  - rostest -t robot_state_publisher test_two_links_moving_joint.launch
-  - rostest -t robot_state_publisher test_joint_states_bag.launch
-  - rosrun roslib roslib-utest --gtest_filter=roslib.commandListNames
-  - rosrun roslib roslib-utest --gtest_filter=roslib.commandList
-  - rosrun roslib roslib-utest --gtest_filter=roslib.getAll
-  - rosrun roslib roslib-utest --gtest_filter=roslib.concurrent_access
-  - rosrun roslib roslib-test_package --gtest_filter=Package.getPath
-  - rosrun roslib roslib-test_package --gtest_filter=Package.getAll
-  - rostest -t message_filters time_sequencer_unittest.xml
-  - rostest -t message_filters test_subscriber.xml
   - rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyInterval
   - rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easySurroundingInterval
   - rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyUnsorted
   - rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyElemBeforeAfter
   - rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.eventInEventOut
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile2
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile3
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile4
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile5
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile6
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile7
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile8
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile9
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction2
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction3
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction4
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction5
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction6
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction7
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction8
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction9
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod2
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod3
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod4
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod5
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod6
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod7
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod8
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add2
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add3
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add4
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add5
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add6
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add7
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add8
+  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add9
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.simple
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.multipleFilters
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.addingFilters
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.inputFilter
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.nonSharedPtrFilter
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilter
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilterThroughBaseClass
+  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveBaseClass
+  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.multipleTimes
+  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.queueSize
+  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.dropCallback
+  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.eventInEventOut
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ExactMatch
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.PerfectMatch
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ImperfectMatch
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.Acceleration
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DroppedMessages
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.LongQueue
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DoublePublish
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.FourTopics
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.EarlyPublish
+  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.RateBound
+
+
+
+  - rostest -t tf2_ros transform_listener_time_reset.launch
+  - rostest -t tf2_ros transform_listener_unittest.launch
+  - rostest -t tf2_kdl test_python.launch
+  - rostest -t tf2_kdl test.launch
+  - rostest -t tf test_message_filter.xml
+  - rostest -t tf transform_listener_unittest.launch
+  - rostest -t tf test_broadcaster.launch
+
+  - rostest -t actionlib ref_server_test.launch
+  - rostest -t actionlib simple_execute_ref_server_test.launch
+  - rostest -t actionlib test_python_simple_client.launch
+  - rostest -t actionlib test_cpp_simple_client_allocator.launch
+  - rostest -t actionlib test_cpp_action_client_destruction.launch
+  - rostest -t actionlib test_server_goal_handle_destruction.launch
+  - rostest -t actionlib test_cpp_simple_client_cancel_crash.launch
+  - rostest -t actionlib test_imports.launch
+  - rostest -t actionlib test_python_server_components.launch
+  - rostest -t actionlib test_python_server.launch
+  - rostest -t actionlib test_python_server2.launch
+  - rostest -t actionlib test_python_server3.launch
+  - rostest -t actionlib test_python_simple_server.launch
+  - rostest -t actionlib test_exercise_simple_clients.launch
+  - rostest -t actionlib test_simple_action_server_deadlock_python.launch
+
+  - rostest -t capabilities test_client_module.test
+  - rostest -t capabilities test_launch_manager.test
+  - rostest -t capabilities test_client.test
+  - rostest -t capabilities test_default_provider.test
+  - rostest -t capabilities test_dependent_capabilities.test
+  - rostest -t capabilities test_invalid_specs.test
+  - rostest -t capabilities test_package_white_black_lists.test
+  - rostest -t capabilities test_remapping.test
+  - rostest -t capabilities test_ros_services.test
+  - rostest -t capabilities test_white_black_lists.test
+  - rostest -t capabilities test_spec_index_from_service.test
+
+  - rostest -t diagnostic_aggregator test_agg.launch
+  - rostest -t diagnostic_aggregator test_add_agg.launch
+  - rostest -t diagnostic_aggregator test_loader.launch
+  - rostest -t diagnostic_aggregator test_expected_stale.launch
+  - rostest -t diagnostic_aggregator test_multiple_match.launch
+  - rostest -t diagnostic_updater diagnostic_updater_fast_test.xml
+
+  - rostest -t dynamic_reconfigure test_cpp_simple_client.launch
+  - rostest -t dynamic_reconfigure test_python_simple_client.launch
+
+  - rostest -t camera_info_manager unit_test.test
+
+  - rostest -t kdl_parser test_kdl_parser.launch
+  - rostest -t kdl_parser test_inertia_rpy.launch
+
+  - rostest -t amcl set_initial_pose.xml
+  - rostest -t amcl set_initial_pose_delayed.xml
+  - rostest -t amcl basic_localization_stage.xml
+  - rostest -t amcl small_loop_prf.xml
+  - rostest -t amcl small_loop_crazy_driving_prg.xml
+  - rostest -t amcl texas_greenroom_loop.xml
+  - rostest -t amcl rosie_multilaser.xml
+  - rostest -t amcl texas_willow_hallway_loop.xml
+
+  - rostest -t clear_costmap_recovery clear_tests.launch
+  - rostest -t costmap_2d footprint_tests.launch
+  - rostest -t costmap_2d inflation_tests.launch
+  - rostest -t costmap_2d obstacle_tests.launch
+  - rostest -t costmap_2d simple_driving_test.xml
+  - rostest -t costmap_2d static_tests.launch
+  - rostest -t map_server rtest.xml
+  - rostest -t robot_pose_ekf test_robot_pose_ekf.launch
+  - rostest -t robot_pose_ekf test_robot_pose_ekf_zero_covariance.launch
+  - rostest -t rgbd_launch camera.test
+  - rostest -t robot_state_publisher test_one_link.launch
+  - rostest -t robot_state_publisher test_two_links_fixed_joint.launch
+  - rostest -t robot_state_publisher test_two_links_moving_joint.launch
+  - rostest -t robot_state_publisher test_joint_states_bag.launch
+  - rostest -t message_filters time_sequencer_unittest.xml
+  - rostest -t message_filters test_subscriber.xml
+
   - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile2
   - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile3
   - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile4
@@ -297,61 +353,8 @@ tests:
   - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.dropCallback
   - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.eventInEventOut
   - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.connectConstructor
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile2
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile3
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile4
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile5
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile6
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile7
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile8
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile9
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction2
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction3
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction4
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction5
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction6
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction7
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction8
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction9
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod2
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod3
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod4
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod5
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod6
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod7
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod8
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add2
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add3
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add4
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add5
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add6
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add7
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add8
-  - rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add9
-  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.multipleTimes
-  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.queueSize
-  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.dropCallback
-  - rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.eventInEventOut
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ExactMatch
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.PerfectMatch
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ImperfectMatch
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.Acceleration
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DroppedMessages
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.LongQueue
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DoublePublish
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.FourTopics
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.EarlyPublish
-  - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.RateBound
   - rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.callbackTypes
   - rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.oldRegisterWithNewFilter
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.simple
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.multipleFilters
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.addingFilters
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.inputFilter
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.nonSharedPtrFilter
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilter
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilterThroughBaseClass
-  - rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveBaseClass
   - rostest -t rospy_tutorials test-add-two-ints.launch
   - rostest -t rospy_tutorials test-peer-subscribe-notify.launch
   - rostest -t rospy_tutorials test-talker-listener.launch
