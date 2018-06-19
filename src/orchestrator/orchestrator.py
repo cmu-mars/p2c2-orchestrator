@@ -503,7 +503,9 @@ class Orchestrator(object):
                 localization.
         """
         def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
-            return 1.0 if nf == 0 else 0.0
+            # FIXME greedy!
+            return 1.0 if nf == 0 and ep == 0 else 0.0
+            # return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
         try:
             localization = Localization.build(problem, suspiciousness)
