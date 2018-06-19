@@ -606,3 +606,45 @@ test-harness:
       command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.noWarningOnLazyLoad
       expected-outcome: True
       time-limit: 3
+
+    - name: ConvertTest.setupLibrary
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.setupLibrary
+      expected-outcome: True
+      time-limit: 3
+    - name: ConvertTest.testExceptions
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
+      expected-outcome: True
+      time-limit: 3
+    - name: ConvertTest.testScanHeight
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testScanHeight
+      expected-outcome: True
+      time-limit: 3
+    - name: ConvertTest.testRandom
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testRandom
+      expected-outcome: True
+      time-limit: 3
+    - name: ConvertTest.testNaN
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testNaN
+      expected-outcome: True
+      time-limit: 3
+    - name: ConvertTest.testPositiveInf
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testPositiveInf
+      expected-outcome: True
+      time-limit: 3
+    - name: ConvertTest.testNegativeInf
+      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testNegativeInf
+      expected-outcome: True
+      time-limit: 3
+
+    - name: laser_geometry.projectLaser2
+      command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.projectLaser2
+      expected-outcome: True
+      time-limit: 3
+    - name: laser_geometry.transformLaserScanToPointCloud
+      command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud
+      expected-outcome: True
+      time-limit: 3
+    - name: laser_geometry.transformLaserScanToPointCloud2
+      command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud2
+      expected-outcome: True
+      time-limit: 3
