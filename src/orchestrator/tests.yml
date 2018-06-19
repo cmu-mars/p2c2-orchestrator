@@ -8,6 +8,7 @@ tests:
   - rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.Repeatability
   - rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
   - rosrun tf2 test_cache_unittest --gtest_filter=Bullet.Slerp
+
   - rosrun tf2 test_simple --gtest_filter=tf2.setTransformFail
   - rosrun tf2 test_simple --gtest_filter=tf2.setTransformValid
   - rosrun tf2 test_simple --gtest_filter=tf2.setTransformInvalidQuarternion
@@ -18,15 +19,10 @@ tests:
   - rosrun tf2 test_simple --gtest_filter=tf2_chainAsVector.chain_v_configuration
   - rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_i_configuration
   - rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_v_configuration
+
   - rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.Repeatability
   - rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.DuplicateEntries
-  - rostest -t tf2_ros transform_listener_time_reset.launch
-  - rostest -t tf2_ros transform_listener_unittest.launch
-  - rostest -t tf2_kdl test_python.launch
-  - rostest -t tf2_kdl test.launch
-  - rostest -t tf test_message_filter.xml
-  - rostest -t tf transform_listener_unittest.launch
-  - rostest -t tf test_broadcaster.launch
+
   - rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_compount
   - rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_helix_configuration
   - rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_ring45
@@ -67,6 +63,17 @@ tests:
   - rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqualEqual
   - rosrun tf tf_unittest --gtest_filter=data.StampedTransformOperatorEqualEqual
   - rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqual
+
+
+  - rostest -t tf2_ros transform_listener_time_reset.launch
+  - rostest -t tf2_ros transform_listener_unittest.launch
+  - rostest -t tf2_kdl test_python.launch
+  - rostest -t tf2_kdl test.launch
+  - rostest -t tf test_message_filter.xml
+  - rostest -t tf transform_listener_unittest.launch
+  - rostest -t tf test_broadcaster.launch
+
+
   - rosrun tf tf_quaternion_unittest --gtest_filter=tf.Quarternion
   - rosrun tf test_transform_datatypes --gtest_filter=tf.set
   - rosrun tf test_velocity --gtest_filter=LinearVelocitySquareTest.LinearVelocityToThreeFrames
