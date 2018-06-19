@@ -515,6 +515,94 @@ test-harness:
       expected-outcome: True
       time-limit: 3
     - name: Angles.find_min_max_delta
-      command:rosrun angles utest --gtest_filter=Angles.find_min_max_delta
+      command: rosrun angles utest --gtest_filter=Angles.find_min_max_delta
+      expected-outcome: True
+      time-limit: 3
+
+    - name: ClassLoaderUniquePtrTest.basicLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.basicLoad
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderUniquePtrTest.correctLazyLoadUnload
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.correctLazyLoadUnload
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderUniquePtrTest.nonExistentPlugin
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.nonExistentPlugin
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderUniquePtrTest.threadSafety
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.threadSafety
+    - name: ClassLoaderUniquePtrTest.loadRefCountingLazy
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.loadRefCountingLazy
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderUniquePtrTest.lazyLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoad
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderUniquePtrTest.nonLazyLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.nonLazyLoad
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
+      expected-outcome: True
+      time-limit: 3
+
+    - name: ClassLoaderTest.basicLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.basicLoad
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.correctNonLazyLoadUnload
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctNonLazyLoadUnload
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.correctLazyLoadUnload
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctLazyLoadUnload
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.nonExistentPlugin
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.nonExistentPlugin
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.nonExistentLibrary
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.nonExistentLibrary
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.invalidBase
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.invalidBase
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.threadSafety
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.threadSafety
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.loadRefCountingNonLazy
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.loadRefCountingNonLazy
+      expected-outcome: True
+      time-limit: 3
+    - name: ClassLoaderTest.loadRefCountingLazy
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.loadRefCountingLazy
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderTest.lazyLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoad
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderTest.lazyLoadSecondTime
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoadSecondTime
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderTest.nonLazyLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.nonLazyLoad
+      expected-outcome: True
+      time-limit: 3
+    - name: MultiClassLoaderTest.noWarningOnLazyLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.noWarningOnLazyLoad
       expected-outcome: True
       time-limit: 3
