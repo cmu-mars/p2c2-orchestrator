@@ -114,6 +114,8 @@ coverage:
     - src/navigation/map_server/src/main.cpp
     - src/navigation/map_server/src/map_saver.cpp
     - src/urdf/urdf/test/test_robot_model_parser.cpp
+
+    - src/ros_comm/message_filters/msg_cache_unittest.cpp
 languages:
 - cpp
 compiler:
