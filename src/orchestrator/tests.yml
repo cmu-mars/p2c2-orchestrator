@@ -237,6 +237,74 @@ tests:
   - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.FourTopics
   - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.EarlyPublish
   - rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.RateBound
+  - rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.callbackTypes
+  - rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.oldRegisterWithNewFilter
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile2
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile3
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile4
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile5
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile6
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile7
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile8
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile9
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction2
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction3
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction4
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction5
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction6
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction7
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction8
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction9
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod2
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod3
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod4
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod5
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod6
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod7
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod8
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate2
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate3
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate4
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate5
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate6
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate7
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate8
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate9
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.multipleTimes
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.queueSize
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.dropCallback
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.eventInEventOut
+  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.connectConstructor
+  - rosrun rospack rospack-utest --gtest-filter=rospack.reentrant
+  - rosrun rospack rospack-utest --gtest-filter=rospack.multiple_rospack_objects
+  - rosrun rospack rospack-utest --gtest-filter=rospack.deduplicate_tokens
+  - rosrun rospack rospack-utest --gtest-filter=rospack.env_change
+  - rosrun rostime rostime-test_time --gtest_filter=Time.size
+  - rosrun rostime rostime-test_time --gtest_filter=Time.Comparitors
+  - rosrun rostime rostime-test_time --gtest_filter=Time.ToFromDouble
+  - rosrun rostime rostime-test_time --gtest_filter=Time.RoundingError
+  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlus
+  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinus
+  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlusEquals
+  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinusEquals
+  - rosrun rostime rostime-test_time --gtest_filter=Time.SecNSecConstructor
+  - rosrun rostime rostime-test_time --gtest_filter=Time.DontMungeStreamState
+  - rosrun rostime rostime-test_time --gtest_filter=Time.ToFromBoost
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.Comparitors
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.ToFromSec
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlus
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinus
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorTimes
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlusEquals
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinusEquals
+  - rosrun rostime rostime-test_time --gtest_filter=Duration.sleepWithSignal
+  - rosrun rostime rostime-test_time --gtest_filter=Rate.constructFromDuration
+  - rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_true
+  - rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_false
+  - rosrun rostime rostime-test_time --gtest_filter=WallRate.constructFromDuration
+
+
+
 
 
 
@@ -317,77 +385,11 @@ tests:
   - rostest -t message_filters time_sequencer_unittest.xml
   - rostest -t message_filters test_subscriber.xml
 
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile2
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile3
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile4
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile5
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile6
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile7
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile8
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile9
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction2
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction3
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction4
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction5
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction6
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction7
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction8
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction9
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod2
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod3
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod4
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod5
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod6
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod7
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod8
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate2
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate3
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate4
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate5
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate6
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate7
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate8
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate9
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.multipleTimes
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.queueSize
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.dropCallback
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.eventInEventOut
-  - rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.connectConstructor
-  - rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.callbackTypes
-  - rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.oldRegisterWithNewFilter
   - rostest -t rospy_tutorials test-add-two-ints.launch
   - rostest -t rospy_tutorials test-peer-subscribe-notify.launch
   - rostest -t rospy_tutorials test-talker-listener.launch
   - rostest -t rospy_tutorials test-on-shutdown.launch
   - rostest -t rospy_tutorials test-connection-header.launch
-  - rosrun rostime rostime-test_time --gtest_filter=Time.size
-  - rosrun rostime rostime-test_time --gtest_filter=Time.Comparitors
-  - rosrun rostime rostime-test_time --gtest_filter=Time.ToFromDouble
-  - rosrun rostime rostime-test_time --gtest_filter=Time.RoundingError
-  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlus
-  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinus
-  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlusEquals
-  - rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinusEquals
-  - rosrun rostime rostime-test_time --gtest_filter=Time.SecNSecConstructor
-  - rosrun rostime rostime-test_time --gtest_filter=Time.DontMungeStreamState
-  - rosrun rostime rostime-test_time --gtest_filter=Time.ToFromBoost
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.Comparitors
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.ToFromSec
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlus
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinus
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorTimes
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlusEquals
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinusEquals
-  - rosrun rostime rostime-test_time --gtest_filter=Duration.sleepWithSignal
-  - rosrun rostime rostime-test_time --gtest_filter=Rate.constructFromDuration
-  - rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_true
-  - rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_false
-  - rosrun rostime rostime-test_time --gtest_filter=WallRate.constructFromDuration
-  - rosrun rospack rospack-utest --gtest-filter=rospack.reentrant
-  - rosrun rospack rospack-utest --gtest-filter=rospack.multiple_rospack_objects
-  - rosrun rospack rospack-utest --gtest-filter=rospack.deduplicate_tokens
-  - rosrun rospack rospack-utest --gtest-filter=rospack.env_change
-
   # WEIRD
   # - rostest -t gmapping basic_localization_stage.launch
   # - rostest -t gmapping basic_localization_stage_replay.launch
