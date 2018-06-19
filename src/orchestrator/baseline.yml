@@ -133,311 +133,236 @@ test-harness:
     - name: tf2.TimeCache.ZeroAtFront
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ZeroAtFront
       expected-outcome: True
-      time-limit: 3
     - name: tf2.TimeCache.CartesianInterpolation
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
       expected-outcome: True
-      time-limit: 3
     - name: tf2.TimeCache.ReparentingInterpolationProtection
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
       expected-outcome: True
-      time-limit: 3
     - name: tf2.TimeCache.AngularInterpolation
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.AngularInterpolation
       expected-outcome: True
-      time-limit: 3
     - name: tf2.TimeCache.DuplicateEntries
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.DuplicateEntries
       expected-outcome: True
-      time-limit: 3
     - name: tf2.TimeCache.Repeatability
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.Repeatability
       expected-outcome: True
-      time-limit: 3
     - name: tf2.TimeCache.RepeatabilityReverseInsertOrder
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
       expected-outcome: True
-      time-limit: 3
     - name: tf2.Bullet.Slerp
       command: rosrun tf2 test_cache_unittest --gtest_filter=Bullet.Slerp
       expected-outcome: True
-      time-limit: 3
 
     - name: tf2.setTransformFail
       command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformFail
       expected-outcome: True
-      time-limit: 3
     - name: tf2.setTransformValid
       command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformValid
       expected-outcome: True
-      time-limit: 3
     - name: tf2.setTransformInvalidQuarternion
       command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformInvalidQuarternion
       expected-outcome: True
-      time-limit: 3
     - name: tf2_lookupTransform.LookupException_Nothing_Exists
       command: rosrun tf2 test_simple --gtest_filter=tf2_lookupTransform.LookupException_Nothing_Exists
       expected-outcome: True
-      time-limit: 3
     - name: tf2_lookupTransform.LookupException_One_Exists
       command: rosrun tf2 test_simple --gtest_filter=tf2_lookupTransform.LookupException_One_Exists
       expected-outcome: True
-      time-limit: 3
     - name: tf2_canTransform.Nothing_Exists
       command: rosrun tf2 test_simple --gtest_filter=tf2_canTransform.Nothing_Exists
       expected-outcome: True
-      time-limit: 3
     - name: tf2_canTransform.One_Exists
       command: rosrun tf2 test_simple --gtest_filter=tf2_canTransform.One_Exists
       expected-outcome: True
-      time-limit: 3
     - name: tf2_chainAsVector.chain_v_configuration
       command: rosrun tf2 test_simple --gtest_filter=tf2_chainAsVector.chain_v_configuration
       expected-outcome: True
-      time-limit: 3
     - name: tf2_walkToTopParent.walk_i_configuration
       command: rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_i_configuration
       expected-outcome: True
-      time-limit: 3
     - name: tf2_walkToTopParent.walk_v_configuration
       command: rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_v_configuration
       expected-outcome: True
-      time-limit: 3
 
     - name: StaticCache.Repeatability
       command: rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.Repeatability
       expected-outcome: True
-      time-limit: 3
     - name: StaticCache.DuplicateEntries
       command: rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.DuplicateEntries
       expected-outcome: True
-      time-limit: 3
 
     - name: tf.lookupTransform_compount
       command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_compount
       expected-outcome: True
-      time-limit: 3
     - name: tf.lookupTransform_helix_configuration
       command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_helix_configuration
       expected-outcome: True
-      time-limit: 3
     - name: tf.lookupTransform_ring45
       command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_ring45
       expected-outcome: True
-      time-limit: 3
     - name: tf.setTransformNoInsertOnSelfTransform
       command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertOnSelfTransform
       expected-outcome: True
-      time-limit: 3
     - name: tf.setTransformNoInsertWithNan
       command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNan
       expected-outcome: True
-      time-limit: 3
     - name: tf.setTransformNoInsertWithNoFrameID
       command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNoFrameID
       expected-outcome: True
-      time-limit: 3
     - name: tf.setTransformNoInsertWithNoParentID
       command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNoParentID
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformTransformsCartesian
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformTransformsCartesian
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformTransformToOwnFrame
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformTransformToOwnFrame
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformPointCartesian
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformPointCartesian
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformVectorCartesian
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformVectorCartesian
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformQuaternionCartesian
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformQuaternionCartesian
       expected-outcome: True
-      time-limit: 3
     - name: tf.ListOneInverse
       command: rosrun tf tf_unittest --gtest_filter=tf.ListOneInverse
       expected-outcome: True
-      time-limit: 3
     - name: tf.ListTwoInverse
       command: rosrun tf tf_unittest --gtest_filter=tf.ListTwoInverse
       expected-outcome: True
-      time-limit: 3
     - name: tf.ListOneForward
       command: rosrun tf tf_unittest --gtest_filter=tf.ListOneForward
       expected-outcome: True
-      time-limit: 3
     - name: tf.ListTwoForward
       command: rosrun tf tf_unittest --gtest_filter=tf.ListTwoForward
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformThrougRoot
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformThrougRoot
       expected-outcome: True
-      time-limit: 3
     - name: tf.TransformThroughNO_PARENT
       command: rosrun tf tf_unittest --gtest_filter=tf.TransformThroughNO_PARENT
       expected-outcome: True
-      time-limit: 3
     - name: tf.getParent
       command: rosrun tf tf_unittest --gtest_filter=tf.getParent
       expected-outcome: True
-      time-limit: 3
     - name: tf.NO_PARENT_SET
       command: rosrun tf tf_unittest --gtest_filter=tf.NO_PARENT_SET
       expected-outcome: True
-      time-limit: 3
     - name: tf.waitForTransform
       command: rosrun tf tf_unittest --gtest_filter=tf.waitForTransform
       expected-outcome: True
-      time-limit: 3
     - name: tf.Exceptions
       command: rosrun tf tf_unittest --gtest_filter=tf.Exceptions
       expected-outcome: True
-      time-limit: 3
     - name: tf.NoExtrapolationExceptionFromParent
       command: rosrun tf tf_unittest --gtest_filter=tf.NoExtrapolationExceptionFromParent
       expected-outcome: True
-      time-limit: 3
     - name: tf.ExtrapolationFromOneValue
       command: rosrun tf tf_unittest --gtest_filter=tf.ExtrapolationFromOneValue
       expected-outcome: True
-      time-limit: 3
     - name: tf.RepeatedTimes
       command: rosrun tf tf_unittest --gtest_filter=tf.RepeatedTimes
       expected-outcome: True
-      time-limit: 3
     - name: tf.frameExists
       command: rosrun tf tf_unittest --gtest_filter=tf.frameExists
       expected-outcome: True
-      time-limit: 3
     - name: tf.canTransform
       command: rosrun tf tf_unittest --gtest_filter=tf.canTransform
       expected-outcome: True
-      time-limit: 3
     - name: tf.lookupTransform
       command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform
       expected-outcome: True
-      time-limit: 3
     - name: tf.getFrameStrings
       command: rosrun tf tf_unittest --gtest_filter=tf.getFrameStrings
       expected-outcome: True
-      time-limit: 3
     - name: tf.assertQuaternionValid
       command: rosrun tf tf_unittest --gtest_filter=tf.assertQuaternionValid
       expected-outcome: True
-      time-limit: 3
     - name: tf.assertQuaternionMsgValid
       command: rosrun tf tf_unittest --gtest_filter=tf.assertQuaternionMsgValid
       expected-outcome: True
-      time-limit: 3
     - name: data.Vector3Conversions
       command: rosrun tf tf_unittest --gtest_filter=data.Vector3Conversions
       expected-outcome: True
-      time-limit: 3
     - name: data.Vector3StampedConversions
       command: rosrun tf tf_unittest --gtest_filter=data.Vector3StampedConversions
       expected-outcome: True
-      time-limit: 3
     - name: data.QuaternionConversions
       command: rosrun tf tf_unittest --gtest_filter=data.QuaternionConversions
       expected-outcome: True
-      time-limit: 3
     - name: data.QuaternionStampedConversions
       command: rosrun tf tf_unittest --gtest_filter=data.QuaternionStampedConversions
       expected-outcome: True
-      time-limit: 3
     - name: data.TransformConversions
       command: rosrun tf tf_unittest --gtest_filter=data.TransformConversions
       expected-outcome: True
-      time-limit: 3
     - name: data.PoseStampedConversions
       command: rosrun tf tf_unittest --gtest_filter=data.PoseStampedConversions
       expected-outcome: True
-      time-limit: 3
     - name: data.StampedOperatorEqualEqual
       command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqualEqual
       expected-outcome: True
-      time-limit: 3
     - name: data.StampedTransformOperatorEqualEqual
       command: rosrun tf tf_unittest --gtest_filter=data.StampedTransformOperatorEqualEqual
       expected-outcome: True
-      time-limit: 3
     - name: data.StampedOperatorEqual
       command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqual
       expected-outcome: True
-      time-limit: 3
 
     - name: tf.Quarternion
       command: rosrun tf tf_quaternion_unittest --gtest_filter=tf.Quarternion
       expected-outcome: True
-      time-limit: 3
 
     - name: tf.set
       command: rosrun tf test_transform_datatypes --gtest_filter=tf.set
       expected-outcome: True
-      time-limit: 3
 
     - name: LinearVelocitySquareTest.LinearVelocityToThreeFrames
       command: rosrun tf test_velocity --gtest_filter=LinearVelocitySquareTest.LinearVelocityToThreeFrames
       expected-outcome: True
-      time-limit: 3
     - name: AngularVelocitySquareTest.AngularVelocityAlone
       command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityAlone
       expected-outcome: True
-      time-limit: 3
     - name: AngularVelocitySquareTest.AngularVelocityOffsetChildFrameInX
       command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityOffsetChildFrameInX
       expected-outcome: True
-      time-limit: 3
     - name: AngularVelocitySquareTest.AngularVelocityOffsetParentFrameInZ
       command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityOffsetParentFrameInZ
       expected-outcome: True
-      time-limit: 3
 
     - name: tf.TimeCache.ZeroAtFront
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.ZeroAtFront
       expected-outcome: True
-      time-limit: 3
     - name: tf.TimeCache.CartesianInterpolation
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
       expected-outcome: True
-      time-limit: 3
     - name: tf.TimeCache.ReparentingInterpolationProtection
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
       expected-outcome: True
-      time-limit: 3
     - name: tf.TimeCache.AngularInterpolation
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.AngularInterpolation
       expected-outcome: True
-      time-limit: 3
     - name: tf.TimeCache.DuplicateEntries
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.DuplicateEntries
       expected-outcome: True
-      time-limit: 3
     - name: tf.TimeCache.Repeatability
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.Repeatability
       expected-outcome: True
-      time-limit: 3
     - name: tf.TimeCache.RepeatabilityReverseInsertOrder
       command: rosrun tf cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
       expected-outcome: True
-      time-limit: 3
     - name: tf.Bullet.Slerp
       command: rosrun tf cache_unittest --gtest_filter=Bullet.Slerp
       expected-outcome: True
-      time-limit: 3
 
     - name: tf.Bullet.Slerp
       command: rosrun tf cache_unittest --gtest_filter=Bullet.Slerp
       expected-outcome: True
-      time-limit: 3
 
     # FIXME
     # - name: TFEigenConversions.tf_eigen_vector
@@ -491,123 +416,94 @@ test-harness:
     - name: Angles.shortestDistanceWithLimits
       command: rosrun angles utest --gtest_filter=Angles.shortestDistanceWithLimits
       expected-outcome: True
-      time-limit: 3
     - name: Angles.from_degrees
       command: rosrun angles utest --gtest_filter=Angles.from_degrees
       expected-outcome: True
-      time-limit: 3
     - name: Angles.to_degrees
       command: rosrun angles utest --gtest_filter=Angles.to_degrees
       expected-outcome: True
-      time-limit: 3
     - name: Angles.normalize_angle_positive
       command: rosrun angles utest --gtest_filter=Angles.normalize_angle_positive
       expected-outcome: True
-      time-limit: 3
     - name: Angles.normalize_angle
       command: rosrun angles utest --gtest_filter=Angles.normalize_angle
       expected-outcome: True
-      time-limit: 3
     - name: Angles.shortest_angular_distance
       command: rosrun angles utest --gtest_filter=Angles.shortest_angular_distance
       expected-outcome: True
-      time-limit: 3
     - name: Angles.two_pi_complement
       command: rosrun angles utest --gtest_filter=Angles.two_pi_complement
       expected-outcome: True
-      time-limit: 3
     - name: Angles.find_min_max_delta
       command: rosrun angles utest --gtest_filter=Angles.find_min_max_delta
       expected-outcome: True
-      time-limit: 3
 
     - name: ClassLoaderUniquePtrTest.basicLoad
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.basicLoad
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderUniquePtrTest.correctLazyLoadUnload
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.correctLazyLoadUnload
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderUniquePtrTest.nonExistentPlugin
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.nonExistentPlugin
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderUniquePtrTest.threadSafety
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.threadSafety
     - name: ClassLoaderUniquePtrTest.loadRefCountingLazy
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.loadRefCountingLazy
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderUniquePtrTest.lazyLoad
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoad
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderUniquePtrTest.nonLazyLoad
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.nonLazyLoad
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
       command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
       expected-outcome: True
-      time-limit: 3
 
     - name: ClassLoaderTest.basicLoad
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.basicLoad
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.correctNonLazyLoadUnload
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctNonLazyLoadUnload
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.correctLazyLoadUnload
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctLazyLoadUnload
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.nonExistentPlugin
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.nonExistentPlugin
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.nonExistentLibrary
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.nonExistentLibrary
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.invalidBase
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.invalidBase
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.threadSafety
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.threadSafety
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.loadRefCountingNonLazy
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.loadRefCountingNonLazy
       expected-outcome: True
-      time-limit: 3
     - name: ClassLoaderTest.loadRefCountingLazy
       command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.loadRefCountingLazy
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderTest.lazyLoad
       command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoad
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderTest.lazyLoadSecondTime
       command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoadSecondTime
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderTest.nonLazyLoad
       command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.nonLazyLoad
       expected-outcome: True
-      time-limit: 3
     - name: MultiClassLoaderTest.noWarningOnLazyLoad
       command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.noWarningOnLazyLoad
       expected-outcome: True
-      time-limit: 3
 
     - name: laser_geometry.projectLaser2
       command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.projectLaser2
@@ -625,619 +521,470 @@ test-harness:
     - name: LineIterator.south
       command: rosrun base_local_planner line_iterator --gtest_filter=LineIterator.south
       expected-outcome: True
-      time-limit: 3
     - name: LineIterator.north_north_west
       command: rosrun base_local_planner line_iterator --gtest_filter=LineIterator.north_north_west
       expected-outcome: True
-      time-limit: 3
 
     - name: TrajectoryPlannerTest
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=TrajectoryPlannerTest.*
       expected-outcome: True
-      time-limit: 3
 
     - name: VelocityIteratorTest.testsingle
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.testsingle_pos
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle_pos
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.testsingle_neg
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle_neg
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test1
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test1
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test1_pos
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test1_pos
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test1_neg
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test1_neg
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test3
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test3
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test4
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test4
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test_shifted
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test_shifted
       expected-outcome: True
-      time-limit: 3
     - name: VelocityIteratorTest.test_cranky
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test_cranky
       expected-outcome: True
-      time-limit: 3
 
     - name: FootprintHelperTest.correctFootprint
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=FootprintHelperTest.correctFootprint
       expected-outcome: True
-      time-limit: 3
     - name: FootprintHelperTest.correctLineCells
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=FootprintHelperTest.correctLineCells
       expected-outcome: True
-      time-limit: 3
 
     - name: MapGridTest.initNull
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.initNull
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.operatorBrackets
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.operatorBrackets
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.copyConstructor
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.copyConstructor
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.getIndex
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.getIndex
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.reset
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.reset
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.properGridConstruction
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.properGridConstruction
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.sizeCheck
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.sizeCheck
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.adjustPlanEmpty
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.adjustPlanEmpty
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.adjustPlan
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.adjustPlan
       expected-outcome: True
-      time-limit: 3
     - name: MapGridTest.distancePropagation
       command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.distancePropagation
       expected-outcome: True
-      time-limit: 3
 
     - name: array_parser.basic_operation
       command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.basic_operation
       expected-outcome: True
-      time-limit: 3
     - name: array_parser.missing_open
       command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.missing_open
       expected-outcome: True
-      time-limit: 3
     - name: array_parser.missing_close
       command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.missing_close
       expected-outcome: True
-      time-limit: 3
     - name: array_parser.wrong_depth
       command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.wrong_depth
       expected-outcome: True
-      time-limit: 3
 
     - name: PathCalc.oscillate_in_pinch_point
       command: rosrun navfn path_calc_test --gtest_filter=PathCalc.oscillate_in_pinch_point
       expected-outcome: True
-      time-limit: 3
     - name: PathCalc.easy_nav_should_always_work
       command: rosrun navfn path_calc_test --gtest_filter=PathCalc.easy_nav_should_always_work
       expected-outcome: True
-      time-limit: 3
 
     - name: voxel_grid.basicMarkingAndClearing
       command: rosrun voxel_grid voxel_grid_tests --gtest_filter=voxel_grid.basicMarkingAndClearing
       expected-outcome: True
-      time-limit: 3
 
     - name: PCLConversionTests.imageConversion
       command: rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionTests.imageConversion
       expected-outcome: True
-      time-limit: 3
     - name: PCLConversionTests.pointcloud2Conversion
       command: rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionTests.pointcloud2Conversion
       expected-outcome: True
-      time-limit: 3
     - name: PCLConversionStamp.Stamps
       command: rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionStamp.Stamps
       expected-outcome: True
-      time-limit: 3
 
     - name: roslib.commandListNames
       command: rosrun roslib roslib-utest --gtest_filter=roslib.commandListNames
       expected-outcome: True
-      time-limit: 3
     - name: roslib.commandList
       command: rosrun roslib roslib-utest --gtest_filter=roslib.commandList
       expected-outcome: True
-      time-limit: 3
     - name: roslib.getAll
       command: rosrun roslib roslib-utest --gtest_filter=roslib.getAll
       expected-outcome: True
-      time-limit: 3
     - name: roslib.concurrent_access
       command: rosrun roslib roslib-utest --gtest_filter=roslib.concurrent_access
       expected-outcome: True
-      time-limit: 3
     - name: Package.getPath
       command: rosrun roslib roslib-test_package --gtest_filter=Package.getPath
       expected-outcome: True
-      time-limit: 3
     - name: Package.getAll
       command: rosrun roslib roslib-test_package --gtest_filter=Package.getAll
       expected-outcome: True
-      time-limit: 3
 
     - name: PluginlibTest.unknownPlugin
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.unknownPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.misspelledPlugin
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.misspelledPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.invalidPackage
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.invalidPackage
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.brokenPlugin
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.brokenPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.workingPlugin
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.workingPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.createUnmanagedInstanceAndUnloadLibrary
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.createUnmanagedInstanceAndUnloadLibrary
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.createManagedInstanceAndUnloadLibrary
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.createManagedInstanceAndUnloadLibrary
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibTest.brokenXML
       command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.brokenXML
       expected-outcome: True
-      time-limit: 3
 
     - name: PluginlibUniquePtrTest.unknownPlugin
       command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.unknownPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibUniquePtrTest.misspelledPlugin
       command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.misspelledPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibUniquePtrTest.workingPlugin
       command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.workingPlugin
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibUniquePtrTest.workingPlugin
       command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=pluginlibuniqueptrtest.createuniqueinstanceandunloadlibrary
       expected-outcome: True
-      time-limit: 3
     - name: PluginlibUniquePtrTest.workingPlugin
       command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=pluginlibtest.brokenplugin
       expected-outcome: True
-      time-limit: 3
 
     - name: Cache.easyInterval
       commmand: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyInterval
       expected-outcome: True
-      time-limit: 3
     - name: Cache.easySurroundingInterval
       command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easySurroundingInterval
       expected-outcome: True
-      time-limit: 3
     - name: Cache.easyUnsorted
       command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyUnsorted
       expected-outcome: True
-      time-limit: 3
     - name: Cache.easyElemBeforeAfter
       command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyElemBeforeAfter
       expected-outcome: True
-      time-limit: 3
     - name: Cache.eventInEventOut
       command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.eventInEventOut
       expected-outcome: True
-      time-limit: 3
 
     - name: Synchronizer.compile2
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile2
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile3
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile3
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile4
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile4
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile5
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile5
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile6
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile6
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile7
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile7
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile8
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile8
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compile9
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile9
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction2
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction2
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction3
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction3
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction4
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction4
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction5
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction5
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction6
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction6
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction7
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction7
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction8
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction8
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileFunction9
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction9
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod2
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod2
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod3
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod3
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod4
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod4
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod5
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod5
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod6
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod6
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod7
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod7
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.compileMethod8
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod8
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add2
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add2
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add3
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add3
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add4
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add4
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add5
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add5
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add6
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add6
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add7
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add7
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add8
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add8
       expected-outcome: True
-      time-limit: 3
     - name: Synchronizer.add9
       command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add9
       expected-outcome: True
-      time-limit: 3
 
     - name: Chain.simple
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.simple
       expected-outcome: True
-      time-limit: 3
     - name: Chain.multipleFilters
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.multipleFilters
       expected-outcome: True
-      time-limit: 3
     - name: Chain.addingFilters
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.addingFilters
       expected-outcome: True
-      time-limit: 3
     - name: Chain.inputFilter
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.inputFilter
       expected-outcome: True
-      time-limit: 3
     - name: Chain.nonSharedPtrFilter
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.nonSharedPtrFilter
       expected-outcome: True
-      time-limit: 3
     - name: Chain.retrieveFilter
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilter
       expected-outcome: True
-      time-limit: 3
     - name: Chain.retrieveFilterThroughBaseClass
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilterThroughBaseClass
       expected-outcome: True
-      time-limit: 3
     - name: Chain.retrieveBaseClass
       command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveBaseClass
       expected-outcome: True
-      time-limit: 3
 
     - name: ExactTime.multipleTimes
       command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.multipleTimes
       expected-outcome: True
-      time-limit: 3
     - name: ExactTime.queueSize
       command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.queueSize
       expected-outcome: True
-      time-limit: 3
     - name: ExactTime.dropCallback
       command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.dropCallback
       expected-outcome: True
-      time-limit: 3
     - name: ExactTime.eventInEventOut
       command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.eventInEventOut
       expected-outcome: True
-      time-limit: 3
 
     - name: ApproxTimeSync.ExactMatch
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ExactMatch
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.PerfectMatch
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.PerfectMatch
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.ImperfectMatch
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ImperfectMatch
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.Acceleration
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.Acceleration
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.DroppedMessages
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DroppedMessages
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.LongQueue
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.LongQueue
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.DoublePublish
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DoublePublish
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.FourTopics
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.FourTopics
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.EarlyPublish
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.EarlyPublish
       expected-outcome: True
-      time-limit: 3
     - name: ApproxTimeSync.RateBound
       command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.RateBound
       expected-outcome: True
-      time-limit: 3
 
     - name: SimpleFilter.callbackTypes
       command: rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.callbackTypes
       expected-outcome: True
-      time-limit: 3
     - name: SimpleFilter.oldRegisterWithNewFilter
       command: rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.oldRegisterWithNewFilter
       expected-outcome: True
-      time-limit: 3
 
     - name: TimeSynchronizer.compile2
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile2
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile3
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile3
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile4
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile4
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile5
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile5
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile6
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile6
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile7
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile7
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile8
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile8
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compile9
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile9
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction2
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction2
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction3
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction3
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction4
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction4
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction5
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction5
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction6
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction6
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction7
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction7
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction8
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction8
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileFunction9
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction9
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod2
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod2
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod3
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod3
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod4
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod4
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod5
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod5
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod6
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod6
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod7
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod7
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.compileMethod8
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod8
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate2
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate2
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate3
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate3
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate4
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate4
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate5
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate5
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate6
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate6
     - name: TimeSynchronizer.immediate7
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate7
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate8
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate8
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.immediate9
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate9
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.multipleTimes
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.multipleTimes
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.queueSize
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.queueSize
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.dropCallback
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.dropCallback
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.eventInEventOut
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.eventInEventOut
       expected-outcome: True
-      time-limit: 3
     - name: TimeSynchronizer.connectConstructor
       command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.connectConstructor
       expected-outcome: True
-      time-limit: 3
 
     - name: rospack.reentrant
       command: rosrun rospack rospack-utest --gtest-filter=rospack.reentrant
