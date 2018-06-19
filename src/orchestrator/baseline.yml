@@ -121,12 +121,255 @@ compiler:
   workspace: /ros_ws
   time-limit: 600
 test-harness:
-  type: simple
   time-limit: 60
-  context: /ros_ws/turtletest
-  command: python3.6 /ros_ws/turtletest/test.py __ID__
+  context: /ros_ws
   tests:
-    - t1
-  # FIXME temporarily disabled as a workaround
-  #  - t2
-  #  - t3
+    - name: t1
+      command: python3.6 /ros_ws/turtletest/test.py t1
+      context: /ros_ws/turtletest
+      expected-outcome: True
+      time-limit: 60
+
+    - name: TimeCache.ZeroAtFront
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ZeroAtFront
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeCache.CartesianInterpolation
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeCache.ReparentingInterpolationProtection
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeCache.AngularInterpolation
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.AngularInterpolation
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeCache.DuplicateEntries
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.DuplicateEntries
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeCache.Repeatability
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.Repeatability
+      expected-outcome: True
+      time-limit: 3
+    - name: TimeCache.RepeatabilityReverseInsertOrder
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
+      expected-outcome: True
+      time-limit: 3
+    - name: Bullet.Slerp
+      command: rosrun tf2 test_cache_unittest --gtest_filter=Bullet.Slerp
+      expected-outcome: True
+      time-limit: 3
+
+    - name: tf2.setTransformFail
+      command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformFail
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2.setTransformValid
+      command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformValid
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2.setTransformInvalidQuarternion
+      command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformInvalidQuarternion
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_lookupTransform.LookupException_Nothing_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_lookupTransform.LookupException_Nothing_Exists
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_lookupTransform.LookupException_One_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_lookupTransform.LookupException_One_Exists
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_canTransform.Nothing_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_canTransform.Nothing_Exists
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_canTransform.One_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_canTransform.One_Exists
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_chainAsVector.chain_v_configuration
+      command: rosrun tf2 test_simple --gtest_filter=tf2_chainAsVector.chain_v_configuration
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_walkToTopParent.walk_i_configuration
+      command: rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_i_configuration
+      expected-outcome: True
+      time-limit: 3
+    - name: tf2_walkToTopParent.walk_v_configuration
+      command: rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_v_configuration
+      expected-outcome: True
+      time-limit: 3
+
+    - name: StaticCache.Repeatability
+      command: rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.Repeatability
+      expected-outcome: True
+      time-limit: 3
+    - name: StaticCache.DuplicateEntries
+      command: rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.DuplicateEntries
+      expected-outcome: True
+      time-limit: 3
+
+    - name: tf.lookupTransform_compount
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_compount
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.lookupTransform_helix_configuration
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_helix_configuration
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.lookupTransform_ring45
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_ring45
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.setTransformNoInsertOnSelfTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertOnSelfTransform
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.setTransformNoInsertWithNan
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNan
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.setTransformNoInsertWithNoFrameID
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNoFrameID
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.setTransformNoInsertWithNoParentID
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNoParentID
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformTransformsCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformTransformsCartesian
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformTransformToOwnFrame
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformTransformToOwnFrame
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformPointCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformPointCartesian
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformVectorCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformVectorCartesian
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformQuaternionCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformQuaternionCartesian
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.ListOneInverse
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListOneInverse
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.ListTwoInverse
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListTwoInverse
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.ListOneForward
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListOneForward
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.ListTwoForward
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListTwoForward
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformThrougRoot
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformThrougRoot
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TransformThroughNO_PARENT
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformThroughNO_PARENT
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.getParent
+      command: rosrun tf tf_unittest --gtest_filter=tf.getParent
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.NO_PARENT_SET
+      command: rosrun tf tf_unittest --gtest_filter=tf.NO_PARENT_SET
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.waitForTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.waitForTransform
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.Exceptions
+      command: rosrun tf tf_unittest --gtest_filter=tf.Exceptions
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.NoExtrapolationExceptionFromParent
+      command: rosrun tf tf_unittest --gtest_filter=tf.NoExtrapolationExceptionFromParent
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.ExtrapolationFromOneValue
+      command: rosrun tf tf_unittest --gtest_filter=tf.ExtrapolationFromOneValue
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.RepeatedTimes
+      command: rosrun tf tf_unittest --gtest_filter=tf.RepeatedTimes
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.frameExists
+      command: rosrun tf tf_unittest --gtest_filter=tf.frameExists
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.canTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.canTransform
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.lookupTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.getFrameStrings
+      command: rosrun tf tf_unittest --gtest_filter=tf.getFrameStrings
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.assertQuaternionValid
+      command: rosrun tf tf_unittest --gtest_filter=tf.assertQuaternionValid
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.assertQuaternionMsgValid
+      command: rosrun tf tf_unittest --gtest_filter=tf.assertQuaternionMsgValid
+      expected-outcome: True
+      time-limit: 3
+    - name: data.Vector3Conversions
+      command: rosrun tf tf_unittest --gtest_filter=data.Vector3Conversions
+      expected-outcome: True
+      time-limit: 3
+    - name: data.Vector3StampedConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.Vector3StampedConversions
+      expected-outcome: True
+      time-limit: 3
+    - name: data.QuaternionConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.QuaternionConversions
+      expected-outcome: True
+      time-limit: 3
+    - name: data.QuaternionStampedConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.QuaternionStampedConversions
+      expected-outcome: True
+      time-limit: 3
+    - name: data.TransformConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.TransformConversions
+      expected-outcome: True
+      time-limit: 3
+    - name: data.PoseStampedConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.PoseStampedConversions
+      expected-outcome: True
+      time-limit: 3
+    - name: data.StampedOperatorEqualEqual
+      command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqualEqual
+      expected-outcome: True
+      time-limit: 3
+    - name: data.StampedTransformOperatorEqualEqual
+      command: rosrun tf tf_unittest --gtest_filter=data.StampedTransformOperatorEqualEqual
+      expected-outcome: True
+      time-limit: 3
+    - name: data.StampedOperatorEqual
+      command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqual
+      expected-outcome: True
+      time-limit: 3
