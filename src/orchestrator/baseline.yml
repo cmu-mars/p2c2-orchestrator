@@ -130,35 +130,35 @@ test-harness:
       expected-outcome: True
       time-limit: 60
 
-    - name: TimeCache.ZeroAtFront
+    - name: tf2.TimeCache.ZeroAtFront
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ZeroAtFront
       expected-outcome: True
       time-limit: 3
-    - name: TimeCache.CartesianInterpolation
+    - name: tf2.TimeCache.CartesianInterpolation
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
       expected-outcome: True
       time-limit: 3
-    - name: TimeCache.ReparentingInterpolationProtection
+    - name: tf2.TimeCache.ReparentingInterpolationProtection
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
       expected-outcome: True
       time-limit: 3
-    - name: TimeCache.AngularInterpolation
+    - name: tf2.TimeCache.AngularInterpolation
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.AngularInterpolation
       expected-outcome: True
       time-limit: 3
-    - name: TimeCache.DuplicateEntries
+    - name: tf2.TimeCache.DuplicateEntries
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.DuplicateEntries
       expected-outcome: True
       time-limit: 3
-    - name: TimeCache.Repeatability
+    - name: tf2.TimeCache.Repeatability
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.Repeatability
       expected-outcome: True
       time-limit: 3
-    - name: TimeCache.RepeatabilityReverseInsertOrder
+    - name: tf2.TimeCache.RepeatabilityReverseInsertOrder
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
       expected-outcome: True
       time-limit: 3
-    - name: Bullet.Slerp
+    - name: tf2.Bullet.Slerp
       command: rosrun tf2 test_cache_unittest --gtest_filter=Bullet.Slerp
       expected-outcome: True
       time-limit: 3
@@ -371,5 +371,117 @@ test-harness:
       time-limit: 3
     - name: data.StampedOperatorEqual
       command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqual
+      expected-outcome: True
+      time-limit: 3
+
+    - name: tf.Quarternion
+      command: rosrun tf tf_quaternion_unittest --gtest_filter=tf.Quarternion
+      expected-outcome: True
+      time-limit: 3
+
+    - name: tf.set
+      command: rosrun tf test_transform_datatypes --gtest_filter=tf.set
+      expected-outcome: True
+      time-limit: 3
+
+    - name: LinearVelocitySquareTest.LinearVelocityToThreeFrames
+      command: rosrun tf test_velocity --gtest_filter=LinearVelocitySquareTest.LinearVelocityToThreeFrames
+      expected-outcome: True
+      time-limit: 3
+    - name: AngularVelocitySquareTest.AngularVelocityAlone
+      command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityAlone
+      expected-outcome: True
+      time-limit: 3
+    - name: AngularVelocitySquareTest.AngularVelocityOffsetChildFrameInX
+      command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityOffsetChildFrameInX
+      expected-outcome: True
+      time-limit: 3
+    - name: AngularVelocitySquareTest.AngularVelocityOffsetParentFrameInZ
+      command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityOffsetParentFrameInZ
+      expected-outcome: True
+      time-limit: 3
+
+    - name: tf.TimeCache.ZeroAtFront
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.ZeroAtFront
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TimeCache.CartesianInterpolation
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TimeCache.ReparentingInterpolationProtection
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TimeCache.AngularInterpolation
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.AngularInterpolation
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TimeCache.DuplicateEntries
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.DuplicateEntries
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TimeCache.Repeatability
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.Repeatability
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.TimeCache.RepeatabilityReverseInsertOrder
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
+      expected-outcome: True
+      time-limit: 3
+    - name: tf.Bullet.Slerp
+      command: rosrun tf cache_unittest --gtest_filter=Bullet.Slerp
+      expected-outcome: True
+      time-limit: 3
+
+    - name: tf.Bullet.Slerp
+      command: rosrun tf cache_unittest --gtest_filter=Bullet.Slerp
+      expected-outcome: True
+      time-limit: 3
+
+    - name: TFEigenConversions.tf_eigen_vector
+      command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.tf_eigen_vector
+      expected-outcome: True
+      time-limit: 3
+    - name: TFEigenConversions.tf_eigen_quaternion
+      command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.tf_eigen_quaternion
+      expected-outcome: True
+      time-limit: 3
+    - name: TFEigenConversions.tf_eigen_transform
+      command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.tf_eigen_transform
+      expected-outcome: True
+      time-limit: 3
+    - name: TFEigenConversions.eigen_tf_transform
+      command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.eigen_tf_transform
+      expected-outcome: True
+      time-limit: 3
+
+    - name: TFKDLConversions.tf_kdl_vector
+      command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_vector
+      expected-outcome: True
+      time-limit: 3
+    - name: TFKDLConversions.tf_kdl_rotation
+      command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_rotation
+      expected-outcome: True
+      time-limit: 3
+    - name: TFKDLConversions.tf_kdl_transform
+      command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_transform
+      expected-outcome: True
+      time-limit: 3
+    - name: TFKDLConversions.tf_kdl_pose
+      command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_pose
+      expected-outcome: True
+      time-limit: 3
+    - name: TFKDLConversions.msg_kdl_twist
+      command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.msg_kdl_twist
+      expected-outcome: True
+      time-limit: 3
+
+    - name: TestRunner.threaded_test
+      command: rosrun actionlib actionlib-destruction_guard_test --gtest_filter=TestRunner.threaded_test
+      expected-outcome: True
+      time-limit: 3
+    - name: DestructionGuard.easy_test
+      command: rosrun actionlib actionlib-destruction_guard_test --gtest_filter=DestructionGuard.easy_test
       expected-outcome: True
       time-limit: 3
