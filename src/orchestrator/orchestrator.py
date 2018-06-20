@@ -196,24 +196,22 @@ class Orchestrator(object):
         Ensures all resources are safely deallocated.
         """
         if self.__client_bugzoo:
+            logger.info("destroying all BugZoo containers")
             try:
-                logger.info("destroying all BugZoo containers")
-                try:
-                    self.__client_bugzoo.containers.clear()
-                    logger.info("destroyed all BugZoo containers")
-                except Exception:
-                    logger.exception("failed to destroy BugZoo containers")
+                self.__client_bugzoo.containers.clear()
+                logger.info("destroyed all BugZoo containers")
+            except Exception:
+                logger.exception("failed to destroy BugZoo containers")
         else:
             logger.info("skipping BugZoo cleanup: not connected to BugZoo")
 
         if self.__client_boggart:
+            logger.info("destroying all boggart mutants")
             try:
-                logger.info("destroying all boggart mutants")
-                try:
-                    self.__client_boggart.mutants.clear()
-                    logger.info("destroyed all boggart mutants")
-                except Exception:
-                    logger.exception("failed to destroy boggart mutants")
+                self.__client_boggart.mutants.clear()
+                logger.info("destroyed all boggart mutants")
+            except Exception:
+                logger.exception("failed to destroy boggart mutants")
         else:
             logger.info("skipping boggart cleanup: not connected to boggart")
 
