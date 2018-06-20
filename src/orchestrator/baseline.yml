@@ -1325,6 +1325,44 @@ test-harness:
       command: rostest -t dynamic_reconfigure test_python_simple_client.launch
       time-limit: 15
 
+    - name: camera_info_manager.unit_test
+      command: rostest -t camera_info_manager unit_test.test
+      time-limit: 10
+
+    # FIXME failing on baseline A
+    # - name: kdl_parser.test_kdl_parser
+    #   command: rostest -t kdl_parser test_kdl_parser.launch
+    - name: kdl_parser.test_inertia_rpy
+      command: rostest -t kdl_parser test_inertia_rpy.launch
+      time-limit: 5
+
+    - name: amcl.set_initial_pose
+      command: rostest -t amcl set_initial_pose.xml
+      time-limit: 140
+    - name: amcl.set_initial_pose_delayed
+      command: rostest -t amcl set_initial_pose_delayed.xml
+      time-limit: 140
+    - name: amcl.basic_localization_stage
+      command: rostest -t amcl basic_localization_stage.xml
+      time-limit: 140
+    - name: amcl.small_loop_prf
+      command: rostest -t amcl small_loop_prf.xml
+      time-limit: 140
+    - name: amcl.small_loop_crazy_driving_prg
+      command: rostest -t amcl small_loop_crazy_driving_prg.xml
+      time-limit: 140
+    - name: amcl.texas_greenroom_loop
+      command: rostest -t amcl texas_greenroom_loop.xml
+      time-limit: 140
+    - name: amcl.rosie_multilaser
+      command: rostest -t amcl rosie_multilaser.xml
+      time-limit: 160
+    - name: amcl.texas_willow_hallway_loop
+      command: rostest -t amcl texas_willow_hallway_loop.xml
+      time-limit: 300
+
+
+
 
 
         # FIXME
