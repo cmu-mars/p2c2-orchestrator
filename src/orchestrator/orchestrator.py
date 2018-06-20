@@ -493,6 +493,7 @@ class Orchestrator(object):
                                str(self.state))
                 raise NotReadyToPerturb()
 
+            mutant = None
             self.__state = OrchestratorState.PERTURBING
             try:
                 try:
@@ -510,6 +511,16 @@ class Orchestrator(object):
                 except Exception as e:
                     raise UnexpectedError(e)
             except OrchestratorError:
+                # deregister the mutant
+                if mutant:
+                    logger.debug("destroying mutant for perturbation.")
+                    try:
+                        del boggartd.mutants[mutant.uuid]
+                    except Exception:
+                        logger.exception("failed to destroy mutant for perturbation")
+                        raise
+                    logger.debug("destroyed mutant for perturbation")
+
                 logger.debug("Resetting system state to be ready to perturb.")
                 self.__problem = None
                 self.__state = OrchestratorState.READY_TO_PERTURB
