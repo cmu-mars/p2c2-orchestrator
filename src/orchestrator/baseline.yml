@@ -1318,6 +1318,15 @@ test-harness:
       command: rostest -t diagnostic_updater diagnostic_updater_fast_test.xml
       time-limit: 10
 
+    - name: dynamic_reconfigure.test_cpp_simple_client
+      command: rostest -t dynamic_reconfigure test_cpp_simple_client.launch
+      time-limit: 10
+    - name: dynamic_reconfigure.test_python_simple_client
+      command: rostest -t dynamic_reconfigure test_python_simple_client.launch
+      time-limit: 15
+
+
+
         # FIXME
         # root@acd661a1cbd5:/ros_ws# rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
         # Note: Google Test filter = ConvertTest.testExceptions
