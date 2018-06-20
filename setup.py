@@ -12,9 +12,9 @@ setup(
     license='mit',
     python_requires='>=3.5',
     install_requires=[
-        'darjeeling>=0.1.7',
-        'bugzoo>=2.1.10',
-        'boggart>=0.1.7',
+        'darjeeling>=0.1.8',
+        'bugzoo>=2.1.11',
+        'boggart>=0.1.8',
         'rooibos>=0.3.0',
         'requests',
         'flask'
