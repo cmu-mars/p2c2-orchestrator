@@ -1172,8 +1172,8 @@ test-harness:
       command: rosrun rostime rostime-test_time --gtest_filter=WallRate.constructFromDuration
       expected-outcome: True
 
-    - name: tf2_ros.transform_listener_time_reset
-      command: rostest -t tf2_ros transform_listener_time_reset.launch
+    - name: tf2_ros.transform_listener_time_reset_test
+      command: rostest -t tf2_ros transform_listener_time_reset_test.launch
       expected-outcome: True
       time-limit: 10
     - name: tf2_ros.transform_listener_unittest
