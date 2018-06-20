@@ -1370,6 +1370,23 @@ test-harness:
       command: rostest -t map_server rtest.xml
       time-limit: 10
 
+    # FIXME urgh, this one is annoying -- fails but exits with code 0
+    - name: costmap_2d.footprint_tests
+      command: rostest -t costmap_2d footprint_tests.launch
+      time-limit: 10
+    - name: costmap_2d.inflation_tests
+      command: rostest -t costmap_2d inflation_tests.launch
+      time-limit: 10
+    - name: costmap_2d.obstacle_tests
+      command: rostest -t costmap_2d obstacle_tests.launch
+      time-limit: 15
+    - name: costmap_2d.simple_driving_test
+      command: rostest -t costmap_2d simple_driving_test.xml
+      time-limit: 100
+    - name: costmap_2d.static_tests
+      command: rostest -t costmap_2d static_tests.launch
+      time-limit: 5
+
 
 
         # FIXME
