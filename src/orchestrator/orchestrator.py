@@ -191,6 +191,30 @@ class Orchestrator(object):
         logger.info("fetched coverage information for Baseline A.")
         logger.info("line coverage for Baseline A: %d lines", len(self.lines))
 
+    def shutdown(self) -> None:
+        """
+        Ensures all resources are safely deallocated.
+        """
+        if self.__client_bugzoo:
+            logger.info("destroying all BugZoo containers")
+            try:
+                self.__client_bugzoo.containers.clear()
+                logger.info("destroyed all BugZoo containers")
+            except Exception:
+                logger.exception("failed to destroy BugZoo containers")
+        else:
+            logger.info("skipping BugZoo cleanup: not connected to BugZoo")
+
+        if self.__client_boggart:
+            logger.info("destroying all boggart mutants")
+            try:
+                self.__client_boggart.mutants.clear()
+                logger.info("destroyed all boggart mutants")
+            except Exception:
+                logger.exception("failed to destroy boggart mutants")
+        else:
+            logger.info("skipping boggart cleanup: not connected to boggart")
+
     @property
     def state(self) -> OrchestratorState:
         """
