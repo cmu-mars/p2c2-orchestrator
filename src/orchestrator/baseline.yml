@@ -1298,7 +1298,25 @@ test-harness:
       command: rostest -t capabilities test_spec_index_from_service.test
       time-limit: 40
 
-
+    # FIXME weird
+    # - name: diagnostic_aggregator.test_agg
+    #   command: rostest -t diagnostic_aggregator test_agg.launch
+    #   time-limit: 10
+    - name: diagnostic_aggregator.test_add_agg
+      command: rostest -t diagnostic_aggregator test_add_agg.launch
+      time-limit: 60
+    - name: diagnostic_aggregator.test_loader
+      command: rostest -t diagnostic_aggregator test_loader.launch
+      time-limit: 5
+    - name: diagnostic_aggregator.test_expected_stale
+      command: rostest -t diagnostic_aggregator test_expected_stale.launch
+      time-limit: 30
+    - name: diagnostic_aggregator.test_multiple_match
+      command: rostest -t diagnostic_aggregator test_multiple_match.launch
+      time-limit: 30
+    - name: diagnostic_updater.diagnostic_updater_fast_test
+      command: rostest -t diagnostic_updater diagnostic_updater_fast_test.xml
+      time-limit: 10
 
         # FIXME
         # root@acd661a1cbd5:/ros_ws# rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
