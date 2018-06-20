@@ -795,18 +795,17 @@ test-harness:
     - name: PluginlibUniquePtrTest.workingPlugin
       command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=pluginlibtest.brokenplugin
       expected-outcome: True
-
-    - name: Cache.easyInterval
-      commmand: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyInterval
+    - name: "Cache.easyInterval"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyInterval"
       expected-outcome: True
-    - name: Cache.easySurroundingInterval
-      command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easySurroundingInterval
+    - name: "Cache.easySurroundingInterval"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easySurroundingInterval"
       expected-outcome: True
-    - name: Cache.easyUnsorted
-      command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyUnsorted
+    - name: "Cache.easyUnsorted"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyUnsorted"
       expected-outcome: True
-    - name: Cache.easyElemBeforeAfter
-      command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyElemBeforeAfter
+    - name: "Cache.easyElemBeforeAfter"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyElemBeforeAfter"
       expected-outcome: True
     - name: Cache.eventInEventOut
       command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.eventInEventOut
@@ -1172,6 +1171,133 @@ test-harness:
     - name: WallRate.constructFromDuration
       command: rosrun rostime rostime-test_time --gtest_filter=WallRate.constructFromDuration
       expected-outcome: True
+
+    - name: tf2_ros.transform_listener_time_reset
+      command: rostest -t tf2_ros transform_listener_time_reset.launch
+      expected-outcome: True
+      time-limit: 10
+    - name: tf2_ros.transform_listener_unittest
+      command: rostest -t tf2_ros transform_listener_unittest.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: tf2_kdl.test_python
+      command: rostest -t tf2_kdl test_python.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: tf2_kdl.test
+      command: rostest -t tf2_kdl test.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: tf.test_message_filter
+      command: rostest -t tf test_message_filter.xml
+      expected-outcome: True
+      time-limit: 6
+    - name: tf.transform_listener_unittest
+      command: rostest -t tf transform_listener_unittest.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: tf.test_broadcaster
+      command: rostest -t tf test_broadcaster.launch
+      expected-outcome: True
+      time-limit: 8
+
+    - name: actionlib.ref_server_test
+      command: rostest -t actionlib ref_server_test.launch
+      expected-outcome: True
+      time-limit: 8
+    - name: actionlib.simple_execute_ref_server_test
+      command: rostest -t actionlib simple_execute_ref_server_test.launch
+      expected-outcome: True
+      time-limit: 15
+    - name: actionlib.test_python_simple_client
+      command: rostest -t actionlib test_python_simple_client.launch
+      expected-outcome: True
+      time-limit: 8
+    - name: actionlib.test_cpp_simple_client_allocator
+      command: rostest -t actionlib test_cpp_simple_client_allocator.launch
+      expected-outcome: True
+      time-limit: 8
+    - name: actionlib.test_cpp_action_client_destruction
+      command: rostest -t actionlib test_cpp_action_client_destruction.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: actionlib.test_server_goal_handle_destruction
+      command: rostest -t actionlib test_server_goal_handle_destruction.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: actionlib.test_cpp_simple_client_cancel_crash
+      command: rostest -t actionlib test_cpp_simple_client_cancel_crash.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: actionlib.test_imports
+      command: rostest -t actionlib test_imports.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: actionlib.test_python_server_components
+      command: rostest -t actionlib test_python_server_components.launch
+      expected-outcome: True
+      time-limit: 10
+    # FIXME fails on baseline A
+    # - name: actionlib.test_python_server.
+    #   command: rostest -t actionlib test_python_server.launch
+    #   expected-outcome: True
+    #   time-limit: 20
+    - name: actionlib.test_python_server2
+      command: rostest -t actionlib test_python_server2.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: actionlib.test_python_server3
+      command: rostest -t actionlib test_python_server3.launch
+      expected-outcome: True
+      time-limit: 15
+    - name: actionlib.test_python_simple_server
+      command: rostest -t actionlib test_python_simple_server.launch
+      expected-outcome: True
+      time-limit: 10
+    - name: actionlib.test_exercise_simple_clients
+      command: rostest -t actionlib test_exercise_simple_clients.launch
+      expected-outcome: True
+      time-limit: 40
+    - name: actionlib.test_simple_action_server_deadlock_python
+      command: rostest -t actionlib test_simple_action_server_deadlock_python.launch
+      expected-outcome: True
+      time-limit: 120
+
+    - name: capabilities.test_client_module
+      command: rostest -t capabilities test_client_module.test
+      expected-outcome: True
+      time-limit: 10
+    - name: capabilities.test_launch_manager
+      command: rostest -t capabilities test_launch_manager.test
+      time-limit: 90
+    - name: capabilities.test_client
+      command: rostest -t capabilities test_client.test
+      time-limit: 60
+    - name: capabilities.test_default_provider
+      command: rostest -t capabilities test_default_provider.test
+      time-limit: 45
+    - name: capabilities.test_dependent_capabilities
+      command: rostest -t capabilities test_dependent_capabilities.test
+      time-limit: 90
+    - name: capabilities.test_invalid_specs
+      command: rostest -t capabilities test_invalid_specs.test
+      time-limit: 10
+    - name: capabilities.test_package_white_black_lists
+      command: rostest -t capabilities test_package_white_black_lists.test
+      time-limit: 10
+    - name: capabilities.test_remapping
+      command: rostest -t capabilities test_remapping.test
+      time-limit: 40
+    - name: capabilities.test_ros_services
+      command: rostest -t capabilities test_ros_services.test
+      time-limit: 30
+    - name: capabilities.test_white_black_lists
+      command: rostest -t capabilities test_white_black_lists.test
+      time-limit: 40
+    - name: capabilities.test_spec_index_from_service
+      command: rostest -t capabilities test_spec_index_from_service.test
+      time-limit: 40
+
 
 
         # FIXME
