@@ -1387,7 +1387,16 @@ test-harness:
       command: rostest -t costmap_2d static_tests.launch
       time-limit: 5
 
+    - name: robot_pose_ekf.test_robot_pose_ekf
+      command: rostest -t robot_pose_ekf test_robot_pose_ekf.launch
+      time-limit: 90
+    - name: robot_pose_ekf.test_robot_pose_ekf_zero_covariance
+      command: rostest -t robot_pose_ekf test_robot_pose_ekf_zero_covariance.launch
+      time-limit: 60
 
+    - name: rgbd_launch.camera
+      command: rostest -t rgbd_launch camera.test
+      time-limit: 40
 
         # FIXME
         # root@acd661a1cbd5:/ros_ws# rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
