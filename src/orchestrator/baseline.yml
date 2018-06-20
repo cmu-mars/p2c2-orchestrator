@@ -1398,6 +1398,39 @@ test-harness:
       command: rostest -t rgbd_launch camera.test
       time-limit: 40
 
+    # FIXME fails on baseline A
+    #- name: robot_state_publisher.test_one_link
+    #  command: rostest -t robot_state_publisher test_one_link.launch
+    #- name: robot_state_publisher.test_two_links_fixed_joint
+    #  command: rostest -t robot_state_publisher test_two_links_fixed_joint.launch
+    #- name: robot_state_publisher.test_two_links_moving_joint
+    #  command: rostest -t robot_state_publisher test_two_links_moving_joint.launch
+    #- name: robot_state_publisher.test_joint_states_bag
+    #  command: rostest -t robot_state_publisher test_joint_states_bag.launch
+    #
+    - name: message_filters.time_sequencer_unittest
+      command: rostest -t message_filters time_sequencer_unittest.xml
+      time-limit: 6
+    - name: message_filters.test_subscriber
+      command: rostest -t message_filters test_subscriber.xml
+      time-limit: 6
+
+    - name: rospy_tutorials.test-add-two-ints
+      command: rostest -t rospy_tutorials test-add-two-ints.launch
+      time-limit: 8
+    - name: rospy_tutorials.test-peer-subscribe-notify
+      command: rostest -t rospy_tutorials test-peer-subscribe-notify.launch
+      time-limit: 8
+    - name: rospy_tutorials.test-talker-listener
+      command: rostest -t rospy_tutorials test-talker-listener.launch
+      time-limit: 8
+    - name: rospy_tutorials.test-on-shutdown
+      command: rostest -t rospy_tutorials test-on-shutdown.launch
+      time-limit: 10
+    - name: rospy_tutorials.test-connection-header
+      command: rostest -t rospy_tutorials test-connection-header.launch
+      time-limit: 20
+
         # FIXME
         # root@acd661a1cbd5:/ros_ws# rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
         # Note: Google Test filter = ConvertTest.testExceptions
