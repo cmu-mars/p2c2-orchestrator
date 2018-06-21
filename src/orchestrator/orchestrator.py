@@ -642,7 +642,7 @@ class Orchestrator(object):
                     self.__searcher = Searcher(bugzoo=self.__client_bugzoo,
                                                problem=problem,
                                                candidates=candidates,
-                                               # num_candidates=attempts,
+                                               num_candidates=attempts,
                                                threads=self.__num_threads,
                                                time_limit=time_limit)
                     logger.debug("constructed search mechanism")
