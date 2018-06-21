@@ -8,6 +8,7 @@ import datetime
 import os
 import yaml
 import random
+import concurrent.futures
 
 import rooibos
 import boggart
@@ -20,8 +21,9 @@ import darjeeling.transformation
 from bugzoo.exceptions import BugZooException
 from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
+from bugzoo.core.test import TestCase
 from bugzoo.core.fileline import FileLine, FileLineSet
-from bugzoo.core.coverage import TestSuiteCoverage
+from bugzoo.core.coverage import TestSuiteCoverage, TestCoverage
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
@@ -397,7 +399,9 @@ class Orchestrator(object):
         try:
             killed = False
             container = mgr_ctr.provision(snapshot)
-            for test in snapshot.tests:
+            # FIXME keep or chuck?
+            tests = [snapshot.harness['t1']]
+            for test in tests:
                 outcome = mgr_ctr.test(container, test)
                 if not outcome.passed:
                     killed = True
@@ -416,30 +420,64 @@ class Orchestrator(object):
         bgrt = self.__client_boggart
         bgz = self.__client_bugzoo
 
+        # FIXME stop provisioning containers -- have one for each thread
+        def get_test_coverage(mutant: Mutant, test: TestCase) -> TestCoverage:
+            logger.info("getting coverage for test: %s", test.name)
+            container = None
+            try:
+                snapshot = bgz.bugs[mutant.snapshot]
+                container = bgz.containers.provision(snapshot)
+                # logger.info("using container (%s) to generate coverage for test (%s)",
+                #             container.uid, test.name)
+                outcome = bgz.containers.test(container, test)
+                lines = bgz.containers.extract_coverage(container)
+                # logger.info("generated coverage for test (%s):\n%s",
+                #             test.name, lines)
+                return TestCoverage(test.name, outcome, lines)
+            except BugZooException:
+                logger.exception("failed to compute coverage for mutant (%s) on test (%s).",
+                                 mutant.uuid, test.name)
+                raise FailedToComputeCoverage
+            finally:
+                if container is not None:
+                    del bgz.containers[container.uid]
+
+        # FIXME restrict to tests that cover the perturbed file
+        tests = list(self.__baseline.tests)
+
         logger.info("computing coverage for mutant: %s", mutant)
-        logger.debug("generating diff for mutant: %s", mutant)
-        diff = bgrt.mutations_to_diff(self.__baseline, mutant.mutations)
-        logger.debug("generated diff for mutant: %s", mutant)
-        container = None
+        logger.info("creating temporary instrumented mutant")
+        mutant_instrumented = None
         try:
-            container = bgz.containers.provision(self.__baseline_with_instrumentation)
-            logger.debug("applying diff to instrumented container")
-            bgz.containers.patch(container, diff)
-            logger.debug("rebuilding program")
-            t_start = timer()
-            bgz.containers.exec(container,
-                                'catkin build',
-                                context='/ros_ws')
-            t_running = timer() - t_start
-            logger.debug("rebuilt program (took %.2f seconds)", t_running)
+            mutant_instrumented = \
+                bgrt.mutate(self.__baseline_with_instrumentation,
+                            mutant.mutations)
+            logger.info("created temporary instrumented mutant: %s",
+                        mutant_instrumented)
+
+            # FIXME compute coverage
+            # thread pool?
             logger.debug("computing coverage")
-            coverage = bgz.containers.coverage(container, instrument=False)
-            logger.debug("computed coverage")
-        except BugZooException:
+            t_start = timer()
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:  # FIXME parameterise
+                test_to_coverage = \
+                    executor.map(lambda t: (t, get_test_coverage(mutant_instrumented, t)),
+                                 tests)
+            coverage = \
+                TestSuiteCoverage({t.name: cov
+                                   for (t, cov) in test_to_coverage})
+            t_running = timer() - t_start
+            logger.debug("computed coverage (took %.2f seconds)", t_running)
+
+        except Exception:
+            logger.warning("failed to compute coverage for mutant: %s",
+                           mutant)
             raise FailedToComputeCoverage
+
         finally:
-            if container is not None:
-                del bgz.containers[container.uid]
+            if mutant_instrumented:
+                del bgrt.mutants[mutant_instrumented.uuid]
+
         logger.debug("restricting coverage to mutable files")
         coverage = coverage.restricted_to_files(self.files)
         logger.debug("restricted coverage to mutable files")
