@@ -1284,7 +1284,7 @@ test-harness:
       time-limit: 10
     - name: capabilities.test_package_white_black_lists
       command: rostest -t capabilities test_package_white_black_lists.test
-      time-limit: 10
+      time-limit: 40
     - name: capabilities.test_remapping
       command: rostest -t capabilities test_remapping.test
       time-limit: 40
