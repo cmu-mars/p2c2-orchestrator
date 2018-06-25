@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional, Callable, Iterator
+from typing import List, Tuple, Optional, Callable, Iterator, Dict, Any
 from timeit import default_timer as timer
 from enum import Enum
 import threading
@@ -55,21 +55,30 @@ OPERATOR_NAMES = [
 ]
 
 
-def fetch_baseline_snapshot(bz: bugzoo.client.Client) -> Snapshot:
+def _load_manifest() -> Dict[str, Any]:
     fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
     with open(fn, 'r') as f:
         desc = yaml.load(f)
+
+    # add oracle information
+    tests = desc['test-harness']['tests']
+    for test in tests:
+        has_oracle = 'oracle' in test
+        if 'kind' in test and test['kind'] != 'system' and not has_oracle:
+            test['oracle'] = {'contains': "[  PASSED  ]"}
     desc['source'] = None
+    return desc
+
+
+def fetch_baseline_snapshot(bz: bugzoo.client.Client) -> Snapshot:
+    desc = _load_manifest()
     snapshot = Snapshot.from_dict(desc)
     bz.bugs.register(snapshot)
     return snapshot
 
 
 def fetch_instrumentation_snapshot(bz: bugzoo.client.Client) -> Snapshot:
-    fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
-    with open(fn, 'r') as f:
-        desc = yaml.load(f)
-    desc['source'] = None
+    desc = _load_manifest()
     desc['name'] = 'mars:instrument'
     desc['image'] = 'cmumars/cp2:instrument'
     snapshot = Snapshot.from_dict(desc)
@@ -459,7 +468,7 @@ class Orchestrator(object):
             # thread pool?
             logger.debug("computing coverage")
             t_start = timer()
-            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:  # FIXME parameterise
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:  # FIXME parameterise
                 test_to_coverage = \
                     executor.map(lambda t: (t, get_test_coverage(mutant_instrumented, t)),
                                  tests)
@@ -577,8 +586,8 @@ class Orchestrator(object):
         """
         def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
             # FIXME greedy!
-            return 1.0 if nf == 0 and ep == 0 else 0.0
-            # return 1.0 if nf == 0 else 0.0
+            # return 1.0 if nf == 0 and ep == 0 else 0.0
+            return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
         try:
             localization = Localization.build(problem, suspiciousness)
