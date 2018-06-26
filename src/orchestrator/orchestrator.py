@@ -35,6 +35,7 @@ from darjeeling.generator import RooibosGenerator
 from .problem import Problem
 from .exceptions import *
 from .snapshot import fetch_baseline_snapshot, fetch_instrumentation_snapshot
+from .blacklist import is_file_mutable
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
@@ -162,7 +163,7 @@ class Orchestrator(object):
             self.__client_bugzoo.bugs.coverage(self.__baseline)
         logger.debug("restricting to mutable files")
         lines = self.__coverage_for_baseline.lines
-        files = [fn for fn in lines.files if self.__is_file_mutable(fn)]
+        files = [fn for fn in lines.files if is_file_mutable(fn)]
         logger.debug("mutable files: %s", files)
         self.__coverage_for_baseline = \
             self.__coverage_for_baseline.restricted_to_files(files)
@@ -215,24 +216,6 @@ class Orchestrator(object):
         under test.
         """
         return self.__client_bugzoo
-
-    def __is_file_mutable(self, fn: str) -> bool:
-        """
-        Determines whether a given source code file may be the subject of
-        perturbation on the basis of its name.
-        """
-        if not fn.endswith('.cpp'):
-            return False
-
-        #
-        # TODO: ignore blacklisted files (e.g., Gazebo, ROS core code)
-        #
-        blacklist = [
-            'src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_subscribers.cpp',
-            'src/rospack/src/rospack.cpp',
-            'src/ros_comm/xmlrpcpp/src/XmlRpcUtil.cpp'
-        ]
-        return fn not in blacklist
 
     @property
     def files(self) -> List[str]:
