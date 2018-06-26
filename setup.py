@@ -35,6 +35,7 @@ setup(
     entry_points = {
         'console_scripts': [
             'orchestrator-instrument = orchestrator.instrument:instrument',
+            'orchestrator-extract = orchestrator.donor:extract'
         ]
     }
 )
