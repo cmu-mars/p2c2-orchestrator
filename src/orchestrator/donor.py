@@ -8,7 +8,7 @@ import bugzoo.server
 from rooibos import Client as RooibosClient
 from bugzoo.client import Client as BugZooClient
 from bugzoo.core.bug import Bug as Snapshot
-from darjeeling.snippet import Snippet
+from darjeeling.snippet import Snippet, SnippetDatabase
 from boggart.server.sourcefile import SourceFileManager
 from boggart.config.operators import Operators
 from boggart.core import FileLocationRange, Location
@@ -40,9 +40,9 @@ def extract_guards(client_rooibos: RooibosClient,
                    files: List[str],
                    snapshot: Snapshot,
                    fn_destination: str
-                   ) -> List[Snippet]:
+                   ) -> None:
     schema = "if (:[1])"
-    snippets = []  # type: List[Dict[str, Any]]
+    snippets = SnippetDatabase()
 
     # fetch the contents of all of the files
     logger.info("storing contents of source files")
@@ -64,20 +64,15 @@ def extract_guards(client_rooibos: RooibosClient,
             loc_stop = Location(loc_range_rooibos.stop.line,
                                  loc_range_rooibos.stop.col)
             snippet_location = FileLocationRange(fn, loc_start, loc_stop)
-            snippet = {
-                'content': snippet_content,
-                'location': str(snippet_location)
-            }
+            snippets.add(snippet_content,
+                         origin=snippet_location)
             logger.info("found snippet in file (%s): %s",
                         fn, snippet_content)
-            snippets.append(snippet)
         logger.info("found all snippets in file: %s", fn)
 
     logger.info("found %d snippets", len(snippets))
 
     logger.info("dumping snippets to file")
     with open(fn_destination, 'w') as f:
-        json.dump(snippets, f, indent=2)
+        json.dump(snippets.to_dict(), f, indent=2)
     logger.info("dumped snippets to file")
-
-    return snippets
