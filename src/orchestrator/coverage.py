@@ -19,6 +19,7 @@ from bugzoo.exceptions import BugZooException
 
 from .orchestrator import fetch_instrumentation_snapshot
 from .exceptions import FailedToComputeCoverage
+from .blacklist import is_file_mutable
 
 logger = logging.getLogger(__name__)  # type: logging.Logger
 logger.setLevel(logging.DEBUG)
@@ -43,6 +44,7 @@ def compute_test_coverage(client_bugzoo: BugZooClient,
         container = ctr_mgr.provision(snapshot)
         outcome = ctr_mgr.test(container, test)
         lines = ctr_mgr.extract_coverage(container)
+        lines = lines.filter(lambda ln: is_file_mutable(ln.filename))
         return TestCoverage(test.name, outcome, lines)
     except BugZooException:
         logger.exception("failed to compute coverage for mutant (%s) on test (%s).",
@@ -111,6 +113,9 @@ def load_baseline_coverage() -> TestSuiteCoverage:
     except Exception:
         logger.exception("failed to load precomputed coverage for baseline A.")
         raise
+    # restrict to mutable files
+    files = [fn for fn in coverage.lines.files if is_file_mutable(fn)]
+    coverage = coverage.restricted_to_files(files)
     logger.info("loaded precomputed coverage for baseline A.")
     return coverage
 
