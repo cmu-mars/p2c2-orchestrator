@@ -13,7 +13,8 @@ from boggart.server.sourcefile import SourceFileManager
 from boggart.config.operators import Operators
 from boggart.core import FileLocationRange, Location
 
-from .orchestrator import fetch_baseline_snapshot
+from .snapshot import fetch_baseline_snapshot
+from .coverage import load_baseline_coverage
 
 logger = logging.getLogger(__name__)  # type: logger.Logging
 logger.setLevel(logging.DEBUG)
@@ -22,9 +23,8 @@ logger.setLevel(logging.DEBUG)
 def extract() -> None:
     dest_fn = sys.argv[1]
     logger.info("writing snippets to %s", dest_fn)
-    files = [
-        'src/ros_comm/roscpp/src/libros/transport_subscriber_link.cpp'
-    ]
+    coverage = load_baseline_coverage()
+    files = list(coverage.lines.files)
     with rooibos.ephemeral_server() as client_rooibos:
         with bugzoo.server.ephemeral() as client_bugzoo:
             snapshot = fetch_baseline_snapshot(client_bugzoo)

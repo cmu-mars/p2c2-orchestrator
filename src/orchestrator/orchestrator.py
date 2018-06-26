@@ -22,6 +22,7 @@ from bugzoo.exceptions import BugZooException
 from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
 from bugzoo.core.test import TestCase
+from bugzoo.core.spectra import Spectra
 from bugzoo.core.fileline import FileLine, FileLineSet
 from bugzoo.core.coverage import TestSuiteCoverage, TestCoverage
 from darjeeling.searcher import Searcher
@@ -33,15 +34,12 @@ from darjeeling.generator import RooibosGenerator
 
 from .problem import Problem
 from .exceptions import *
+from .snapshot import fetch_baseline_snapshot, fetch_instrumentation_snapshot
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
 
 __all__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
-
-BASE_IMAGE_NAME = 'mars:base'
-__BASELINE_SNAPSHOT = None  # type: Optional[Snapshot]
-__INSTRUMENTATION_SNAPSHOT = None  # type: Optional[Snapshot]
 
 # a list of the names of supported mutation operators
 OPERATOR_NAMES = [
@@ -53,37 +51,6 @@ OPERATOR_NAMES = [
     'delete-conditional-control-flow',
     'flip-signedness'
 ]
-
-
-def _load_manifest() -> Dict[str, Any]:
-    fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
-    with open(fn, 'r') as f:
-        desc = yaml.load(f)
-
-    # add oracle information
-    tests = desc['test-harness']['tests']
-    for test in tests:
-        has_oracle = 'oracle' in test
-        if 'kind' in test and test['kind'] != 'system' and not has_oracle:
-            test['oracle'] = {'contains': "[  PASSED  ]"}
-    desc['source'] = None
-    return desc
-
-
-def fetch_baseline_snapshot(bz: bugzoo.client.Client) -> Snapshot:
-    desc = _load_manifest()
-    snapshot = Snapshot.from_dict(desc)
-    bz.bugs.register(snapshot)
-    return snapshot
-
-
-def fetch_instrumentation_snapshot(bz: bugzoo.client.Client) -> Snapshot:
-    desc = _load_manifest()
-    desc['name'] = 'mars:instrument'
-    desc['image'] = 'cmumars/cp2:instrument'
-    snapshot = Snapshot.from_dict(desc)
-    bz.bugs.register(snapshot)
-    return snapshot
 
 
 class OrchestratorState(Enum):
@@ -587,8 +554,13 @@ class Orchestrator(object):
         def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
             # FIXME greedy!
             # return 1.0 if nf == 0 and ep == 0 else 0.0
+            logger.debug("SUSPICIOUSNESS: (%d, %d, %d, %d)",
+                         ep, np, ef, nf)
             return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
+        logger.info("passing coverage:\n%s", problem.coverage.passing)
+        logger.info("failing coverage:\n%s", problem.coverage.failing)
+        logger.info("spectra:\n%s", Spectra.from_coverage(problem.coverage))
         try:
             localization = Localization.build(problem, suspiciousness)
         except darjeeling.exceptions.NoImplicatedLines:
