@@ -36,6 +36,7 @@ from .problem import Problem
 from .exceptions import *
 from .snapshot import fetch_baseline_snapshot, fetch_instrumentation_snapshot
 from .blacklist import is_file_mutable
+from .coverage import load_baseline_coverage
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
@@ -159,14 +160,9 @@ class Orchestrator(object):
             fetch_instrumentation_snapshot(self.__client_bugzoo)
 
         logger.info("fetching coverage information for Baseline A.")
-        self.__coverage_for_baseline = \
-            self.__client_bugzoo.bugs.coverage(self.__baseline)
-        logger.debug("restricting to mutable files")
-        lines = self.__coverage_for_baseline.lines
-        files = [fn for fn in lines.files if is_file_mutable(fn)]
-        logger.debug("mutable files: %s", files)
-        self.__coverage_for_baseline = \
-            self.__coverage_for_baseline.restricted_to_files(files)
+        self.__coverage_for_baseline = load_baseline_coverage()
+        logger.debug("mutable files: %s",
+                     self.__coverage_for_baseline.lines.files)
         logger.info("fetched coverage information for Baseline A.")
         logger.info("line coverage for Baseline A: %d lines", len(self.lines))
 
