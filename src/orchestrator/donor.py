@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple, Callable
 import logging
 import json
 import sys
@@ -21,41 +21,48 @@ logger.setLevel(logging.DEBUG)
 
 
 def extract() -> None:
-    dest_fn = sys.argv[1]
-    logger.info("writing snippets to %s", dest_fn)
-    coverage = load_baseline_coverage()
-    files = list(coverage.lines.files)
     with rooibos.ephemeral_server() as client_rooibos:
+        coverage = load_baseline_coverage()
+        files = list(coverage.lines.files)
+
+        logger.info("storing contents of source files")
+        filename_to_contents = {}  # type: Dict[str, str]
         with bugzoo.server.ephemeral() as client_bugzoo:
             snapshot = fetch_baseline_snapshot(client_bugzoo)
-            extract_guards(client_rooibos,
-                           client_bugzoo,
-                           files,
-                           snapshot,
-                           dest_fn)
+            sources = \
+                SourceFileManager(client_bugzoo, client_rooibos, Operators())
+            sources._fetch_files(snapshot, files)
+            for fn in files:
+                filename_to_contents[fn] = sources.read_file(snapshot, fn)
+        logger.info("stored contents of source files")
+
+        build_guard_pool('guard.snippets.json', client_rooibos, filename_to_contents)
 
 
-def extract_guards(client_rooibos: RooibosClient,
-                   client_bugzoo: BugZooClient,
-                   files: List[str],
-                   snapshot: Snapshot,
-                   fn_destination: str
-                   ) -> None:
+def build_guard_pool(dest_fn: str,
+                     client_rooibos: RooibosClient,
+                     filename_to_contents: Dict[str, str]
+                     ) -> None:
     schema = "if (:[1])"
+    def transformer(match: rooibos.Match
+                    ) -> Tuple[str, rooibos.LocationRange]:
+        content = match.environment['1'].fragment
+        location = match.environment['1'].location
+        return (content, location)
+    _build_pool(dest_fn, client_rooibos, filename_to_contents,
+                schema, transformer)
+
+
+def _build_pool(dest_fn: str,
+                client_rooibos: RooibosClient,
+                filename_to_contents: Dict[str, str],
+                schema: str,
+                transformer: Callable[[rooibos.Match], Tuple[str, rooibos.LocationRange]],
+                ) -> None:
     snippets = SnippetDatabase()
-
-    # fetch the contents of all of the files
-    logger.info("storing contents of source files")
-    mgr_file = SourceFileManager(client_bugzoo,
-                                 client_rooibos,
-                                 Operators())
-    mgr_file._fetch_files(snapshot, files)
-    logger.info("stored contents of source files")
-
     logger.info("finding snippets")
-    for fn in files:
+    for (fn, file_content) in filename_to_contents.items():
         logger.info("finding snippets in file: %s", fn)
-        file_content = mgr_file.read_file(snapshot, fn)
         for match in client_rooibos.matches(file_content, schema):
             snippet_content = match.environment['1'].fragment
             loc_range_rooibos = match.environment['1'].location
@@ -73,6 +80,6 @@ def extract_guards(client_rooibos: RooibosClient,
     logger.info("found %d snippets", len(snippets))
 
     logger.info("dumping snippets to file")
-    with open(fn_destination, 'w') as f:
+    with open(dest_fn, 'w') as f:
         json.dump(snippets.to_dict(), f, indent=2)
     logger.info("dumped snippets to file")
