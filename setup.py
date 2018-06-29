@@ -14,17 +14,17 @@ setup(
     install_requires=[
         'darjeeling>=0.1.9',
         'bugzoo>=2.1.12',
-        'boggart>=0.1.9',
+        'boggart>=0.1.10',
         'rooibos>=0.3.0',
         'requests',
         'flask'
     ],
-    setup_requires=[
-        'pytest-runner'
-    ],
-    tests_require=[
-        'pytest'
-    ],
+    # setup_requires=[
+    #     'pytest-runner'
+    # ],
+    # tests_require=[
+    #     'pytest'
+    # ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
     package_data={
