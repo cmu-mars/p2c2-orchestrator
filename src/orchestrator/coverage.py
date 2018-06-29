@@ -38,10 +38,16 @@ def compute_mutant_coverage(client_bugzoo: BugZooClient,
                             client_boggart: BoggartClient,
                             mutant: Mutant
                             ) -> TestSuiteCoverage:
-    # FIXME restrict to tests that cover the perturbed file
     logger.info("computing coverage for mutant: %s", mutant)
+    coverage_baseline = load_baseline_coverage()
     snapshot_mutant = client_bugzoo.bugs[mutant.snapshot]
-    tests = list(snapshot_mutant.tests)
+
+    # restrict to tests that cover the perturbed file
+    filename = list(mutant.mutations)[0].location.filename
+    tests = [t for t in snapshot_mutant.tests \
+             if filename in coverage_baseline[t.name].lines.files]
+    logger.info("restricting coverage for mutant to following tests: %s",
+                ', '.join([t.name for t in tests]))
 
     mutant_instrumented = None
     try:
@@ -63,6 +69,14 @@ def compute_mutant_coverage(client_bugzoo: BugZooClient,
     finally:
         if mutant_instrumented:
             del client_boggart.mutants[mutant_instrumented.uuid]
+
+    # complete the rest of the coverage report
+    test_to_coverage = {}  # type: Dict[str, TestCoverage]
+    for test_name in coverage_baseline:
+        test_to_coverage[test_name] = coverage_baseline[test_name]
+    for test_name in coverage:
+        test_to_coverage[test_name] = coverage[test_name]
+    coverage = TestSuiteCoverage(test_to_coverage)
 
     logger.info("computed coverage for mutant: %s", mutant)
     return coverage
