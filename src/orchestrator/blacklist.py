@@ -25,7 +25,12 @@ def is_file_mutable(fn: str) -> bool:
         'src/pluginlib/test',
         'src/navigation/costmap_2d/test',
         'src/navigation/robot_pose_ekf/test',
-        'build/'
+        'build/',
+        'src/dynamic_reconfigure/test',
+        'src/image_common/camera_info_manager/tests',
+        'src/diagnostics/diagnostic_updater',
+        'src/diagnostics/diagnostic_aggregator',
+        'src/navigation/clear_costmap_recovery/test',
         'src/geometry2/tf2_ros/test',
         'src/rospack/test',
         'src/ros/roslib/test',
@@ -33,5 +38,9 @@ def is_file_mutable(fn: str) -> bool:
         'src/navigation/voxel_grid/test',
         'src/laser_geometry/test',
         'src/angles/test',
+        'src/geometry2/tf2_kdl/test',
+        'src/geometry2/tf2_ros/test',
+        'src/navigation/navfn/test',
+        'src/geometry2/tf2_py'
     ]
     return not any(fn.startswith(b) for b in blacklist)
