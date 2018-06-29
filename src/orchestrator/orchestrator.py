@@ -36,8 +36,9 @@ from .problem import Problem
 from .exceptions import *
 from .snapshot import fetch_baseline_snapshot, fetch_instrumentation_snapshot
 from .blacklist import is_file_mutable
-from .coverage import load_baseline_coverage
+from .coverage import load_baseline_coverage, compute_mutant_coverage
 from .donor import load_pool
+from .liveness import mutant_fails_test
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
@@ -154,14 +155,14 @@ class Orchestrator(object):
         self.__searcher = None  # type: Optional[Searcher]
         self.__localization = None  # type: Optional[Localization]
         self.__coverage_for_mutant = None  # type: Optional[TestSuiteCoverage]
-        self.__coverage_for_baseline = None  # type: Optional[TestSuiteCoverage]
         self.__baseline = \
             fetch_baseline_snapshot(self.__client_bugzoo)
         self.__baseline_with_instrumentation = \
             fetch_instrumentation_snapshot(self.__client_bugzoo)
 
         logger.info("fetching coverage information for Baseline A.")
-        self.__coverage_for_baseline = load_baseline_coverage()
+        self.__coverage_for_baseline = \
+            load_baseline_coverage()  # type: TestSuiteCoverage
         logger.debug("mutable files: %s",
                      self.__coverage_for_baseline.lines.files)
         logger.info("fetched coverage information for Baseline A.")
@@ -324,7 +325,11 @@ class Orchestrator(object):
         logger.debug("Using perturbation operators: %s",
                      [op.name for op in operators])
 
-        restrict_to_lines = None if line_num is None else [line_num]
+        if line_num is None:
+            restrict_to_lines = [l.num for l in self.lines[filename]]
+        else:
+            restrict_to_lines = [line_num]
+
         generator_mutations = \
             boggartd.mutations(baseline,
                                filepath=filename,
@@ -345,101 +350,6 @@ class Orchestrator(object):
                                    self.__searcher.outcomes[patch],
                                    str(patch.to_diff(self.__problem)))
 
-    def _check_liveness(self, mutant: Mutant) -> None:
-        """
-        Determines whether a given mutant is killed by the test suite.
-        """
-        mgr_ctr = self.__client_bugzoo.containers
-        snapshot = self.__client_bugzoo.bugs[mutant.snapshot]
-        logger.info("Ensuring that mutant fails at least one test")
-        try:
-            killed = False
-            container = mgr_ctr.provision(snapshot)
-            # FIXME keep or chuck?
-            tests = [snapshot.harness['t1']]
-            for test in tests:
-                outcome = mgr_ctr.test(container, test)
-                if not outcome.passed:
-                    killed = True
-                    break
-            if not killed:
-                logger.info("Mutant was not killed by any of the test cases")
-                raise NeutralPerturbation
-        finally:
-            del mgr_ctr[container.uid]
-        logger.info("Verified that mutant fails at least one test")
-
-    def _compute_coverage(self, mutant: Mutant) -> TestSuiteCoverage:
-        """
-        Attempts to compute coverage information for a given mutant.
-        """
-        bgrt = self.__client_boggart
-        bgz = self.__client_bugzoo
-
-        # FIXME stop provisioning containers -- have one for each thread
-        def get_test_coverage(mutant: Mutant, test: TestCase) -> TestCoverage:
-            logger.info("getting coverage for test: %s", test.name)
-            container = None
-            try:
-                snapshot = bgz.bugs[mutant.snapshot]
-                container = bgz.containers.provision(snapshot)
-                # logger.info("using container (%s) to generate coverage for test (%s)",
-                #             container.uid, test.name)
-                outcome = bgz.containers.test(container, test)
-                lines = bgz.containers.extract_coverage(container)
-                # logger.info("generated coverage for test (%s):\n%s",
-                #             test.name, lines)
-                return TestCoverage(test.name, outcome, lines)
-            except BugZooException:
-                logger.exception("failed to compute coverage for mutant (%s) on test (%s).",
-                                 mutant.uuid, test.name)
-                raise FailedToComputeCoverage
-            finally:
-                if container is not None:
-                    del bgz.containers[container.uid]
-
-        # FIXME restrict to tests that cover the perturbed file
-        tests = list(self.__baseline.tests)
-
-        logger.info("computing coverage for mutant: %s", mutant)
-        logger.info("creating temporary instrumented mutant")
-        mutant_instrumented = None
-        try:
-            mutant_instrumented = \
-                bgrt.mutate(self.__baseline_with_instrumentation,
-                            mutant.mutations)
-            logger.info("created temporary instrumented mutant: %s",
-                        mutant_instrumented)
-
-            # FIXME compute coverage
-            # thread pool?
-            logger.debug("computing coverage")
-            t_start = timer()
-            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:  # FIXME parameterise
-                test_to_coverage = \
-                    executor.map(lambda t: (t, get_test_coverage(mutant_instrumented, t)),
-                                 tests)
-            coverage = \
-                TestSuiteCoverage({t.name: cov
-                                   for (t, cov) in test_to_coverage})
-            t_running = timer() - t_start
-            logger.debug("computed coverage (took %.2f seconds)", t_running)
-
-        except Exception:
-            logger.warning("failed to compute coverage for mutant: %s",
-                           mutant)
-            raise FailedToComputeCoverage
-
-        finally:
-            if mutant_instrumented:
-                del bgrt.mutants[mutant_instrumented.uuid]
-
-        logger.debug("restricting coverage to mutable files")
-        coverage = coverage.restricted_to_files(self.files)
-        logger.debug("restricted coverage to mutable files")
-        logger.info("computed coverage for mutant: %s", mutant)
-        return coverage
-
     def _build_problem(self, perturbation: Mutation) -> Problem:
         """
         Transforms the scenario into a repair problem.
@@ -449,7 +359,10 @@ class Orchestrator(object):
                 computing process.
         """
         try:
-            self.__coverage_for_mutant = self._compute_coverage(perturbation)
+            self.__coverage_for_mutant = \
+                compute_mutant_coverage(self.__client_bugzoo,
+                                        self.__client_boggart,
+                                        perturbation)
             problem = \
                 Problem(self.__client_bugzoo,
                         self.__client_rooibos,
@@ -496,7 +409,8 @@ class Orchestrator(object):
                     mutant = boggartd.mutate(baseline, [perturbation])
                     snapshot = bz.bugs[mutant.snapshot]
                     logger.info("Generated mutant snapshot: %s", snapshot)
-                    self._check_liveness(mutant)
+                    if not mutant_fails_test(bz, boggartd, mutant):
+                        raise NeutralPerturbation
                     self.__problem = self._build_problem(mutant)
                     self.__state = OrchestratorState.READY_TO_ADAPT
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
