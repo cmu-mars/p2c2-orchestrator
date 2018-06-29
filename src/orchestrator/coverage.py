@@ -16,17 +16,56 @@ from bugzoo.core.bug import Bug as Snapshot
 from bugzoo.core.test import TestCase
 from bugzoo.core.coverage import TestCoverage, TestSuiteCoverage
 from bugzoo.exceptions import BugZooException
+from boggart import Client as BoggartClient
+from boggart import Mutant
 
 from .orchestrator import fetch_instrumentation_snapshot
 from .exceptions import FailedToComputeCoverage
 from .blacklist import is_file_mutable
+from .snapshot import fetch_instrumentation_snapshot
 
 logger = logging.getLogger(__name__)  # type: logging.Logger
 logger.setLevel(logging.DEBUG)
 
+__BASELINE_COVERAGE = None  #  type: Optional[TestSuiteCoverage]
+
 BASELINE_COVERAGE_FN = \
     os.path.join(os.path.dirname(__file__),
                  'data/baseline.coverage.json')  # type: str
+
+
+def compute_mutant_coverage(client_bugzoo: BugZooClient,
+                            client_boggart: BoggartClient,
+                            mutant: Mutant
+                            ) -> TestSuiteCoverage:
+    # FIXME restrict to tests that cover the perturbed file
+    logger.info("computing coverage for mutant: %s", mutant)
+    snapshot_mutant = client_bugzoo.bugs[mutant.snapshot]
+    tests = list(snapshot_mutant.tests)
+
+    mutant_instrumented = None
+    try:
+        logger.info("creating temporary instrumented mutant")
+        mutant_instrumented = \
+            client_boggart.mutate(fetch_instrumentation_snapshot(client_bugzoo),
+                                  mutant.mutations)
+        snapshot_instrumented = \
+            client_bugzoo.bugs[mutant_instrumented.snapshot]
+        logger.info("created temporary instrumented mutant: %s",
+                    mutant_instrumented)
+        coverage = compute_coverage(client_bugzoo,
+                                    snapshot_instrumented,
+                                    tests)
+    except Exception:
+        logger.warning("failed to compute coverage for mutant: %s", mutant)
+        raise FailedToComputeCoverage
+
+    finally:
+        if mutant_instrumented:
+            del client_boggart.mutants[mutant_instrumented.uuid]
+
+    logger.info("computed coverage for mutant: %s", mutant)
+    return coverage
 
 
 # FIXME stop provisioning containers -- have one for each thread
@@ -55,30 +94,6 @@ def compute_test_coverage(client_bugzoo: BugZooClient,
             del ctr_mgr[container.uid]
 
 
-def compute_mutant_coverage() -> None:
-    # FIXME restrict to tests that cover the perturbed file
-    tests = list(self.__baseline.tests)
-
-    logger.info("computing coverage for mutant: %s", mutant)
-    logger.info("creating temporary instrumented mutant")
-    mutant_instrumented = None
-
-    try:
-        mutant_instrumented = \
-            bgrt.mutate(self.__baseline_with_instrumentation,
-                        mutant.mutations)
-        logger.info("created temporary instrumented mutant: %s",
-                    mutant_instrumented)
-    except Exception:
-        logger.warning("failed to compute coverage for mutant: %s",
-                       mutant)
-        raise FailedToComputeCoverage
-
-    finally:
-        if mutant_instrumented:
-            del bgrt.mutants[mutant_instrumented.uuid]
-
-
 def compute_coverage(client_bugzoo: BugZooClient,
                      snapshot: Snapshot,
                      tests: List[TestCase],
@@ -105,6 +120,10 @@ def load_baseline_coverage() -> TestSuiteCoverage:
     """
     Attempts to load coverage information for Baseline A.
     """
+    global __BASELINE_COVERAGE
+    if __BASELINE_COVERAGE:
+        return __BASELINE_COVERAGE
+
     logger.info("attempting to load precomputed coverage for baseline A.")
     try:
         with open(BASELINE_COVERAGE_FN, 'r') as f:
@@ -115,9 +134,9 @@ def load_baseline_coverage() -> TestSuiteCoverage:
         raise
     # restrict to mutable files
     files = [fn for fn in coverage.lines.files if is_file_mutable(fn)]
-    coverage = coverage.restricted_to_files(files)
+    __BASELINE_COVERAGE = coverage.restricted_to_files(files)
     logger.info("loaded precomputed coverage for baseline A.")
-    return coverage
+    return __BASELINE_COVERAGE
 
 
 def precompute() -> None:
