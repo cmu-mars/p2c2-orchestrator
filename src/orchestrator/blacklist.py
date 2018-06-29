@@ -41,6 +41,8 @@ def is_file_mutable(fn: str) -> bool:
         'src/geometry2/tf2_kdl/test',
         'src/geometry2/tf2_ros/test',
         'src/navigation/navfn/test',
-        'src/geometry2/tf2_py'
+        'src/geometry2/tf2_py',
+
+        'src/stage_ros'
     ]
     return not any(fn.startswith(b) for b in blacklist)
