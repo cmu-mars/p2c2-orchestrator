@@ -223,6 +223,7 @@ compiler:
   workspace: /ros_ws
   context: /ros_ws
   time-limit: 600
+
 test-harness:
   time-limit: 3
   context: /ros_ws
@@ -232,6 +233,22 @@ test-harness:
       context: /ros_ws/turtletest
       expected-outcome: True
       time-limit: 60
+      kill-after: 10
+      kind: system
+    - name: t2
+      command: python3.6 /ros_ws/turtletest/test.py t2
+      context: /ros_ws/turtletest
+      expected-outcome: True
+      time-limit: 60
+      kill-after: 10
+      kind: system
+    - name: t3
+      command: python3.6 /ros_ws/turtletest/test.py t3
+      context: /ros_ws/turtletest
+      expected-outcome: True
+      time-limit: 60
+      kill-after: 10
+      kind: system
 
     - name: tf2.TimeCache.ZeroAtFront
       command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ZeroAtFront
@@ -1254,10 +1271,11 @@ test-harness:
       command: rostest -t actionlib test_python_simple_server.launch
       expected-outcome: True
       time-limit: 10
-    - name: actionlib.test_exercise_simple_clients
-      command: rostest -t actionlib test_exercise_simple_clients.launch
-      expected-outcome: True
-      time-limit: 40
+    # FIXME BORKO?
+    # - name: actionlib.test_exercise_simple_clients
+    #   command: rostest -t actionlib test_exercise_simple_clients.launch
+    #   expected-outcome: True
+    #   time-limit: 40
     - name: actionlib.test_simple_action_server_deadlock_python
       command: rostest -t actionlib test_simple_action_server_deadlock_python.launch
       expected-outcome: True
@@ -1318,9 +1336,10 @@ test-harness:
       command: rostest -t diagnostic_updater diagnostic_updater_fast_test.xml
       time-limit: 10
 
-    - name: dynamic_reconfigure.test_cpp_simple_client
-      command: rostest -t dynamic_reconfigure test_cpp_simple_client.launch
-      time-limit: 10
+    # FIXME borko?
+    # - name: dynamic_reconfigure.test_cpp_simple_client
+    #   command: rostest -t dynamic_reconfigure test_cpp_simple_client.launch
+    #   time-limit: 10
     - name: dynamic_reconfigure.test_python_simple_client
       command: rostest -t dynamic_reconfigure test_python_simple_client.launch
       time-limit: 15
@@ -1387,9 +1406,10 @@ test-harness:
       command: rostest -t costmap_2d static_tests.launch
       time-limit: 5
 
-    - name: robot_pose_ekf.test_robot_pose_ekf
-      command: rostest -t robot_pose_ekf test_robot_pose_ekf.launch
-      time-limit: 90
+    # FIXME flaky?
+    # - name: robot_pose_ekf.test_robot_pose_ekf
+    #   command: rostest -t robot_pose_ekf test_robot_pose_ekf.launch
+    #   time-limit: 90
     - name: robot_pose_ekf.test_robot_pose_ekf_zero_covariance
       command: rostest -t robot_pose_ekf test_robot_pose_ekf_zero_covariance.launch
       time-limit: 60
