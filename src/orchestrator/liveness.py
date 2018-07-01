@@ -47,6 +47,7 @@ def mutant_fails_test(client_bugzoo: BugZooClient,
         for test in tests:
             outcome = mgr_ctr.test(container, test)
             if not outcome.passed:
+                logger.info("mutant killed by test: %s", test.name)
                 killed = True
                 break
         if not killed:
