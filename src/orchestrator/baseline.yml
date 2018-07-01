@@ -6,127 +6,1487 @@ source-location: /ros_ws
 source: ephemeral
 coverage:
   files-to-instrument:
-    - src/actionlib/test/add_two_ints_server.cpp
-    - src/actionlib/test/server_goal_handle_destruction.cpp
+    - src/actionlib/test/action_client_destruction_test.cpp
     - src/actionlib/test/add_two_ints_client.cpp
-    - src/actionlib/test/simple_client_test.cpp
+    - src/actionlib/test/add_two_ints_server.cpp
+    - src/actionlib/test/destruction_guard_test.cpp
+    - src/actionlib/test/exercise_simple_client.cpp
     - src/actionlib/test/ref_server.cpp
+    - src/actionlib/test/server_goal_handle_destruction.cpp
+    - src/actionlib/test/simple_client_allocator_test.cpp
+    - src/actionlib/test/simple_client_test.cpp
+    - src/actionlib/test/simple_client_wait_test.cpp
     - src/actionlib/test/simple_execute_ref_server.cpp
     - src/actionlib/test/test_cpp_simple_client_cancel_crash.cpp
-    - src/actionlib/test/exercise_simple_client.cpp
-    - src/actionlib/test/action_client_destruction_test.cpp
-    - src/actionlib/test/simple_client_wait_test.cpp
-    - src/actionlib/test/simple_client_allocator_test.cpp
-    - src/image_common/camera_info_manager/tests/unit_test.cpp
-    - src/image_common/image_transport/src/republish.cpp
-    - src/image_common/image_transport/tutorial/src/my_subscriber.cpp
-    - src/image_common/image_transport/tutorial/src/my_publisher.cpp
-    - src/kdl_parser/kdl_parser/test/test_inertia_rpy.cpp
-    - src/kdl_parser/kdl_parser/test/test_kdl_parser.cpp
-    - src/perception_pcl/pcl_ros/tools/convert_pcd_to_image.cpp
-    - src/perception_pcl/pcl_ros/tools/bag_to_pcd.cpp
-    - src/perception_pcl/pcl_ros/tools/convert_pointcloud_to_image.cpp
-    - src/perception_pcl/pcl_ros/tools/pcd_to_pointcloud.cpp
-    - src/perception_pcl/pcl_ros/tools/pointcloud_to_pcd.cpp
-    - src/nodelet_core/nodelet/src/nodelet.cpp
-    - src/depthimage_to_laserscan/test/depthimage_to_laserscan_rostest.cpp
+    - src/angles/test/utest.cpp
+    - src/class_loader/test/unique_ptr_test.cpp
+    - src/class_loader/test/utest.cpp
+    - src/common_msgs/sensor_msgs/test/main.cpp
     - src/depthimage_to_laserscan/src/depthimage_to_laserscan.cpp
-    - src/diagnostics/diagnostic_updater/test/diagnostic_updater_test.cpp
-    - src/diagnostics/diagnostic_updater/src/example.cpp
-    - src/diagnostics/diagnostic_aggregator/test/analyzer_loader.cpp
+    - src/depthimage_to_laserscan/test/depthimage_to_laserscan_rostest.cpp
+    - src/depthimage_to_laserscan/test/DepthImageToLaserScanTest.cpp
     - src/diagnostics/diagnostic_aggregator/src/aggregator_node.cpp
-    - src/geometry/tf/test/tf_unittest.cpp
-    - src/geometry/tf/test/test_message_filter.cpp
-    - src/geometry/tf/test/transform_listener_unittest.cpp
-    - src/geometry/tf/test/testBroadcaster.cpp
-    - src/geometry/tf/test/testListener.cpp
-    - src/geometry/tf/test/transform_twist_test.cpp
-    - src/geometry/tf/src/static_transform_publisher.cpp
-    - src/geometry/tf/src/tf_monitor.cpp
-    - src/geometry/tf/src/tf_echo.cpp
-    - src/geometry/tf/src/change_notifier.cpp
-    - src/geometry/tf/src/empty_listener.cpp
-    - src/kobuki/kobuki_keyop/src/main.cpp
-    - src/geometry2/tf2_kdl/test/test_tf2_kdl.cpp
-    - src/geometry2/tf2_ros/test/time_reset_test.cpp
-    - src/geometry2/tf2_ros/test/listener_unittest.cpp
-    - src/geometry2/tf2_ros/src/static_transform_broadcaster_program.cpp
-    - src/geometry2/tf2_ros/src/buffer_server_main.cpp
-    - src/turtlebot_apps/turtlebot_navigation/src/laser_footprint_filter.cpp
-    - src/realsense_camera/test/camera_core.cpp
-    - src/realsense_camera/test/rgbd_topics.cpp
-    - src/realsense_camera/src/get_debug_info.cpp
-    - src/stage_ros/src/stageros.cpp
-    - src/image_pipeline/image_proc/test/test_rectify.cpp
-    - src/image_pipeline/image_proc/test/rostest.cpp
-    - src/image_pipeline/image_proc/src/nodes/image_proc.cpp
-    - src/freenect_stack/freenect_camera/src/nodes/freenect_node.cpp
-    - src/slam_gmapping/gmapping/test/rtest.cpp
-    - src/slam_gmapping/gmapping/src/main.cpp
-    - src/slam_gmapping/gmapping/src/replay.cpp
+    - src/diagnostics/diagnostic_aggregator/test/analyzer_loader.cpp
+    - src/diagnostics/diagnostic_updater/src/example.cpp
+    - src/diagnostics/diagnostic_updater/test/diagnostic_updater_test.cpp
     - src/dynamic_reconfigure/test/ref_server.cpp
     - src/dynamic_reconfigure/test/test_client.cpp
     - src/dynamic_reconfigure/test/testserver.cpp
+    - src/ecl_core/ecl_command_line/src/test/command_line.cpp
+    - src/ecl_core/ecl_concepts/src/test/concepts.cpp
+    - src/ecl_core/ecl_containers/src/test/arrays.cpp
+    - src/ecl_core/ecl_containers/src/test/arrays_mem_check.cpp
+    - src/ecl_core/ecl_containers/src/test/container_converters.cpp
+    - src/ecl_core/ecl_containers/src/test/fifo.cpp
+    - src/ecl_core/ecl_containers/src/test/push_and_pop.cpp
+    - src/ecl_core/ecl_containers/src/test/stencil.cpp
+    - src/ecl_core/ecl_converters/src/test/byte_array_converters.cpp
+    - src/ecl_core/ecl_converters/src/test/converters.cpp
+    - src/ecl_core/ecl_devices/src/test/files.cpp
+    - src/ecl_core/ecl_devices/src/test/shared_files.cpp
+    - src/ecl_core/ecl_geometry/graveyard/pose3d_cpp.old
+    - src/ecl_core/ecl_geometry/src/test/angles.cpp
+    - src/ecl_core/ecl_geometry/src/test/cartesian_points.cpp
+    - src/ecl_core/ecl_geometry/src/test/cubic_splines.cpp
+    - src/ecl_core/ecl_geometry/src/test/homogeneous_points.cpp
+    - src/ecl_core/ecl_geometry/src/test/legacy_pose2d.cpp
+    - src/ecl_core/ecl_geometry/src/test/legacy_pose3d.cpp
+    - src/ecl_core/ecl_geometry/src/test/linear_segment.cpp
+    - src/ecl_core/ecl_geometry/src/test/odometry_helper.cpp
+    - src/ecl_core/ecl_geometry/src/test/polynomials.cpp
+    - src/ecl_core/ecl_geometry/src/test/smooth_linear_splines.cpp
+    - src/ecl_core/ecl_geometry/src/test/tension_function.cpp
+    - src/ecl_core/ecl_geometry/src/test/tension_splines.cpp
+    - src/ecl_core/ecl_linear_algebra/src/test/formatters.cpp
+    - src/ecl_core/ecl_linear_algebra/src/test/interpolators.cpp
+    - src/ecl_core/ecl_linear_algebra/src/test/plugin.cpp
+    - src/ecl_core/ecl_math/src/test/constants.cpp
+    - src/ecl_core/ecl_math/src/test/fuzzy.cpp
+    - src/ecl_core/ecl_math/src/test/norms.cpp
+    - src/ecl_core/ecl_math/src/test/simple.cpp
+    - src/ecl_core/ecl_mpl/src/test/enable_if.cpp
+    - src/ecl_core/ecl_sigslots/src/test/sigslots.cpp
+    - src/ecl_core/ecl_streams/src/test/file_streams.cpp
+    - src/ecl_core/ecl_streams/src/test/string_streams.cpp
+    - src/ecl_core/ecl_threads/src/test/mutex.cpp
+    - src/ecl_core/ecl_threads/src/test/priorities.cpp
+    - src/ecl_core/ecl_threads/src/test/threadable.cpp
+    - src/ecl_core/ecl_threads/src/test/threads.cpp
+    - src/ecl_core/ecl_time/src/test/cpuwatch_rt.cpp
+    - src/ecl_core/ecl_time/src/test/frequency.cpp
+    - src/ecl_core/ecl_time/src/test/sleep.cpp
+    - src/ecl_core/ecl_time/src/test/snooze.cpp
+    - src/ecl_core/ecl_time/src/test/stopwatch.cpp
+    - src/ecl_core/ecl_time/src/test/time_data.cpp
+    - src/ecl_core/ecl_time/src/test/timestamp.cpp
+    - src/ecl_core/ecl_type_traits/src/test/fundamental_types.cpp
+    - src/ecl_core/ecl_type_traits/src/test/numeric_limits.cpp
+    - src/ecl_core/ecl_utilities/src/test/flags.cpp
+    - src/ecl_core/ecl_utilities/src/test/function_objects.cpp
+    - src/ecl_core/ecl_utilities/src/test/parameters.cpp
+    - src/ecl_core/ecl_utilities/src/test/references.cpp
+    - src/ecl_core/ecl_utilities/src/test/singleton.cpp
+    - src/ecl_lite/ecl_config/src/test/char_sign.cpp
+    - src/ecl_lite/ecl_config/src/test/endianness.cpp
+    - src/ecl_lite/ecl_config/src/test/portable_types.cpp
+    - src/ecl_navigation/ecl_mobile_robot/src/test/partial_inverse.cpp
+    - src/freenect_stack/freenect_camera/src/nodes/freenect_node.cpp
+    - src/geometry2/tf2_kdl/test/test_tf2_kdl.cpp
+    - src/geometry2/tf2_ros/src/buffer_server_main.cpp
+    - src/geometry2/tf2_ros/src/static_transform_broadcaster_program.cpp
+    - src/geometry2/tf2_ros/test/listener_unittest.cpp
+    - src/geometry2/tf2_ros/test/time_reset_test.cpp
+    - src/geometry2/tf2/test/cache_unittest.cpp
+    - src/geometry2/tf2/test/simple_tf2_core.cpp
+    - src/geometry2/tf2/test/static_cache_test.cpp
+    - src/geometry/tf_conversions/test/test_eigen_tf.cpp
+    - src/geometry/tf_conversions/test/test_kdl_tf.cpp
+    - src/geometry/tf/src/change_notifier.cpp
+    - src/geometry/tf/src/empty_listener.cpp
+    - src/geometry/tf/src/static_transform_publisher.cpp
+    - src/geometry/tf/src/tf_echo.cpp
+    - src/geometry/tf/src/tf_monitor.cpp
+    - src/geometry/tf/test/cache_unittest.cpp
+    - src/geometry/tf/test/quaternion.cpp
+    - src/geometry/tf/test/testBroadcaster.cpp
+    - src/geometry/tf/test/testListener.cpp
+    - src/geometry/tf/test/test_message_filter.cpp
+    - src/geometry/tf/test/test_transform_datatypes.cpp
+    - src/geometry/tf/test/tf_benchmark.cpp
+    - src/geometry/tf/test/tf_unittest.cpp
+    - src/geometry/tf/test/tf_unittest_future.cpp
+    - src/geometry/tf/test/transform_listener_unittest.cpp
+    - src/geometry/tf/test/transform_twist_test.cpp
+    - src/geometry/tf/test/velocity_test.cpp
+    - src/image_common/camera_info_manager/tests/unit_test.cpp
+    - src/image_common/image_transport/src/republish.cpp
+    - src/image_common/image_transport/tutorial/src/my_publisher.cpp
+    - src/image_common/image_transport/tutorial/src/my_subscriber.cpp
+    - src/image_pipeline/image_proc/src/nodes/image_proc.cpp
+    - src/image_pipeline/image_proc/test/rostest.cpp
+    - src/image_pipeline/image_proc/test/test_rectify.cpp
+    - src/kdl_parser/kdl_parser/test/test_inertia_rpy.cpp
+    - src/kdl_parser/kdl_parser/test/test_kdl_parser.cpp
+    - src/kobuki/kobuki_keyop/src/main.cpp
+    - src/laser_geometry/test/projection_test.cpp
+    - src/navigation/amcl/src/amcl_node.cpp
+    - src/navigation/base_local_planner/test/gtest_main.cpp
+    - src/navigation/base_local_planner/test/line_iterator_test.cpp
+    - src/navigation/clear_costmap_recovery/test/clear_tester.cpp
+    - src/navigation/costmap_2d/src/costmap_2d_cloud.cpp
+    - src/navigation/costmap_2d/src/costmap_2d_markers.cpp
+    - src/navigation/costmap_2d/src/costmap_2d_node.cpp
+    - src/navigation/costmap_2d/test/array_parser_test.cpp
+    - src/navigation/costmap_2d/test/costmap_tester.cpp
+    - src/navigation/costmap_2d/test/footprint_tests.cpp
+    - src/navigation/costmap_2d/test/inflation_tests.cpp
+    - src/navigation/costmap_2d/test/module_tests.cpp
+    - src/navigation/costmap_2d/test/obstacle_tests.cpp
+    - src/navigation/costmap_2d/test/static_tests.cpp
+    - src/navigation/fake_localization/fake_localization.cpp
+    - src/navigation/global_planner/src/plan_node.cpp
+    - src/navigation/map_server/src/main.cpp
+    - src/navigation/map_server/src/map_saver.cpp
+    - src/navigation/map_server/test/rtest.cpp
+    - src/navigation/map_server/test/utest.cpp
+    - src/navigation/move_base/src/move_base_node.cpp
+    - src/navigation/navfn/src/navfn_node.cpp
+    - src/navigation/navfn/test/path_calc_test.cpp
+    - src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp
+    - src/navigation/robot_pose_ekf/test/test_robot_pose_ekf.cpp
+    - src/navigation/robot_pose_ekf/test/test_robot_pose_ekf_zero_covariance.cpp
+    - src/navigation/voxel_grid/test/voxel_grid_tests.cpp
+    - src/nodelet_core/nodelet/src/nodelet.cpp
     - src/openni2_camera/openni2_camera/ros/openni2_camera_node.cpp
-    - src/ros_comm/message_filters/test/test_chain.cpp
-    - src/ros_comm/message_filters/test/msg_cache_unittest.cpp
-    - src/ros_comm/message_filters/test/test_subscriber.cpp
-    - src/ros_comm/message_filters/test/test_simple.cpp
-    - src/ros_comm/message_filters/test/test_approximate_time_policy.cpp
-    - src/ros_comm/message_filters/test/test_exact_time_policy.cpp
-    - src/ros_comm/message_filters/test/time_synchronizer_unittest.cpp
-    - src/ros_comm/message_filters/test/time_sequencer_unittest.cpp
-    - src/ros_comm/message_filters/test/test_synchronizer.cpp
-    - src/ros_comm/topic_tools/test/test_shapeshifter.cpp
-    - src/ros_comm/topic_tools/src/drop.cpp
-    - src/ros_comm/topic_tools/src/switch_mux.cpp
-    - src/ros_comm/topic_tools/src/throttle.cpp
-    - src/ros_comm/topic_tools/src/mux.cpp
-    - src/ros_comm/topic_tools/src/demux.cpp
-    - src/ros_comm/topic_tools/src/relay.cpp
-    - src/ros_comm/rosbag/src/record.cpp
-    - src/ros_comm/rosbag/src/play.cpp
-    - src/ros_comm/rosout/rosout.cpp
-    - src/ros_comm/roscpp/src/libros/node_handle.cpp
-    - src/yujin_ocs/yocs_virtual_sensor/src/virtual_sensor_node.cpp
-    - src/zeroconf_avahi_suite/zeroconf_avahi/src/node/zeroconf.cpp
+    - src/pcl_conversions/test/test_pcl_conversions.cpp
+    - src/perception_pcl/pcl_ros/tools/bag_to_pcd.cpp
+    - src/perception_pcl/pcl_ros/tools/convert_pcd_to_image.cpp
+    - src/perception_pcl/pcl_ros/tools/convert_pointcloud_to_image.cpp
+    - src/perception_pcl/pcl_ros/tools/pcd_to_pointcloud.cpp
+    - src/perception_pcl/pcl_ros/tools/pointcloud_to_pcd.cpp
+    - src/pluginlib/test/unique_ptr_test.cpp
+    - src/pluginlib/test/utest.cpp
+    - src/realsense_camera/src/get_debug_info.cpp
+    - src/realsense_camera/test/camera_core.cpp
+    - src/realsense_camera/test/rgbd_topics.cpp
+    - src/robot_state_publisher/src/joint_state_listener.cpp
     - src/robot_state_publisher/test/test_joint_states_bag.cpp
     - src/robot_state_publisher/test/test_one_link.cpp
     - src/robot_state_publisher/test/test_two_links_fixed_joint.cpp
     - src/robot_state_publisher/test/test_two_links_moving_joint.cpp
-    - src/robot_state_publisher/src/joint_state_listener.cpp
-    - src/navigation/global_planner/src/plan_node.cpp
-    - src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp
-    - src/navigation/clear_costmap_recovery/test/clear_tester.cpp
-    - src/navigation/navfn/src/navfn_node.cpp
-    - src/navigation/move_base/src/move_base_node.cpp
-    - src/navigation/costmap_2d/test/costmap_tester.cpp
-    - src/navigation/costmap_2d/test/footprint_tests.cpp
-    - src/navigation/costmap_2d/test/obstacle_tests.cpp
-    - src/navigation/costmap_2d/test/inflation_tests.cpp
-    - src/navigation/costmap_2d/test/static_tests.cpp
-    - src/navigation/costmap_2d/src/costmap_2d_node.cpp
-    - src/navigation/costmap_2d/src/costmap_2d_cloud.cpp
-    - src/navigation/costmap_2d/src/costmap_2d_markers.cpp
-    - src/navigation/amcl/src/amcl_node.cpp
-    - src/navigation/fake_localization/fake_localization.cpp
-    - src/navigation/map_server/test/rtest.cpp
-    - src/navigation/map_server/src/main.cpp
-    - src/navigation/map_server/src/map_saver.cpp
+    - src/ros_comm/message_filters/test/msg_cache_unittest.cpp
+    - src/ros_comm/message_filters/test/test_approximate_time_policy.cpp
+    - src/ros_comm/message_filters/test/test_chain.cpp
+    - src/ros_comm/message_filters/test/test_exact_time_policy.cpp
+    - src/ros_comm/message_filters/test/test_simple.cpp
+    - src/ros_comm/message_filters/test/test_subscriber.cpp
+    - src/ros_comm/message_filters/test/test_synchronizer.cpp
+    - src/ros_comm/message_filters/test/time_sequencer_unittest.cpp
+    - src/ros_comm/message_filters/test/time_synchronizer_unittest.cpp
+    - src/ros_comm/rosbag/src/play.cpp
+    - src/ros_comm/rosbag/src/record.cpp
+    - src/ros_comm/rosconsole/test/assertion_test.cpp
+    - src/ros_comm/rosconsole/test/thread_test.cpp
+    - src/ros_comm/rosconsole/test/utest.cpp
+    - src/ros_comm/roscpp/src/libros/node_handle.cpp
+    - src/ros_comm/roslz4/test/roslz4_test.cpp
+    - src/ros_comm/rosout/rosout.cpp
+    - src/ros_comm/rostest/test/test_permuter.cpp
+    - src/ros_comm/topic_tools/src/demux.cpp
+    - src/ros_comm/topic_tools/src/drop.cpp
+    - src/ros_comm/topic_tools/src/mux.cpp
+    - src/ros_comm/topic_tools/src/relay.cpp
+    - src/ros_comm/topic_tools/src/switch_mux.cpp
+    - src/ros_comm/topic_tools/src/throttle.cpp
+    - src/ros_comm/topic_tools/test/test_shapeshifter.cpp
+    - src/ros_comm/topic_tools/test/utest.cpp
+    - src/roscpp_core/rostime/test/time.cpp
+    - src/rospack/test/test/utest.cpp
+    - src/ros/roslib/test/package.cpp
+    - src/ros/roslib/test/utest.cpp
+    - src/slam_gmapping/gmapping/src/main.cpp
+    - src/slam_gmapping/gmapping/src/replay.cpp
+    - src/slam_gmapping/gmapping/test/rtest.cpp
+    - src/stage_ros/src/stageros.cpp
+    - src/turtlebot_apps/turtlebot_navigation/src/laser_footprint_filter.cpp
+    - src/turtlebot/turtlebot_description/test/test_urdf.cpp
+    - src/unique_identifier/unique_id/tests/test_unique_id.cpp
     - src/urdf/urdf/test/test_robot_model_parser.cpp
+    - src/vision_opencv/cv_bridge/test/utest.cpp
+    - src/vision_opencv/image_geometry/test/utest.cpp
+    - src/yujin_ocs/yocs_virtual_sensor/src/virtual_sensor_node.cpp
+    - src/zeroconf_avahi_suite/zeroconf_avahi/src/node/zeroconf.cpp
 languages:
 - cpp
 compiler:
   type: catkin
   workspace: /ros_ws
+  context: /ros_ws
   time-limit: 600
+
 test-harness:
-  type: simple
-  time-limit: 60
-  context: /ros_ws/turtletest
-  command: python3.6 /ros_ws/turtletest/test.py __ID__
+  time-limit: 3
+  context: /ros_ws
   tests:
-    - t1
-  # FIXME temporarily disabled as a workaround
-  #  - t2
-  #  - t3
+    - name: t1
+      command: python3.6 /ros_ws/turtletest/test.py t1
+      context: /ros_ws/turtletest
+      expected-outcome: True
+      time-limit: 60
+      kill-after: 10
+      kind: system
+    - name: t2
+      command: python3.6 /ros_ws/turtletest/test.py t2
+      context: /ros_ws/turtletest
+      expected-outcome: True
+      time-limit: 60
+      kill-after: 10
+      kind: system
+    - name: t3
+      command: python3.6 /ros_ws/turtletest/test.py t3
+      context: /ros_ws/turtletest
+      expected-outcome: True
+      time-limit: 60
+      kill-after: 10
+      kind: system
+
+    - name: tf2.TimeCache.ZeroAtFront
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ZeroAtFront
+      expected-outcome: True
+    - name: tf2.TimeCache.CartesianInterpolation
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
+      expected-outcome: True
+    - name: tf2.TimeCache.ReparentingInterpolationProtection
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
+      expected-outcome: True
+    - name: tf2.TimeCache.AngularInterpolation
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.AngularInterpolation
+      expected-outcome: True
+    - name: tf2.TimeCache.DuplicateEntries
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.DuplicateEntries
+      expected-outcome: True
+    - name: tf2.TimeCache.Repeatability
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.Repeatability
+      expected-outcome: True
+    - name: tf2.TimeCache.RepeatabilityReverseInsertOrder
+      command: rosrun tf2 test_cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
+      expected-outcome: True
+    - name: tf2.Bullet.Slerp
+      command: rosrun tf2 test_cache_unittest --gtest_filter=Bullet.Slerp
+      expected-outcome: True
+
+    - name: tf2.setTransformFail
+      command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformFail
+      expected-outcome: True
+    - name: tf2.setTransformValid
+      command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformValid
+      expected-outcome: True
+    - name: tf2.setTransformInvalidQuarternion
+      command: rosrun tf2 test_simple --gtest_filter=tf2.setTransformInvalidQuarternion
+      expected-outcome: True
+    - name: tf2_lookupTransform.LookupException_Nothing_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_lookupTransform.LookupException_Nothing_Exists
+      expected-outcome: True
+    - name: tf2_lookupTransform.LookupException_One_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_lookupTransform.LookupException_One_Exists
+      expected-outcome: True
+    - name: tf2_canTransform.Nothing_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_canTransform.Nothing_Exists
+      expected-outcome: True
+    - name: tf2_canTransform.One_Exists
+      command: rosrun tf2 test_simple --gtest_filter=tf2_canTransform.One_Exists
+      expected-outcome: True
+    - name: tf2_chainAsVector.chain_v_configuration
+      command: rosrun tf2 test_simple --gtest_filter=tf2_chainAsVector.chain_v_configuration
+      expected-outcome: True
+    - name: tf2_walkToTopParent.walk_i_configuration
+      command: rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_i_configuration
+      expected-outcome: True
+    - name: tf2_walkToTopParent.walk_v_configuration
+      command: rosrun tf2 test_simple --gtest_filter=tf2_walkToTopParent.walk_v_configuration
+      expected-outcome: True
+
+    - name: StaticCache.Repeatability
+      command: rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.Repeatability
+      expected-outcome: True
+    - name: StaticCache.DuplicateEntries
+      command: rosrun tf2 test_static_cache_unittest --gtest_filter=StaticCache.DuplicateEntries
+      expected-outcome: True
+
+    - name: tf.lookupTransform_compount
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_compount
+      expected-outcome: True
+    - name: tf.lookupTransform_helix_configuration
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_helix_configuration
+      expected-outcome: True
+    - name: tf.lookupTransform_ring45
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform_ring45
+      expected-outcome: True
+    - name: tf.setTransformNoInsertOnSelfTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertOnSelfTransform
+      expected-outcome: True
+    - name: tf.setTransformNoInsertWithNan
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNan
+      expected-outcome: True
+    - name: tf.setTransformNoInsertWithNoFrameID
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNoFrameID
+      expected-outcome: True
+    - name: tf.setTransformNoInsertWithNoParentID
+      command: rosrun tf tf_unittest --gtest_filter=tf.setTransformNoInsertWithNoParentID
+      expected-outcome: True
+    - name: tf.TransformTransformsCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformTransformsCartesian
+      expected-outcome: True
+    - name: tf.TransformTransformToOwnFrame
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformTransformToOwnFrame
+      expected-outcome: True
+    - name: tf.TransformPointCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformPointCartesian
+      expected-outcome: True
+    - name: tf.TransformVectorCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformVectorCartesian
+      expected-outcome: True
+    - name: tf.TransformQuaternionCartesian
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformQuaternionCartesian
+      expected-outcome: True
+    - name: tf.ListOneInverse
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListOneInverse
+      expected-outcome: True
+    - name: tf.ListTwoInverse
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListTwoInverse
+      expected-outcome: True
+    - name: tf.ListOneForward
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListOneForward
+      expected-outcome: True
+    - name: tf.ListTwoForward
+      command: rosrun tf tf_unittest --gtest_filter=tf.ListTwoForward
+      expected-outcome: True
+    - name: tf.TransformThrougRoot
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformThrougRoot
+      expected-outcome: True
+    - name: tf.TransformThroughNO_PARENT
+      command: rosrun tf tf_unittest --gtest_filter=tf.TransformThroughNO_PARENT
+      expected-outcome: True
+    - name: tf.getParent
+      command: rosrun tf tf_unittest --gtest_filter=tf.getParent
+      expected-outcome: True
+    - name: tf.NO_PARENT_SET
+      command: rosrun tf tf_unittest --gtest_filter=tf.NO_PARENT_SET
+      expected-outcome: True
+    - name: tf.waitForTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.waitForTransform
+      expected-outcome: True
+    - name: tf.Exceptions
+      command: rosrun tf tf_unittest --gtest_filter=tf.Exceptions
+      expected-outcome: True
+    - name: tf.NoExtrapolationExceptionFromParent
+      command: rosrun tf tf_unittest --gtest_filter=tf.NoExtrapolationExceptionFromParent
+      expected-outcome: True
+    - name: tf.ExtrapolationFromOneValue
+      command: rosrun tf tf_unittest --gtest_filter=tf.ExtrapolationFromOneValue
+      expected-outcome: True
+    - name: tf.RepeatedTimes
+      command: rosrun tf tf_unittest --gtest_filter=tf.RepeatedTimes
+      expected-outcome: True
+    - name: tf.frameExists
+      command: rosrun tf tf_unittest --gtest_filter=tf.frameExists
+      expected-outcome: True
+    - name: tf.canTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.canTransform
+      expected-outcome: True
+    - name: tf.lookupTransform
+      command: rosrun tf tf_unittest --gtest_filter=tf.lookupTransform
+      expected-outcome: True
+    - name: tf.getFrameStrings
+      command: rosrun tf tf_unittest --gtest_filter=tf.getFrameStrings
+      expected-outcome: True
+    - name: tf.assertQuaternionValid
+      command: rosrun tf tf_unittest --gtest_filter=tf.assertQuaternionValid
+      expected-outcome: True
+    - name: tf.assertQuaternionMsgValid
+      command: rosrun tf tf_unittest --gtest_filter=tf.assertQuaternionMsgValid
+      expected-outcome: True
+    - name: data.Vector3Conversions
+      command: rosrun tf tf_unittest --gtest_filter=data.Vector3Conversions
+      expected-outcome: True
+    - name: data.Vector3StampedConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.Vector3StampedConversions
+      expected-outcome: True
+    - name: data.QuaternionConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.QuaternionConversions
+      expected-outcome: True
+    - name: data.QuaternionStampedConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.QuaternionStampedConversions
+      expected-outcome: True
+    - name: data.TransformConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.TransformConversions
+      expected-outcome: True
+    - name: data.PoseStampedConversions
+      command: rosrun tf tf_unittest --gtest_filter=data.PoseStampedConversions
+      expected-outcome: True
+    - name: data.StampedOperatorEqualEqual
+      command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqualEqual
+      expected-outcome: True
+    - name: data.StampedTransformOperatorEqualEqual
+      command: rosrun tf tf_unittest --gtest_filter=data.StampedTransformOperatorEqualEqual
+      expected-outcome: True
+    - name: data.StampedOperatorEqual
+      command: rosrun tf tf_unittest --gtest_filter=data.StampedOperatorEqual
+      expected-outcome: True
+
+    - name: tf.Quarternion
+      command: rosrun tf tf_quaternion_unittest --gtest_filter=tf.Quarternion
+      expected-outcome: True
+
+    - name: tf.set
+      command: rosrun tf test_transform_datatypes --gtest_filter=tf.set
+      expected-outcome: True
+
+    - name: LinearVelocitySquareTest.LinearVelocityToThreeFrames
+      command: rosrun tf test_velocity --gtest_filter=LinearVelocitySquareTest.LinearVelocityToThreeFrames
+      expected-outcome: True
+    - name: AngularVelocitySquareTest.AngularVelocityAlone
+      command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityAlone
+      expected-outcome: True
+    - name: AngularVelocitySquareTest.AngularVelocityOffsetChildFrameInX
+      command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityOffsetChildFrameInX
+      expected-outcome: True
+    - name: AngularVelocitySquareTest.AngularVelocityOffsetParentFrameInZ
+      command: rosrun tf test_velocity --gtest_filter=AngularVelocitySquareTest.AngularVelocityOffsetParentFrameInZ
+      expected-outcome: True
+
+    - name: tf.TimeCache.ZeroAtFront
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.ZeroAtFront
+      expected-outcome: True
+    - name: tf.TimeCache.CartesianInterpolation
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.CartesianInterpolation
+      expected-outcome: True
+    - name: tf.TimeCache.ReparentingInterpolationProtection
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.ReparentingInterpolationProtection
+      expected-outcome: True
+    - name: tf.TimeCache.AngularInterpolation
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.AngularInterpolation
+      expected-outcome: True
+    - name: tf.TimeCache.DuplicateEntries
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.DuplicateEntries
+      expected-outcome: True
+    - name: tf.TimeCache.Repeatability
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.Repeatability
+      expected-outcome: True
+    - name: tf.TimeCache.RepeatabilityReverseInsertOrder
+      command: rosrun tf cache_unittest --gtest_filter=TimeCache.RepeatabilityReverseInsertOrder
+      expected-outcome: True
+    - name: tf.Bullet.Slerp
+      command: rosrun tf cache_unittest --gtest_filter=Bullet.Slerp
+      expected-outcome: True
+
+    - name: tf.Bullet.Slerp
+      command: rosrun tf cache_unittest --gtest_filter=Bullet.Slerp
+      expected-outcome: True
+
+    # FIXME
+    # - name: TFEigenConversions.tf_eigen_vector
+    # - command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.tf_eigen_vector
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFEigenConversions.tf_eigen_quaternion
+    # - command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.tf_eigen_quaternion
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFEigenConversions.tf_eigen_transform
+    # - command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.tf_eigen_transform
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFEigenConversions.eigen_tf_transform
+    # - command: rosrun tf_conversions test_eigen_tf --gtest_filter=TFEigenConversions.eigen_tf_transform
+    # - expected-outcome: True
+    # - time-limit: 3
+
+    # - name: TFKDLConversions.tf_kdl_vector
+    # - command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_vector
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFKDLConversions.tf_kdl_rotation
+    # - command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_rotation
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFKDLConversions.tf_kdl_transform
+    # - command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_transform
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFKDLConversions.tf_kdl_pose
+    # - command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.tf_kdl_pose
+    # - expected-outcome: True
+    # - time-limit: 3
+    # - name: TFKDLConversions.msg_kdl_twist
+    # - command: rosrun tf_conversions test_kdl_tf --gtest_filter=TFKDLConversions.msg_kdl_twist
+    # - expected-outcome: True
+    # - time-limit: 3
+
+    # FIXME
+    # - name: TestRunner.threaded_test
+    #   command: rosrun actionlib actionlib-destruction_guard_test --gtest_filter=TestRunner.threaded_test
+    #   expected-outcome: True
+    #   time-limit: 3
+    # - name: DestructionGuard.easy_test
+    #   command: rosrun actionlib actionlib-destruction_guard_test --gtest_filter=DestructionGuard.easy_test
+    #   expected-outcome: True
+    #   time-limit: 3
+
+    - name: Angles.shortestDistanceWithLimits
+      command: rosrun angles utest --gtest_filter=Angles.shortestDistanceWithLimits
+      expected-outcome: True
+    - name: Angles.from_degrees
+      command: rosrun angles utest --gtest_filter=Angles.from_degrees
+      expected-outcome: True
+    - name: Angles.to_degrees
+      command: rosrun angles utest --gtest_filter=Angles.to_degrees
+      expected-outcome: True
+    - name: Angles.normalize_angle_positive
+      command: rosrun angles utest --gtest_filter=Angles.normalize_angle_positive
+      expected-outcome: True
+    - name: Angles.normalize_angle
+      command: rosrun angles utest --gtest_filter=Angles.normalize_angle
+      expected-outcome: True
+    - name: Angles.shortest_angular_distance
+      command: rosrun angles utest --gtest_filter=Angles.shortest_angular_distance
+      expected-outcome: True
+    - name: Angles.two_pi_complement
+      command: rosrun angles utest --gtest_filter=Angles.two_pi_complement
+      expected-outcome: True
+    - name: Angles.find_min_max_delta
+      command: rosrun angles utest --gtest_filter=Angles.find_min_max_delta
+      expected-outcome: True
+
+    - name: ClassLoaderUniquePtrTest.basicLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.basicLoad
+      expected-outcome: True
+    - name: ClassLoaderUniquePtrTest.correctLazyLoadUnload
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.correctLazyLoadUnload
+      expected-outcome: True
+    - name: ClassLoaderUniquePtrTest.nonExistentPlugin
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.nonExistentPlugin
+      expected-outcome: True
+    - name: ClassLoaderUniquePtrTest.threadSafety
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.threadSafety
+    - name: ClassLoaderUniquePtrTest.loadRefCountingLazy
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=ClassLoaderUniquePtrTest.loadRefCountingLazy
+      expected-outcome: True
+    - name: MultiClassLoaderUniquePtrTest.lazyLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoad
+      expected-outcome: True
+    - name: MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.lazyLoadSecondTime
+      expected-outcome: True
+    - name: MultiClassLoaderUniquePtrTest.nonLazyLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.nonLazyLoad
+      expected-outcome: True
+    - name: MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
+      command: rosrun class_loader class_loader_unique_ptr_test --gtest_filter=MultiClassLoaderUniquePtrTest.noWarningOnLazyLoad
+      expected-outcome: True
+
+    - name: ClassLoaderTest.basicLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.basicLoad
+      expected-outcome: True
+    - name: ClassLoaderTest.correctNonLazyLoadUnload
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctNonLazyLoadUnload
+      expected-outcome: True
+    - name: ClassLoaderTest.correctLazyLoadUnload
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.correctLazyLoadUnload
+      expected-outcome: True
+    - name: ClassLoaderTest.nonExistentPlugin
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.nonExistentPlugin
+      expected-outcome: True
+    - name: ClassLoaderTest.nonExistentLibrary
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.nonExistentLibrary
+      expected-outcome: True
+    - name: ClassLoaderTest.invalidBase
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.invalidBase
+      expected-outcome: True
+    - name: ClassLoaderTest.threadSafety
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.threadSafety
+      expected-outcome: True
+    - name: ClassLoaderTest.loadRefCountingNonLazy
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.loadRefCountingNonLazy
+      expected-outcome: True
+    - name: ClassLoaderTest.loadRefCountingLazy
+      command: rosrun class_loader class_loader_utest --gtest_filter=ClassLoaderTest.loadRefCountingLazy
+      expected-outcome: True
+    - name: MultiClassLoaderTest.lazyLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoad
+      expected-outcome: True
+    - name: MultiClassLoaderTest.lazyLoadSecondTime
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.lazyLoadSecondTime
+      expected-outcome: True
+    - name: MultiClassLoaderTest.nonLazyLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.nonLazyLoad
+      expected-outcome: True
+    - name: MultiClassLoaderTest.noWarningOnLazyLoad
+      command: rosrun class_loader class_loader_utest --gtest_filter=MultiClassLoaderTest.noWarningOnLazyLoad
+      expected-outcome: True
+
+    - name: laser_geometry.projectLaser2
+      command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.projectLaser2
+      expected-outcome: True
+      time-limit: 20
+    - name: laser_geometry.transformLaserScanToPointCloud
+      command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud
+      expected-outcome: True
+      time-limit: 20
+    - name: laser_geometry.transformLaserScanToPointCloud2
+      command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud2
+      expected-outcome: True
+      time-limit: 20
+
+    - name: LineIterator.south
+      command: rosrun base_local_planner line_iterator --gtest_filter=LineIterator.south
+      expected-outcome: True
+    - name: LineIterator.north_north_west
+      command: rosrun base_local_planner line_iterator --gtest_filter=LineIterator.north_north_west
+      expected-outcome: True
+
+    - name: TrajectoryPlannerTest
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=TrajectoryPlannerTest.*
+      expected-outcome: True
+
+    - name: VelocityIteratorTest.testsingle
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle
+      expected-outcome: True
+    - name: VelocityIteratorTest.testsingle_pos
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle_pos
+      expected-outcome: True
+    - name: VelocityIteratorTest.testsingle_neg
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.testsingle_neg
+      expected-outcome: True
+    - name: VelocityIteratorTest.test1
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test1
+      expected-outcome: True
+    - name: VelocityIteratorTest.test1_pos
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test1_pos
+      expected-outcome: True
+    - name: VelocityIteratorTest.test1_neg
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test1_neg
+      expected-outcome: True
+    - name: VelocityIteratorTest.test3
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test3
+      expected-outcome: True
+    - name: VelocityIteratorTest.test4
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test4
+      expected-outcome: True
+    - name: VelocityIteratorTest.test_shifted
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test_shifted
+      expected-outcome: True
+    - name: VelocityIteratorTest.test_cranky
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=VelocityIteratorTest.test_cranky
+      expected-outcome: True
+
+    - name: FootprintHelperTest.correctFootprint
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=FootprintHelperTest.correctFootprint
+      expected-outcome: True
+    - name: FootprintHelperTest.correctLineCells
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=FootprintHelperTest.correctLineCells
+      expected-outcome: True
+
+    - name: MapGridTest.initNull
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.initNull
+      expected-outcome: True
+    - name: MapGridTest.operatorBrackets
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.operatorBrackets
+      expected-outcome: True
+    - name: MapGridTest.copyConstructor
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.copyConstructor
+      expected-outcome: True
+    - name: MapGridTest.getIndex
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.getIndex
+      expected-outcome: True
+    - name: MapGridTest.reset
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.reset
+      expected-outcome: True
+    - name: MapGridTest.properGridConstruction
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.properGridConstruction
+      expected-outcome: True
+    - name: MapGridTest.sizeCheck
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.sizeCheck
+      expected-outcome: True
+    - name: MapGridTest.adjustPlanEmpty
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.adjustPlanEmpty
+      expected-outcome: True
+    - name: MapGridTest.adjustPlan
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.adjustPlan
+      expected-outcome: True
+    - name: MapGridTest.distancePropagation
+      command: rosrun base_local_planner base_local_planner_utest --gtest_filter=MapGridTest.distancePropagation
+      expected-outcome: True
+
+    - name: array_parser.basic_operation
+      command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.basic_operation
+      expected-outcome: True
+    - name: array_parser.missing_open
+      command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.missing_open
+      expected-outcome: True
+    - name: array_parser.missing_close
+      command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.missing_close
+      expected-outcome: True
+    - name: array_parser.wrong_depth
+      command: rosrun costmap_2d array_parser_test --gtest_filter=array_parser.wrong_depth
+      expected-outcome: True
+
+    - name: PathCalc.oscillate_in_pinch_point
+      command: rosrun navfn path_calc_test --gtest_filter=PathCalc.oscillate_in_pinch_point
+      expected-outcome: True
+    - name: PathCalc.easy_nav_should_always_work
+      command: rosrun navfn path_calc_test --gtest_filter=PathCalc.easy_nav_should_always_work
+      expected-outcome: True
+
+    - name: voxel_grid.basicMarkingAndClearing
+      command: rosrun voxel_grid voxel_grid_tests --gtest_filter=voxel_grid.basicMarkingAndClearing
+      expected-outcome: True
+
+    - name: PCLConversionTests.imageConversion
+      command: rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionTests.imageConversion
+      expected-outcome: True
+    - name: PCLConversionTests.pointcloud2Conversion
+      command: rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionTests.pointcloud2Conversion
+      expected-outcome: True
+    - name: PCLConversionStamp.Stamps
+      command: rosrun pcl_conversions pcl_conversions-test --gtest_filter=PCLConversionStamp.Stamps
+      expected-outcome: True
+
+    # FIXME these fail?
+    # - name: roslib.commandListNames
+    #   command: rosrun roslib roslib-utest --gtest_filter=roslib.commandListNames
+    #   expected-outcome: True
+    # - name: roslib.commandList
+    #   command: rosrun roslib roslib-utest --gtest_filter=roslib.commandList
+    #   expected-outcome: True
+    # - name: roslib.getAll
+    #   command: rosrun roslib roslib-utest --gtest_filter=roslib.getAll
+    #   expected-outcome: True
+    - name: roslib.concurrent_access
+      command: rosrun roslib roslib-utest --gtest_filter=roslib.concurrent_access
+      expected-outcome: True
+    - name: Package.getPath
+      command: rosrun roslib roslib-test_package --gtest_filter=Package.getPath
+      expected-outcome: True
+    - name: Package.getAll
+      command: rosrun roslib roslib-test_package --gtest_filter=Package.getAll
+      expected-outcome: True
+
+    - name: PluginlibTest.unknownPlugin
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.unknownPlugin
+      expected-outcome: True
+    - name: PluginlibTest.misspelledPlugin
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.misspelledPlugin
+      expected-outcome: True
+    - name: PluginlibTest.invalidPackage
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.invalidPackage
+      expected-outcome: True
+    - name: PluginlibTest.brokenPlugin
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.brokenPlugin
+      expected-outcome: True
+    - name: PluginlibTest.workingPlugin
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.workingPlugin
+      expected-outcome: True
+    - name: PluginlibTest.createUnmanagedInstanceAndUnloadLibrary
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.createUnmanagedInstanceAndUnloadLibrary
+      expected-outcome: True
+    - name: PluginlibTest.createManagedInstanceAndUnloadLibrary
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.createManagedInstanceAndUnloadLibrary
+      expected-outcome: True
+    - name: PluginlibTest.brokenXML
+      command: rosrun pluginlib pluginlib_utest --gtest_filter=PluginlibTest.brokenXML
+      expected-outcome: True
+
+    - name: PluginlibUniquePtrTest.unknownPlugin
+      command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.unknownPlugin
+      expected-outcome: True
+    - name: PluginlibUniquePtrTest.misspelledPlugin
+      command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.misspelledPlugin
+      expected-outcome: True
+    - name: PluginlibUniquePtrTest.workingPlugin
+      command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=PluginlibUniquePtrTest.workingPlugin
+      expected-outcome: True
+    - name: PluginlibUniquePtrTest.workingPlugin
+      command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=pluginlibuniqueptrtest.createuniqueinstanceandunloadlibrary
+      expected-outcome: True
+    - name: PluginlibUniquePtrTest.workingPlugin
+      command: rosrun pluginlib pluginlib_unique_ptr_test --gtest_filter=pluginlibtest.brokenplugin
+      expected-outcome: True
+    - name: "Cache.easyInterval"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyInterval"
+      expected-outcome: True
+    - name: "Cache.easySurroundingInterval"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easySurroundingInterval"
+      expected-outcome: True
+    - name: "Cache.easyUnsorted"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyUnsorted"
+      expected-outcome: True
+    - name: "Cache.easyElemBeforeAfter"
+      command: "rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.easyElemBeforeAfter"
+      expected-outcome: True
+    - name: Cache.eventInEventOut
+      command: rosrun message_filters message_filters-msg_cache_unittest --gtest_filter=Cache.eventInEventOut
+      expected-outcome: True
+
+    - name: Synchronizer.compile2
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile2
+      expected-outcome: True
+    - name: Synchronizer.compile3
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile3
+      expected-outcome: True
+    - name: Synchronizer.compile4
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile4
+      expected-outcome: True
+    - name: Synchronizer.compile5
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile5
+      expected-outcome: True
+    - name: Synchronizer.compile6
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile6
+      expected-outcome: True
+    - name: Synchronizer.compile7
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile7
+      expected-outcome: True
+    - name: Synchronizer.compile8
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile8
+      expected-outcome: True
+    - name: Synchronizer.compile9
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compile9
+      expected-outcome: True
+    - name: Synchronizer.compileFunction2
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction2
+      expected-outcome: True
+    - name: Synchronizer.compileFunction3
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction3
+      expected-outcome: True
+    - name: Synchronizer.compileFunction4
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction4
+      expected-outcome: True
+    - name: Synchronizer.compileFunction5
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction5
+      expected-outcome: True
+    - name: Synchronizer.compileFunction6
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction6
+      expected-outcome: True
+    - name: Synchronizer.compileFunction7
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction7
+      expected-outcome: True
+    - name: Synchronizer.compileFunction8
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction8
+      expected-outcome: True
+    - name: Synchronizer.compileFunction9
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileFunction9
+      expected-outcome: True
+    - name: Synchronizer.compileMethod2
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod2
+      expected-outcome: True
+    - name: Synchronizer.compileMethod3
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod3
+      expected-outcome: True
+    - name: Synchronizer.compileMethod4
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod4
+      expected-outcome: True
+    - name: Synchronizer.compileMethod5
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod5
+      expected-outcome: True
+    - name: Synchronizer.compileMethod6
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod6
+      expected-outcome: True
+    - name: Synchronizer.compileMethod7
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod7
+      expected-outcome: True
+    - name: Synchronizer.compileMethod8
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.compileMethod8
+      expected-outcome: True
+    - name: Synchronizer.add2
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add2
+      expected-outcome: True
+    - name: Synchronizer.add3
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add3
+      expected-outcome: True
+    - name: Synchronizer.add4
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add4
+      expected-outcome: True
+    - name: Synchronizer.add5
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add5
+      expected-outcome: True
+    - name: Synchronizer.add6
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add6
+      expected-outcome: True
+    - name: Synchronizer.add7
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add7
+      expected-outcome: True
+    - name: Synchronizer.add8
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add8
+      expected-outcome: True
+    - name: Synchronizer.add9
+      command: rosrun message_filters message_filters-test_synchronizer --gtest_filter=Synchronizer.add9
+      expected-outcome: True
+
+    - name: Chain.simple
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.simple
+      expected-outcome: True
+    - name: Chain.multipleFilters
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.multipleFilters
+      expected-outcome: True
+    - name: Chain.addingFilters
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.addingFilters
+      expected-outcome: True
+    - name: Chain.inputFilter
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.inputFilter
+      expected-outcome: True
+    - name: Chain.nonSharedPtrFilter
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.nonSharedPtrFilter
+      expected-outcome: True
+    - name: Chain.retrieveFilter
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilter
+      expected-outcome: True
+    - name: Chain.retrieveFilterThroughBaseClass
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveFilterThroughBaseClass
+      expected-outcome: True
+    - name: Chain.retrieveBaseClass
+      command: rosrun message_filters message_filters-test_chain --gtest_filter=Chain.retrieveBaseClass
+      expected-outcome: True
+
+    - name: ExactTime.multipleTimes
+      command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.multipleTimes
+      expected-outcome: True
+    - name: ExactTime.queueSize
+      command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.queueSize
+      expected-outcome: True
+    - name: ExactTime.dropCallback
+      command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.dropCallback
+      expected-outcome: True
+    - name: ExactTime.eventInEventOut
+      command: rosrun message_filters message_filters-test_exact_time_policy --gtest_filter=ExactTime.eventInEventOut
+      expected-outcome: True
+
+    - name: ApproxTimeSync.ExactMatch
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ExactMatch
+      expected-outcome: True
+    - name: ApproxTimeSync.PerfectMatch
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.PerfectMatch
+      expected-outcome: True
+    - name: ApproxTimeSync.ImperfectMatch
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.ImperfectMatch
+      expected-outcome: True
+    - name: ApproxTimeSync.Acceleration
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.Acceleration
+      expected-outcome: True
+    - name: ApproxTimeSync.DroppedMessages
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DroppedMessages
+      expected-outcome: True
+    - name: ApproxTimeSync.LongQueue
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.LongQueue
+      expected-outcome: True
+    - name: ApproxTimeSync.DoublePublish
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.DoublePublish
+      expected-outcome: True
+    - name: ApproxTimeSync.FourTopics
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.FourTopics
+      expected-outcome: True
+    - name: ApproxTimeSync.EarlyPublish
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.EarlyPublish
+      expected-outcome: True
+    - name: ApproxTimeSync.RateBound
+      command: rosrun message_filters message_filters-test_approximate_time_policy --gtest_filter=ApproxTimeSync.RateBound
+      expected-outcome: True
+
+    - name: SimpleFilter.callbackTypes
+      command: rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.callbackTypes
+      expected-outcome: True
+    - name: SimpleFilter.oldRegisterWithNewFilter
+      command: rosrun message_filters message_filters-test_simple --gtest_filter=SimpleFilter.oldRegisterWithNewFilter
+      expected-outcome: True
+
+    - name: TimeSynchronizer.compile2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile2
+      expected-outcome: True
+    - name: TimeSynchronizer.compile3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile3
+      expected-outcome: True
+    - name: TimeSynchronizer.compile4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile4
+      expected-outcome: True
+    - name: TimeSynchronizer.compile5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile5
+      expected-outcome: True
+    - name: TimeSynchronizer.compile6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile6
+      expected-outcome: True
+    - name: TimeSynchronizer.compile7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile7
+      expected-outcome: True
+    - name: TimeSynchronizer.compile8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile8
+      expected-outcome: True
+    - name: TimeSynchronizer.compile9
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compile9
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction2
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction3
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction4
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction5
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction6
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction7
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction8
+      expected-outcome: True
+    - name: TimeSynchronizer.compileFunction9
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileFunction9
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod2
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod3
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod4
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod5
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod6
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod7
+      expected-outcome: True
+    - name: TimeSynchronizer.compileMethod8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.compileMethod8
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate2
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate2
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate3
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate3
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate4
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate4
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate5
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate5
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate6
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate6
+    - name: TimeSynchronizer.immediate7
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate7
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate8
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate8
+      expected-outcome: True
+    - name: TimeSynchronizer.immediate9
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.immediate9
+      expected-outcome: True
+    - name: TimeSynchronizer.multipleTimes
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.multipleTimes
+      expected-outcome: True
+    - name: TimeSynchronizer.queueSize
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.queueSize
+      expected-outcome: True
+    - name: TimeSynchronizer.dropCallback
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.dropCallback
+      expected-outcome: True
+    - name: TimeSynchronizer.eventInEventOut
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.eventInEventOut
+      expected-outcome: True
+    - name: TimeSynchronizer.connectConstructor
+      command: rosrun message_filters message_filters-time_synchronizer_unittest --gtest_filter=TimeSynchronizer.connectConstructor
+      expected-outcome: True
+
+    - name: rospack.reentrant
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.reentrant
+      expected-outcome: True
+    - name: rospack.multiple_rospack_objects
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.multiple_rospack_objects
+      expected-outcome: True
+    - name: rospack.deduplicate_tokens
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.deduplicate_tokens
+      expected-outcome: True
+    - name: rospack.env_change
+      command: rosrun rospack rospack-utest --gtest-filter=rospack.env_change
+      expected-outcome: True
+
+    - name: Time.size
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.size
+      expected-outcome: True
+    - name: Time.Comparitors
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.Comparitors
+      expected-outcome: True
+    - name: Time.ToFromDouble
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.ToFromDouble
+      expected-outcome: True
+    - name: Time.RoundingError
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.RoundingError
+      expected-outcome: True
+    - name: Time.OperatorPlus
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlus
+      expected-outcome: True
+    - name: Time.OperatorMinus
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinus
+      expected-outcome: True
+    - name: Time.OperatorPlusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorPlusEquals
+      expected-outcome: True
+    - name: Time.OperatorMinusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.OperatorMinusEquals
+      expected-outcome: True
+    - name: Time.SecNSecConstructor
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.SecNSecConstructor
+      expected-outcome: True
+    - name: Time.DontMungeStreamState
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.DontMungeStreamState
+      expected-outcome: True
+    - name: Time.ToFromBoost
+      command: rosrun rostime rostime-test_time --gtest_filter=Time.ToFromBoost
+      expected-outcome: True
+    - name: Duration.Comparitors
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.Comparitors
+      expected-outcome: True
+    - name: Duration.ToFromSec
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.ToFromSec
+      expected-outcome: True
+    - name: Duration.OperatorPlus
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlus
+      expected-outcome: True
+    - name: Duration.OperatorMinus
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinus
+      expected-outcome: True
+    - name: Duration.OperatorTimes
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorTimes
+      expected-outcome: True
+    - name: Duration.OperatorPlusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorPlusEquals
+      expected-outcome: True
+    - name: Duration.OperatorMinusEquals
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.OperatorMinusEquals
+      expected-outcome: True
+    - name: Duration.sleepWithSignal
+      command: rosrun rostime rostime-test_time --gtest_filter=Duration.sleepWithSignal
+      expected-outcome: True
+    - name: Rate.constructFromDuration
+      command: rosrun rostime rostime-test_time --gtest_filter=Rate.constructFromDuration
+      expected-outcome: True
+    - name: Rate.sleep_return_value_true
+      command: rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_true
+      expected-outcome: True
+    - name: Rate.sleep_return_value_false
+      command: rosrun rostime rostime-test_time --gtest_filter=Rate.sleep_return_value_false
+      expected-outcome: True
+    - name: WallRate.constructFromDuration
+      command: rosrun rostime rostime-test_time --gtest_filter=WallRate.constructFromDuration
+      expected-outcome: True
+
+    - name: tf2_ros.transform_listener_time_reset_test
+      command: rostest -t tf2_ros transform_listener_time_reset_test.launch
+      expected-outcome: True
+      time-limit: 10
+    - name: tf2_ros.transform_listener_unittest
+      command: rostest -t tf2_ros transform_listener_unittest.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: tf2_kdl.test_python
+      command: rostest -t tf2_kdl test_python.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: tf2_kdl.test
+      command: rostest -t tf2_kdl test.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: tf.test_message_filter
+      command: rostest -t tf test_message_filter.xml
+      expected-outcome: True
+      time-limit: 6
+    - name: tf.transform_listener_unittest
+      command: rostest -t tf transform_listener_unittest.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: tf.test_broadcaster
+      command: rostest -t tf test_broadcaster.launch
+      expected-outcome: True
+      time-limit: 8
+
+    - name: actionlib.ref_server_test
+      command: rostest -t actionlib ref_server_test.launch
+      expected-outcome: True
+      time-limit: 8
+    - name: actionlib.simple_execute_ref_server_test
+      command: rostest -t actionlib simple_execute_ref_server_test.launch
+      expected-outcome: True
+      time-limit: 15
+    - name: actionlib.test_python_simple_client
+      command: rostest -t actionlib test_python_simple_client.launch
+      expected-outcome: True
+      time-limit: 8
+    - name: actionlib.test_cpp_simple_client_allocator
+      command: rostest -t actionlib test_cpp_simple_client_allocator.launch
+      expected-outcome: True
+      time-limit: 8
+    - name: actionlib.test_cpp_action_client_destruction
+      command: rostest -t actionlib test_cpp_action_client_destruction.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: actionlib.test_server_goal_handle_destruction
+      command: rostest -t actionlib test_server_goal_handle_destruction.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: actionlib.test_cpp_simple_client_cancel_crash
+      command: rostest -t actionlib test_cpp_simple_client_cancel_crash.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: actionlib.test_imports
+      command: rostest -t actionlib test_imports.launch
+      expected-outcome: True
+      time-limit: 5
+    - name: actionlib.test_python_server_components
+      command: rostest -t actionlib test_python_server_components.launch
+      expected-outcome: True
+      time-limit: 10
+    # FIXME fails on baseline A
+    # - name: actionlib.test_python_server.
+    #   command: rostest -t actionlib test_python_server.launch
+    #   expected-outcome: True
+    #   time-limit: 20
+    - name: actionlib.test_python_server2
+      command: rostest -t actionlib test_python_server2.launch
+      expected-outcome: True
+      time-limit: 6
+    - name: actionlib.test_python_server3
+      command: rostest -t actionlib test_python_server3.launch
+      expected-outcome: True
+      time-limit: 15
+    - name: actionlib.test_python_simple_server
+      command: rostest -t actionlib test_python_simple_server.launch
+      expected-outcome: True
+      time-limit: 10
+    # FIXME BORKO?
+    # - name: actionlib.test_exercise_simple_clients
+    #   command: rostest -t actionlib test_exercise_simple_clients.launch
+    #   expected-outcome: True
+    #   time-limit: 40
+    - name: actionlib.test_simple_action_server_deadlock_python
+      command: rostest -t actionlib test_simple_action_server_deadlock_python.launch
+      expected-outcome: True
+      time-limit: 120
+
+    - name: capabilities.test_client_module
+      command: rostest -t capabilities test_client_module.test
+      expected-outcome: True
+      time-limit: 10
+    - name: capabilities.test_launch_manager
+      command: rostest -t capabilities test_launch_manager.test
+      time-limit: 90
+    - name: capabilities.test_client
+      command: rostest -t capabilities test_client.test
+      time-limit: 60
+    - name: capabilities.test_default_provider
+      command: rostest -t capabilities test_default_provider.test
+      time-limit: 45
+    - name: capabilities.test_dependent_capabilities
+      command: rostest -t capabilities test_dependent_capabilities.test
+      time-limit: 90
+    - name: capabilities.test_invalid_specs
+      command: rostest -t capabilities test_invalid_specs.test
+      time-limit: 10
+    - name: capabilities.test_package_white_black_lists
+      command: rostest -t capabilities test_package_white_black_lists.test
+      time-limit: 40
+    - name: capabilities.test_remapping
+      command: rostest -t capabilities test_remapping.test
+      time-limit: 40
+    - name: capabilities.test_ros_services
+      command: rostest -t capabilities test_ros_services.test
+      time-limit: 30
+    - name: capabilities.test_white_black_lists
+      command: rostest -t capabilities test_white_black_lists.test
+      time-limit: 40
+    - name: capabilities.test_spec_index_from_service
+      command: rostest -t capabilities test_spec_index_from_service.test
+      time-limit: 40
+
+    # FIXME weird
+    # - name: diagnostic_aggregator.test_agg
+    #   command: rostest -t diagnostic_aggregator test_agg.launch
+    #   time-limit: 10
+    - name: diagnostic_aggregator.test_add_agg
+      command: rostest -t diagnostic_aggregator test_add_agg.launch
+      time-limit: 60
+    - name: diagnostic_aggregator.test_loader
+      command: rostest -t diagnostic_aggregator test_loader.launch
+      time-limit: 5
+    - name: diagnostic_aggregator.test_expected_stale
+      command: rostest -t diagnostic_aggregator test_expected_stale.launch
+      time-limit: 30
+    - name: diagnostic_aggregator.test_multiple_match
+      command: rostest -t diagnostic_aggregator test_multiple_match.launch
+      time-limit: 30
+    - name: diagnostic_updater.diagnostic_updater_fast_test
+      command: rostest -t diagnostic_updater diagnostic_updater_fast_test.xml
+      time-limit: 10
+
+    # FIXME borko?
+    # - name: dynamic_reconfigure.test_cpp_simple_client
+    #   command: rostest -t dynamic_reconfigure test_cpp_simple_client.launch
+    #   time-limit: 10
+    - name: dynamic_reconfigure.test_python_simple_client
+      command: rostest -t dynamic_reconfigure test_python_simple_client.launch
+      time-limit: 15
+
+    - name: camera_info_manager.unit_test
+      command: rostest -t camera_info_manager unit_test.test
+      time-limit: 10
+
+    # FIXME failing on baseline A
+    # - name: kdl_parser.test_kdl_parser
+    #   command: rostest -t kdl_parser test_kdl_parser.launch
+    - name: kdl_parser.test_inertia_rpy
+      command: rostest -t kdl_parser test_inertia_rpy.launch
+      time-limit: 5
+
+    - name: amcl.set_initial_pose
+      command: rostest -t amcl set_initial_pose.xml
+      time-limit: 140
+    - name: amcl.set_initial_pose_delayed
+      command: rostest -t amcl set_initial_pose_delayed.xml
+      time-limit: 140
+    - name: amcl.basic_localization_stage
+      command: rostest -t amcl basic_localization_stage.xml
+      time-limit: 140
+    - name: amcl.small_loop_prf
+      command: rostest -t amcl small_loop_prf.xml
+      time-limit: 140
+    - name: amcl.small_loop_crazy_driving_prg
+      command: rostest -t amcl small_loop_crazy_driving_prg.xml
+      time-limit: 140
+    - name: amcl.texas_greenroom_loop
+      command: rostest -t amcl texas_greenroom_loop.xml
+      time-limit: 140
+    - name: amcl.rosie_multilaser
+      command: rostest -t amcl rosie_multilaser.xml
+      time-limit: 160
+    - name: amcl.texas_willow_hallway_loop
+      command: rostest -t amcl texas_willow_hallway_loop.xml
+      time-limit: 300
+
+    # FIXME urgh, this one is annoying -- fails but exits with code 0
+    - name: clear_costmap_recovery.clear_tests
+      command: rostest -t clear_costmap_recovery clear_tests.launch
+      time-limit: 15
+
+    - name: map_server.rtest
+      command: rostest -t map_server rtest.xml
+      time-limit: 10
+
+    # FIXME urgh, this one is annoying -- fails but exits with code 0
+    - name: costmap_2d.footprint_tests
+      command: rostest -t costmap_2d footprint_tests.launch
+      time-limit: 10
+    - name: costmap_2d.inflation_tests
+      command: rostest -t costmap_2d inflation_tests.launch
+      time-limit: 10
+    - name: costmap_2d.obstacle_tests
+      command: rostest -t costmap_2d obstacle_tests.launch
+      time-limit: 15
+    - name: costmap_2d.simple_driving_test
+      command: rostest -t costmap_2d simple_driving_test.xml
+      time-limit: 100
+    - name: costmap_2d.static_tests
+      command: rostest -t costmap_2d static_tests.launch
+      time-limit: 5
+
+    # FIXME flaky?
+    # - name: robot_pose_ekf.test_robot_pose_ekf
+    #   command: rostest -t robot_pose_ekf test_robot_pose_ekf.launch
+    #   time-limit: 90
+    - name: robot_pose_ekf.test_robot_pose_ekf_zero_covariance
+      command: rostest -t robot_pose_ekf test_robot_pose_ekf_zero_covariance.launch
+      time-limit: 60
+
+    - name: rgbd_launch.camera
+      command: rostest -t rgbd_launch camera.test
+      time-limit: 40
+
+    # FIXME fails on baseline A
+    #- name: robot_state_publisher.test_one_link
+    #  command: rostest -t robot_state_publisher test_one_link.launch
+    #- name: robot_state_publisher.test_two_links_fixed_joint
+    #  command: rostest -t robot_state_publisher test_two_links_fixed_joint.launch
+    #- name: robot_state_publisher.test_two_links_moving_joint
+    #  command: rostest -t robot_state_publisher test_two_links_moving_joint.launch
+    #- name: robot_state_publisher.test_joint_states_bag
+    #  command: rostest -t robot_state_publisher test_joint_states_bag.launch
+    #
+    - name: message_filters.time_sequencer_unittest
+      command: rostest -t message_filters time_sequencer_unittest.xml
+      time-limit: 6
+    - name: message_filters.test_subscriber
+      command: rostest -t message_filters test_subscriber.xml
+      time-limit: 6
+
+    - name: rospy_tutorials.test-add-two-ints
+      command: rostest -t rospy_tutorials test-add-two-ints.launch
+      time-limit: 8
+    - name: rospy_tutorials.test-peer-subscribe-notify
+      command: rostest -t rospy_tutorials test-peer-subscribe-notify.launch
+      time-limit: 8
+    - name: rospy_tutorials.test-talker-listener
+      command: rostest -t rospy_tutorials test-talker-listener.launch
+      time-limit: 8
+    - name: rospy_tutorials.test-on-shutdown
+      command: rostest -t rospy_tutorials test-on-shutdown.launch
+      time-limit: 10
+    - name: rospy_tutorials.test-connection-header
+      command: rostest -t rospy_tutorials test-connection-header.launch
+      time-limit: 20
+
+        # FIXME
+        # root@acd661a1cbd5:/ros_ws# rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
+        # Note: Google Test filter = ConvertTest.testExceptions
+        # [==========] Running 1 test from 1 test case.
+        # [----------] Global test environment set-up.
+        # [----------] 1 test from ConvertTest
+        # [ RUN      ] ConvertTest.testExceptions
+        # libtest: /usr/include/boost/smart_ptr/shared_ptr.hpp:653: typename boost::detail::sp_member_access<T>::type boost::shared_ptr<T>::operator->() const [with T = sensor_msgs::Image_<std::allocator<void> >; typename boost::detail::sp_member_access<T>::type = sensor_msgs::Image_<std::allocator<void> >*]: Assertion `px != 0' failed.
+        # /ros_ws/devel/bin/rosrun: line 4:    86 Aborted                 (core dumped) "/ros_ws/src/ros/rosbash/scripts/rosrun" "$@"
+        #
+        #    - name: ConvertTest.setupLibrary
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.setupLibrary
+        #      expected-outcome: True
+        #      time-limit: 3
+        #    - name: ConvertTest.testExceptions
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testExceptions
+        #      expected-outcome: True
+        #      time-limit: 3
+        #    - name: ConvertTest.testScanHeight
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testScanHeight
+        #      expected-outcome: True
+        #      time-limit: 3
+        #    - name: ConvertTest.testRandom
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testRandom
+        #      expected-outcome: True
+        #      time-limit: 3
+        #    - name: ConvertTest.testNaN
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testNaN
+        #      expected-outcome: True
+        #      time-limit: 3
+        #    - name: ConvertTest.testPositiveInf
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testPositiveInf
+        #      expected-outcome: True
+        #      time-limit: 3
+        #    - name: ConvertTest.testNegativeInf
+        #      command: rosrun depthimage_to_laserscan libtest --gtest_filter=ConvertTest.testNegativeInf
+        #      expected-outcome: True
+        #      time-limit: 3
+        #

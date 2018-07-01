@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional, Callable, Iterator
+from typing import List, Tuple, Optional, Callable, Iterator, Dict, Any
 from timeit import default_timer as timer
 from enum import Enum
 import threading
@@ -8,6 +8,7 @@ import datetime
 import os
 import yaml
 import random
+import concurrent.futures
 
 import rooibos
 import boggart
@@ -20,8 +21,11 @@ import darjeeling.transformation
 from bugzoo.exceptions import BugZooException
 from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
+from bugzoo.core.test import TestCase
+from bugzoo.core.spectra import Spectra
 from bugzoo.core.fileline import FileLine, FileLineSet
-from bugzoo.core.coverage import TestSuiteCoverage
+from bugzoo.core.coverage import TestSuiteCoverage, TestCoverage
+from bugzoo.util import indent
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
@@ -31,15 +35,16 @@ from darjeeling.generator import RooibosGenerator
 
 from .problem import Problem
 from .exceptions import *
+from .snapshot import fetch_baseline_snapshot, fetch_instrumentation_snapshot
+from .blacklist import is_file_mutable
+from .coverage import load_baseline_coverage, compute_mutant_coverage
+from .donor import load_pool
+from .liveness import mutant_fails_test
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
 
 __all__ = ['Orchestrator', 'OrchestratorState', 'OrchestratorOutcome']
-
-BASE_IMAGE_NAME = 'mars:base'
-__BASELINE_SNAPSHOT = None  # type: Optional[Snapshot]
-__INSTRUMENTATION_SNAPSHOT = None  # type: Optional[Snapshot]
 
 # a list of the names of supported mutation operators
 OPERATOR_NAMES = [
@@ -51,28 +56,6 @@ OPERATOR_NAMES = [
     'delete-conditional-control-flow',
     'flip-signedness'
 ]
-
-
-def fetch_baseline_snapshot(bz: bugzoo.client.Client) -> Snapshot:
-    fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
-    with open(fn, 'r') as f:
-        desc = yaml.load(f)
-    desc['source'] = None
-    snapshot = Snapshot.from_dict(desc)
-    bz.bugs.register(snapshot)
-    return snapshot
-
-
-def fetch_instrumentation_snapshot(bz: bugzoo.client.Client) -> Snapshot:
-    fn = os.path.join(os.path.dirname(__file__), 'baseline.yml')
-    with open(fn, 'r') as f:
-        desc = yaml.load(f)
-    desc['source'] = None
-    desc['name'] = 'mars:instrument'
-    desc['image'] = 'cmumars/cp2:instrument'
-    snapshot = Snapshot.from_dict(desc)
-    bz.bugs.register(snapshot)
-    return snapshot
 
 
 class OrchestratorState(Enum):
@@ -173,7 +156,6 @@ class Orchestrator(object):
         self.__searcher = None  # type: Optional[Searcher]
         self.__localization = None  # type: Optional[Localization]
         self.__coverage_for_mutant = None  # type: Optional[TestSuiteCoverage]
-        self.__coverage_for_baseline = None  # type: Optional[TestSuiteCoverage]
         self.__baseline = \
             fetch_baseline_snapshot(self.__client_bugzoo)
         self.__baseline_with_instrumentation = \
@@ -181,13 +163,9 @@ class Orchestrator(object):
 
         logger.info("fetching coverage information for Baseline A.")
         self.__coverage_for_baseline = \
-            self.__client_bugzoo.bugs.coverage(self.__baseline)
-        logger.debug("restricting to mutable files")
-        lines = self.__coverage_for_baseline.lines
-        files = [fn for fn in lines.files if self.__is_file_mutable(fn)]
-        logger.debug("mutable files: %s", files)
-        self.__coverage_for_baseline = \
-            self.__coverage_for_baseline.restricted_to_files(files)
+            load_baseline_coverage()  # type: TestSuiteCoverage
+        logger.debug("mutable files: %s",
+                     self.__coverage_for_baseline.lines.files)
         logger.info("fetched coverage information for Baseline A.")
         logger.info("line coverage for Baseline A: %d lines", len(self.lines))
 
@@ -237,24 +215,6 @@ class Orchestrator(object):
         under test.
         """
         return self.__client_bugzoo
-
-    def __is_file_mutable(self, fn: str) -> bool:
-        """
-        Determines whether a given source code file may be the subject of
-        perturbation on the basis of its name.
-        """
-        if not fn.endswith('.cpp'):
-            return False
-
-        #
-        # TODO: ignore blacklisted files (e.g., Gazebo, ROS core code)
-        #
-        blacklist = [
-            'src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_subscribers.cpp',
-            'src/rospack/src/rospack.cpp',
-            'src/ros_comm/xmlrpcpp/src/XmlRpcUtil.cpp'
-        ]
-        return fn not in blacklist
 
     @property
     def files(self) -> List[str]:
@@ -366,7 +326,11 @@ class Orchestrator(object):
         logger.debug("Using perturbation operators: %s",
                      [op.name for op in operators])
 
-        restrict_to_lines = None if line_num is None else [line_num]
+        if line_num is None:
+            restrict_to_lines = [l.num for l in self.lines[filename]]
+        else:
+            restrict_to_lines = [line_num]
+
         generator_mutations = \
             boggartd.mutations(baseline,
                                filepath=filename,
@@ -387,65 +351,6 @@ class Orchestrator(object):
                                    self.__searcher.outcomes[patch],
                                    str(patch.to_diff(self.__problem)))
 
-    def _check_liveness(self, mutant: Mutant) -> None:
-        """
-        Determines whether a given mutant is killed by the test suite.
-        """
-        mgr_ctr = self.__client_bugzoo.containers
-        snapshot = self.__client_bugzoo.bugs[mutant.snapshot]
-        logger.info("Ensuring that mutant fails at least one test")
-        try:
-            killed = False
-            container = mgr_ctr.provision(snapshot)
-            for test in snapshot.tests:
-                outcome = mgr_ctr.test(container, test)
-                if not outcome.passed:
-                    killed = True
-                    break
-            if not killed:
-                logger.info("Mutant was not killed by any of the test cases")
-                raise NeutralPerturbation
-        finally:
-            del mgr_ctr[container.uid]
-        logger.info("Verified that mutant fails at least one test")
-
-    def _compute_coverage(self, mutant: Mutant) -> TestSuiteCoverage:
-        """
-        Attempts to compute coverage information for a given mutant.
-        """
-        bgrt = self.__client_boggart
-        bgz = self.__client_bugzoo
-
-        logger.info("computing coverage for mutant: %s", mutant)
-        logger.debug("generating diff for mutant: %s", mutant)
-        diff = bgrt.mutations_to_diff(self.__baseline, mutant.mutations)
-        logger.debug("generated diff for mutant: %s", mutant)
-        container = None
-        try:
-            container = bgz.containers.provision(self.__baseline_with_instrumentation)
-            logger.debug("applying diff to instrumented container")
-            bgz.containers.patch(container, diff)
-            logger.debug("rebuilding program")
-            t_start = timer()
-            bgz.containers.exec(container,
-                                'catkin build',
-                                context='/ros_ws')
-            t_running = timer() - t_start
-            logger.debug("rebuilt program (took %.2f seconds)", t_running)
-            logger.debug("computing coverage")
-            coverage = bgz.containers.coverage(container, instrument=False)
-            logger.debug("computed coverage")
-        except BugZooException:
-            raise FailedToComputeCoverage
-        finally:
-            if container is not None:
-                del bgz.containers[container.uid]
-        logger.debug("restricting coverage to mutable files")
-        coverage = coverage.restricted_to_files(self.files)
-        logger.debug("restricted coverage to mutable files")
-        logger.info("computed coverage for mutant: %s", mutant)
-        return coverage
-
     def _build_problem(self, perturbation: Mutation) -> Problem:
         """
         Transforms the scenario into a repair problem.
@@ -455,7 +360,10 @@ class Orchestrator(object):
                 computing process.
         """
         try:
-            self.__coverage_for_mutant = self._compute_coverage(perturbation)
+            self.__coverage_for_mutant = \
+                compute_mutant_coverage(self.__client_bugzoo,
+                                        self.__client_boggart,
+                                        perturbation)
             problem = \
                 Problem(self.__client_bugzoo,
                         self.__client_rooibos,
@@ -502,7 +410,8 @@ class Orchestrator(object):
                     mutant = boggartd.mutate(baseline, [perturbation])
                     snapshot = bz.bugs[mutant.snapshot]
                     logger.info("Generated mutant snapshot: %s", snapshot)
-                    self._check_liveness(mutant)
+                    if not mutant_fails_test(bz, boggartd, mutant):
+                        raise NeutralPerturbation
                     self.__problem = self._build_problem(mutant)
                     self.__state = OrchestratorState.READY_TO_ADAPT
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
@@ -538,14 +447,26 @@ class Orchestrator(object):
                 localization.
         """
         def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
-            return 1.0 if nf == 0 else 0.0
+            # FIXME greedy!
+            # return 1.0 if nf == 0 and ep == 0 else 0.0
+            logger.debug("SUSPICIOUSNESS: (%d, %d, %d, %d)",
+                         ep, np, ef, nf)
+            if nf != 0:
+                return 0.0
+            return np / (ep + np + 1)
+            # return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
+        logger.info("passing coverage:\n%s", problem.coverage.passing)
+        logger.info("failing coverage:\n%s", problem.coverage.failing)
+        logger.info("spectra:\n%s", Spectra.from_coverage(problem.coverage))
         try:
             localization = Localization.build(problem, suspiciousness)
         except darjeeling.exceptions.NoImplicatedLines:
             raise FailedToComputeCoverage
-        logger.info("computed fault localization (%d files, %d lines)",
-                    len(localization.files), len(localization))
+        logger.info("computed fault localization (%d files, %d lines):\n%s",
+                    len(localization.files), len(localization), localization)
+        lines = FileLineSet.from_list([l for l in localization])
+        logger.info("suspicious lines:\n%s", indent(repr(lines), 2))
         return localization
 
     def _construct_search_space(self,
@@ -581,7 +502,9 @@ class Orchestrator(object):
             #darjeeling.transformation.ApplyTransformation
         ]
         logger.info("constructing search space")
+        snippets = load_pool()
         transformations = RooibosGenerator(problem,
+                                           snippets,
                                            localization,
                                            schemas)
         candidates = \
