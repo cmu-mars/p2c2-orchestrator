@@ -42,7 +42,47 @@ def is_file_mutable(fn: str) -> bool:
         'src/geometry2/tf2_ros/test',
         'src/navigation/navfn/test',
         'src/geometry2/tf2_py',
+        'src/navigation/map_server/test/rtest.cpp',
 
-        'src/stage_ros'
+
+        # no perturbations
+        'src/bond_core/bondcpp',
+        'src/dynamic_reconfigure/src/dynamic_reconfigure_config_init_mutex.cpp',
+        'src/kdl_parser',
+        'src/kobuki/kobuki_safety_controller/src/nodelet.cpp',
+        'src/ros_comm/message_filters/src/connection.cpp',
+        'src/image_common/camera_calibration_parsers/src/parse.cpp',
+        'src/geometry/eigen_conversions/src/eigen_msg.cpp',
+        'src/vision_opencv',
+        'src/image_common/image_transport/src/camera_common.cpp',
+        'src/navigation/rotate_recovery/src/rotate_recovery.cpp',
+        'src/bfl',
+        'src/ros_comm/topic_tools',
+        'src/perception_pcl',
+
+        'src/image_pipeline/depth_image_proc/src/nodelets/convert_metric.cpp',
+        'src/image_pipeline/depth_image_proc/src/nodelets/crop_foremost.cpp',
+
+        'src/orocos_kinematics_dynamics/orocos_kdl/src/chain.cpp',
+
+        'src/nodelet_core/nodelet/src/nodelet_class.cpp',
+
+        # out of scope
+        'src/ecl_core/ecl_threads',
+        'src/bfl/src/wrappers/rng',
+        'src/ros_comm/rosout',
+        'src/ros_comm/rosbag',
+        'src/stage_ros',
+        'src/ros_comm/rosconsole',
+        'src/rosconsole_bridge',
+        'src/nodelet_core',
+        'src/roscpp_core/cpp_common',
+
+        # TEMPORARY
+        'src/ros_comm/xmlrpcpp',
+        'src/ros_comm/roscpp/src/libros',
+
+        # misbehaving in baseline A
+        'src/robot_state_publisher'
     ]
     return not any(fn.startswith(b) for b in blacklist)
