@@ -25,6 +25,7 @@ from bugzoo.core.test import TestCase
 from bugzoo.core.spectra import Spectra
 from bugzoo.core.fileline import FileLine, FileLineSet
 from bugzoo.core.coverage import TestSuiteCoverage, TestCoverage
+from bugzoo.util import indent
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
@@ -450,7 +451,10 @@ class Orchestrator(object):
             # return 1.0 if nf == 0 and ep == 0 else 0.0
             logger.debug("SUSPICIOUSNESS: (%d, %d, %d, %d)",
                          ep, np, ef, nf)
-            return 1.0 if nf == 0 else 0.0
+            if nf != 0:
+                return 0.0
+            return np / (ep + np + 1)
+            # return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
         logger.info("passing coverage:\n%s", problem.coverage.passing)
         logger.info("failing coverage:\n%s", problem.coverage.failing)
@@ -459,8 +463,10 @@ class Orchestrator(object):
             localization = Localization.build(problem, suspiciousness)
         except darjeeling.exceptions.NoImplicatedLines:
             raise FailedToComputeCoverage
-        logger.info("computed fault localization (%d files, %d lines)",
-                    len(localization.files), len(localization))
+        logger.info("computed fault localization (%d files, %d lines):\n%s",
+                    len(localization.files), len(localization), localization)
+        lines = FileLineSet.from_list([l for l in localization])
+        logger.info("suspicious lines:\n%s", indent(repr(lines), 2))
         return localization
 
     def _construct_search_space(self,
@@ -471,29 +477,29 @@ class Orchestrator(object):
         Used to compose the sequence of patches that should be attempted.
         """
         schemas = [
-            ## boolean operators
-            #darjeeling.transformation.AndToOr,
-            #darjeeling.transformation.OrToAnd,
-            ## relation operators
-            #darjeeling.transformation.LEToGT,
-            #darjeeling.transformation.GTToLE,
-            #darjeeling.transformation.GEToLT,
-            #darjeeling.transformation.LTToGE,
-            #darjeeling.transformation.EQToNEQ,
-            #darjeeling.transformation.NEQToEQ,
-            ## arithmetic operators
-            #darjeeling.transformation.PlusToMinus,
-            #darjeeling.transformation.MinusToPlus,
-            #darjeeling.transformation.MulToDiv,
-            #darjeeling.transformation.DivToMul,
-            #darjeeling.transformation.SignedToUnsigned,
+            # boolean operators
+            darjeeling.transformation.AndToOr,
+            darjeeling.transformation.OrToAnd,
+            # relation operators
+            darjeeling.transformation.LEToGT,
+            darjeeling.transformation.GTToLE,
+            darjeeling.transformation.GEToLT,
+            darjeeling.transformation.LTToGE,
+            darjeeling.transformation.EQToNEQ,
+            darjeeling.transformation.NEQToEQ,
+            # arithmetic operators
+            darjeeling.transformation.PlusToMinus,
+            darjeeling.transformation.MinusToPlus,
+            darjeeling.transformation.MulToDiv,
+            darjeeling.transformation.DivToMul,
+            darjeeling.transformation.SignedToUnsigned,
             # insert void function call
             # darjeeling.transformation.InsertVoidFunctionCall,
             # insert conditional control flow
             # darjeeling.transformation.InsertConditionalReturn,
             # darjeeling.transformation.InsertConditionalBreak,
             # apply transformation
-            darjeeling.transformation.ApplyTransformation
+            #darjeeling.transformation.ApplyTransformation
         ]
         logger.info("constructing search space")
         snippets = load_pool()
