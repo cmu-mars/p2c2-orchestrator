@@ -83,6 +83,7 @@ def is_file_mutable(fn: str) -> bool:
         'src/ros_comm/roscpp/src/libros',
 
         # misbehaving in baseline A
-        'src/robot_state_publisher'
+        'src/robot_state_publisher',
+        'src/navigation/navfn/src/read_pgm_costmap.cpp'
     ]
     return not any(fn.startswith(b) for b in blacklist)
