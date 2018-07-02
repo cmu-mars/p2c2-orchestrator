@@ -24,7 +24,7 @@ logger.setLevel(logging.DEBUG)
 
 # FIXME
 DONOR_POOL_FN = os.path.join(os.path.dirname(__file__),
-                             'data/transformer.snippets.json')
+                             'data/snippets.json')
 
 
 def extract() -> None:
@@ -42,15 +42,17 @@ def extract() -> None:
                                      files)
         logger.info("stored contents of source files")
 
-        build_guard_pool('guard.snippets.json',
-                         client_rooibos,
-                         sources)
-        build_transformer_pool('transformer.snippets.json',
-                               client_rooibos,
-                               sources)
-        build_void_call_pool('void-call.snippets.json',
-                             client_rooibos,
-                             sources)
+        snippets = SnippetDatabase()
+        build_guard_pool(client_rooibos, sources, snippets)
+        build_transformer_pool(client_rooibos, sources, snippets)
+        build_void_call_pool(client_rooibos, sources, snippets)
+
+        # write to file
+        fn = 'snippets.json'
+        logger.info("writing donor pool to file: %s", fn)
+        with open(fn, 'w') as f:
+            json.dump(snippets.to_dict(), f, indent=2)
+        logger.info("wrote donor pool to file: %s", fn)
 
 
 def load_pool() -> None:
@@ -60,9 +62,9 @@ def load_pool() -> None:
     return snippets
 
 
-def build_guard_pool(dest_fn: str,
-                     client_rooibos: RooibosClient,
-                     sources: ProgramSourceManager
+def build_guard_pool(client_rooibos: RooibosClient,
+                     sources: ProgramSourceManager,
+                     snippets: SnippetDatabase
                      ) -> None:
     schema = "if (:[1])"
     def transformer(match: rooibos.Match
@@ -70,12 +72,13 @@ def build_guard_pool(dest_fn: str,
         content = match.environment['1'].fragment.strip()
         location = match.environment['1'].location
         return (content, location)
-    _build_pool(dest_fn, client_rooibos, sources, schema, transformer)
+    _build_pool(client_rooibos, sources, snippets, schema, transformer,
+                kind='guard')
 
 
-def build_transformer_pool(dest_fn: str,
-                           client_rooibos: RooibosClient,
-                           sources: ProgramSourceManager
+def build_transformer_pool(client_rooibos: RooibosClient,
+                           sources: ProgramSourceManager,
+                           snippets: SnippetDatabase
                            ) -> None:
     constraints = [
         IsSingleTerm('1'),
@@ -88,13 +91,14 @@ def build_transformer_pool(dest_fn: str,
         content = match.environment['2'].fragment.strip()
         location = match.environment['2'].location
         return (content, location)
-    _build_pool(dest_fn, client_rooibos, sources, schema, transformer,
-                constraints=constraints)
+    _build_pool(client_rooibos, sources, snippets, schema, transformer,
+                constraints=constraints,
+                kind='transformer')
 
 
-def build_void_call_pool(dest_fn: str,
-                         client_rooibos: RooibosClient,
-                         sources: ProgramSourceManager
+def build_void_call_pool(client_rooibos: RooibosClient,
+                         sources: ProgramSourceManager,
+                         snippets: SnippetDatabase
                          ) -> None:
     constraints = [
         IsSingleTerm('1'),
@@ -106,17 +110,19 @@ def build_void_call_pool(dest_fn: str,
         content = match.environment['1'].fragment.strip()
         location = match.environment['1'].location
         return (content, location)
-    _build_pool(dest_fn, client_rooibos, sources, schema, transformer,
-                constraints=constraints)
+    _build_pool(client_rooibos, sources, snippets, schema, transformer,
+                constraints=constraints,
+                kind='void-call')
 
 
-def _build_pool(dest_fn: str,
-                client_rooibos: RooibosClient,
+def _build_pool(client_rooibos: RooibosClient,
                 sources: ProgramSourceManager,
+                snippets: SnippetDatabase,
                 schema: str,
                 transformer: Callable[[rooibos.Match], Tuple[str, rooibos.LocationRange]],
                 *,
-                constraints: Optional[List[Constraint]] = None
+                constraints: Optional[List[Constraint]] = None,
+                kind: Optional[str] = None
                 ) -> None:
     # build a constraint checker
     if constraints is None:
@@ -140,7 +146,6 @@ def _build_pool(dest_fn: str,
 
         return True
 
-    snippets = SnippetDatabase()
     logger.info("finding snippets")
     for fn in sources.files:
         file_content = sources.read_file(fn)
@@ -156,14 +161,9 @@ def _build_pool(dest_fn: str,
                                  loc_range_rooibos.stop.col)
             snippet_location = FileLocationRange(fn, loc_start, loc_stop)
             snippets.add(snippet_content,
-                         origin=snippet_location)
+                         origin=snippet_location,
+                         kind=kind)
             logger.info("found snippet in file (%s): %s",
                         fn, snippet_content)
         logger.info("found all snippets in file: %s", fn)
-
     logger.info("found %d snippets", len(snippets))
-
-    logger.info("dumping snippets to file")
-    with open(dest_fn, 'w') as f:
-        json.dump(snippets.to_dict(), f, indent=2)
-    logger.info("dumped snippets to file")

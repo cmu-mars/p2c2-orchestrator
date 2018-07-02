@@ -38,8 +38,8 @@ from .exceptions import *
 from .snapshot import fetch_baseline_snapshot, fetch_instrumentation_snapshot
 from .blacklist import is_file_mutable
 from .coverage import load_baseline_coverage, compute_mutant_coverage
-from .donor import load_pool
 from .liveness import mutant_fails_test
+from .space import build_search_space
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
@@ -469,49 +469,6 @@ class Orchestrator(object):
         logger.info("suspicious lines:\n%s", indent(repr(lines), 2))
         return localization
 
-    def _construct_search_space(self,
-                                problem: Problem,
-                                localization: Localization
-                                ) -> Iterator[Candidate]:
-        """
-        Used to compose the sequence of patches that should be attempted.
-        """
-        schemas = [
-            # boolean operators
-            darjeeling.transformation.AndToOr,
-            darjeeling.transformation.OrToAnd,
-            # relation operators
-            darjeeling.transformation.LEToGT,
-            darjeeling.transformation.GTToLE,
-            darjeeling.transformation.GEToLT,
-            darjeeling.transformation.LTToGE,
-            darjeeling.transformation.EQToNEQ,
-            darjeeling.transformation.NEQToEQ,
-            # arithmetic operators
-            darjeeling.transformation.PlusToMinus,
-            darjeeling.transformation.MinusToPlus,
-            darjeeling.transformation.MulToDiv,
-            darjeeling.transformation.DivToMul,
-            darjeeling.transformation.SignedToUnsigned,
-            # insert void function call
-            # darjeeling.transformation.InsertVoidFunctionCall,
-            # insert conditional control flow
-            # darjeeling.transformation.InsertConditionalReturn,
-            # darjeeling.transformation.InsertConditionalBreak,
-            # apply transformation
-            #darjeeling.transformation.ApplyTransformation
-        ]
-        logger.info("constructing search space")
-        snippets = load_pool()
-        transformations = RooibosGenerator(problem,
-                                           snippets,
-                                           localization,
-                                           schemas)
-        candidates = \
-            darjeeling.generator.SingleEditPatches(transformations)
-        logger.info("constructed search space")
-        return candidates
-
     def adapt(self,
               *,
               minutes: Optional[float] = None,
@@ -558,9 +515,8 @@ class Orchestrator(object):
                 try:
                     problem = self.__problem
                     assert self.__localization is not None
-                    candidates = \
-                        self._construct_search_space(problem,
-                                                     self.__localization)
+                    candidates = build_search_space(problem,
+                                                    self.__localization)
                     logger.debug("constructing search mechanism")
                     self.__searcher = Searcher(bugzoo=self.__client_bugzoo,
                                                problem=problem,
