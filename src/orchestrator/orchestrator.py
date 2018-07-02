@@ -399,7 +399,7 @@ class Orchestrator(object):
             if self.state != OrchestratorState.READY_TO_PERTURB:
                 logger.warning("System is not ready to be perturbed [state: %s]",  # noqa: pycodestyle
                                str(self.state))
-                raise NotReadyToPerturb()
+                raise NotReadyToPerturb
 
             mutant = None
             self.__state = OrchestratorState.PERTURBING
@@ -416,7 +416,7 @@ class Orchestrator(object):
                     self.__state = OrchestratorState.READY_TO_ADAPT
                     logger.info("Transformed perturbed code into a repair problem.")  # noqa: pycodestyle
                 except OrchestratorError:
-                    raise
+                    raise NeutralPerturbation
                 except Exception as e:
                     raise UnexpectedError(e)
             except OrchestratorError:
