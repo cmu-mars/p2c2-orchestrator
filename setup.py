@@ -16,6 +16,7 @@ setup(
         'bugzoo>=2.1.12',
         'boggart>=0.1.10',
         'rooibos>=0.3.0',
+        'kaskara>=0.0.1',
         'requests',
         'flask'
     ],
