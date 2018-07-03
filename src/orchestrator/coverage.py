@@ -100,8 +100,8 @@ def compute_test_coverage(client_bugzoo: BugZooClient,
         lines = lines.filter(lambda ln: is_file_mutable(ln.filename))
         return TestCoverage(test.name, outcome, lines)
     except BugZooException:
-        logger.exception("failed to compute coverage for mutant (%s) on test (%s).",
-                         mutant.uuid, test.name)
+        logger.exception("failed to compute coverage for snapshot (%s) on test (%s).",
+                         snapshot.name, test.name)
         raise FailedToComputeCoverage
     finally:
         if container is not None:
