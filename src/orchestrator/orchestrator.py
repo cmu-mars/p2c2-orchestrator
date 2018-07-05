@@ -32,6 +32,7 @@ from boggart import Mutation
 from boggart.core.mutant import Mutant
 from darjeeling.localization import Localization
 from darjeeling.generator import RooibosGenerator
+from kaskara import Analysis
 
 from .problem import Problem
 from .exceptions import *
@@ -173,25 +174,25 @@ class Orchestrator(object):
         """
         Ensures all resources are safely deallocated.
         """
-        if self.__client_bugzoo:
-            logger.info("destroying all BugZoo containers")
-            try:
-                self.__client_bugzoo.containers.clear()
-                logger.info("destroyed all BugZoo containers")
-            except Exception:
-                logger.exception("failed to destroy BugZoo containers")
-        else:
-            logger.info("skipping BugZoo cleanup: not connected to BugZoo")
-
         if self.__client_boggart:
-            logger.info("destroying all boggart mutants")
+            logger.info("shutting down boggart")
             try:
-                self.__client_boggart.mutants.clear()
-                logger.info("destroyed all boggart mutants")
+                self.__client_boggart.shutdown()
+                logger.info("finished shutting down boggart")
             except Exception:
-                logger.exception("failed to destroy boggart mutants")
+                logger.exception("failed to shutdown boggart")
         else:
             logger.info("skipping boggart cleanup: not connected to boggart")
+
+        if self.__client_bugzoo:
+            logger.info("shutting down BugZoo")
+            try:
+                self.__client_bugzoo.shutdown()
+                logger.info("finished shutting down BugZoo")
+            except Exception:
+                logger.exception("failed to shutdown BugZoo")
+        else:
+            logger.info("skipping BugZoo cleanup: not connected to BugZoo")
 
     @property
     def state(self) -> OrchestratorState:
@@ -360,15 +361,20 @@ class Orchestrator(object):
                 computing process.
         """
         try:
+            snapshot = self.__client_bugzoo.bugs[perturbation.snapshot]
             self.__coverage_for_mutant = \
                 compute_mutant_coverage(self.__client_bugzoo,
                                         self.__client_boggart,
                                         perturbation)
+            covered_files = self.__coverage_for_mutant.failing.lines.files
+            analysis = \
+                Analysis.build(self.__client_bugzoo, snapshot, covered_files)
             problem = \
                 Problem(self.__client_bugzoo,
                         self.__client_rooibos,
                         self.__coverage_for_mutant,
-                        perturbation)
+                        perturbation,
+                        analysis)
             self.__localization = self._compute_localization(problem)
         except Exception:
             self.__localization = None
@@ -459,6 +465,7 @@ class Orchestrator(object):
         logger.info("passing coverage:\n%s", problem.coverage.passing)
         logger.info("failing coverage:\n%s", problem.coverage.failing)
         logger.info("spectra:\n%s", Spectra.from_coverage(problem.coverage))
+        # FIXME this should be independent of Problem
         try:
             localization = Localization.build(problem, suspiciousness)
         except darjeeling.exceptions.NoImplicatedLines:
