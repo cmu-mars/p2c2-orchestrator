@@ -11,6 +11,7 @@ from bugzoo.core.container import Container
 from bugzoo.core.coverage import TestSuiteCoverage
 from bugzoo.cmd import ExecResponse
 from bugzoo.compiler import CompilationOutcome as BuildOutcome
+from kaskara import Analysis
 
 STACKS = [
     'ros_comm',
@@ -59,14 +60,16 @@ class Problem(darjeeling.problem.Problem):
                  client_bugzoo: BugZooClient,
                  client_rooibos: RooibosClient,
                  coverage: TestSuiteCoverage,
-                 mutant: Mutant
+                 mutant: Mutant,
+                 analysis: Analysis
                  ) -> None:
         self.__client_bugzoo = client_bugzoo
         snapshot = client_bugzoo.bugs[mutant.snapshot]
         super().__init__(bz=client_bugzoo,
                          bug=snapshot,
                          coverage=coverage,
-                         client_rooibos=client_rooibos)
+                         client_rooibos=client_rooibos,
+                         analysis=analysis)
 
     def build_patch(self,
                     patch: Patch,
