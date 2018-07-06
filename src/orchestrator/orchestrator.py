@@ -25,7 +25,8 @@ from bugzoo.core.test import TestCase
 from bugzoo.core.spectra import Spectra
 from bugzoo.core.fileline import FileLine, FileLineSet
 from bugzoo.core.coverage import TestSuiteCoverage, TestCoverage
-from bugzoo.util import indent
+from bugzoo.util import report_resource_limits, report_system_resources, \
+                        indent
 from darjeeling.searcher import Searcher
 from darjeeling.candidate import Candidate
 from boggart import Mutation
@@ -131,6 +132,8 @@ class Orchestrator(object):
         logger.info("- using boggart: %s", boggart.__version__)
         logger.info("- using RNG seed: %d", seed)
         logger.info("- using %d threads for evaluation", threads)
+        report_system_resources(logger)
+        report_resource_limits(logger)
 
         self.__callback_progress = callback_progress
         self.__callback_done = callback_done
