@@ -126,7 +126,7 @@ def compute_coverage(client_bugzoo: BugZooClient,
         TestSuiteCoverage({cov.test: cov
                            for cov in test_to_coverage})
     t_running = timer() - t_start
-    logger.debug("computed coverage (took %.2f seconds)", t_running)
+    logger.info("computed coverage (took %.2f seconds)", t_running)
     return coverage
 
 

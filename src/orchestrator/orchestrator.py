@@ -458,16 +458,14 @@ class Orchestrator(object):
         def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
             # FIXME greedy!
             # return 1.0 if nf == 0 and ep == 0 else 0.0
-            logger.debug("SUSPICIOUSNESS: (%d, %d, %d, %d)",
-                         ep, np, ef, nf)
             if nf != 0:
                 return 0.0
             return np / (ep + np + 1)
             # return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
-        logger.info("passing coverage:\n%s", problem.coverage.passing)
-        logger.info("failing coverage:\n%s", problem.coverage.failing)
-        logger.info("spectra:\n%s", Spectra.from_coverage(problem.coverage))
+        logger.debug("passing coverage:\n%s", problem.coverage.passing)
+        logger.debug("failing coverage:\n%s", problem.coverage.failing)
+        # logger.info("spectra:\n%s", Spectra.from_coverage(problem.coverage))
         # FIXME this should be independent of Problem
         try:
             localization = Localization.build(problem, suspiciousness)
