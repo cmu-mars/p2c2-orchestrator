@@ -43,7 +43,8 @@ def is_file_mutable(fn: str) -> bool:
         'src/navigation/navfn/test',
         'src/geometry2/tf2_py',
         'src/navigation/map_server/test/rtest.cpp',
-
+        'src/bfl/test',
+        'src/orocos_kinematics_dynamics/orocos_kdl/tests',
 
         # no perturbations
         'src/bond_core/bondcpp',
@@ -56,7 +57,6 @@ def is_file_mutable(fn: str) -> bool:
         'src/vision_opencv',
         'src/image_common/image_transport/src/camera_common.cpp',
         'src/navigation/rotate_recovery/src/rotate_recovery.cpp',
-        'src/bfl',
         'src/ros_comm/topic_tools',
         'src/perception_pcl',
 
@@ -69,6 +69,7 @@ def is_file_mutable(fn: str) -> bool:
 
         # out of scope
         'src/ecl_core/ecl_threads',
+        'src/bfl/examples',
         'src/bfl/src/wrappers/rng',
         'src/ros_comm/rosout',
         'src/ros_comm/rosbag',
