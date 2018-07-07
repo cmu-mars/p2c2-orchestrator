@@ -334,6 +334,8 @@ class Orchestrator(object):
             restrict_to_lines = [l.num for l in self.lines[filename]]
         else:
             restrict_to_lines = [line_num]
+        logger.info("Looking for perturbations at lines: %s",
+                    restrict_to_lines)
 
         generator_mutations = \
             boggartd.mutations(baseline,
