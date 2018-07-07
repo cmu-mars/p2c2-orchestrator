@@ -371,6 +371,8 @@ class Orchestrator(object):
                 compute_mutant_coverage(self.__client_bugzoo,
                                         self.__client_boggart,
                                         perturbation)
+            self.__localization = \
+                self._compute_localization(self.__coverage_for_mutant)
             covered_files = self.__coverage_for_mutant.failing.lines.files
             analysis = \
                 Analysis.build(self.__client_bugzoo, snapshot, covered_files)
@@ -380,7 +382,6 @@ class Orchestrator(object):
                         self.__coverage_for_mutant,
                         perturbation,
                         analysis)
-            self.__localization = self._compute_localization(problem)
         except Exception:
             self.__localization = None
             self.__coverage_for_mutant = None
@@ -449,7 +450,9 @@ class Orchestrator(object):
         logger.info("Successfully perturbed system using mutation: %s",
                     perturbation)
 
-    def _compute_localization(self, problem: Problem) -> Localization:
+    def _compute_localization(self,
+                              coverage: TestSuiteCoverage
+                              ) -> Localization:
         """
         Computes the fault localization for baseline C.
 
@@ -465,12 +468,10 @@ class Orchestrator(object):
             return np / (ep + np + 1)
             # return 1.0 if nf == 0 else 0.0
         logger.info("computing fault localization")
-        logger.debug("passing coverage:\n%s", problem.coverage.passing)
-        logger.debug("failing coverage:\n%s", problem.coverage.failing)
-        # logger.info("spectra:\n%s", Spectra.from_coverage(problem.coverage))
-        # FIXME this should be independent of Problem
+        logger.debug("passing coverage:\n%s", coverage.passing)
+        logger.debug("failing coverage:\n%s", coverage.failing)
         try:
-            localization = Localization.build(problem, suspiciousness)
+            localization = Localization.from_coverage(coverage, suspiciousness)
         except darjeeling.exceptions.NoImplicatedLines:
             raise FailedToComputeCoverage
         logger.info("computed fault localization (%d files, %d lines):\n%s",
