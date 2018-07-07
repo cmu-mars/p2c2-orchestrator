@@ -15,7 +15,8 @@ def _load_manifest() -> Dict[str, Any]:
     tests = desc['test-harness']['tests']
     for test in tests:
         has_oracle = 'oracle' in test
-        if 'kind' in test and test['kind'] != 'system' and not has_oracle:
+        has_kind = 'kind' in test
+        if not has_kind and not has_oracle:
             test['oracle'] = {'contains': "[  PASSED  ]"}
     desc['source'] = None
     return desc

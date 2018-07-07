@@ -216,6 +216,30 @@ coverage:
     - src/vision_opencv/image_geometry/test/utest.cpp
     - src/yujin_ocs/yocs_virtual_sensor/src/virtual_sensor_node.cpp
     - src/zeroconf_avahi_suite/zeroconf_avahi/src/node/zeroconf.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/framestest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/inertiatest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/iotest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/jacobiandoubletests.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/jacobianframetests.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/jacobiantest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/jacobiantests.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/kinfamtest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/rallnumbertest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/rframestest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/serialchaintest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/solvertest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/test-runner.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/toolkittest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/velocityprofiletest.cpp
+    - src/orocos_kinematics_dynamics/orocos_kdl/tests/zxxzxztest.cpp
+    - src/bfl/tests/model_test.cpp
+    - src/bfl/tests/pdf_test.cpp
+    - src/bfl/tests/smoother_test.cpp
+    - src/bfl/tests/matrixwrapper_test.cpp
+    - src/bfl/tests/complete_filter_test.cpp
+    - src/bfl/tests/model_test_ginac.cpp
+    - src/bfl/tests/ekf_test.cpp
+    - src/bfl/tests/sample_test.cpp
 languages:
 - cpp
 compiler:
@@ -228,6 +252,60 @@ test-harness:
   time-limit: 3
   context: /ros_ws
   tests:
+    - name: bfl.complete_filter
+      command: /ros_ws/build/bfl/tests/test_complete_filter
+      kind: cppunit
+      time-limit: 15
+    - name: bfl.ekf
+      command: /ros_ws/build/bfl/tests/test_ekf
+      kind: cppunit
+      time-limit: 2
+    - name: bfl.matrixwrapper
+      command: /ros_ws/build/bfl/tests/test_matrixwrapper
+      kind: cppunit
+      time-limit: 2
+    - name: bfl.model
+      command: /ros_ws/build/bfl/tests/test_model
+      kind: cppunit
+      time-limit: 2
+    - name: bfl.pdf
+      command: /ros_ws/build/bfl/tests/test_pdf
+      kind: cppunit
+      time-limit: 2
+    - name: bfl.sample
+      command: /ros_ws/build/bfl/tests/test_sample
+      kind: cppunit
+      time-limit: 2
+    - name: bfl.smoother
+      command: /ros_ws/build/bfl/tests/test_smoother
+      kind: cppunit
+      time-limit: 2
+
+    - name: orocos_kdl.framestest
+      command: /ros_ws/build/orocos_kdl/tests/framestest
+      kind: cppunit
+      time-limit: 2
+    - name: orocos_kdl.inertiatest
+      command: /ros_ws/build/orocos_kdl/tests/inertiatest
+      kind: cppunit
+      time-limit: 2
+    - name: orocos_kdl.jacobiantest
+      command: /ros_ws/build/orocos_kdl/tests/jacobiantest
+      kind: cppunit
+      time-limit: 2
+    - name: orocos_kdl.kinfamtest
+      command: /ros_ws/build/orocos_kdl/tests/kinfamtest
+      kind: cppunit
+      time-limit: 2
+    - name: orocos_kdl.solvertest
+      command: /ros_ws/build/orocos_kdl/tests/solvertest
+      kind: cppunit
+      time-limit: 2
+    - name: orocos_kdl.velocityprofiletest
+      command: /ros_ws/build/orocos_kdl/tests/velocityprofiletest
+      kind: cppunit
+      time-limit: 2
+
     - name: t1
       command: python3.6 /ros_ws/turtletest/test.py t1
       context: /ros_ws/turtletest
