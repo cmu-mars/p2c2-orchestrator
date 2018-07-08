@@ -1,16 +1,17 @@
 """
 This module is responsible for composing the search space.
 """
-from typing import Iterator
+from typing import Iterator, Type
 import logging
 
 import darjeeling.transformation
-import darjeeling.generator
+from darjeeling.transformation import Transformation, \
+                                      sample_by_localization_and_type
+from darjeeling.candidate import all_single_edit_patches
 from darjeeling.core import FileLine
 from darjeeling.candidate import Candidate
 from darjeeling.problem import Problem
 from darjeeling.localization import Localization
-from darjeeling.generator import RooibosGenerator
 
 from .donor import load_pool
 
@@ -42,14 +43,13 @@ def build_search_space(problem: Problem,
         #darjeeling.transformation.InsertConditionalReturn,
         #darjeeling.transformation.InsertConditionalBreak,
         #darjeeling.transformation.ApplyTransformation
-    ]
+    ]  # type: Type[Transformation]
     logger.info("constructing search space")
     snippets = load_pool()
-    transformations = RooibosGenerator(problem,
-                                       snippets,
-                                       localization,
-                                       schemas)
-    candidates = \
-        darjeeling.generator.SingleEditPatches(transformations)
+    transformations = sample_by_localization_and_type(problem,
+                                                      snippets,
+                                                      localization,
+                                                      schemas)
+    candidates = all_single_edit_patches(transformations)
     logger.info("constructed search space")
     return candidates
