@@ -12,7 +12,7 @@ setup(
     license='mit',
     python_requires='>=3.5',
     install_requires=[
-        'darjeeling>=0.1.9',
+        'darjeeling>=0.1.10',
         'bugzoo>=2.1.14',
         'boggart>=0.1.12',
         'rooibos>=0.3.0',
