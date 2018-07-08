@@ -537,10 +537,17 @@ class Orchestrator(object):
                                                time_limit=time_limit)
                     logger.debug("constructed search mechanism")
                     logger.info("beginning search")
+
                     for patch in self.__searcher:
                         evaluation = self._patch_to_evaluation(patch)
                         self.__patches.append(evaluation)
                         self.__callback_progress(evaluation, self.patches)
+
+                        # NOTE our evaluation outcome can't improve after we've
+                        # found a complete repair, so let's terminate the
+                        # search.
+                        break
+
                     logger.info("finished search")
                     log = [self._patch_to_evaluation(p)
                            for p in self.__searcher.history]
