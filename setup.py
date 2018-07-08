@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'darjeeling>=0.1.9',
         'bugzoo>=2.1.14',
-        'boggart>=0.1.10',
+        'boggart>=0.1.12',
         'rooibos>=0.3.0',
         'kaskara>=0.0.1',
         'requests',
