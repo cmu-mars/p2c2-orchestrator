@@ -42,6 +42,7 @@ from .blacklist import is_file_mutable
 from .coverage import load_baseline_coverage, compute_mutant_coverage
 from .liveness import mutant_fails_test
 from .space import build_search_space
+from .localization import localize
 
 logger = logging.getLogger("orchestrator")  # type: logging.Logger
 logger.addHandler(logging.NullHandler())
@@ -371,11 +372,17 @@ class Orchestrator(object):
                 compute_mutant_coverage(self.__client_bugzoo,
                                         self.__client_boggart,
                                         perturbation)
-            self.__localization = \
-                self._compute_localization(self.__coverage_for_mutant)
+            self.__localization = localize(self.__coverage_for_mutant)
+            self.__coverage_for_mutant = \
+                self.__coverage_for_mutant.restricted_to_files(self.__localization.files)
             covered_files = self.__coverage_for_mutant.failing.lines.files
+            logger.info("performing static analysis (may take a few minutes)")
+            time_start = timer()
             analysis = \
                 Analysis.build(self.__client_bugzoo, snapshot, covered_files)
+            time_taken = timer() - time_start
+            logger.info("finished static analysis (took %.3f seconds)",
+                        time_taken)
             problem = \
                 Problem(self.__client_bugzoo,
                         self.__client_rooibos,
@@ -449,36 +456,6 @@ class Orchestrator(object):
                 raise
         logger.info("Successfully perturbed system using mutation: %s",
                     perturbation)
-
-    def _compute_localization(self,
-                              coverage: TestSuiteCoverage
-                              ) -> Localization:
-        """
-        Computes the fault localization for baseline C.
-
-        Raises:
-            FailedToComputeCoverage: if no lines are implicated by the fault
-                localization.
-        """
-        def suspiciousness(ep: int, np: int, ef: int, nf: int) -> float:
-            # FIXME greedy!
-            # return 1.0 if nf == 0 and ep == 0 else 0.0
-            if nf != 0:
-                return 0.0
-            return np / (ep + np + 1)
-            # return 1.0 if nf == 0 else 0.0
-        logger.info("computing fault localization")
-        logger.debug("passing coverage:\n%s", coverage.passing)
-        logger.debug("failing coverage:\n%s", coverage.failing)
-        try:
-            localization = Localization.from_coverage(coverage, suspiciousness)
-        except darjeeling.exceptions.NoImplicatedLines:
-            raise FailedToComputeCoverage
-        logger.info("computed fault localization (%d files, %d lines):\n%s",
-                    len(localization.files), len(localization), localization)
-        lines = FileLineSet.from_list([l for l in localization])
-        logger.info("suspicious lines:\n%s", indent(repr(lines), 2))
-        return localization
 
     def adapt(self,
               *,
