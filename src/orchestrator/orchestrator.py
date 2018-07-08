@@ -17,7 +17,6 @@ import bugzoo.client
 import bugzoo.exceptions
 import darjeeling
 import darjeeling.outcome
-import darjeeling.transformation
 from bugzoo.exceptions import BugZooException
 from bugzoo.core.container import Container
 from bugzoo.core.bug import Bug as Snapshot
@@ -32,7 +31,6 @@ from darjeeling.candidate import Candidate
 from boggart import Mutation
 from boggart.core.mutant import Mutant
 from darjeeling.localization import Localization
-from darjeeling.generator import RooibosGenerator
 from kaskara import Analysis
 
 from .problem import Problem
@@ -372,7 +370,8 @@ class Orchestrator(object):
                 compute_mutant_coverage(self.__client_bugzoo,
                                         self.__client_boggart,
                                         perturbation)
-            self.__localization = localize(self.__coverage_for_mutant)
+            self.__localization = localize(perturbation,
+                                           self.__coverage_for_mutant)
             self.__coverage_for_mutant = \
                 self.__coverage_for_mutant.restricted_to_files(self.__localization.files)
             covered_files = self.__coverage_for_mutant.failing.lines.files
