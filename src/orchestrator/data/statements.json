@@ -1,0 +1,4301 @@
+[
+  {
+    "contents": "sub_image_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/nodelets/resize.cpp@102:3::102:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_info_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/nodelets/resize.cpp@101:3::101:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "onInitPostProcess();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/nodelets/resize.cpp@85:3::85:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "nodelet_topic_tools::NodeletLazy::onInit();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/nodelets/resize.cpp@75:3::75:45"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_raw_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/nodelets/crop_non_zero.cpp@79:5::79:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "timerCb();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/libimage_proc/advertisement_checker.cpp@84:3::84:12"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!ros::master::getTopics(topic_info)) return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/libimage_proc/advertisement_checker.cpp@49:3::49:50"
+    ],
+    "reads": [
+      "topic_info",
+      "getTopics"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sub_rgb_info_   .unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/register.cpp@125:5::125:35"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_depth_info_ .unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/register.cpp@124:5::124:35"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_rgb_  .unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzrgb.cpp@138:5::138:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_info_.unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi_radial.cpp@177:6::177:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_intensity_.unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi_radial.cpp@176:6::176:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "DataType<sensor_msgs::Image>::value();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/raw_publisher.cpp@85:39::85:76"
+    ],
+    "reads": [
+      "value"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "value();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/raw_publisher.cpp@92:65::92:72",
+      "/ros_ws/src/image_common/image_transport/src/raw_publisher.cpp@86:65::86:72",
+      "/ros_ws/src/image_common/image_transport/src/raw_publisher.cpp@73:65::73:72"
+    ],
+    "reads": [
+      "value"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "MD5Sum<sensor_msgs::Image>::value();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/raw_publisher.cpp@72:39::72:74"
+    ],
+    "reads": [
+      "value"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "info_sub_.unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/camera_subscriber.cpp@71:7::71:30"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "image_pub_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/camera_publisher.cpp@61:7::61:28"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "corr_file_.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@164:7::164:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "vo_file_.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@163:7::163:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "gps_file_.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@162:7::162:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "array.data.setZero();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/jntarray.cpp@110:9::110:29"
+    ],
+    "reads": [
+      "array"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "data.setZero();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/jntarray.cpp@35:9::35:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "cam_info.D.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/camera_calibration_parsers/src/parse_ini.cpp@158:3::158:21"
+    ],
+    "reads": [
+      "cam_info"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "drive_velocities.setIdentity();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner.cpp@979:7::979:37"
+    ],
+    "reads": [
+      "drive_velocities"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "goal_map_.resetPathDist();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner.cpp@927:5::927:30",
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner.cpp@506:7::506:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "cmd_vel_sub[idx].timer.start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@34:3::34:33"
+    ],
+    "reads": [
+      "idx",
+      "operator[]"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "timer_.stop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/libimage_proc/advertisement_checker.cpp@89:3::89:16"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "xml_file.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/urdf/urdf/src/model.cpp@77:5::77:21"
+    ],
+    "reads": [
+      "xml_file"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sleep_time.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/roscpp_core/rostime/src/rate.cpp@148:10::148:28",
+      "/ros_ws/src/roscpp_core/rostime/src/rate.cpp@90:10::90:28"
+    ],
+    "reads": [
+      "sleep_time"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "invalidate();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcValue.cpp@533:9::533:21",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcValue.cpp@220:5::220:17",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcValue.cpp@125:7::125:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "executeRequest();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServerConnection.cpp@185:5::185:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (_introspectionEnabled == enabled)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@253:3::254:11"
+    ],
+    "reads": [
+      "enabled"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sub_intensity_  .unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi.cpp@123:5::123:35"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "acceptConnection();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@143:3::143:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "_methods.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@28:3::28:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "_sources.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcDispatch.cpp@203:5::203:21",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcDispatch.cpp@168:7::168:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "setupConnection();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@355:14::355:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "result.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@147:3::147:17",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@102:3::102:17"
+    ],
+    "reads": [
+      "result"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(thisIt->getSource() == src)\n            break;",
+    "kind": "guarded-break",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcDispatch.cpp@145:11::146:18"
+    ],
+    "reads": [
+      "src",
+      "thisIt",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "XmlRpcSource::close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@352:7::352:28",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@64:3::64:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "removed_connections_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@303:7::303:35",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@194:5::194:33"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "clients_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@171:3::171:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "i->client_->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@167:5::167:24"
+    ],
+    "reads": [
+      "i",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "server_.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@155:3::155:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!success && !conn)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_publisher_link.cpp@182:3::183:11"
+    ],
+    "reads": [
+      "conn",
+      "operator!",
+      "success"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@587:9::587:16",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@432:11::432:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@419:13::419:20",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@281:7::281:14",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@319:5::319:12",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@599:7::599:14",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@488:7::488:14",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@208:5::208:12",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@262:7::262:14",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@83:7::83:14",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@426:11::426:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@498:5::498:12",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@704:5::704:12",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@113:5::113:12",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@527:7::527:14",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@168:7::168:14"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "pub->incrementSequence();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@773:5::773:29"
+    ],
+    "reads": [
+      "pub",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "p->incrementSequence();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@764:5::764:27"
+    ],
+    "reads": [
+      "p",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "pub.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@343:7::343:18"
+    ],
+    "reads": [
+      "pub"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "(*s)->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@149:7::149:23"
+    ],
+    "reads": [
+      "s",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "advertised_topics_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@136:5::136:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "fullNoLock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription_queue.cpp@178:10::178:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "queue_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription_queue.cpp@98:3::98:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "queue_.pop_front();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription_queue.cpp@146:5::146:23",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription_queue.cpp@62:5::62:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "cached_deserializers_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@673:3::673:32",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@605:3::605:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "udp_transport->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@412:7::412:29"
+    ],
+    "reads": [
+      "udp_transport",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "link->drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@314:5::314:17"
+    ],
+    "reads": [
+      "link",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "parent->getMessageDefinition();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber_link.cpp@84:10::84:40"
+    ],
+    "reads": [
+      "parent",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "parent->getDataType();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber_link.cpp@78:10::78:31"
+    ],
+    "reads": [
+      "parent",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "helper_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber.cpp@57:2::57:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber.cpp@42:5::42:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "stats.age_list.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/statistics.cpp@246:5::246:27"
+    ],
+    "reads": [
+      "stats"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "threads_.join_all();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@182:3::182:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "transport_hints_.reliable();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@348:5::348:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/wall_timer.cpp@115:5::115:19",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/timer.cpp@115:5::115:19",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@223:3::223:17"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "member_spinlock.unlock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@179:3::179:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "_disp.exit();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@193:3::193:15",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@62:3::62:15"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (continue_)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@147:3::148:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "publishers_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/publisher.cpp@79:7::79:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "spinlock.owns_lock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@140:10::140:30"
+    ],
+    "reads": [
+      "spinlock"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "odom_file_.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@160:7::160:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "stop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/wall_timer.cpp@42:3::42:9",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/timer.cpp@42:3::42:9",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@134:3::134:9"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "ros::waitForShutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@83:3::83:25"
+    ],
+    "reads": [
+      "waitForShutdown"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "s.start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@81:3::81:12"
+    ],
+    "reads": [
+      "s"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "callFinished();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@248:3::248:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "processNextCall();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@275:3::275:20",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@360:5::360:22",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@161:5::161:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "call_queue_.pop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@294:7::294:24",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@110:5::110:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "boost::this_thread::yield();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@83:7::83:34"
+    ],
+    "reads": [
+      "yield"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "local->finished_condition_.notify_all();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@76:5::76:44"
+    ],
+    "reads": [
+      "local",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "clearCalls();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@175:3::175:15",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@67:3::67:15"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@858:5::858:20"
+    ],
+    "reads": [
+      "sub",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "pub->drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@443:7::443:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_manager.cpp@196:5::196:16"
+    ],
+    "reads": [
+      "pub",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "local_service_clients.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_manager.cpp@129:5::129:34"
+    ],
+    "reads": [
+      "local_service_clients"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl_->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/publisher.cpp@185:5::185:22",
+      "/ros_ws/src/image_common/image_transport/src/camera_publisher.cpp@150:5::150:22",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client.cpp@179:5::179:22"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "server_link_->isValid();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client.cpp@81:10::81:33"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sub_info_ .unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzrgb.cpp@139:5::139:29",
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi.cpp@124:5::124:29",
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/disparity.cpp@113:5::113:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "transport->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service.cpp@64:7::64:25"
+    ],
+    "reads": [
+      "transport",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "subscriptions_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@151:5::151:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "publish_thread_.join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/rosout_appender.cpp@67:3::67:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "node_handle_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server.cpp@54:5::54:25",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber.cpp@56:2::56:22",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publisher.cpp@55:5::55:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "(*i)->drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@134:7::134:19",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_manager.cpp@110:7::110:19",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publication.cpp@321:5::321:17"
+    ],
+    "reads": [
+      "i",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "dropAllConnections();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@154:5::154:25",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_publication.cpp@81:3::81:23",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publication.cpp@154:3::154:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_subscriber_link.cpp@54:3::54:9",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_publisher_link.cpp@286:5::286:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_publisher_link.cpp@173:5::173:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publication.cpp@98:3::98:9",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@93:3::93:9",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_publication.cpp@69:3::69:9",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_publisher_link.cpp@132:5::132:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "createNativePollset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_set.cpp@177:3::177:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "signal();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_set.cpp@155:3::155:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_set.cpp@135:3::135:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_set.cpp@110:5::110:13",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_set.cpp@86:3::86:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "poll_signal_.disconnect_all_slots();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_manager.cpp@79:3::79:38"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (shutting_down_) return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_manager.cpp@70:3::70:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl->unadvertise();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@491:9::491:28",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@477:9::477:28"
+    ],
+    "reads": [
+      "impl",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl->unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@463:9::463:28"
+    ],
+    "reads": [
+      "impl",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@172:5::172:17"
+    ],
+    "reads": [
+      "start"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "destruct();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@127:3::127:13"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "serialized_message_.buf.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/message_deserializer.cpp@81:3::81:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!continue_)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@172:3::173:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "serialized_message_.message.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/message_deserializer.cpp@43:5::43:40"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!pub_color_.getNumSubscribers())\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/nodelets/debayer.cpp@156:3::157:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "subscriber_->drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/intraprocess_subscriber_link.cpp@111:5::111:24"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "cmd_vel_sub[idx].timer.stop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@33:3::33:32"
+    ],
+    "reads": [
+      "idx",
+      "operator[]"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "publisher_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/intraprocess_publisher_link.cpp@95:5::95:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "Time::shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@607:3::607:19"
+    ],
+    "reads": [
+      "shutdown"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "outbox_.pop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_subscriber_link.cpp@204:7::204:20",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport_subscriber_link.cpp@166:7::166:20"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "XMLRPCManager::instance()->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@600:5::600:42"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "poll_manager_->getPollSet().signal();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@759:7::759:43"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ConnectionManager::instance()->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@599:5::599:46"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "initializeSocket();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@94:10::94:28",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@73:10::73:28"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "ServiceManager::instance()->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@597:5::597:43"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::console::shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@582:3::582:27"
+    ],
+    "reads": [
+      "shutdown"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "g_global_queue.get();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@566:10::566:30"
+    ],
+    "reads": [
+      "g_global_queue"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::Time::init();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@354:3::354:20"
+    ],
+    "reads": [
+      "init"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "connections_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@185:3::185:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "functions_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@174:3::174:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "XMLRPCManager::instance()->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@347:3::347:37"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl_->unadvertise();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server.cpp@78:5::78:25",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publisher.cpp@107:5::107:25"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "PollManager::instance()->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@346:3::346:35"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ConnectionManager::instance()->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@345:3::345:41"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "disableAllSignalsInThisThread();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@248:3::248:34",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@187:3::187:34",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_manager.cpp@84:3::84:34",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@277:3::277:34"
+    ],
+    "reads": [
+      "disableAllSignalsInThisThread"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::spinOnce();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@105:5::105:20",
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@95:7::95:22"
+    ],
+    "reads": [
+      "spinOnce"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "input_ss.get();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/array_parser.cpp@83:7::83:21",
+      "/ros_ws/src/navigation/costmap_2d/src/array_parser.cpp@74:7::74:21",
+      "/ros_ws/src/navigation/costmap_2d/src/array_parser.cpp@64:7::64:21"
+    ],
+    "reads": [
+      "input_ss"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "IOTracePop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile.cpp@77:3::77:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile.cpp@68:3::68:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile.cpp@62:3::62:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/trajectory.cpp@68:3::68:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/rotational_interpolation.cpp@77:3::77:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile.cpp@89:3::89:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/rotational_interpolation.cpp@63:3::63:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/rotational_interpolation.cpp@62:3::62:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@159:3::159:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@150:3::150:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@149:3::149:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@239:9::239:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/rotational_interpolation.cpp@70:3::70:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@207:9::207:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@158:3::158:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@186:5::186:17",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@229:9::229:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@141:9::141:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@215:9::215:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@222:9::222:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@275:9::275:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@167:5::167:17",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@137:3::137:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@146:9::146:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/rotational_interpolation.cpp@69:3::69:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@289:5::289:17",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@299:5::299:17",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/rotational_interpolation.cpp@76:3::76:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@306:5::306:17",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@106:3::106:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/trajectory.cpp@69:3::69:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@72:3::72:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@73:3::73:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@244:9::244:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@105:3::105:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/frames_io.cpp@260:9::260:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@85:3::85:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@86:3::86:15",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@136:3::136:15"
+    ],
+    "reads": [
+      "IOTracePop"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl_->image_sub_.getNumPublishers();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/camera_subscriber.cpp@140:21::140:57"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "voxel_grid_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@113:3::113:22",
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@106:3::106:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_->hasPending();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/wall_timer.cpp@131:12::131:31",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/timer.cpp@131:12::131:31"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "clearing_buffers_[i]->lock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@488:5::488:33"
+    ],
+    "reads": [
+      "operator[]",
+      "i",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "udpserver_transport_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection_manager.cpp@99:5::99:33"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!footprint_clearing_enabled_) return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@418:5::418:45"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "publishZeroVelocity();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@981:13::981:34",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@875:7::875:28",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@948:11::948:32",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1185:5::1185:26",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@673:11::673:32",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@972:13::972:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "resetMaps();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@294:3::294:14",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@84:3::84:14",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@615:5::615:16",
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@105:3::105:14",
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@423:3::423:14",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@54:3::54:14"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "tf_error.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@114:5::114:21"
+    ],
+    "reads": [
+      "tf_error"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl_->subscriber_->getNumPublishers();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/subscriber.cpp@122:21::122:59"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "subscriptions_.size();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@886:10::886:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "disable();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@50:3::50:12"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_->stop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/timer.cpp@123:5::123:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/wall_timer.cpp@123:5::123:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@228:3::228:16"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "parent->isLatching();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/intraprocess_subscriber_link.cpp@68:12::68:32"
+    ],
+    "reads": [
+      "parent",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "buffer->lock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@335:3::335:17",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@326:3::326:17",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@309:3::309:17",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@272:3::272:17"
+    ],
+    "reads": [
+      "buffer",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sub_depth_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyz_radial.cpp@146:6::146:27",
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyz.cpp@92:5::92:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "ObstacleLayer::onInitialize();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@57:3::57:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "marking_buffers_[i]->unlock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@475:5::475:34"
+    ],
+    "reads": [
+      "operator[]",
+      "i",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "deleteKernels();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@312:5::312:20"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "s.M.setZero();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/chainidsolver_vereshchagin.cpp@144:13::144:26"
+    ],
+    "reads": [
+      "s"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "tc_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@511:5::511:16"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sub_depth_image_.unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/register.cpp@123:5::123:35",
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/disparity.cpp@112:5::112:35"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "computeCaches();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@377:5::377:20",
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@164:3::164:18",
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@116:3::116:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/voxel_grid/src/voxel_grid.cpp@66:7::66:14"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "pending_connections_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@82:3::82:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "matchSize();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@92:3::92:14",
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@97:3::97:14"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "y_it.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/simple_trajectory_generator.cpp@132:7::132:19"
+    ],
+    "reads": [
+      "y_it"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "PollManager::instance()->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@598:5::598:40"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "odom_sub_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/odometry_helper_ros.cpp@93:7::93:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "writeTransport();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@311:5::311:21",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@259:3::259:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "dsrv_->clearCallback();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@87:7::87:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_->unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber.cpp@83:2::83:22"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "th_pts_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory.cpp@68:5::68:20"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (xn < x0 || yn < y0)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layered_costmap.cpp@144:3::145:11"
+    ],
+    "reads": [
+      "y0",
+      "yn",
+      "x0",
+      "xn"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "just_deleted_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_set.cpp@250:5::250:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "y_pts_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory.cpp@67:5::67:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "sample_params_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/simple_trajectory_generator.cpp@78:3::78:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "traj.resetPoints();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner.cpp@254:5::254:23",
+      "/ros_ws/src/navigation/base_local_planner/src/simple_trajectory_generator.cpp@189:3::189:21",
+      "/ros_ws/src/navigation/base_local_planner/src/simple_scored_sampling_planner.cpp@128:9::128:27"
+    ],
+    "reads": [
+      "traj"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "printPSFooter();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@681:3::681:18"
+    ],
+    "reads": [
+      "printPSFooter"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "d.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/roscpp_core/rostime/src/time.cpp@386:16::386:25",
+      "/ros_ws/src/roscpp_core/rostime/src/time.cpp@360:20::360:29",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@779:5::779:14",
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer.cpp@95:7::95:16"
+    ],
+    "reads": [
+      "d"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "lock.try_lock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription_queue.cpp@111:5::111:20"
+    ],
+    "reads": [
+      "lock"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!map_received_ || !(has_updated_data_ || has_extra_bounds_))\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@272:5::273:13"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "latchedStopRotateController_.resetLatching();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/dwa_local_planner/src/dwa_planner_ros.cpp@137:5::137:49"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "comp->GetNrOfSegments();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path_roundedcomposite.cpp@171:9::171:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "_disp.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@202:3::202:16"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(poly.size() == 0)\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@488:5::489:13"
+    ],
+    "reads": [
+      "poly"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "map_sub_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@250:3::250:22",
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@220:5::220:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(laser_scan.cloud.points.size() == 0)\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/voxel_grid_model.cpp@216:5::217:13",
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@393:5::394:13"
+    ],
+    "reads": [
+      "laser_scan"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (cell_inflation_radius_ == 0)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@306:3::307:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(laser_scans.empty())\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@361:5::362:13"
+    ],
+    "reads": [
+      "laser_scans"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "updatePoseFromServer();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@832:3::832:25",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@416:3::416:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(nearestNeighborDistance(pt) < sq_min_separation_)\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@243:5::244:13"
+    ],
+    "reads": [
+      "pt"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(!gridCoords(lower_right, gx, gy))\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@197:5::198:13"
+    ],
+    "reads": [
+      "gy",
+      "gx",
+      "lower_right"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (clearing_observation.cloud_->points.size() == 0)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@269:3::270:11"
+    ],
+    "reads": [
+      "clearing_observation"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "g_global_queue->disable();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@584:3::584:28"
+    ],
+    "reads": [
+      "g_global_queue",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "marking_buffers_[i]->lock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@472:5::472:32"
+    ],
+    "reads": [
+      "operator[]",
+      "i",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "trans->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@438:5::438:19"
+    ],
+    "reads": [
+      "trans",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "points.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@179:5::179:19"
+    ],
+    "reads": [
+      "points"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(poly.size() < 2)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@62:3::63:11"
+    ],
+    "reads": [
+      "poly"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "getGlobalCallbackQueue()->enable();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@415:3::415:37"
+    ],
+    "reads": [
+      "getGlobalCallbackQueue"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@151:5::151:15",
+      "/ros_ws/src/image_common/image_transport/src/camera_publisher.cpp@49:5::49:15",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@123:3::123:13",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_manager.cpp@59:3::59:13",
+      "/ros_ws/src/image_common/image_transport/src/publisher.cpp@52:5::52:15",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@134:7::134:17",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_manager.cpp@78:3::78:13",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@79:3::79:13",
+      "/ros_ws/src/image_common/image_transport/src/camera_subscriber.cpp@58:5::58:15",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection_manager.cpp@66:3::66:13",
+      "/ros_ws/src/image_common/image_transport/src/subscriber.cpp@52:5::52:15",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client.cpp@43:3::43:13"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "s->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@290:5::290:18"
+    ],
+    "reads": [
+      "s",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "topics.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/master.cpp@137:3::137:17"
+    ],
+    "reads": [
+      "topics"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "dedicated_listener_thread_->join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2_ros/src/transform_listener.cpp@65:5::65:39"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "ifs.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/yujin_ocs/yocs_cmd_vel_mux/src/cmd_vel_mux_nodelet.cpp@174:3::174:14"
+    ],
+    "reads": [
+      "ifs"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "transformed_plan.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/goal_functions.cpp@95:5::95:29"
+    ],
+    "reads": [
+      "transformed_plan"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "oriented_footprint.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/footprint.cpp@110:3::110:29"
+    ],
+    "reads": [
+      "oriented_footprint"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "deactivate();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@104:3::104:15",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@614:5::614:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "setNonBlocking();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@227:3::227:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "vec.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/buffer_core.cpp@1388:3::1388:14"
+    ],
+    "reads": [
+      "vec"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "lock.unlock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1179:5::1179:18",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@987:13::987:26",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@938:11::938:24",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@903:9::903:22",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@656:9::656:22",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1045:9::1045:22",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@277:9::277:22",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1019:11::1019:24",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@677:9::677:22",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@630:7::630:20",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@795:9::795:22",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@708:5::708:18",
+      "/ros_ws/src/geometry2/tf2/src/buffer_core.cpp@1476:3::1476:16",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@833:5::833:18",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@757:11::757:24",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@892:7::892:20"
+    ],
+    "reads": [
+      "lock"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@188:5::188:20",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@686:3::686:18",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@282:3::282:18"
+    ],
+    "reads": [
+      "shutdown"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "recovery_behaviors_[recovery_index_]->runBehavior();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1000:11::1000:62"
+    ],
+    "reads": [
+      "operator[]",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "wd.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer.cpp@100:5::100:15"
+    ],
+    "reads": [
+      "wd"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(!gridCoords(upper_left, gx, gy))\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@201:5::202:13"
+    ],
+    "reads": [
+      "gy",
+      "gx",
+      "upper_left"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "motprof->Duration();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/trajectory_segment.cpp@65:9::65:28"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "amcl_node_ptr->savePoseToServer();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@281:3::281:36"
+    ],
+    "reads": [
+      "amcl_node_ptr",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (i >= polygon_cells.size() - 1)\n      break;",
+    "kind": "guarded-break",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@391:5::392:12"
+    ],
+    "reads": [
+      "polygon_cells",
+      "i"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "buffer->unlock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@337:3::337:19",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@328:3::328:19",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@311:3::311:19",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@274:3::274:19"
+    ],
+    "reads": [
+      "buffer",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "Q.pop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl/map/map_cspace.cpp@172:5::172:12"
+    ],
+    "reads": [
+      "Q"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(distance > cdm->cell_radius_)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl/map/map_cspace.cpp@102:3::103:11"
+    ],
+    "reads": [
+      "cdm",
+      "distance"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "recovery_behaviors_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1140:5::1140:32",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@488:5::488:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "info->subscription_queue_->clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@780:5::780:39"
+    ],
+    "reads": [
+      "info",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(det == 0)\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@546:5::547:13"
+    ],
+    "reads": [
+      "det"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "prepareGrid();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_publisher.cpp@136:5::136:18",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_publisher.cpp@85:3::85:16"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "tx_odom.setIdentity();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@1469:5::1469:26"
+    ],
+    "reads": [
+      "tx_odom"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "global_pose.setIdentity();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@525:3::525:28"
+    ],
+    "reads": [
+      "global_pose"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "unadvertise();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server.cpp@40:3::40:16",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publisher.cpp@41:3::41:16"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(marked[MAP_INDEX(map, i, j)])\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl/map/map_cspace.cpp@95:3::96:11"
+    ],
+    "reads": [
+      "map",
+      "j",
+      "i",
+      "marked"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "publisher_->drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/intraprocess_publisher_link.cpp@94:5::94:23"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "onInitialize();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layer.cpp@48:3::48:17",
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@263:5::263:19",
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@245:3::245:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "server_.start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer_server.cpp@219:5::219:20"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (0 <= _endTime && getTime() > _endTime)\n      break;",
+    "kind": "guarded-break",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcDispatch.cpp@178:5::179:12"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "buffer_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2_ros/src/transform_listener.cpp@107:5::107:20"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "inflation_cells_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@275:3::275:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "m.message.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@741:7::741:24",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publication.cpp@419:5::419:22"
+    ],
+    "reads": [
+      "m"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "printPSHeader();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@649:3::649:18"
+    ],
+    "reads": [
+      "printPSHeader"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (plugins_.size() == 0)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layered_costmap.cpp@109:3::110:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "controller_costmap_ros_->stop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1191:7::1191:38",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@182:7::182:38"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "enableRead();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_udp.cpp@267:3::267:15",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/transport/transport_tcp.cpp@414:5::414:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "tf2_buffer_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry/tf/src/tf.cpp@225:3::225:22"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "Destroy();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/trajectory_composite.cpp@107:9::107:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "cost_cloud_->points.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/map_grid_visualizer.cpp@61:5::61:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (s->first == root_name) break;",
+    "kind": "guarded-break",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/tree.cpp@131:13::131:45",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/tree.cpp@126:13::126:45"
+    ],
+    "reads": [
+      "s",
+      "operator->",
+      "operator=="
+    ],
+    "writes": []
+  },
+  {
+    "contents": "publication_ptr->isLatched();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publisher.cpp@142:12::142:40"
+    ],
+    "reads": [
+      "publication_ptr",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::requestShutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@272:3::272:25"
+    ],
+    "reads": [
+      "requestShutdown"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (frequency == 0.0)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@394:3::395:11"
+    ],
+    "reads": [
+      "frequency"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "frame_to_laser_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@811:3::811:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "testTransformableRequests();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/buffer_core.cpp@282:3::282:30"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "topics_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/image_proc/src/libimage_proc/advertisement_checker.cpp@77:3::77:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "parents_chain_root.pop_back();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/tree.cpp@140:13::140:42"
+    ],
+    "reads": [
+      "parents_chain_root"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "current_call_->finished_condition_.notify_all();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@262:5::262:52"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "subscriber_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/intraprocess_subscriber_link.cpp@112:5::112:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(!worldToMap3D(ox, oy, oz, sensor_x, sensor_y, sensor_z))\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/voxel_grid_model.cpp@224:5::225:13"
+    ],
+    "reads": [
+      "sensor_y",
+      "ox",
+      "sensor_z",
+      "oy",
+      "oz",
+      "sensor_x"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "image_sub_.unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/camera_subscriber.cpp@70:7::70:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (polygon.size() < 3)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@358:3::359:11"
+    ],
+    "reads": [
+      "polygon"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "path_map_.resetPathDist();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner.cpp@926:5::926:30",
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner.cpp@505:7::505:32"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "added_connections_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@262:7::262:33",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@189:5::189:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(!gridCoords(pt, gx, gy))\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@239:5::240:13"
+    ],
+    "reads": [
+      "gy",
+      "gx",
+      "pt"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "publish_queue_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publication.cpp@441:5::441:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "initInternalTimerManager();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@341:3::341:29"
+    ],
+    "reads": [
+      "initInternalTimerManager"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!enabled_ || (cell_inflation_radius_ == 0))\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@175:3::176:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!map_received_)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@293:3::294:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "th_it.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/simple_trajectory_generator.cpp@130:9::130:22"
+    ],
+    "reads": [
+      "th_it"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "parents_chain_tip.pop_back();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/tree.cpp@141:13::141:41"
+    ],
+    "reads": [
+      "parents_chain_tip"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(points_.empty())\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@509:5::510:13",
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@413:5::414:13"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "r.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@823:7::823:16",
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@96:7::96:16",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@425:5::425:14",
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer_client.cpp@88:7::88:16"
+    ],
+    "reads": [
+      "r"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "c.disconnect();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_manager.cpp@111:3::111:17",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@96:3::96:17",
+      "/ros_ws/src/geometry2/tf2/src/buffer_core.cpp@1358:3::1358:17"
+    ],
+    "reads": [
+      "c"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "global_plan_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner_ros.cpp@369:5::369:25",
+      "/ros_ws/src/navigation/base_local_planner/src/local_planner_util.cpp@98:3::98:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "purgeStaleObservations();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/observation_buffer.cpp@201:3::201:27",
+      "/ros_ws/src/navigation/costmap_2d/src/observation_buffer.cpp@194:3::194:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "stats.arrival_time_list.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/statistics.cpp@247:5::247:36"
+    ],
+    "reads": [
+      "stats"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "g_global_queue->clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@585:3::585:26"
+    ],
+    "reads": [
+      "g_global_queue",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "planner_plan_->clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@634:7::634:29",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@306:9::306:31",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@271:9::271:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "source_frame_chain.pop_back();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/buffer_core.cpp@1634:5::1634:34"
+    ],
+    "reads": [
+      "source_frame_chain"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "client_.cancelGoal();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer_client.cpp@95:7::95:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (storage_it->stamp_ <= new_data.stamp_)\n      break;",
+    "kind": "guarded-break",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/cache.cpp@260:5::261:12"
+    ],
+    "reads": [
+      "new_data",
+      "storage_it",
+      "operator->",
+      "operator<="
+    ],
+    "writes": []
+  },
+  {
+    "contents": "controller_costmap_ros_->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@717:7::717:39",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@170:5::170:37"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "storage_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/cache.cpp@272:3::272:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_->getNumSubscribers();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/publisher.cpp@146:41::146:67"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "TopicManager::instance()->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@596:5::596:41"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "pruneList();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/cache.cpp@266:3::266:14"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "parent->getMD5Sum();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscriber_link.cpp@72:10::72:29"
+    ],
+    "reads": [
+      "parent",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ServiceManager::instance()->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@344:3::344:38"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!worldToMap(start_x, start_y, map_sx, map_sy) || !worldToMap(end_x, end_y, map_ex, map_ey))\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@239:3::240:11"
+    ],
+    "reads": [
+      "map_ey",
+      "map_ex",
+      "end_x",
+      "start_x",
+      "start_y",
+      "end_y",
+      "map_sx",
+      "map_sy"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@505:9::505:25"
+    ],
+    "reads": [
+      "impl",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "amcl_node_ptr.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@308:3::308:24"
+    ],
+    "reads": [
+      "amcl_node_ptr"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "bag_scan_period_.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@664:9::664:33"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!enabled_)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_layer.cpp@112:3::113:11",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_layer.cpp@75:3::76:11",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_layer.cpp@93:3::94:11",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_layer.cpp@48:3::49:11",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@429:3::430:11",
+      "/ros_ws/src/navigation/costmap_2d/plugins/static_layer.cpp@296:3::297:11",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@345:3::346:11",
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@121:3::122:11"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "setupTLS();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@293:3::293:13",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@215:3::215:13",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@144:3::144:13"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "requestShutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@165:5::165:22"
+    ],
+    "reads": [
+      "requestShutdown"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sleeper.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry/tf/src/static_transform_publisher.cpp@111:7::111:22",
+      "/ros_ws/src/geometry/tf/src/static_transform_publisher.cpp@88:7::88:22"
+    ],
+    "reads": [
+      "sleeper"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "spin_rate.sleep();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/yujin_ocs/yocs_velocity_smoother/src/velocity_smoother_nodelet.cpp@230:5::230:22"
+    ],
+    "reads": [
+      "spin_rate"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "freeMapDependentMemory();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@930:3::930:27",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@806:3::806:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "dist_queue.pop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/map_grid.cpp@265:7::265:23"
+    ],
+    "reads": [
+      "dist_queue"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "service_publications_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_manager.cpp@112:5::112:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "errstr->clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer_client.cpp@164:9::164:24",
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer_client.cpp@144:9::144:24",
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer.cpp@152:7::152:22",
+      "/ros_ws/src/geometry2/tf2_ros/src/buffer.cpp@123:7::123:22"
+    ],
+    "reads": [
+      "errstr"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "resetState();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@933:11::933:23",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1035:11::1035:23",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@274:9::274:21",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@771:11::771:23",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1041:9::1041:21",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@309:9::309:21",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@898:9::898:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "link.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client.cpp@144:3::144:15"
+    ],
+    "reads": [
+      "link"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "plugins_.pop_back();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layered_costmap.cpp@78:5::78:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "lasers_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@809:3::809:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "activate();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@107:3::107:13",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@617:5::617:15"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "lasers_update_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@810:3::810:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "(*it)->drop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@174:5::174:18"
+    ],
+    "reads": [
+      "it",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "this->savePoseToServer();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@1408:7::1408:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "g_internal_queue_thread.join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@589:5::589:35"
+    ],
+    "reads": [
+      "g_internal_queue_thread"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "map_.resetPathDist();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/map_grid_cost_function.cpp@60:3::60:23"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "src->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcDispatch.cpp@171:9::171:21"
+    ],
+    "reads": [
+      "src"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!old_h.hasParam(name))\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@53:3::54:11"
+    ],
+    "reads": [
+      "name",
+      "old_h"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "applyInitialPose();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@1503:3::1503:21",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@875:3::875:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "this->shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@27:3::27:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "resetOscillationFlags();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/oscillation_cost_function.cpp@80:5::80:28"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "Costmap2D::resetMaps();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@112:3::112:25"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "planner_costmap_ros_->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@716:7::716:36",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@169:5::169:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "server_link_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client.cpp@58:7::58:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (!worldToMap(wx, wy, mx, my))\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@219:3::220:11"
+    ],
+    "reads": [
+      "my",
+      "wy",
+      "mx",
+      "wx"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "impl_->isValid();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client.cpp@162:10::162:26"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "clearing_endpoints_.points.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@289:5::289:39"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "s.G.setZero();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/chainidsolver_vereshchagin.cpp@145:13::145:26"
+    ],
+    "reads": [
+      "s"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!success)\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@232:3::233:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_server_link.cpp@192:3::193:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@385:3::386:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@406:3::407:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client_link.cpp@181:3::182:11",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/service_client_link.cpp@204:3::205:11"
+    ],
+    "reads": [
+      "success"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "deleteMaps();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@177:3::177:15",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@144:3::144:15",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d.cpp@112:3::112:15"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "old_pose_.setIdentity();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@80:3::80:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "read_buffer_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@169:7::169:27",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@135:9::135:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "map_update_thread_->join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@286:5::286:31",
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@197:5::197:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (distance > cell_inflation_radius_)\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/inflation_layer.cpp@296:5::297:13"
+    ],
+    "reads": [
+      "distance"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "updateMap();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@405:5::405:16"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "info_pub_.shutdown();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/camera_publisher.cpp@62:7::62:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(!gridCoords(lower_left, gx, gy))\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/point_grid.cpp@192:5::193:13"
+    ],
+    "reads": [
+      "gx",
+      "gy",
+      "lower_left"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "publisher_->publishCostmap();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@421:9::421:37"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "Definition<sensor_msgs::Image>::value();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/raw_publisher.cpp@91:39::91:78"
+    ],
+    "reads": [
+      "value"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "result.valid();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@470:10::470:24"
+    ],
+    "reads": [
+      "result"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "(*plugin)->activate();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@468:7::468:28"
+    ],
+    "reads": [
+      "plugin",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "output.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/buffer_core.cpp@1581:3::1581:17"
+    ],
+    "reads": [
+      "output"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "(*plugin)->deactivate();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@488:5::488:28"
+    ],
+    "reads": [
+      "plugin",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "(*plugin)->reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@519:5::519:23"
+    ],
+    "reads": [
+      "plugin",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "bag.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@672:3::672:14"
+    ],
+    "reads": [
+      "bag"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "robot_pose.setIdentity();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@527:3::527:27"
+    ],
+    "reads": [
+      "robot_pose"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "server_thread_.join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/xmlrpc_manager.cpp@153:3::153:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "ros::ok();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry/tf/src/transform_listener.cpp@61:45::61:54"
+    ],
+    "reads": [
+      "ok"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!getRobotPose(global_pose))\n    return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_2d_ros.cpp@567:3::568:11"
+    ],
+    "reads": [
+      "global_pose"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if (!has_extra_bounds_)\n        return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/costmap_layer.cpp@32:5::33:15"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "storage_.pop_back();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/geometry2/tf2/src/cache.cpp@309:5::309:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "oriented_footprint.polygon.points.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/footprint.cpp@126:3::126:44"
+    ],
+    "reads": [
+      "oriented_footprint"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "sub_depth_.unsubscribe();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzrgb.cpp@137:5::137:29",
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi_radial.cpp@175:6::175:30",
+      "/ros_ws/src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi.cpp@122:5::122:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "ObstacleLayer::matchSize();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/voxel_layer.cpp@97:3::97:29",
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@66:3::66:29"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "planner_costmap_ros_->stop();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@1190:7::1190:35",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@181:7::181:35"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if ( factor > 1 )\n        return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile_traphalf.cpp@103:5::104:15"
+    ],
+    "reads": [
+      "factor"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "(*plugin)->matchSize();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layered_costmap.cpp@91:5::91:27"
+    ],
+    "reads": [
+      "plugin",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "(*plugin)->onFootprintChanged();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layered_costmap.cpp@181:5::181:36"
+    ],
+    "reads": [
+      "plugin",
+      "operator*",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "observation_list_.pop_front();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/observation_buffer.cpp@184:5::184:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "current_vector.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/array_parser.cpp@65:7::65:29"
+    ],
+    "reads": [
+      "current_vector"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "planner_cond_.notify_one();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@986:13::986:39",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@921:11::921:37",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@832:5::832:31",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@609:5::609:31",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@756:11::756:37",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@707:5::707:31",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@794:9::794:35"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "controller_plan_->clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@308:9::308:34",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@273:9::273:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "pub->isLatched();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@782:12::782:28"
+    ],
+    "reads": [
+      "pub",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "id_info->calling_rw_mutex.unlock_shared();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@165:7::165:48"
+    ],
+    "reads": [
+      "id_info",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "local_plan.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory_planner_ros.cpp@505:7::505:25",
+      "/ros_ws/src/navigation/dwa_local_planner/src/dwa_planner_ros.cpp@219:7::219:25"
+    ],
+    "reads": [
+      "local_plan"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "planner_costmap_ros_->pause();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@113:5::113:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "controller_costmap_ros_->pause();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@141:5::141:37"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "layered_costmap_->getFootprint();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/src/layer.cpp@53:10::53:42"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "loadDefaultRecoveryBehaviors();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@187:7::187:37"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "thread_.join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/poll_manager.cpp@75:5::75:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "commonInit();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/map_grid.cpp@48:5::48:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "as_->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@197:5::197:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "planner_thread_->interrupt();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@501:5::501:33"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "clear_poly.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@363:5::363:23"
+    ],
+    "reads": [
+      "clear_poly"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "x_pts_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/trajectory.cpp@66:5::66:19"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "planner_costmap_ros_->resetLayers();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@388:5::388:40"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "queue_condition_.notify_all();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/rosout_appender.cpp@114:3::114:32",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/rosout_appender.cpp@64:5::64:34"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "lock.lock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@901:9::901:20",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@642:9::642:20",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@830:5::830:16",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@666:9::666:20",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@791:9::791:20",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@681:7::681:18",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@753:11::753:22"
+    ],
+    "reads": [
+      "lock"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "if(done)\n        return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@815:7::816:15"
+    ],
+    "reads": [
+      "done"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "segments.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/tree.cpp@45:5::45:21",
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/tree.cpp@35:5::35:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "controller_costmap_ros_->resetLayers();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@389:5::389:43"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "planner_thread_->join();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@502:5::502:28"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "planner_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@510:5::510:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "plan.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@518:5::518:17"
+    ],
+    "reads": [
+      "plan"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "tf_q.normalize();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@569:5::569:21"
+    ],
+    "reads": [
+      "tf_q"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "tr->Finish();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path.cpp@134:3::134:15"
+    ],
+    "reads": [
+      "tr",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "latest_plan_->clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@307:9::307:30",
+      "/ros_ws/src/navigation/move_base/src/move_base.cpp@272:9::272:30"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "comp->PathLength();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/path_roundedcomposite.cpp@151:9::151:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "pub->processPublishQueue();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/topic_manager.cpp@164:5::164:31"
+    ],
+    "reads": [
+      "pub",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "TopicManager::instance()->start();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@343:3::343:36"
+    ],
+    "reads": [
+      "instance",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "transport_->disableWrite();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@248:7::248:33"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "callbacks_.size();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publication.cpp@358:10::358:27"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if (factor > 1)\n        return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile_trap.cpp@98:5::99:15"
+    ],
+    "reads": [
+      "factor"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "ros::spin();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/node_handle.cpp@143:3::143:14",
+      "/ros_ws/src/navigation/move_base/src/move_base_node.cpp@39:3::39:14",
+      "/ros_ws/src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@516:3::516:14",
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@300:5::300:16"
+    ],
+    "reads": [
+      "spin"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "transport_->disableRead();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@185:5::185:30"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "callbacks_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/subscription.cpp@83:3::83:21",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@320:5::320:23",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@73:3::73:21"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "condition_.notify_one();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@127:3::127:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "id_info->calling_rw_mutex.lock_shared();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@188:7::188:46"
+    ],
+    "reads": [
+      "id_info",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "read_callback_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@168:7::168:29",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@134:9::134:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "readTransport();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@284:3::284:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@103:3::103:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_->canStart();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/spinner.cpp@218:10::218:27"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "requestMap();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/amcl/src/amcl_node.cpp@444:5::444:17"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "transport_->enableRead();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@281:3::281:27"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "transport_->enableWrite();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@306:3::306:28"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "this->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@112:5::112:18",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@53:3::53:16",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@96:5::96:18",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@233:5::233:18",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcClient.cpp@240:5::240:18",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@104:5::104:18",
+      "/ros_ws/src/ros_comm/xmlrpcpp/src/XmlRpcServer.cpp@88:5::88:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "condition_.notify_all();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@66:3::66:26",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/callback_queue.cpp@58:3::58:26"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "transport_->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection.cpp@338:5::338:24"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "udpserver_transport_->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection_manager.cpp@98:5::98:34"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "tcpserver_transport_->close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection_manager.cpp@104:5::104:34"
+    ],
+    "reads": [
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "imu_file_.close();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@161:7::161:24"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "if(path.empty())\n      return;",
+    "kind": "guarded-return",
+    "locations": [
+      "/ros_ws/src/navigation/base_local_planner/src/goal_functions.cpp@52:5::53:13"
+    ],
+    "reads": [
+      "path"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "tcpserver_transport_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection_manager.cpp@105:5::105:33"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "dropped_connections_.clear();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/connection_manager.cpp@130:3::130:31"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "impl_.reset();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/image_common/image_transport/src/camera_publisher.cpp@151:5::151:18",
+      "/ros_ws/src/image_common/image_transport/src/publisher.cpp@186:5::186:18",
+      "/ros_ws/src/ros_comm/roscpp/src/libros/publisher.cpp@108:5::108:18"
+    ],
+    "reads": [],
+    "writes": []
+  },
+  {
+    "contents": "clearing_buffers_[i]->unlock();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/navigation/costmap_2d/plugins/obstacle_layer.cpp@491:5::491:35"
+    ],
+    "reads": [
+      "operator[]",
+      "i",
+      "operator->"
+    ],
+    "writes": []
+  },
+  {
+    "contents": "console::notifyLoggerLevelsChanged();",
+    "kind": "void-call",
+    "locations": [
+      "/ros_ws/src/ros_comm/roscpp/src/libros/init.cpp@241:5::241:41"
+    ],
+    "reads": [
+      "notifyLoggerLevelsChanged"
+    ],
+    "writes": []
+  }
+]
