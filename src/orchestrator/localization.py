@@ -60,7 +60,7 @@ def localize(perturbation: Mutant,
             logger.warning("perturbed line [%s] not contained in fault localization",
                            str(perturbed_line))
             # FIXME automagically correct?
-            raise FailedToComputeCoverage
+            # raise FailedToComputeCoverage
 
     except darjeeling.exceptions.NoImplicatedLines:
         raise FailedToComputeCoverage
