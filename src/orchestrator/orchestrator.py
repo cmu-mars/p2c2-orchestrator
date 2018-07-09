@@ -370,7 +370,7 @@ class Orchestrator(object):
                 compute_mutant_coverage(self.__client_bugzoo,
                                         self.__client_boggart,
                                         perturbation,
-                                        threads=self.num_threads)
+                                        threads=self.__num_threads)
             self.__localization = localize(perturbation,
                                            self.__coverage_for_mutant)
             self.__coverage_for_mutant = \
