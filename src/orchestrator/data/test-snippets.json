@@ -1,0 +1,26 @@
+[
+  {
+    "content": "if (size_x < 100) { return; }",
+    "locations": [
+      "src/navigation/costmap_2d/src/costmap_2d.cpp@176:1::177:12"
+    ],
+    "reads": ["size_x"],
+    "kind": "guarded-return"
+  },
+  {
+    "content": "if (i == 0) { break; }",
+    "locations": [
+      "src/navigation/costmap_2d/src/costmap_2d.cpp@176:1::177:12"
+    ],
+    "reads": ["i"],
+    "kind": "guarded-break"
+  },
+  {
+    "content": "deleteMaps();",
+    "locations": [
+      "src/navigation/costmap_2d/src/costmap_2d.cpp@176:1::177:12"
+    ],
+    "reads": ["deleteMaps"],
+    "kind": "void-call"
+  }
+]
