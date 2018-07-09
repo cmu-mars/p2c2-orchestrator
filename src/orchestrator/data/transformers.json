@@ -1,0 +1,558 @@
+[
+  {
+    "content": "rnorm",
+    "locations": [
+      "src/bfl/src/pdf/conditionalgaussian.cpp@82:67::82:72"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "rnorm"
+    ]
+  },
+  {
+    "content": "_Sigma.cholesky_semidefinite",
+    "locations": [
+      "src/bfl/src/pdf/gaussian.cpp@155:20::155:48",
+      "src/bfl/src/pdf/gaussian.cpp@107:17::107:45"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "_Sigma.cholesky_semidefinite"
+    ]
+  },
+  {
+    "content": "lu_factorize",
+    "locations": [
+      "src/bfl/src/wrappers/matrix/matrix_BOOST.cpp@242:22::242:34",
+      "src/bfl/src/wrappers/matrix/matrix_BOOST.cpp@282:17::282:29",
+      "src/bfl/src/wrappers/matrix/matrix_BOOST.cpp@398:17::398:29",
+      "src/bfl/src/wrappers/matrix/matrix_BOOST.cpp@428:18::428:30"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "lu_factorize"
+    ]
+  },
+  {
+    "content": "fabs",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/utilities/svd_HH.cpp@32:13::32:17",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@115:15::115:19",
+      "src/bfl/src/wrappers/matrix/matrix_wrapper.cpp@287:10::287:14",
+      "src/bfl/src/wrappers/matrix/matrix_wrapper.cpp@286:10::286:14",
+      "src/navigation/base_local_planner/src/trajectory_planner.cpp@392:25::392:29",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@116:15::116:19",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/utilities/svd_HH.cpp@31:13::31:17"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "fabs"
+    ]
+  },
+  {
+    "content": "PYTHAG",
+    "locations": [
+      "src/bfl/src/wrappers/matrix/matrix_wrapper.cpp@230:16::230:22"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "PYTHAG"
+    ]
+  },
+  {
+    "content": "v2",
+    "locations": [
+      "src/bfl/src/wrappers/matrix/vector_BOOST.cpp@276:28::276:30",
+      "src/bfl/src/wrappers/matrix/vector_BOOST.cpp@78:25::78:27"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "v2"
+    ]
+  },
+  {
+    "content": "v1",
+    "locations": [
+      "src/bfl/src/wrappers/matrix/vector_BOOST.cpp@273:15::273:17",
+      "src/bfl/src/wrappers/matrix/vector_BOOST.cpp@75:15::75:17"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "v1"
+    ]
+  },
+  {
+    "content": "a",
+    "locations": [
+      "src/bfl/src/wrappers/matrix/vector_BOOST.cpp@41:13::41:14"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "a"
+    ]
+  },
+  {
+    "content": "deps.erase",
+    "locations": [
+      "src/rospack/src/rospack_cmdline.cpp@335:15::335:25"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "deps.erase"
+    ]
+  },
+  {
+    "content": "s.F.M.Inverse",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainidsolver_vereshchagin.cpp@99:18::99:31",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainidsolver_vereshchagin.cpp@104:18::104:31"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "s.F.M.Inverse"
+    ]
+  },
+  {
+    "content": "segment.pose",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainidsolver_vereshchagin.cpp@80:14::80:26"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "segment.pose"
+    ]
+  },
+  {
+    "content": "original_Aii.cwiseProduct",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolverpos_lma.cpp@203:8::203:33"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "original_Aii.cwiseProduct"
+    ]
+  },
+  {
+    "content": "sqrt",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@364:13::364:17",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@380:15::380:19",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@365:13::365:17",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@363:13::363:17"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "sqrt"
+    ]
+  },
+  {
+    "content": "atan2",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@384:12::384:17"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "atan2"
+    ]
+  },
+  {
+    "content": "sin",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@235:31::235:34",
+      "src/navigation/amcl/src/amcl/sensors/amcl_odom.cpp@241:26::241:29",
+      "src/navigation/base_local_planner/src/trajectory_planner.cpp@375:24::375:27",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@234:30::234:33",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/path_circle.cpp@123:13::123:16",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@259:14::259:17",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@304:16::304:19",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@76:13::76:16",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@258:14::258:17",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@59:13::59:16",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@75:13::75:16",
+      "src/navigation/amcl/src/amcl/sensors/amcl_odom.cpp@150:26::150:29",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@58:13::58:16",
+      "src/navigation/base_local_planner/src/footprint_helper.cpp@204:18::204:21",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@260:14::260:17",
+      "src/navigation/costmap_2d/src/footprint.cpp@112:18::112:21",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@236:30::236:33",
+      "src/navigation/costmap_2d/src/footprint.cpp@128:18::128:21"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "sin"
+    ]
+  },
+  {
+    "content": "cos",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@77:13::77:16",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@57:13::57:16",
+      "src/navigation/amcl/src/amcl/sensors/amcl_odom.cpp@240:26::240:29",
+      "src/navigation/base_local_planner/src/footprint_helper.cpp@203:18::203:21",
+      "src/navigation/costmap_2d/src/footprint.cpp@127:18::127:21",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@234:14::234:17",
+      "src/navigation/costmap_2d/src/footprint.cpp@111:18::111:21",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@303:16::303:19",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@235:14::235:17",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/path_circle.cpp@122:13::122:16",
+      "src/navigation/base_local_planner/src/trajectory_planner.cpp@374:24::374:27",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@60:13::60:16",
+      "src/navigation/amcl/src/amcl/sensors/amcl_odom.cpp@149:26::149:29",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@260:30::260:33",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@74:13::74:16",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@259:29::259:32",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@258:29::258:32",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@236:14::236:17"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "cos"
+    ]
+  },
+  {
+    "content": "p",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/frames.cpp@46:23::46:24"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "p"
+    ]
+  },
+  {
+    "content": "GetTreeElementParent",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/treejnttojacsolver.cpp@60:13::60:33",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/treefksolverpos_recursive.cpp@59:50::59:70"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "GetTreeElementParent"
+    ]
+  },
+  {
+    "content": "T_total.M.Inverse",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/treejnttojacsolver.cpp@55:22::55:39"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "T_total.M.Inverse"
+    ]
+  },
+  {
+    "content": "sign",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile_traphalf.cpp@84:19::84:23",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile_traphalf.cpp@106:19::106:23",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile_trap.cpp@65:18::65:22"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "sign"
+    ]
+  },
+  {
+    "content": "iksolver.CartToJnt",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolverpos_nr.cpp@41:31::41:49"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "iksolver.CartToJnt"
+    ]
+  },
+  {
+    "content": "diff",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolverpos_nr.cpp@40:30::40:34"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "diff"
+    ]
+  },
+  {
+    "content": "svd_eigen_Macie",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolvervel_pinv_givens.cpp@69:18::69:33"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "svd_eigen_Macie"
+    ]
+  },
+  {
+    "content": "weight_js.lazyProduct",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolvervel_wdls.cpp@113:17::113:38"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "weight_js.lazyProduct"
+    ]
+  },
+  {
+    "content": "weight_ts.lazyProduct",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolvervel_wdls.cpp@101:26::101:47",
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolvervel_wdls.cpp@112:17::112:38"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "weight_ts.lazyProduct"
+    ]
+  },
+  {
+    "content": "svd_eigen_HH",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolvervel_wdls.cpp@104:20::104:32"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "svd_eigen_HH"
+    ]
+  },
+  {
+    "content": "jac.data.lazyProduct",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/chainiksolvervel_wdls.cpp@100:26::100:46"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "jac.data.lazyProduct"
+    ]
+  },
+  {
+    "content": "-SIGN",
+    "locations": [
+      "src/orocos_kinematics_dynamics/orocos_kdl/src/utilities/svd_eigen_HH.cpp@57:24::57:29"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "-SIGN"
+    ]
+  },
+  {
+    "content": "storage_.upper_bound",
+    "locations": [
+      "src/geometry/tf/src/cache.cpp@160:44::160:64"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "storage_.upper_bound"
+    ]
+  },
+  {
+    "content": "strip_leading_slash",
+    "locations": [
+      "src/geometry/tf/src/tf.cpp@171:30::171:49"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "strip_leading_slash"
+    ]
+  },
+  {
+    "content": "stripSlash",
+    "locations": [
+      "src/geometry2/tf2/src/buffer_core.cpp@215:28::215:38",
+      "src/geometry2/tf2/src/buffer_core.cpp@214:29::214:39"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "stripSlash"
+    ]
+  },
+  {
+    "content": "output",
+    "locations": [
+      "src/laser_geometry/src/laser_geometry.cpp@112:36::112:42",
+      "src/laser_geometry/src/laser_geometry.cpp@113:36::113:42"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "output"
+    ]
+  },
+  {
+    "content": "normalize",
+    "locations": [
+      "src/navigation/amcl/src/amcl/sensors/amcl_odom.cpp@48:6::48:15",
+      "src/navigation/amcl/src/amcl/sensors/amcl_odom.cpp@49:6::49:15"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "normalize"
+    ]
+  },
+  {
+    "content": "name.substr",
+    "locations": [
+      "src/navigation/clear_costmap_recovery/src/clear_costmap_recovery.cpp@113:15::113:26"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "name.substr"
+    ]
+  },
+  {
+    "content": "cellDistance",
+    "locations": [
+      "src/navigation/costmap_2d/plugins/obstacle_layer.cpp@569:39::569:51",
+      "src/navigation/costmap_2d/plugins/voxel_layer.cpp@355:41::355:53",
+      "src/navigation/costmap_2d/plugins/inflation_layer.cpp@115:27::115:39",
+      "src/navigation/costmap_2d/plugins/inflation_layer.cpp@163:27::163:39",
+      "src/navigation/costmap_2d/plugins/inflation_layer.cpp@374:29::374:41"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "cellDistance"
+    ]
+  },
+  {
+    "content": "computeCost",
+    "locations": [
+      "src/navigation/costmap_2d/plugins/inflation_layer.cpp@334:28::334:39"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "computeCost"
+    ]
+  },
+  {
+    "content": "transform",
+    "locations": [
+      "src/navigation/costmap_2d/plugins/static_layer.cpp@332:12::332:21"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "transform"
+    ]
+  },
+  {
+    "content": "interpretValue",
+    "locations": [
+      "src/navigation/costmap_2d/plugins/static_layer.cpp@203:24::203:38",
+      "src/navigation/costmap_2d/plugins/static_layer.cpp@233:24::233:38"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "interpretValue"
+    ]
+  },
+  {
+    "content": "strdup",
+    "locations": [
+      "src/navigation/map_server/src/main.cpp@151:31::151:37"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "strdup"
+    ]
+  },
+  {
+    "content": "getPointPotential",
+    "locations": [
+      "src/navigation/navfn/src/navfn_ros.cpp@111:27::111:44"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "getPointPotential"
+    ]
+  },
+  {
+    "content": "numBits",
+    "locations": [
+      "src/navigation/voxel_grid/src/voxel_grid.cpp@151:24::151:31"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "numBits"
+    ]
+  },
+  {
+    "content": "vel_trans*cos",
+    "locations": [
+      "src/navigation/robot_pose_ekf/src/nonlinearanalyticconditionalgaussianodo.cpp@61:10::61:23"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "vel_trans*cos"
+    ]
+  },
+  {
+    "content": "covar",
+    "locations": [
+      "src/navigation/robot_pose_ekf/src/odom_estimation.cpp@399:35::399:40"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "covar"
+    ]
+  },
+  {
+    "content": "imu_rel",
+    "locations": [
+      "src/navigation/robot_pose_ekf/src/odom_estimation.cpp@233:28::233:35"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "imu_rel"
+    ]
+  },
+  {
+    "content": "odom_rel",
+    "locations": [
+      "src/navigation/robot_pose_ekf/src/odom_estimation.cpp@206:29::206:37"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "odom_rel"
+    ]
+  },
+  {
+    "content": "pow",
+    "locations": [
+      "src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@256:30::256:33",
+      "src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@255:30::255:33",
+      "src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp@257:30::257:33",
+      "src/navigation/robot_pose_ekf/src/odom_estimation.cpp@137:29::137:32"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "pow"
+    ]
+  },
+  {
+    "content": "clean_topic.substr",
+    "locations": [
+      "src/image_common/image_transport/src/subscriber.cpp@96:28::96:46"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "clean_topic.substr"
+    ]
+  },
+  {
+    "content": "ros::names::clean",
+    "locations": [
+      "src/image_common/image_transport/src/subscriber.cpp@93:28::93:45"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "ros::names::clean"
+    ]
+  },
+  {
+    "content": "sensorPoints.reshape",
+    "locations": [
+      "src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyz_radial.cpp@102:16::102:36",
+      "src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzi_radial.cpp@122:16::122:36"
+    ],
+    "kind": "transformer",
+    "reads": [
+      "sensorPoints.reshape"
+    ]
+  }
+]
