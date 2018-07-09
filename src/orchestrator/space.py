@@ -39,17 +39,19 @@ def build_search_space(problem: Problem,
         darjeeling.transformation.MulToDiv,
         darjeeling.transformation.DivToMul,
         darjeeling.transformation.SignedToUnsigned,
-        #darjeeling.transformation.InsertVoidFunctionCall,
-        #darjeeling.transformation.InsertConditionalReturn,
-        #darjeeling.transformation.InsertConditionalBreak,
-        #darjeeling.transformation.ApplyTransformation
+        darjeeling.transformation.ApplyTransformation,
+        darjeeling.transformation.InsertVoidFunctionCall,
+        darjeeling.transformation.InsertConditionalReturn,
+        darjeeling.transformation.InsertConditionalBreak
     ]  # type: Type[Transformation]
     logger.info("constructing search space")
     snippets = load_pool()
     transformations = sample_by_localization_and_type(problem,
                                                       snippets,
                                                       localization,
-                                                      schemas)
+                                                      schemas,
+                                                      threads=8,
+                                                      eager=True)
     candidates = all_single_edit_patches(transformations)
     logger.info("constructed search space")
     return candidates
