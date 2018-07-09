@@ -45,6 +45,8 @@ def mutant_fails_test(client_bugzoo: BugZooClient,
         killed = False
         container = mgr_ctr.provision(snapshot)
         for test in tests:
+            logger.info("checking whether test [%s] kills mutant",
+                        test.name)
             outcome = mgr_ctr.test(container, test)
             if not outcome.passed:
                 logger.info("mutant killed by test: %s", test.name)
