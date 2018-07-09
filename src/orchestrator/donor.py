@@ -13,7 +13,7 @@ from bugzoo.core.bug import Bug as Snapshot
 from darjeeling.snippet import Snippet, SnippetDatabase
 from darjeeling.source import ProgramSourceManager
 from boggart.config.operators import Operators
-from boggart.core import FileLocationRange, Location
+from boggart.core import FileLocationRange, Location, LocationRange
 from boggart.core.constraint import Constraint, IsSingleTerm, PrecededBy
 
 from .snapshot import fetch_baseline_snapshot
@@ -43,12 +43,8 @@ def extract() -> None:
         logger.info("stored contents of source files")
 
         snippets = SnippetDatabase()
-        build_guard_pool(client_rooibos, sources, snippets)
         build_transformer_pool(client_rooibos, sources, snippets)
-        build_void_call_pool(client_rooibos, sources, snippets)
-
-        # write to file
-        fn = 'snippets.json'
+        fn = 'transformer-snippets.json'
         logger.info("writing donor pool to file: %s", fn)
         with open(fn, 'w') as f:
             json.dump(snippets.to_dict(), f, indent=2)
@@ -62,20 +58,6 @@ def load_pool() -> None:
     return snippets
 
 
-def build_guard_pool(client_rooibos: RooibosClient,
-                     sources: ProgramSourceManager,
-                     snippets: SnippetDatabase
-                     ) -> None:
-    schema = "if (:[1])"
-    def transformer(match: rooibos.Match
-                    ) -> Tuple[str, rooibos.LocationRange]:
-        content = match.environment['1'].fragment.strip()
-        location = match.environment['1'].location
-        return (content, location)
-    _build_pool(client_rooibos, sources, snippets, schema, transformer,
-                kind='guard')
-
-
 def build_transformer_pool(client_rooibos: RooibosClient,
                            sources: ProgramSourceManager,
                            snippets: SnippetDatabase
@@ -87,39 +69,21 @@ def build_transformer_pool(client_rooibos: RooibosClient,
     ]
     schema = ":[1] = :[2](:[3]);"
     def transformer(match: rooibos.Match
-                    ) -> Tuple[str, rooibos.LocationRange]:
+                    ) -> Tuple[str, rooibos.LocationRange, List[str]]:
         content = match.environment['2'].fragment.strip()
         location = match.environment['2'].location
-        return (content, location)
+        reads = [content]
+        return (content, location, reads)
     _build_pool(client_rooibos, sources, snippets, schema, transformer,
                 constraints=constraints,
                 kind='transformer')
-
-
-def build_void_call_pool(client_rooibos: RooibosClient,
-                         sources: ProgramSourceManager,
-                         snippets: SnippetDatabase
-                         ) -> None:
-    constraints = [
-        IsSingleTerm('1'),
-        PrecededBy([';', '{', '}'])
-    ]
-    schema = ":[1]();"
-    def transformer(match: rooibos.Match
-                    ) -> Tuple[str, rooibos.LocationRange]:
-        content = match.environment['1'].fragment.strip()
-        location = match.environment['1'].location
-        return (content, location)
-    _build_pool(client_rooibos, sources, snippets, schema, transformer,
-                constraints=constraints,
-                kind='void-call')
 
 
 def _build_pool(client_rooibos: RooibosClient,
                 sources: ProgramSourceManager,
                 snippets: SnippetDatabase,
                 schema: str,
-                transformer: Callable[[rooibos.Match], Tuple[str, rooibos.LocationRange]],
+                transformer: Callable[[rooibos.Match], Tuple[str, rooibos.LocationRange, List[str]]],
                 *,
                 constraints: Optional[List[Constraint]] = None,
                 kind: Optional[str] = None
@@ -154,15 +118,17 @@ def _build_pool(client_rooibos: RooibosClient,
             if not check_constraints(match, fn):
                 continue
 
-            snippet_content, loc_range_rooibos = transformer(match)
+            snippet_content, loc_range_rooibos, reads = transformer(match)
             loc_start = Location(loc_range_rooibos.start.line,
                                  loc_range_rooibos.start.col)
             loc_stop = Location(loc_range_rooibos.stop.line,
                                  loc_range_rooibos.stop.col)
-            snippet_location = FileLocationRange(fn, loc_start, loc_stop)
+            loc_range = LocationRange(loc_start, loc_stop)
+            snippet_location = FileLocationRange(fn, loc_range)
             snippets.add(snippet_content,
                          origin=snippet_location,
-                         kind=kind)
+                         kind=kind,
+                         reads=reads)
             logger.info("found snippet in file (%s): %s",
                         fn, snippet_content)
         logger.info("found all snippets in file: %s", fn)
