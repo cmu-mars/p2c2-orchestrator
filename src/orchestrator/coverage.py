@@ -36,7 +36,9 @@ BASELINE_COVERAGE_FN = \
 
 def compute_mutant_coverage(client_bugzoo: BugZooClient,
                             client_boggart: BoggartClient,
-                            mutant: Mutant
+                            mutant: Mutant,
+                            *,
+                            threads: int = 6
                             ) -> TestSuiteCoverage:
     logger.info("computing coverage for mutant: %s", mutant)
     coverage_baseline = load_baseline_coverage()
@@ -61,7 +63,8 @@ def compute_mutant_coverage(client_bugzoo: BugZooClient,
                     mutant_instrumented)
         coverage = compute_coverage(client_bugzoo,
                                     snapshot_instrumented,
-                                    tests)
+                                    tests,
+                                    threads=threads)
     except Exception:
         logger.warning("failed to compute coverage for mutant: %s", mutant)
         raise FailedToComputeCoverage
@@ -112,7 +115,7 @@ def compute_coverage(client_bugzoo: BugZooClient,
                      snapshot: Snapshot,
                      tests: List[TestCase],
                      *,
-                     threads: int = 4
+                     threads: int = 6
                      ) -> TestSuiteCoverage:
     t_start = timer()
     logger.debug("computing coverage")
