@@ -102,6 +102,14 @@ class CandidateEvaluation(object):
     def build(self) -> darjeeling.outcome.BuildOutcome:
         return self.__outcome.build
 
+    @property
+    def is_partial_repair(self) -> bool:
+        return self.build and any(t.passed for t in self.tests)
+
+    @property
+    def is_complete_repair(self) -> bool:
+        return self.build and all(t.passed for t in self.tests)
+
 
 class Orchestrator(object):
     def __init__(self,
@@ -525,14 +533,19 @@ class Orchestrator(object):
                         # search.
                         break
 
+                    self.__state = OrchestratorState.FINISHED
                     logger.info("finished search")
                     log = [self._patch_to_evaluation(p)
                            for p in self.__searcher.history]
-                    self.__state = OrchestratorState.FINISHED
+
+                    # determine the outcome of the search
                     if self.patches:
                         outcome = OrchestratorOutcome.COMPLETE_REPAIR
+                    elif any(e.is_partial_repair for e in log):
+                        outcome = OrchestratorOutcome.PARTIAL_REPAIR
                     else:
                         outcome = OrchestratorOutcome.NO_REPAIR
+
                     num_attempts, runtime = self.resource_usage
                     self.__callback_done(log, num_attempts, outcome, self.patches, runtime)
 
