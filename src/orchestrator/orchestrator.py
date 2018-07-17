@@ -104,11 +104,11 @@ class CandidateEvaluation(object):
 
     @property
     def is_partial_repair(self) -> bool:
-        return self.build and any(t.passed for t in self.tests)
+        return self.build and any(self.tests[n].passed for n in self.tests)
 
     @property
     def is_complete_repair(self) -> bool:
-        return self.build and all(t.passed for t in self.tests)
+        return self.build and all(self.tests[n].passed for n in self.tests)
 
 
 class Orchestrator(object):
