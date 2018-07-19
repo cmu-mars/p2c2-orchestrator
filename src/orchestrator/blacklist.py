@@ -62,6 +62,7 @@ def is_file_mutable(fn: str) -> bool:
 
         'src/image_pipeline/depth_image_proc/src/nodelets/convert_metric.cpp',
         'src/image_pipeline/depth_image_proc/src/nodelets/crop_foremost.cpp',
+        'src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzrgb.cpp',
 
         'src/orocos_kinematics_dynamics/orocos_kdl/src/chain.cpp',
 
