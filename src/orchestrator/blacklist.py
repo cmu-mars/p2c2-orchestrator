@@ -85,6 +85,9 @@ def is_file_mutable(fn: str) -> bool:
 
         # misbehaving in baseline A
         'src/robot_state_publisher',
-        'src/navigation/navfn/src/read_pgm_costmap.cpp'
+        'src/navigation/navfn/src/read_pgm_costmap.cpp',
+
+        # coverage problems
+        'src/navigation/voxel_grid'
     ]
     return not any(fn.startswith(b) for b in blacklist)
