@@ -29,7 +29,7 @@ def mutant_fails_test(client_bugzoo: BugZooClient,
     replacements = client_boggart.mutations_to_replacements(snapshot,
                                                             mutant.mutations)
     locations = [r.location for r in replacements]
-    lines = [FileLine(l.filename, l.start.line) for l in locations]
+    lines = [FileLine(l.filename, l.stop.line) for l in locations]
     logger.info("lines changed by mutant: %s", lines)
 
     # restrict to the test outcomes that may be changed by the mutant

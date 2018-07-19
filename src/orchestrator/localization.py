@@ -29,7 +29,7 @@ def localize(perturbation: Mutant,
 
     mutation = list(perturbation.mutations)[0]
     perturbed_file = mutation.location.filename
-    perturbed_line = FileLine(perturbed_file, mutation.location.start.line)
+    perturbed_line = FileLine(perturbed_file, mutation.location.stop.line)
 
     logger.info("computing fault localization")
     logger.debug("passing coverage:\n%s", coverage.passing)
