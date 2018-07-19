@@ -66,6 +66,7 @@ def is_file_mutable(fn: str) -> bool:
         'src/orocos_kinematics_dynamics/orocos_kdl/src/chain.cpp',
 
         'src/nodelet_core/nodelet/src/nodelet_class.cpp',
+        'src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp',
 
         # out of scope
         'src/ecl_core/ecl_threads',
