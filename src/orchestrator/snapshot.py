@@ -18,6 +18,11 @@ def _load_manifest() -> Dict[str, Any]:
         has_kind = 'kind' in test
         if not has_kind and not has_oracle:
             test['oracle'] = {'contains': "[  PASSED  ]"}
+
+        # FIXME only apply during coverage?
+        if 'kill-after' not in test:
+            test['kill-after'] = 10
+
     desc['source'] = None
     return desc
 
