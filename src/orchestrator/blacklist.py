@@ -57,6 +57,7 @@ def is_file_mutable(fn: str) -> bool:
         'src/vision_opencv',
         'src/image_common/image_transport/src/camera_common.cpp',
         'src/navigation/rotate_recovery/src/rotate_recovery.cpp',
+        'src/navigation/base_local_planner/src/map_cell.cpp',
         'src/ros_comm/topic_tools',
         'src/perception_pcl',
 
@@ -64,11 +65,13 @@ def is_file_mutable(fn: str) -> bool:
         'src/image_pipeline/depth_image_proc/src/nodelets/crop_foremost.cpp',
         'src/image_pipeline/depth_image_proc/src/nodelets/point_cloud_xyzrgb.cpp',
         'src/image_pipeline/image_proc',
+        'src/navigation/robot_pose_ekf',
 
         'src/orocos_kinematics_dynamics/orocos_kdl/src/chain.cpp',
 
         'src/nodelet_core/nodelet/src/nodelet_class.cpp',
-        'src/navigation/robot_pose_ekf/src/odom_estimation_node.cpp',
+        'src/image_common/image_transport/src/raw_publisher.cpp',
+        'src/image_common/image_transport/src/image_transport.cpp',
 
         # out of scope
         'src/ecl_core/ecl_threads',
