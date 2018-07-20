@@ -47,6 +47,7 @@ def is_file_mutable(fn: str) -> bool:
         'src/orocos_kinematics_dynamics/orocos_kdl/tests',
 
         # no perturbations
+        'src/roscpp_core/roscpp_serialization/src/serialization.cpp',
         'src/bond_core/bondcpp',
         'src/dynamic_reconfigure/src/dynamic_reconfigure_config_init_mutex.cpp',
         'src/kdl_parser',
