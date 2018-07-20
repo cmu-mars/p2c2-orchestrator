@@ -40,7 +40,10 @@ def compute_mutant_coverage(client_bugzoo: BugZooClient,
                             *,
                             threads: int = 6
                             ) -> TestSuiteCoverage:
+    # NOTE coverage appears to become flaky beyond 8 simultaneous threads
+    # threads = max(threads, 8)
     logger.info("computing coverage for mutant: %s", mutant)
+    logger.info("num. coverage threads: %d", threads)
     coverage_baseline = load_baseline_coverage()
     snapshot_mutant = client_bugzoo.bugs[mutant.snapshot]
 
@@ -93,7 +96,7 @@ def compute_test_coverage(client_bugzoo: BugZooClient,
     """
     Computes coverage information for a given test using a fresh container.
     """
-    logger.info("getting coverage for test: %s", test.name)
+    logger.info("computing coverage for test: %s", test.name)
     ctr_mgr = client_bugzoo.containers
     container = None
     try:
@@ -101,6 +104,7 @@ def compute_test_coverage(client_bugzoo: BugZooClient,
         outcome = ctr_mgr.test(container, test)
         lines = ctr_mgr.extract_coverage(container)
         lines = lines.filter(lambda ln: is_file_mutable(ln.filename))
+        logger.info("computed coverage for test: %s", test.name)
         return TestCoverage(test.name, outcome, lines)
     except BugZooException:
         logger.exception("failed to compute coverage for snapshot (%s) on test (%s).",
