@@ -714,7 +714,8 @@ test-harness:
     - name: laser_geometry.transformLaserScanToPointCloud2
       command: rosrun laser_geometry projection_test --gtest_filter=laser_geometry.transformLaserScanToPointCloud2
       expected-outcome: True
-      time-limit: 20
+      time-limit: 30
+      kill-after: 10
 
     - name: LineIterator.south
       command: rosrun base_local_planner line_iterator --gtest_filter=LineIterator.south
