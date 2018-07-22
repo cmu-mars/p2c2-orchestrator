@@ -42,8 +42,8 @@ def compute_mutant_coverage(client_bugzoo: BugZooClient,
                             ) -> TestSuiteCoverage:
     # NOTE coverage appears to become flaky beyond 8 simultaneous threads
     # threads = max(threads, 8)
-    logger.info("computing coverage for mutant: %s", mutant)
-    logger.info("num. coverage threads: %d", threads)
+    logger.info("computing coverage for mutant: %s", mutant.uuid)
+    logger.debug("num. coverage threads: %d", threads)
     coverage_baseline = load_baseline_coverage()
     snapshot_mutant = client_bugzoo.bugs[mutant.snapshot]
 
@@ -51,19 +51,19 @@ def compute_mutant_coverage(client_bugzoo: BugZooClient,
     filename = list(mutant.mutations)[0].location.filename
     tests = [t for t in snapshot_mutant.tests \
              if filename in coverage_baseline[t.name].lines.files]
-    logger.info("restricting coverage for mutant to following tests: %s",
-                ', '.join([t.name for t in tests]))
+    logger.debug("restricting coverage for mutant to following tests: %s",
+                 ', '.join([t.name for t in tests]))
 
     mutant_instrumented = None
     try:
-        logger.info("creating temporary instrumented mutant")
+        logger.debug("creating temporary instrumented mutant")
         mutant_instrumented = \
             client_boggart.mutate(fetch_instrumentation_snapshot(client_bugzoo),
                                   mutant.mutations)
         snapshot_instrumented = \
             client_bugzoo.bugs[mutant_instrumented.snapshot]
-        logger.info("created temporary instrumented mutant: %s",
-                    mutant_instrumented)
+        logger.debug("created temporary instrumented mutant: %s",
+                     mutant_instrumented)
         coverage = compute_coverage(client_bugzoo,
                                     snapshot_instrumented,
                                     tests,
@@ -145,7 +145,7 @@ def load_baseline_coverage() -> TestSuiteCoverage:
     if __BASELINE_COVERAGE:
         return __BASELINE_COVERAGE
 
-    logger.info("attempting to load precomputed coverage for baseline A.")
+    logger.debug("attempting to load precomputed coverage for baseline A.")
     try:
         with open(BASELINE_COVERAGE_FN, 'r') as f:
             jsn = json.load(f)
@@ -156,7 +156,7 @@ def load_baseline_coverage() -> TestSuiteCoverage:
     # restrict to mutable files
     files = [fn for fn in coverage.lines.files if is_file_mutable(fn)]
     __BASELINE_COVERAGE = coverage.restricted_to_files(files)
-    logger.info("loaded precomputed coverage for baseline A.")
+    logger.debug("loaded precomputed coverage for baseline A.")
     return __BASELINE_COVERAGE
 
 

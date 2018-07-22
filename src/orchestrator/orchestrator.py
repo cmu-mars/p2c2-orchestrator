@@ -172,13 +172,13 @@ class Orchestrator(object):
         self.__baseline_with_instrumentation = \
             fetch_instrumentation_snapshot(self.__client_bugzoo)
 
-        logger.info("fetching coverage information for Baseline A.")
+        logger.debug("fetching coverage information for Baseline A.")
         self.__coverage_for_baseline = \
             load_baseline_coverage()  # type: TestSuiteCoverage
         logger.debug("mutable files: %s",
                      self.__coverage_for_baseline.lines.files)
-        logger.info("fetched coverage information for Baseline A.")
-        logger.info("line coverage for Baseline A: %d lines", len(self.lines))
+        logger.debug("fetched coverage information for Baseline A.")
+        logger.debug("line coverage for Baseline A: %d lines", len(self.lines))
 
     def shutdown(self) -> None:
         """
@@ -342,7 +342,7 @@ class Orchestrator(object):
         else:
             restrict_to_lines = [line_num]
         logger.info("Looking for perturbations at lines: %s",
-                    restrict_to_lines)
+                    sorted(set(restrict_to_lines)))
 
         generator_mutations = \
             boggartd.mutations(baseline,
@@ -433,10 +433,10 @@ class Orchestrator(object):
             try:
                 try:
                     # TODO capture unexpected errors during snapshot creation
-                    logger.info("Applying perturbation to baseline snapshot.")
+                    logger.debug("Applying perturbation to baseline snapshot.")
                     mutant = boggartd.mutate(baseline, [perturbation])
                     snapshot = bz.bugs[mutant.snapshot]
-                    logger.info("Generated mutant snapshot: %s", snapshot)
+                    logger.info("Generated mutant snapshot: %s", snapshot.name)
                     if not mutant_fails_test(bz, boggartd, mutant):
                         raise NeutralPerturbation
                     self.__problem = self._build_problem(mutant)

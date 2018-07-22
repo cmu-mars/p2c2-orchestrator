@@ -30,7 +30,8 @@ def mutant_fails_test(client_bugzoo: BugZooClient,
                                                             mutant.mutations)
     locations = [r.location for r in replacements]
     lines = [FileLine(l.filename, l.stop.line) for l in locations]
-    logger.info("lines changed by mutant: %s", lines)
+    logger.info("lines changed by mutant: %s",
+                sorted(set(l.num for l in lines)))
 
     # restrict to the test outcomes that may be changed by the mutant
     coverage = load_baseline_coverage()
@@ -38,7 +39,8 @@ def mutant_fails_test(client_bugzoo: BugZooClient,
     tests = list(snapshot.tests)
     tests = [t for t in tests \
              if any(line in coverage[t.name] for line in lines)]
-    logger.info("tests covered by mutant: %s", [t.name for t in tests])
+    logger.info("tests covered by mutant: %s",
+                sorted(set(t.name for t in tests)))
 
     container = None
     try:

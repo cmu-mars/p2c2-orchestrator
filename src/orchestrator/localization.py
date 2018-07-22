@@ -64,8 +64,9 @@ def localize(perturbation: Mutant,
 
     except darjeeling.exceptions.NoImplicatedLines:
         raise FailedToComputeCoverage
-    logger.info("computed fault localization (%d files, %d lines):\n%s",
-                len(localization.files), len(localization), localization)
+    logger.info("computed fault localization (%d files, %d lines)",
+                len(localization.files), len(localization))
+    logger.debug("fault localization: %s", localization)
     lines = FileLineSet.from_list([l for l in localization])
     logger.info("suspicious lines:\n%s", indent(repr(lines), 2))
     return localization
