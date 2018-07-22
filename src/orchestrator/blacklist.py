@@ -60,6 +60,8 @@ def is_file_mutable(fn: str) -> bool:
         'src/navigation/base_local_planner/src/map_cell.cpp',
         'src/ros_comm/topic_tools',
         'src/perception_pcl',
+        'src/orocos_kinematics_dynamics/orocos_kdl/src/path_roundedcomposite.cpp',
+        'src/orocos_kinematics_dynamics/orocos_kdl/src/velocityprofile.cpp',
 
         'src/image_pipeline/depth_image_proc/src/nodelets/convert_metric.cpp',
         'src/image_pipeline/depth_image_proc/src/nodelets/crop_foremost.cpp',
